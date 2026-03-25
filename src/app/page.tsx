@@ -690,7 +690,7 @@ export default function LandForgeLanding() {
           transform: heroVisible ? "translateY(0)" : "translateY(30px)",
           transition: "all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s",
         }}>
-          Describe tu negocio en 5 minutos. La experiencia de <strong>Generador de webs AI</strong> y <strong>SEO programático integrado</strong> de LandForge crea tu{" "}
+          Describe tu negocio en 5 minutos. LandForge crea tu{" "}
           <strong style={{ color: BRAND.text }}>landing page de alta conversión</strong> en 30 segundos.{" "}
           <strong>Forgi</strong> la optimiza contigo y realiza una <strong>Atención al cliente automática 24/7</strong> como experto en ventas.
         </p>
