@@ -85,15 +85,25 @@ export default function ChatbotVentasArticle() {
             {/* ÍNDICE */}
             <div className="bg-[#F3E8FF] border border-[#E0AAFF] rounded-2xl p-6 mb-10">
               <p className="font-bold text-sm mb-3 uppercase tracking-wider text-[#9D4EDD]">En este artículo</p>
-              <ol className="space-y-1.5 text-sm text-[#6B7280]">
-                {["Por qué el 73% de tus visitantes se van sin contactar", "Qué es un chatbot de ventas con IA (vs chatbot de soporte)", "Cuándo y cómo activar el chatbot para máxima conversión", "Los 5 mejores chatbots de ventas para landing pages en 2026", "Cómo activar Forgi en tu landing en 30 segundos"].map((item, i) => (
-                  <li key={item}><span className="text-[#9D4EDD] font-bold mr-2">{i + 1}.</span>{item}</li>
+              <ol className="space-y-1.5 text-sm">
+                {[
+                  { label: "Por qué el 73% de tus visitantes se van sin contactar", anchor: "#problema" },
+                  { label: "Qué es un chatbot de ventas con IA (vs chatbot de soporte)", anchor: "#que-es" },
+                  { label: "Cuándo y cómo activar el chatbot para máxima conversión", anchor: "#cuando" },
+                  { label: "Los mejores chatbots de ventas para landing pages en 2026", anchor: "#mejores" },
+                  { label: "Cómo activar Forgi en tu landing en 30 segundos", anchor: "#forgi" },
+                ].map((item, i) => (
+                  <li key={item.anchor}>
+                    <a href={item.anchor} className="inline-flex gap-2 hover:text-[#9D4EDD] transition-colors">
+                      <span className="text-[#9D4EDD] font-bold">{i + 1}.</span>{item.label}
+                    </a>
+                  </li>
                 ))}
               </ol>
             </div>
 
             {/* SECCIÓN 1 */}
-            <section>
+            <section id="problema">
               <h2 className="text-2xl font-extrabold mb-4">1. Por qué el 73% de tus visitantes se van sin contactar</h2>
               <p className="text-[#6B7280] leading-relaxed mb-4">Imagina que tienes una tienda física con 100 personas que entran cada día. 73 de ellas entran, miran y se van sin comprar nada ni hablar con nadie. ¿Cuál sería tu reacción? Probablemente pondrías a un vendedor en la puerta para dar la bienvenida y resolver dudas.</p>
               <p className="text-[#6B7280] leading-relaxed mb-4">En tu landing page pasa exactamente lo mismo, solo que sin ese vendedor. El visitante llega buscando algo concreto, tiene una duda que no encuentra respondida en la página y se va. El chatbot de ventas con IA es ese vendedor que nunca duerme.</p>
@@ -112,7 +122,7 @@ export default function ChatbotVentasArticle() {
             </section>
 
             {/* SECCIÓN 2 */}
-            <section className="mt-12">
+            <section id="que-es" className="mt-12">
               <h2 className="text-2xl font-extrabold mb-4">2. Qué es un chatbot de ventas con IA (y por qué no es lo mismo que un chatbot de soporte)</h2>
               <div className="overflow-x-auto rounded-2xl border border-[#E0AAFF] mb-6">
                 <table className="w-full text-sm">
@@ -143,7 +153,7 @@ export default function ChatbotVentasArticle() {
             </section>
 
             {/* SECCIÓN 3 */}
-            <section className="mt-12">
+            <section id="cuando" className="mt-12">
               <h2 className="text-2xl font-extrabold mb-4">3. Cuándo y cómo activar el chatbot para máxima conversión</h2>
               <p className="text-[#6B7280] leading-relaxed mb-4">El momento de activación del chatbot es crítico. Un chatbot que interrumpe demasiado pronto molesta. Uno que espera demasiado no ayuda. La regla del Master en conversión es:</p>
               <div className="space-y-4 mb-6">
@@ -161,7 +171,7 @@ export default function ChatbotVentasArticle() {
             </section>
 
             {/* SECCIÓN 4 */}
-            <section className="mt-12">
+            <section id="mejores" className="mt-12">
               <h2 className="text-2xl font-extrabold mb-6">4. Los mejores chatbots de ventas para landing pages en 2026</h2>
               <div className="space-y-4">
                 {[
@@ -186,7 +196,7 @@ export default function ChatbotVentasArticle() {
             </section>
 
             {/* SECCIÓN 5 — CTA NATIVO */}
-            <section className="mt-14 rounded-2xl p-8" style={{ background: "linear-gradient(135deg, #9D4EDD 0%, #4C0099 100%)" }}>
+            <section id="forgi" className="mt-14 rounded-2xl p-8" style={{ background: "linear-gradient(135deg, #9D4EDD 0%, #4C0099 100%)" }}>
               <h2 className="text-2xl font-extrabold text-white mb-4">5. Cómo activar Forgi en tu landing en 30 segundos</h2>
               <ol className="space-y-3 text-[#E0AAFF] text-sm mb-6">
                 <li className="flex gap-3"><span className="font-bold text-white flex-shrink-0">1.</span>Crea tu cuenta gratuita en LandForge</li>

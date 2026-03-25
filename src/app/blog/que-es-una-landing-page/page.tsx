@@ -89,15 +89,26 @@ export default function QueEsLandingPage() {
             {/* ÍNDICE */}
             <div className="bg-[#F3E8FF] border border-[#E0AAFF] rounded-2xl p-6 mb-10">
               <p className="font-bold text-sm mb-3 uppercase tracking-wider text-[#9D4EDD]">Contenido de este artículo</p>
-              <ol className="space-y-1.5 text-sm text-[#6B7280]">
-                {["Qué es una landing page (definición clara)", "Para qué sirve: Los 5 usos más comunes", "Diferencia entre landing page y web corporativa", "Tipos de landing pages según el funnel", "Qué debe tener una landing page para convertir", "Cómo crear una landing page en 30 segundos con IA"].map((item, i) => (
-                  <li key={item}><span className="text-[#9D4EDD] font-bold mr-2">{i + 1}.</span>{item}</li>
+              <ol className="space-y-1.5 text-sm">
+                {[
+                  { label: "Qué es una landing page (definición clara)", anchor: "#definicion" },
+                  { label: "Para qué sirve: Los 5 usos más comunes", anchor: "#para-que-sirve" },
+                  { label: "Diferencia entre landing page y web corporativa", anchor: "#diferencia" },
+                  { label: "Tipos de landing pages según el funnel", anchor: "#tipos" },
+                  { label: "Qué debe tener una landing page para convertir", anchor: "#elementos" },
+                  { label: "Cómo crear una landing page en 30 segundos con IA", anchor: "#crear-con-ia" },
+                ].map((item, i) => (
+                  <li key={item.anchor}>
+                    <a href={item.anchor} className="inline-flex gap-2 hover:text-[#9D4EDD] transition-colors">
+                      <span className="text-[#9D4EDD] font-bold">{i + 1}.</span>{item.label}
+                    </a>
+                  </li>
                 ))}
               </ol>
             </div>
 
             {/* SECCIÓN 1 */}
-            <section>
+            <section id="definicion">
               <h2 className="text-2xl font-extrabold mb-4">1. Qué es una landing page (definición clara)</h2>
               <p className="text-[#6B7280] leading-relaxed mb-4">Una <strong className="text-[#1A1A2E]">landing page</strong> (también llamada «página de aterrizaje» en español) es una página web diseñada con un único objetivo: conseguir que el visitante realice una acción concreta.</p>
               <p className="text-[#6B7280] leading-relaxed mb-4">A diferencia de una página web corporativa, una landing page:</p>
@@ -113,7 +124,7 @@ export default function QueEsLandingPage() {
             </section>
 
             {/* SECCIÓN 2 */}
-            <section className="mt-12">
+            <section id="para-que-sirve" className="mt-12">
               <h2 className="text-2xl font-extrabold mb-4">2. Para qué sirve una landing page: Los 5 usos más comunes</h2>
               <div className="space-y-6">
                 {[
@@ -135,7 +146,7 @@ export default function QueEsLandingPage() {
             </section>
 
             {/* SECCIÓN 3 */}
-            <section className="mt-12">
+            <section id="diferencia" className="mt-12">
               <h2 className="text-2xl font-extrabold mb-4">3. Diferencia entre landing page y web corporativa</h2>
               <div className="overflow-x-auto rounded-2xl border border-[#E0AAFF]">
                 <table className="w-full text-sm">
@@ -167,7 +178,7 @@ export default function QueEsLandingPage() {
             </section>
 
             {/* SECCIÓN 4 */}
-            <section className="mt-12">
+            <section id="tipos" className="mt-12">
               <h2 className="text-2xl font-extrabold mb-6">4. Tipos de landing pages según el funnel</h2>
               <div className="grid md:grid-cols-3 gap-4">
                 {[
@@ -185,7 +196,7 @@ export default function QueEsLandingPage() {
             </section>
 
             {/* SECCIÓN 5 */}
-            <section className="mt-12">
+            <section id="elementos" className="mt-12">
               <h2 className="text-2xl font-extrabold mb-6">5. Qué debe tener una landing page para convertir</h2>
               <div className="space-y-4">
                 {[
@@ -207,7 +218,7 @@ export default function QueEsLandingPage() {
             </section>
 
             {/* SECCIÓN 6 — CTA NATIVO */}
-            <section className="mt-14 rounded-2xl p-8 text-center" style={{ background: "linear-gradient(135deg, #9D4EDD 0%, #4C0099 100%)" }}>
+            <section id="crear-con-ia" className="mt-14 rounded-2xl p-8 text-center" style={{ background: "linear-gradient(135deg, #9D4EDD 0%, #4C0099 100%)" }}>
               <h2 className="text-2xl font-extrabold text-white mb-4">6. Cómo crear una landing page en 30 segundos con IA</h2>
               <p className="text-[#E0AAFF] mb-6 max-w-lg mx-auto">Si has llegado hasta aquí, ya sabes exactamente qué necesita una landing page para convertir. Ahora LandForge la construye por ti: describe tu negocio, y la IA genera el copy, la estructura y activa el chatbot Forgi en segundos.</p>
               <Link href="/register" className="inline-block bg-white text-[#9D4EDD] font-bold text-lg px-8 py-4 rounded-2xl hover:-translate-y-1 transition shadow-xl">

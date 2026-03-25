@@ -154,9 +154,13 @@ export default function ComoCrearLandingPage() {
             {/* ÍNDICE */}
             <div className="bg-[#F3E8FF] border border-[#E0AAFF] rounded-2xl p-6 mb-12">
               <p className="font-bold text-sm mb-3 uppercase tracking-wider text-[#9D4EDD]">Lo que aprenderás en esta guía</p>
-              <ol className="space-y-1.5 text-sm text-[#6B7280]">
+              <ol className="space-y-1.5 text-sm">
                 {pasos.map((p, i) => (
-                  <li key={p.num}><span className="text-[#9D4EDD] font-bold mr-2">{i + 1}.</span>{p.title}</li>
+                  <li key={p.num}>
+                    <a href={`#paso-${p.num}`} className="inline-flex gap-2 hover:text-[#9D4EDD] transition-colors">
+                      <span className="text-[#9D4EDD] font-bold">{i + 1}.</span>{p.title}
+                    </a>
+                  </li>
                 ))}
               </ol>
             </div>
@@ -182,7 +186,7 @@ export default function ComoCrearLandingPage() {
             {/* LOS 7 PASOS */}
             <div className="space-y-14">
               {pasos.map((paso) => (
-                <section key={paso.num}>
+                <section key={paso.num} id={`paso-${paso.num}`}>
                   <div className="flex gap-5 items-start mb-4">
                     <div className="flex-shrink-0 w-12 h-12 rounded-2xl flex items-center justify-center font-mono font-bold text-lg border-2 border-[#9D4EDD] bg-[#F3E8FF] text-[#9D4EDD]">
                       {paso.num}
