@@ -38,3 +38,48 @@ body {
 ::-webkit-scrollbar-track { background: #F3E8FF; }
 ::-webkit-scrollbar-thumb { background: #E0AAFF; border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: #9D4EDD; }
+
+/* ── Landing page animations ── */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes forgiFloat {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-6px); }
+}
+
+@keyframes forgiRingPulse {
+  0%   { transform: scale(1); opacity: 0.7; }
+  100% { transform: scale(1.55); opacity: 0; }
+}
+
+@keyframes forgiSlideUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes forgiPopIn {
+  from { opacity: 0; transform: scale(0.7) translateY(8px); transform-origin: bottom right; }
+  to   { opacity: 1; transform: scale(1) translateY(0); transform-origin: bottom right; }
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Landing page responsive ── */
+@media (max-width: 768px) {
+  .lf-nav { padding: 12px 16px !important; }
+  .lf-nav-links { display: none !important; }
+  .lf-nav-mobile { display: flex !important; }
+  .lf-forgi-grid { grid-template-columns: 1fr !important; }
+  .lf-comp-grid { grid-template-columns: 1fr !important; }
+  .lf-score-header { flex-direction: column !important; align-items: flex-start !important; gap: 16px; }
+  section { padding-left: 20px !important; padding-right: 20px !important; }
+}
+
+@media (max-width: 480px) {
+  .lf-hero-ctas { flex-direction: column !important; align-items: stretch !important; }
+  .lf-hero-ctas a { text-align: center; justify-content: center; }
+  .lf-final-cta { padding: 40px 20px !important; }
+}

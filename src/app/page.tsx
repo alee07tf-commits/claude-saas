@@ -530,6 +530,7 @@ export default function LandForgeLanding() {
       fontFamily: "'DM Sans', -apple-system, sans-serif", overflowX: "hidden",
     }}>
       <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
+      <main>
 
       {/* ── NAV ── */}
       <nav className="lf-nav" style={{
@@ -656,6 +657,15 @@ export default function LandForgeLanding() {
           </div>
         </div>
 
+        {/* SEO Kicker (H1 Dual) */}
+        <p style={{
+          fontSize: "14px", fontWeight: "bold", textTransform: "uppercase", letterSpacing: "1.5px", color: BRAND.accent, 
+          opacity: heroVisible ? 1 : 0, transform: heroVisible ? "translateY(0)" : "translateY(30px)", 
+          transition: "all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.05s", marginBottom: "16px"
+        }}>
+          El Mejor Generador de Landing Pages con Inteligencia Artificial
+        </p>
+
         {/* Headline */}
         <h1 style={{
           fontSize: "clamp(38px, 6vw, 74px)", fontWeight: 800,
@@ -680,8 +690,9 @@ export default function LandForgeLanding() {
           transform: heroVisible ? "translateY(0)" : "translateY(30px)",
           transition: "all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s",
         }}>
-          Rellena un formulario sobre tu negocio. La IA genera una landing profesional.{" "}
-          <strong style={{ color: BRAND.text }}>Forgi la edita contigo y después atiende a tus visitantes 24/7.</strong>
+          Describe tu negocio en 5 minutos. La experiencia de <strong>Generador de webs AI</strong> y <strong>SEO programático integrado</strong> de LandForge crea tu{" "}
+          <strong style={{ color: BRAND.text }}>landing page de alta conversión</strong> en 30 segundos.{" "}
+          <strong>Forgi</strong> la optimiza contigo y realiza una <strong>Atención al cliente automática 24/7</strong> como experto en ventas.
         </p>
 
         {/* CTAs */}
@@ -735,7 +746,7 @@ export default function LandForgeLanding() {
         <div style={{ textAlign: "center", marginBottom: "48px" }}>
           <SectionBadge label="ASÍ QUEDA" />
           <h2 style={{ fontSize: "clamp(26px, 3.5vw, 40px)", fontWeight: 800, letterSpacing: "-1px", marginTop: "16px", color: BRAND.text }}>
-            De briefing a landing publicada en 30 segundos
+            Genera tu landing page con IA en 30 segundos
           </h2>
           <p style={{ color: BRAND.gray, fontSize: "16px", maxWidth: "500px", margin: "12px auto 0" }}>
             Lo que ves es exactamente lo que tus visitantes ven. Publicada, online, lista para recibir tráfico.
@@ -750,7 +761,7 @@ export default function LandForgeLanding() {
           <div style={{ textAlign: "center", marginBottom: "64px" }}>
             <SectionBadge label="CÓMO FUNCIONA" />
             <h2 style={{ fontSize: "clamp(26px, 3.5vw, 40px)", fontWeight: 800, letterSpacing: "-1px", marginTop: "16px", color: BRAND.text }}>
-              Tres pasos. Sin código. En minutos.
+              Crea tu landing page con IA en 3 pasos. Sin código.
             </h2>
           </div>
           <div style={{ display: "flex", gap: "24px", flexWrap: "wrap" }}>
@@ -768,12 +779,12 @@ export default function LandForgeLanding() {
       </section>
 
       {/* ── FORGI ── */}
-      <section style={{ padding: "80px 24px 100px" }}>
+      <section id="forgi" aria-label="Forgi: asistente IA para landing pages" style={{ padding: "80px 24px 100px" }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: "56px" }}>
             <SectionBadge label="CONOCE A FORGI" />
             <h2 style={{ fontSize: "clamp(26px, 3.5vw, 40px)", fontWeight: 800, letterSpacing: "-1px", marginTop: "16px", color: BRAND.text }}>
-              Tu asistente IA. Editor + Vendedor.
+              Forgi: el asistente IA para tus landing pages
             </h2>
             <p style={{ color: BRAND.gray, fontSize: "16px", maxWidth: "520px", margin: "14px auto 0", lineHeight: 1.7 }}>
               Forgi no es un chatbot genérico. Se entrena automáticamente con la información de tu negocio.
@@ -834,12 +845,12 @@ export default function LandForgeLanding() {
       </section>
 
       {/* ── CONVERSION SCORE ── */}
-      <section style={{ padding: "80px 24px 100px", background: BRAND.bgAlt }}>
+      <section id="conversion-score" aria-label="Conversion Score: análisis de tu landing page con IA" style={{ padding: "80px 24px 100px", background: BRAND.bgAlt }}>
         <div style={{ maxWidth: "1000px", margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: "56px" }}>
             <SectionBadge label="OPTIMIZACIÓN" />
             <h2 style={{ fontSize: "clamp(26px, 3.5vw, 40px)", fontWeight: 800, letterSpacing: "-1px", marginTop: "16px", color: BRAND.text }}>
-              Tu landing page, puntuada por IA.
+              Conversion Score: tu landing page analizada por IA.
             </h2>
             <p style={{ color: BRAND.gray, fontSize: "16px", maxWidth: "520px", margin: "14px auto 0", lineHeight: 1.7 }}>
               Antes de publicar, Forgi analiza tu landing y te dice exactamente qué mejorar para convertir más.
@@ -909,10 +920,10 @@ export default function LandForgeLanding() {
       </section>
 
       {/* ── BEFORE / AFTER ── */}
-      <section style={{ padding: "80px 24px", maxWidth: "860px", margin: "0 auto" }}>
+      <section id="comparativa" aria-label="Antes y después de usar LandForge para crear landing pages" style={{ padding: "80px 24px", maxWidth: "860px", margin: "0 auto" }}>
         <div style={{ textAlign: "center", marginBottom: "48px" }}>
           <h2 style={{ fontSize: "clamp(26px, 3.5vw, 40px)", fontWeight: 800, letterSpacing: "-1px", color: BRAND.text }}>
-            El antes y el después
+            Crear landing pages para agencias: antes y después de LandForge
           </h2>
           <p style={{ color: BRAND.gray, fontSize: "16px", marginTop: "12px" }}>
             Para agencias que crean landing pages para sus clientes.
@@ -973,12 +984,12 @@ export default function LandForgeLanding() {
       </section>
 
       {/* ── TESTIMONIALS ── */}
-      <section style={{ padding: "80px 24px 100px", background: BRAND.bgAlt }}>
+      <section id="testimonios" aria-label="Testimonios de agencias que usan LandForge" style={{ padding: "80px 24px 100px", background: BRAND.bgAlt }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: "56px" }}>
             <SectionBadge label="TESTIMONIOS" />
             <h2 style={{ fontSize: "clamp(26px, 3.5vw, 40px)", fontWeight: 800, letterSpacing: "-1px", marginTop: "16px", color: BRAND.text }}>
-              Agencias que ya ahorran horas cada semana
+              Agencias digitales que ya crean landing pages con LandForge
             </h2>
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "20px" }}>
@@ -995,7 +1006,7 @@ export default function LandForgeLanding() {
           <div style={{ textAlign: "center", marginBottom: "56px" }}>
             <SectionBadge label="PRECIOS" />
             <h2 style={{ fontSize: "clamp(26px, 3.5vw, 40px)", fontWeight: 800, letterSpacing: "-1px", marginTop: "16px", color: BRAND.text }}>
-              Simple. Sin sorpresas.
+              Precios para agencias y freelancers. Sin sorpresas.
             </h2>
             <p style={{ color: BRAND.gray, fontSize: "14px", marginTop: "10px", fontFamily: "'Space Mono', monospace" }}>
               ✨ Precios de lanzamiento — empieza gratis, sin tarjeta
@@ -1053,7 +1064,7 @@ export default function LandForgeLanding() {
       </section>
 
       {/* ── FAQ ── */}
-      <section style={{ padding: "80px 24px 100px", maxWidth: "680px", margin: "0 auto" }}>
+      <section id="faq" aria-label="Preguntas frecuentes sobre LandForge" style={{ padding: "80px 24px 100px", maxWidth: "680px", margin: "0 auto" }}>
         <div style={{ textAlign: "center", marginBottom: "48px" }}>
           <h2 style={{ fontSize: "clamp(26px, 3.5vw, 36px)", fontWeight: 800, letterSpacing: "-1px", color: BRAND.text }}>
             Preguntas frecuentes
@@ -1102,6 +1113,123 @@ export default function LandForgeLanding() {
           </div>
         </div>
       </section>
+
+      {/* ── ENLAZADO INTERNO JERÁRQUICO ── SEO Hub Section ── */}
+      <section style={{ padding: "80px 24px", borderTop: `1px solid ${BRAND.border}`, background: BRAND.bg }}>
+        <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+          <div style={{ marginBottom: "48px", textAlign: "center" }}>
+            <p style={{ fontSize: "12px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "2px", color: BRAND.accent, marginBottom: "8px" }}>
+              Explora LandForge
+            </p>
+            <h2 style={{ fontSize: "clamp(22px, 3vw, 32px)", fontWeight: 800, color: BRAND.text, letterSpacing: "-0.5px" }}>
+              Todo lo que necesitas para dominar landing pages con IA
+            </h2>
+          </div>
+
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(230px, 1fr))", gap: "32px" }}>
+
+            {/* Hub 1: Funcionalidades */}
+            <div>
+              <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "16px" }}>
+                <span style={{ fontSize: "18px" }}>⚡</span>
+                <span style={{ fontWeight: 800, fontSize: "14px", color: BRAND.text }}>Funcionalidades</span>
+              </div>
+              <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "10px" }}>
+                {[
+                  { label: "Forgi Chatbot — Ventas 24/7", href: "/features/forgi-chatbot" },
+                  { label: "Forgi Editor — Edita con IA", href: "/features/forgi-editor" },
+                  { label: "Precios y Planes", href: "/pricing" },
+                ].map(item => (
+                  <li key={item.href}>
+                    <a href={item.href} style={{ fontSize: "14px", color: BRAND.gray, textDecoration: "none", display: "flex", alignItems: "center", gap: "6px" }}
+                      onMouseEnter={e => (e.currentTarget.style.color = BRAND.accent)}
+                      onMouseLeave={e => (e.currentTarget.style.color = BRAND.gray)}>
+                      <span style={{ color: BRAND.accent, flexShrink: 0 }}>→</span>{item.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Hub 2: Sectores */}
+            <div>
+              <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "16px" }}>
+                <span style={{ fontSize: "18px" }}>🏢</span>
+                <span style={{ fontWeight: 800, fontSize: "14px", color: BRAND.text }}>LandForge para tu Sector</span>
+              </div>
+              <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "10px" }}>
+                {[
+                  { label: "Agencias de Marketing", href: "/para/agencias-de-marketing" },
+                  { label: "Clínicas Dentales", href: "/para/clinicas-dentales" },
+                  { label: "eCommerce y Tiendas Online", href: "/para/ecommerce" },
+                  { label: "Agencias Inmobiliarias", href: "/para/inmobiliarias" },
+                  { label: "Coaches y Formadores", href: "/para/coaches" },
+                  { label: "Despachos de Abogados", href: "/para/abogados" },
+                ].map(item => (
+                  <li key={item.href}>
+                    <a href={item.href} style={{ fontSize: "14px", color: BRAND.gray, textDecoration: "none", display: "flex", alignItems: "center", gap: "6px" }}
+                      onMouseEnter={e => (e.currentTarget.style.color = BRAND.accent)}
+                      onMouseLeave={e => (e.currentTarget.style.color = BRAND.gray)}>
+                      <span style={{ color: BRAND.accent, flexShrink: 0 }}>→</span>{item.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Hub 3: Comparativas */}
+            <div>
+              <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "16px" }}>
+                <span style={{ fontSize: "18px" }}>⚖️</span>
+                <span style={{ fontWeight: 800, fontSize: "14px", color: BRAND.text }}>Comparativas</span>
+              </div>
+              <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "10px" }}>
+                {[
+                  { label: "LandForge vs Webflow", href: "/comparar/landforge-vs-webflow" },
+                  { label: "LandForge vs Unbounce", href: "/comparar/landforge-vs-unbounce" },
+                  { label: "Alternativas a Leadpages", href: "/comparar/alternativas-leadpages" },
+                  { label: "WordPress vs LandForge", href: "/integraciones/wordpress" },
+                ].map(item => (
+                  <li key={item.href}>
+                    <a href={item.href} style={{ fontSize: "14px", color: BRAND.gray, textDecoration: "none", display: "flex", alignItems: "center", gap: "6px" }}
+                      onMouseEnter={e => (e.currentTarget.style.color = BRAND.accent)}
+                      onMouseLeave={e => (e.currentTarget.style.color = BRAND.gray)}>
+                      <span style={{ color: BRAND.accent, flexShrink: 0 }}>→</span>{item.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Hub 4: Blog y Recursos */}
+            <div>
+              <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "16px" }}>
+                <span style={{ fontSize: "18px" }}>📚</span>
+                <span style={{ fontWeight: 800, fontSize: "14px", color: BRAND.text }}>Blog y Recursos</span>
+              </div>
+              <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "10px" }}>
+                {[
+                  { label: "Qué es una Landing Page", href: "/blog/que-es-una-landing-page" },
+                  { label: "Cómo Aumentar la Conversión", href: "/blog/como-aumentar-conversion-landing-page" },
+                  { label: "Chatbot de Ventas para tu Web", href: "/blog/chatbot-ventas-para-web" },
+                  { label: "Ver todos los artículos", href: "/blog" },
+                ].map(item => (
+                  <li key={item.href}>
+                    <a href={item.href} style={{ fontSize: "14px", color: BRAND.gray, textDecoration: "none", display: "flex", alignItems: "center", gap: "6px" }}
+                      onMouseEnter={e => (e.currentTarget.style.color = BRAND.accent)}
+                      onMouseLeave={e => (e.currentTarget.style.color = BRAND.gray)}>
+                      <span style={{ color: BRAND.accent, flexShrink: 0 }}>→</span>{item.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      </main>
 
       {/* ── FOOTER ── */}
       <footer style={{
@@ -1304,61 +1432,7 @@ export default function LandForgeLanding() {
         </div>
       )}
 
-      <style>{`
-        @keyframes pulse {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0.7; }
-        }
-        @keyframes forgiFloat {
-          0%, 100% { transform: translateY(0px); }
-          50%       { transform: translateY(-6px); }
-        }
-        @keyframes forgiRingPulse {
-          0%   { transform: scale(1); opacity: 0.7; }
-          100% { transform: scale(1.55); opacity: 0; }
-        }
-        @keyframes forgiSlideUp {
-          from { opacity: 0; transform: translateY(10px); }
-          to   { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes forgiPopIn {
-          from { opacity: 0; transform: scale(0.7) translateY(8px); transform-origin: bottom right; }
-          to   { opacity: 1; transform: scale(1) translateY(0); transform-origin: bottom right; }
-        }
-        @keyframes spin { to { transform: rotate(360deg); } }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        ::selection { background: ${BRAND.accent}22; color: ${BRAND.text}; }
-        html { scroll-behavior: smooth; }
-
-        /* ── RESPONSIVE ── */
-        @media (max-width: 768px) {
-          /* Nav: ocultar links desktop, mostrar hamburger */
-          .lf-nav { padding: 12px 16px !important; }
-          .lf-nav-links { display: none !important; }
-          .lf-nav-mobile { display: flex !important; }
-
-          /* Forgi grid: 1 columna */
-          .lf-forgi-grid { grid-template-columns: 1fr !important; }
-
-          /* Before/After: 1 columna */
-          .lf-comp-grid { grid-template-columns: 1fr !important; }
-
-          /* Score header: stack vertical */
-          .lf-score-header { flex-direction: column; align-items: flex-start !important; gap: 16px; }
-
-          /* Secciones: padding reducido */
-          section { padding-left: 20px !important; padding-right: 20px !important; }
-        }
-
-        @media (max-width: 480px) {
-          /* CTA del hero: full-width */
-          .lf-hero-ctas { flex-direction: column !important; align-items: stretch !important; }
-          .lf-hero-ctas a { text-align: center; justify-content: center; }
-
-          /* Final CTA card: menos padding */
-          .lf-final-cta { padding: 40px 20px !important; }
-        }
-      `}</style>
+      {/* Animations and responsive CSS moved to globals.css */}
     </div>
   );
 }

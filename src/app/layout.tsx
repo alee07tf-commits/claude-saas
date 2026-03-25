@@ -13,24 +13,24 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://landforge.io";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://landforge.digital";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "LandForge — Genera Landing Pages con IA para Agencias",
+    default: "LandForge: Generador de Landing Pages con IA para Agencias",
     template: "%s | LandForge",
   },
   description:
-    "LandForge es el SaaS para agencias que genera landing pages de alta conversión con Inteligencia Artificial en segundos. Incluye chatbot de ventas Forgi integrado.",
+    "Crea páginas de aterrizaje de alta conversión en 30s. Nuestro Chatbot IA (Forgi) diseña, atiende a tus clientes 24/7 y cierra ventas sin tocar código.",
   keywords: [
-    "landing page con IA",
-    "generador de landing pages",
-    "software para agencias",
-    "landing page automatizada",
-    "SaaS agencias marketing",
-    "crear landing page",
-    "chatbot ventas",
+    "generador de landing pages con IA",
+    "crear landing page con Inteligencia Artificial",
+    "generador de landing pages para agencias",
+    "mejor alternativa a leadpages con IA",
+    "creador de embudos de venta sin código",
+    "chatbots de IA para landing pages",
+    "software landing pages agencias",
     "Forgi chatbot",
   ],
   authors: [{ name: "LandForge", url: SITE_URL }],
@@ -52,23 +52,23 @@ export const metadata: Metadata = {
     locale: "es_ES",
     url: SITE_URL,
     siteName: "LandForge",
-    title: "LandForge — Genera Landing Pages con IA para Agencias",
+    title: "Generador de Landing Pages con IA | LandForge — Para Agencias",
     description:
-      "Genera landing pages de alta conversión con IA en segundos. Incluye chatbot de ventas Forgi. Planes desde €49/mes.",
+      "Genera landing pages de alta conversión con IA en 30 segundos. Forgi edita y vende por ti 24/7. Prueba gratis, sin tarjeta.",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "LandForge — Generador de Landing Pages con IA",
+        alt: "LandForge — Generador de Landing Pages con IA para Agencias",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "LandForge — Genera Landing Pages con IA para Agencias",
+    title: "Generador de Landing Pages con IA | LandForge",
     description:
-      "Genera landing pages de alta conversión con IA en segundos. Incluye chatbot Forgi. Planes desde €49/mes.",
+      "Genera landing pages de alta conversión con IA en 30 segundos. Forgi edita y vende por ti 24/7. Prueba gratis.",
     images: ["/og-image.png"],
   },
   alternates: {

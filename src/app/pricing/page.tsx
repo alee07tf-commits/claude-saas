@@ -83,10 +83,10 @@ export default function PricingPage() {
       <div className="max-w-7xl mx-auto space-y-12">
         <div className="text-center space-y-4">
           <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900">
-            Escala tus ventas sin límites
+            Precios para crear landing pages con IA
           </h1>
           <p className="max-w-2xl mx-auto text-xl text-slate-600">
-            Elige el plan que mejor se adapte al tamaño de tu negocio o agencia.
+            Elige el plan para tu agencia o freelance. Landing pages con IA, Forgi Editor y chatbot de ventas 24/7 incluidos. Sin permanencia.
           </p>
         </div>
 
