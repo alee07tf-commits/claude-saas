@@ -153,7 +153,7 @@ export default function ForgiEditorPage() {
                   { icon: "📦", title: "Añadir o eliminar secciones", text: "\"Añade una sección de testimonios después de la sección de precios\", \"Elimina el vídeo de la parte superior\"" },
                   { icon: "📱", title: "Optimizar para móvil", text: "\"El Hero se ve mal en móvil, simplifica la estructura\", \"Asegúrate de que el formulario funcione en pantallas pequeñas\"" },
                   { icon: "🔗", title: "Crear variantes A/B", text: "\"Crea una variante de esta landing con el CTA cambiado a 'Solicitar demo' y fondo oscuro\"" },
-                  { icon: "🚀", title: "Publicar al instante", text: "Cada cambio aprobado se publica en producción en segundos, sin build manual ni deploy." },
+                  { icon: "🚀", title: "Publicar al instante", text: "\"Publica esta versión ahora mismo\", \"Lanza los cambios a la web real\"" },
                 ].map((f) => (
                   <div key={f.title} className="bg-white/5 border border-white/10 rounded-2xl p-6">
                     <div className="text-3xl mb-3">{f.icon}</div>
