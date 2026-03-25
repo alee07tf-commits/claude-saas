@@ -16,25 +16,25 @@ export const metadata: Metadata = {
 export default function BlogIndex() {
   const posts = [
     {
-      title: "Cómo aumentar un 300% tu tasa de conversión con un Chatbot IA",
-      slug: "como-aumentar-conversion-landing-page",
+      title: "¿Qué es una Landing Page? Guía completa 2026",
+      slug: "que-es-una-landing-page",
+      category: "Conceptos",
+      date: "Marzo 2026",
+      excerpt: "Aprende qué es una landing page, para qué sirve y por qué es la herramienta más potente para convertir visitas en clientes. Guía con ejemplos reales.",
+    },
+    {
+      title: "Cómo Crear una Landing Page de Alta Conversión en 2026",
+      slug: "como-crear-landing-page-alta-conversion",
       category: "CRO & SXO",
-      date: "Octubre 2026",
-      excerpt: "Descubre por qué las landing pages estáticas están muertas y cómo un asistente 24/7 (como Forgi) rompe las barreras de fricción.",
+      date: "Marzo 2026",
+      excerpt: "Guía paso a paso para construir landing pages que convierten: estructura, copywriting, velocidad, A/B testing y errores que debes evitar.",
     },
     {
-      title: "Guía de SEO Programático B2B para Agencias 2026",
-      slug: "#",
-      category: "SEO",
-      date: "Octubre 2026",
-      excerpt: "Aprende a usar LandForge para iterar y posicionar 100 landing pages transaccionales enfocadas en micro-nichos locales.",
-    },
-    {
-      title: "LandForge vs Crear landing pages en React desde cero",
-      slug: "#",
-      category: "Desarrollo",
-      date: "Noviembre 2026",
-      excerpt: "El tiempo es tu activo más valioso. Analizamos los costes ocultos del hardcoding frente a la automatización de LLMs.",
+      title: "Chatbot de Ventas para tu Web: Guía Completa 2026",
+      slug: "chatbot-ventas-para-web",
+      category: "IA & Ventas",
+      date: "Marzo 2026",
+      excerpt: "Descubre cómo un chatbot IA puede atender a tus clientes 24/7, responder objeciones y cerrar ventas mientras tú duermes.",
     },
   ];
 
