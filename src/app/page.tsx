@@ -318,7 +318,7 @@ export default function LandForgeLanding() {
   }, []);
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
+  const [billingInterval, setBillingInterval] = useState<'month' | 'year'>('month');
 
   const testimonials = [
     {
@@ -371,43 +371,42 @@ export default function LandForgeLanding() {
 
   const pricing = [
     {
-      name: "Free", price: "0", period: "/mes",
-      desc: "Para probar la calidad del resultado",
-      cta: "Empezar gratis", ctaNote: "Sin tarjeta · 1 landing incluida",
+      name: "Starter", price: 49, period: "/mes",
+      desc: "Perfecto para empezar a testear ideas.",
+      cta: "Empezar con Starter", ctaNote: "Sin tarjeta · 14 días gratis",
       features: [
-        "1 landing page completa",
-        "Publicación con subdominio",
-        "Forgi Editor (5 ediciones)",
-        "Forgi Chatbot (50 mensajes/mes)",
+        "5 Landings activas",
+        "10 Generaciones AI al mes",
+        "30 Ediciones Forgi al mes",
+        "500 Mensajes en el Chatbot",
         "Conversion Score",
       ],
       highlight: false,
     },
     {
-      name: "Pro", price: "49", period: "/mes",
-      desc: "Para freelancers y agencias en crecimiento",
-      cta: "Empezar — 14 días gratis", ctaNote: "14 días de prueba · Sin tarjeta",
+      name: "Agency", price: 97, period: "/mes",
+      desc: "Para agencias que manejan varios clientes.",
+      cta: "Empezar con Agency", ctaNote: "Popular · 14 días gratis",
       features: [
-        "10 landing pages activas",
-        "Publicación con subdominio",
-        "Dominio propio",
-        "Forgi Editor (100 ediciones/mes)",
-        "Forgi Chatbot (2.000 mensajes/mes)",
+        "20 Landings activas",
+        "100 Generaciones AI al mes",
+        "200 Ediciones Forgi al mes",
+        "3.000 Mensajes en el Chatbot",
         "Conversion Score",
         "Análisis de competidores",
-        "Descarga HTML",
+        "Dominio propio",
       ],
       highlight: true,
     },
     {
-      name: "Unlimited", price: "97", period: "/mes",
-      desc: "Para agencias con volumen alto",
-      cta: "Empezar — 14 días gratis", ctaNote: "14 días de prueba · Sin tarjeta",
+      name: "Agency Pro", price: 197, period: "/mes",
+      desc: "El plan definitivo sin límites.",
+      cta: "Ser Pro", ctaNote: "Soporte prioritario",
       features: [
-        "Generación ilimitada",
-        "Hasta 5 usuarios",
-        "Forgi Editor ilimitado",
-        "Forgi Chatbot ilimitado",
+        "Landings Ilimitadas",
+        "Generaciones AI Ilimitadas",
+        "Ediciones Forgi Ilimitadas",
+        "Chatbot Ilimitado",
         "White label (tu marca)",
         "Soporte prioritario",
       ],
@@ -909,53 +908,86 @@ export default function LandForgeLanding() {
               ✨ Precios de lanzamiento — empieza gratis, sin tarjeta
             </p>
           </div>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "16px", marginBottom: "40px" }}>
+            <span style={{ fontSize: "14px", fontWeight: 600, color: billingInterval === 'month' ? BRAND.text : BRAND.gray }}>Mensual</span>
+            <button 
+              onClick={() => setBillingInterval(billingInterval === 'month' ? 'year' : 'month')}
+              style={{
+                position: "relative", width: "48px", height: "24px", 
+                background: billingInterval === 'year' ? BRAND.accent : "#E5E7EB",
+                borderRadius: "100px", padding: "2px", border: "none", cursor: "pointer",
+                transition: "background 0.3s ease",
+              }}
+            >
+              <div style={{ 
+                width: "20px", height: "20px", background: "#fff", borderRadius: "50%",
+                transform: billingInterval === 'year' ? "translateX(24px)" : "translateX(0)",
+                transition: "transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
+                boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
+              }} />
+            </button>
+            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+              <span style={{ fontSize: "14px", fontWeight: 600, color: billingInterval === 'year' ? BRAND.text : BRAND.gray }}>Anual</span>
+              <span style={{ 
+                background: "#DEF7EC", color: "#03543F", fontSize: "10px", fontWeight: 800, 
+                padding: "2px 8px", borderRadius: "100px", textTransform: "uppercase" 
+              }}>Ahorra 20%</span>
+            </div>
+          </div>
+
           <div style={{ display: "flex", gap: "24px", flexWrap: "wrap", justifyContent: "center" }}>
-            {pricing.map((plan) => (
-              <div key={plan.name} style={{
-                background: plan.highlight ? `linear-gradient(135deg, ${BRAND.accent}08, ${BRAND.accentAlt}05)` : BRAND.bgCard,
-                border: `1px solid ${plan.highlight ? BRAND.accent + "55" : BRAND.border}`,
-                borderRadius: "16px", padding: "36px 30px",
-                flex: "1 1 280px", maxWidth: "340px", position: "relative", overflow: "hidden",
-                boxShadow: plan.highlight ? `0 8px 40px ${BRAND.accent}18` : "0 2px 12px rgba(157,78,221,0.06)",
-              }}>
-                {plan.highlight && (
-                  <div style={{
-                    position: "absolute", top: "16px", right: "16px",
-                    background: `linear-gradient(135deg, ${BRAND.accent}, ${BRAND.accentAlt})`,
-                    color: "#fff", fontSize: "11px", fontWeight: 800,
-                    padding: "4px 12px", borderRadius: "100px",
-                    textTransform: "uppercase", letterSpacing: "1px",
-                  }}>Popular</div>
-                )}
-                <p style={{ fontSize: "13px", color: BRAND.gray, fontWeight: 700, textTransform: "uppercase", letterSpacing: "1px" }}>{plan.name}</p>
-                <div style={{ display: "flex", alignItems: "baseline", gap: "4px", margin: "14px 0 6px" }}>
-                  <span style={{ fontSize: "52px", fontWeight: 800, fontFamily: "'Space Mono', monospace", lineHeight: 1, color: BRAND.text }}>€{plan.price}</span>
-                  <span style={{ color: BRAND.gray, fontSize: "14px" }}>{plan.period}</span>
+            {pricing.map((plan) => {
+              const displayPrice = billingInterval === 'month' ? plan.price : Math.round(plan.price * 0.8);
+              const displayInterval = billingInterval === 'month' ? "/mes" : "/mes (anual)";
+              
+              return (
+                <div key={plan.name} style={{
+                  background: plan.highlight ? `linear-gradient(135deg, ${BRAND.accent}08, ${BRAND.accentAlt}05)` : BRAND.bgCard,
+                  border: `1px solid ${plan.highlight ? BRAND.accent + "55" : BRAND.border}`,
+                  borderRadius: "16px", padding: "36px 30px",
+                  flex: "1 1 280px", maxWidth: "340px", position: "relative", overflow: "hidden",
+                  boxShadow: plan.highlight ? `0 8px 40px ${BRAND.accent}18` : "0 2px 12px rgba(157,78,221,0.06)",
+                  transition: "transform 0.3s ease, border-color 0.3s ease",
+                }}>
+                  {plan.highlight && (
+                    <div style={{
+                      position: "absolute", top: "16px", right: "16px",
+                      background: `linear-gradient(135deg, ${BRAND.accent}, ${BRAND.accentAlt})`,
+                      color: "#fff", fontSize: "11px", fontWeight: 800,
+                      padding: "4px 12px", borderRadius: "100px",
+                      textTransform: "uppercase", letterSpacing: "1px",
+                    }}>Popular</div>
+                  )}
+                  <p style={{ fontSize: "13px", color: BRAND.gray, fontWeight: 700, textTransform: "uppercase", letterSpacing: "1px" }}>{plan.name}</p>
+                  <div style={{ display: "flex", alignItems: "baseline", gap: "4px", margin: "14px 0 6px" }}>
+                    <span style={{ fontSize: "52px", fontWeight: 800, fontFamily: "'Space Mono', monospace", lineHeight: 1, color: BRAND.text }}>€{displayPrice}</span>
+                    <span style={{ color: BRAND.gray, fontSize: "14px" }}>{displayInterval}</span>
+                  </div>
+                  <p style={{ fontSize: "14px", color: BRAND.gray, marginBottom: "24px" }}>{plan.desc}</p>
+                  <div style={{ display: "flex", flexDirection: "column", gap: "11px", marginBottom: "28px" }}>
+                    {plan.features.map((f, i) => (
+                      <div key={i} style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                        <div style={{ flexShrink: 0 }}><CheckIcon size={18} /></div>
+                        <span style={{ fontSize: "14px", color: BRAND.text }}>{f}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <a href="/register" style={{
+                    display: "block", textAlign: "center",
+                    padding: "13px 24px", borderRadius: "10px",
+                    background: plan.highlight ? `linear-gradient(135deg, ${BRAND.accent}, ${BRAND.accentAlt})` : "transparent",
+                    color: plan.highlight ? "#fff" : BRAND.accent,
+                    border: plan.highlight ? "none" : `1px solid ${BRAND.accent}`,
+                    fontWeight: 700, fontSize: "15px", textDecoration: "none",
+                    transition: "transform 0.2s",
+                  }}
+                    onMouseEnter={e => (e.currentTarget.style.transform = "translateY(-1px)")}
+                    onMouseLeave={e => (e.currentTarget.style.transform = "translateY(0)")}
+                  >{plan.cta}</a>
+                  <p style={{ textAlign: "center", fontSize: "12px", color: BRAND.gray, marginTop: "10px" }}>{plan.ctaNote}</p>
                 </div>
-                <p style={{ fontSize: "14px", color: BRAND.gray, marginBottom: "24px" }}>{plan.desc}</p>
-                <div style={{ display: "flex", flexDirection: "column", gap: "11px", marginBottom: "28px" }}>
-                  {plan.features.map((f, i) => (
-                    <div key={i} style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                      <div style={{ flexShrink: 0 }}><CheckIcon size={18} /></div>
-                      <span style={{ fontSize: "14px", color: BRAND.text }}>{f}</span>
-                    </div>
-                  ))}
-                </div>
-                <a href="/register" style={{
-                  display: "block", textAlign: "center",
-                  padding: "13px 24px", borderRadius: "10px",
-                  background: plan.highlight ? `linear-gradient(135deg, ${BRAND.accent}, ${BRAND.accentAlt})` : "transparent",
-                  color: plan.highlight ? "#fff" : BRAND.accent,
-                  border: plan.highlight ? "none" : `1px solid ${BRAND.accent}`,
-                  fontWeight: 700, fontSize: "15px", textDecoration: "none",
-                  transition: "transform 0.2s",
-                }}
-                  onMouseEnter={e => (e.currentTarget.style.transform = "translateY(-1px)")}
-                  onMouseLeave={e => (e.currentTarget.style.transform = "translateY(0)")}
-                >{plan.cta}</a>
-                <p style={{ textAlign: "center", fontSize: "12px", color: BRAND.gray, marginTop: "10px" }}>{plan.ctaNote}</p>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
