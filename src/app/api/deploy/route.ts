@@ -98,6 +98,8 @@ export async function POST(req: NextRequest) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       name: 'landforge-user-sites',
+      project: VERCEL_SITES_PROJECT_ID,
+      target: 'production',
       files: [{ file: 'index.html', sha, size }],
       projectSettings: {
         framework: null,
