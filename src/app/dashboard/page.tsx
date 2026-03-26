@@ -15,6 +15,7 @@ type LandingRow = {
   business_name: string | null
   created_at: string
   status: string
+  subdomain: string | null
   metadata: { keyword?: string; location?: string } | null
 }
 
@@ -55,7 +56,7 @@ export default async function DashboardPage() {
 
   const { data: landings, error } = await supabase
     .from('landing_pages')
-    .select('id, business_name, created_at, status, metadata')
+    .select('id, business_name, created_at, status, subdomain, metadata')
     .eq('user_id', user?.id)
     .order('created_at', { ascending: false })
     .limit(200)
@@ -215,6 +216,16 @@ export default async function DashboardPage() {
                       {subtitle && <span style={{ marginRight: '12px' }}>{subtitle}</span>}
                       <span>{formatDate(row.created_at)}</span>
                     </div>
+                    {row.status === 'published' && row.subdomain && (
+                      <a
+                        href={row.subdomain}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ fontSize: '11px', color: T.accent, textDecoration: 'none', marginTop: '4px', display: 'inline-flex', alignItems: 'center', gap: '4px' }}
+                      >
+                        🌐 {row.subdomain.replace(/^https?:\/\//, '')}
+                      </a>
+                    )}
                   </div>
 
                   {/* Actions */}
@@ -228,6 +239,16 @@ export default async function DashboardPage() {
                       }}
                     >
                       Ver
+                    </a>
+                    <a
+                      href={`/preview/${row.id}`}
+                      style={{
+                        padding: '8px 18px', borderRadius: '8px', textDecoration: 'none',
+                        background: 'transparent', border: `1px solid ${T.border}`,
+                        color: T.accent, fontSize: '13px', fontWeight: 700,
+                      }}
+                    >
+                      🔗 {row.subdomain ? 'Dominio' : 'Publicar'}
                     </a>
                     <a
                       href={`/editor/${row.id}`}

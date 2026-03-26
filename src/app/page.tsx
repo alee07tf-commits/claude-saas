@@ -47,44 +47,6 @@ const XIcon = () => (
   </svg>
 );
 
-/* ─── Forgi Avatar SVG ─── */
-const ForgiAvatar = ({ size = 40 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ display: 'block', flexShrink: 0 }}>
-    <defs>
-      <radialGradient id="fgBg" cx="35%" cy="28%" r="78%">
-        <stop offset="0%" stopColor="#C77DFF" />
-        <stop offset="58%" stopColor="#9D4EDD" />
-        <stop offset="100%" stopColor="#3D0070" />
-      </radialGradient>
-      <radialGradient id="fgEye" cx="30%" cy="28%" r="72%">
-        <stop offset="0%" stopColor="#F3E8FF" />
-        <stop offset="100%" stopColor="#E0AAFF" />
-      </radialGradient>
-    </defs>
-    {/* Fondo círculo */}
-    <circle cx="20" cy="20" r="20" fill="url(#fgBg)" />
-    {/* Brillo superior */}
-    <ellipse cx="13.5" cy="11" rx="10" ry="5.5" fill="white" opacity="0.16" transform="rotate(-18 13.5 11)" />
-    {/* Antena */}
-    <line x1="20" y1="13.5" x2="20" y2="7" stroke="white" strokeWidth="1.8" strokeLinecap="round" opacity="0.65" />
-    <circle cx="20" cy="5.8" r="2.5" fill="white" opacity="0.7" />
-    <circle cx="20" cy="5.8" r="1.2" fill="#C77DFF" />
-    {/* Orejas laterales */}
-    <rect x="3.5" y="18" width="4" height="6.5" rx="2" fill="white" opacity="0.28" />
-    <rect x="32.5" y="18" width="4" height="6.5" rx="2" fill="white" opacity="0.28" />
-    {/* Ojos blancos */}
-    <circle cx="15" cy="21.5" r="4.8" fill="url(#fgEye)" />
-    <circle cx="25" cy="21.5" r="4.8" fill="url(#fgEye)" />
-    {/* Pupilas */}
-    <circle cx="15" cy="21.5" r="2.7" fill="#5A009D" />
-    <circle cx="25" cy="21.5" r="2.7" fill="#5A009D" />
-    {/* Brillo en ojos */}
-    <circle cx="16.1" cy="20.2" r="1.1" fill="white" />
-    <circle cx="26.1" cy="20.2" r="1.1" fill="white" />
-    {/* Sonrisa */}
-    <path d="M13.5 28 Q20 33.5 26.5 28" stroke="white" strokeWidth="2.2" strokeLinecap="round" fill="none" opacity="0.85" />
-  </svg>
-);
 
 /* ─── Avatar Stack ─── */
 const avatars = [
@@ -343,29 +305,6 @@ const SectionBadge = ({ label }: { label: string }) => (
   }}>{label}</span>
 );
 
-/* ─── Forgi message renderer — handles **bold**, line breaks, - lists ─── */
-function ForgiText({ text }: { text: string }) {
-  const lines = text.split('\n').filter(l => l.trim() !== '');
-  return (
-    <span style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-      {lines.map((line, i) => {
-        // Parse **bold** inline
-        const parts = line.split(/(\*\*[^*]+\*\*)/g).map((part, j) =>
-          part.startsWith('**') && part.endsWith('**')
-            ? <strong key={j}>{part.slice(2, -2)}</strong>
-            : part
-        );
-        const isBullet = line.trimStart().startsWith('- ') || line.trimStart().startsWith('• ');
-        return (
-          <span key={i} style={{ display: 'flex', gap: isBullet ? '6px' : '0', alignItems: 'flex-start' }}>
-            {isBullet && <span style={{ flexShrink: 0, marginTop: '2px', opacity: 0.6 }}>·</span>}
-            <span>{isBullet ? parts.map((p, j) => typeof p === 'string' ? p.replace(/^[-•]\s*/, '') : p) : parts}</span>
-          </span>
-        );
-      })}
-    </span>
-  );
-}
 
 /* ─── Main Page ─── */
 export default function LandForgeLanding() {
@@ -380,54 +319,6 @@ export default function LandForgeLanding() {
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  // ── Forgi chat widget ──────────────────────────────────────────────────────
-  type ForgiMsg = { role: 'user' | 'forgi'; text: string; loading?: boolean }
-  const [forgiOpen, setForgiOpen]       = useState(false);
-  const [forgiInput, setForgiInput]     = useState('');
-  const [forgiMsgs, setForgiMsgs]       = useState<ForgiMsg[]>([]);
-  const [forgiWorking, setForgiWorking] = useState(false);
-  const [forgiBadge, setForgiBadge]     = useState(false);
-  const [forgiTeaser, setForgiTeaser]   = useState(false);
-  const forgiHistoryRef = useRef<{ role: 'user' | 'assistant'; content: string }[]>([]);
-  const forgiEndRef     = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const t = setTimeout(() => {
-      setForgiMsgs([{ role: 'forgi', text: '¡Hola! Soy Forgi 👋 El asistente IA de LandForge. Puedo contarte cómo funciona, qué planes tenemos, o resolver cualquier duda. ¡Y de paso, estás viendo cómo funciono en las landings de tus clientes! 😉' }]);
-      setForgiBadge(true);
-      setForgiTeaser(true);
-    }, 3000);
-    return () => clearTimeout(t);
-  }, []);
-
-  async function handleForgiSend() {
-    const text = forgiInput.trim();
-    if (!text || forgiWorking) return;
-    setForgiInput('');
-    setForgiWorking(true);
-    setForgiMsgs(prev => [...prev, { role: 'user', text }, { role: 'forgi', text: 'Forgi está pensando...', loading: true }]);
-    setTimeout(() => forgiEndRef.current?.scrollIntoView({ behavior: 'smooth' }), 50);
-    try {
-      const res  = await fetch('/api/forgi-landforge', {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: text, conversation_history: forgiHistoryRef.current }),
-      });
-      const data = await res.json() as { reply?: string; error?: string };
-      if (!res.ok || data.error) throw new Error(data.error || `Error ${res.status}`);
-      forgiHistoryRef.current = [
-        ...forgiHistoryRef.current,
-        { role: 'user', content: text },
-        { role: 'assistant', content: data.reply! },
-      ];
-      setForgiMsgs(prev => [...prev.slice(0, -1), { role: 'forgi', text: data.reply! }]);
-    } catch (err) {
-      const msg = err instanceof Error ? err.message : 'Error desconocido';
-      setForgiMsgs(prev => [...prev.slice(0, -1), { role: 'forgi', text: `❌ ${msg}` }]);
-    } finally {
-      setForgiWorking(false);
-      setTimeout(() => forgiEndRef.current?.scrollIntoView({ behavior: 'smooth' }), 50);
-    }
-  }
 
   const testimonials = [
     {
@@ -908,11 +799,17 @@ export default function LandForgeLanding() {
                 </div>
               ))}
             </div>
-            <button style={{
-              width: "100%", padding: "12px", borderRadius: "10px", border: "none",
-              background: `linear-gradient(135deg, ${BRAND.accent}, ${BRAND.accentAlt})`,
-              color: "#fff", fontSize: "14px", fontWeight: 700, cursor: "pointer",
-            }}>
+            <button 
+              onClick={() => {
+                const el = document.getElementById('forgi');
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+              }}
+              style={{
+                width: "100%", padding: "12px", borderRadius: "10px", border: "none",
+                background: `linear-gradient(135deg, ${BRAND.accent}, ${BRAND.accentAlt})`,
+                color: "#fff", fontSize: "14px", fontWeight: 700, cursor: "pointer",
+              }}
+            >
               Aplicar mejora con Forgi
             </button>
           </div>
@@ -1251,188 +1148,7 @@ export default function LandForgeLanding() {
         </p>
       </footer>
 
-      {/* ── FORGI CHAT WIDGET ── */}
-
-      {/* Mensaje flotante teaser */}
-      {forgiTeaser && !forgiOpen && (
-        <div style={{
-          position: 'fixed', bottom: '102px', right: '24px', zIndex: 9998,
-          background: '#fff', borderRadius: '14px 14px 4px 14px',
-          boxShadow: '0 8px 32px rgba(157,78,221,0.22)',
-          border: `1px solid ${BRAND.border}`,
-          padding: '12px 14px 12px 12px',
-          maxWidth: '230px',
-          display: 'flex', alignItems: 'flex-start', gap: '8px',
-          animation: 'forgiPopIn .35s cubic-bezier(0.34,1.56,0.64,1)',
-          fontFamily: "'DM Sans', -apple-system, sans-serif",
-        }}>
-          <ForgiAvatar size={26} />
-          <div style={{ flex: 1 }}>
-            <p style={{ fontSize: '12px', color: BRAND.text, lineHeight: 1.45, margin: 0 }}>
-              👋 ¡Hola! Soy <strong>Forgi</strong>, tu asistente IA.<br />¿Te ayudo a conocer LandForge?
-            </p>
-            <button
-              onClick={() => { setForgiOpen(true); setForgiBadge(false); setForgiTeaser(false); }}
-              style={{
-                marginTop: '8px', padding: '5px 12px', borderRadius: '20px', border: 'none',
-                background: `linear-gradient(135deg, ${BRAND.accent}, ${BRAND.accentAlt})`,
-                color: '#fff', fontSize: '11px', fontWeight: 700, cursor: 'pointer',
-              }}
-            >Empezar chat →</button>
-          </div>
-          <button
-            onClick={() => setForgiTeaser(false)}
-            style={{ background: 'none', border: 'none', cursor: 'pointer', color: BRAND.gray, fontSize: '14px', lineHeight: 1, padding: '0 0 0 2px', flexShrink: 0 }}
-          >✕</button>
-        </div>
-      )}
-
-      {/* Botón flotante */}
-      <button
-        onClick={() => { setForgiOpen(o => !o); setForgiBadge(false); setForgiTeaser(false); }}
-        title="Habla con Forgi"
-        style={{
-          position: 'fixed', bottom: '24px', right: '24px', zIndex: 9999,
-          width: '64px', height: '64px', borderRadius: '50%', border: 'none',
-          background: `linear-gradient(135deg, ${BRAND.accent}, ${BRAND.accentAlt})`,
-          cursor: 'pointer',
-          boxShadow: `0 6px 28px ${BRAND.accent}55`,
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          animation: forgiOpen ? 'none' : 'forgiFloat 3s ease-in-out infinite',
-          transition: 'transform .2s, box-shadow .2s',
-          padding: 0, overflow: 'hidden',
-        } as React.CSSProperties}
-        onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.transform = 'scale(1.1)'; (e.currentTarget as HTMLButtonElement).style.boxShadow = `0 10px 36px ${BRAND.accent}77`; }}
-        onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.transform = 'scale(1)'; (e.currentTarget as HTMLButtonElement).style.boxShadow = `0 6px 28px ${BRAND.accent}55`; }}
-      >
-        {forgiOpen
-          ? <span style={{ fontSize: '20px', lineHeight: 1, color: '#fff' }}>✕</span>
-          : <ForgiAvatar size={44} />
-        }
-      </button>
-      {/* Anillo pulsante (fuera del botón para no ser cortado) */}
-      {!forgiOpen && (
-        <span style={{
-          position: 'fixed', bottom: '18px', right: '18px', zIndex: 9998,
-          width: '76px', height: '76px', borderRadius: '50%',
-          border: `2px solid ${BRAND.accent}55`,
-          animation: 'forgiRingPulse 2.5s ease-out infinite',
-          pointerEvents: 'none',
-        }} />
-      )}
-      {/* Badge notificación */}
-      {forgiBadge && !forgiOpen && (
-        <span style={{
-          position: 'fixed', bottom: '72px', right: '18px', zIndex: 10000,
-          width: '17px', height: '17px', borderRadius: '50%',
-          background: '#EF4444', border: '2px solid #fff',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          fontSize: '9px', fontWeight: 800, color: '#fff', lineHeight: 1,
-          pointerEvents: 'none',
-        }}>1</span>
-      )}
-
-      {forgiOpen && (
-        <div style={{
-          position: 'fixed', bottom: '96px', right: '24px', zIndex: 9999,
-          width: '360px', maxWidth: 'calc(100vw - 32px)',
-          background: '#fff', borderRadius: '16px',
-          border: `1px solid ${BRAND.border}`,
-          boxShadow: `0 16px 56px rgba(157,78,221,0.18)`,
-          display: 'flex', flexDirection: 'column', overflow: 'hidden',
-          animation: 'forgiSlideUp .2s ease',
-          fontFamily: "'DM Sans', -apple-system, sans-serif",
-        }}>
-          {/* Header */}
-          <div style={{
-            padding: '14px 16px',
-            background: `linear-gradient(135deg, ${BRAND.accent}14, ${BRAND.accentAlt}0A)`,
-            borderBottom: `1px solid ${BRAND.border}`,
-            display: 'flex', alignItems: 'center', gap: '10px',
-          }}>
-            <ForgiAvatar size={34} />
-            <div style={{ flex: 1 }}>
-              <div style={{ fontWeight: 700, fontSize: '14px', color: BRAND.text }}>Forgi ✨</div>
-              <div style={{ fontSize: '11px', color: BRAND.gray }}>Asistente IA · LandForge</div>
-            </div>
-            <button
-              onClick={() => setForgiOpen(false)}
-              style={{ background: 'none', border: 'none', cursor: 'pointer', color: BRAND.gray, fontSize: '16px', lineHeight: 1, padding: '4px' }}
-            >✕</button>
-          </div>
-          {/* Messages */}
-          <div style={{
-            flex: 1, overflowY: 'auto', padding: '16px',
-            display: 'flex', flexDirection: 'column', gap: '10px',
-            maxHeight: '340px',
-          }}>
-            {forgiMsgs.length === 0 && (
-              <p style={{ fontSize: '13px', color: BRAND.gray, textAlign: 'center', padding: '20px 0' }}>
-                Hazme una pregunta sobre LandForge...
-              </p>
-            )}
-            {forgiMsgs.map((msg, i) => (
-              <div key={i} style={{ alignSelf: msg.role === 'user' ? 'flex-end' : 'flex-start', maxWidth: '84%' }}>
-                <div style={{
-                  padding: '9px 13px', borderRadius: '12px',
-                  fontSize: '13px', lineHeight: 1.5, opacity: msg.loading ? 0.6 : 1,
-                  ...(msg.role === 'user' ? {
-                    background: `linear-gradient(135deg, ${BRAND.accent}, ${BRAND.accentAlt})`,
-                    color: '#fff', fontWeight: 500, borderBottomRightRadius: '4px',
-                  } : {
-                    background: BRAND.bgAlt, color: msg.loading ? BRAND.gray : BRAND.text,
-                    border: `1px solid ${BRAND.border}`,
-                    borderBottomLeftRadius: '4px',
-                    fontStyle: msg.loading ? 'italic' : 'normal',
-                  }),
-                }}>
-                  {msg.loading
-                    ? <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-                        <span style={{ display: 'inline-block', animation: 'spin 0.8s linear infinite' }}>⟳</span>
-                        {msg.text}
-                      </span>
-                    : msg.role === 'forgi'
-                      ? <ForgiText text={msg.text} />
-                      : msg.text}
-                </div>
-              </div>
-            ))}
-            <div ref={forgiEndRef} />
-          </div>
-          {/* Input */}
-          <div style={{ display: 'flex', gap: '8px', padding: '10px 12px', borderTop: `1px solid ${BRAND.border}` }}>
-            <input
-              value={forgiInput}
-              onChange={e => setForgiInput(e.target.value)}
-              onKeyDown={e => e.key === 'Enter' && !e.shiftKey && handleForgiSend()}
-              placeholder="Pregunta lo que quieras..."
-              disabled={forgiWorking}
-              autoFocus
-              style={{
-                flex: 1, background: BRAND.bgAlt, border: `1px solid ${BRAND.border}`,
-                borderRadius: '8px', padding: '9px 12px',
-                color: BRAND.text, fontSize: '13px', outline: 'none',
-                fontFamily: "'DM Sans', -apple-system, sans-serif",
-                opacity: forgiWorking ? 0.6 : 1,
-              }}
-            />
-            <button
-              onClick={handleForgiSend}
-              disabled={forgiWorking}
-              style={{
-                width: '36px', height: '36px', borderRadius: '8px', border: 'none',
-                background: `linear-gradient(135deg, ${BRAND.accent}, ${BRAND.accentAlt})`,
-                color: '#fff', fontSize: '15px',
-                cursor: forgiWorking ? 'wait' : 'pointer',
-                flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center',
-                opacity: forgiWorking ? 0.4 : 1, transition: 'opacity .15s',
-              }}
-            >➤</button>
-          </div>
-        </div>
-      )}
-
-      {/* Animations and responsive CSS moved to globals.css */}
+      {/* Forgi chat widget is rendered globally via layout.tsx → ForgiChatWidget */}
     </div>
   );
 }

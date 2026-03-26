@@ -3,11 +3,11 @@ import { buildForgiWidget } from '@/lib/forgi-widget'
 import { NextRequest, NextResponse } from 'next/server'
 import { createHash } from 'crypto'
 
-const VERCEL_TOKEN      = process.env.VERCEL_TOKEN
-const VERCEL_TEAM_ID    = process.env.VERCEL_TEAM_ID     // optional (personal account = empty)
-const VERCEL_PROJECT_ID = process.env.VERCEL_PROJECT_ID
-const BASE_DOMAIN       = process.env.LANDFORGE_DOMAIN || 'landforge.io'
-const APP_URL           = process.env.APP_URL || (process.env.VERCEL_PROJECT_PRODUCTION_URL ? 'https://'+process.env.VERCEL_PROJECT_PRODUCTION_URL : (process.env.VERCEL_URL ? 'https://'+process.env.VERCEL_URL : 'http://localhost:3000'))
+const VERCEL_TOKEN            = process.env.VERCEL_TOKEN
+const VERCEL_TEAM_ID          = process.env.VERCEL_TEAM_ID     // optional (personal account = empty)
+const VERCEL_SITES_PROJECT_ID = process.env.VERCEL_SITES_PROJECT_ID
+const BASE_DOMAIN             = process.env.LANDFORGE_DOMAIN || 'landforge.io'
+const APP_URL                 = process.env.APP_URL || (process.env.VERCEL_PROJECT_PRODUCTION_URL ? 'https://'+process.env.VERCEL_PROJECT_PRODUCTION_URL : (process.env.VERCEL_URL ? 'https://'+process.env.VERCEL_URL : 'http://localhost:3000'))
 
 function vercelFetch(path: string, options: RequestInit = {}, extraQs: Record<string, string> = {}) {
   const params: Record<string, string> = { ...extraQs }
@@ -24,9 +24,9 @@ function vercelFetch(path: string, options: RequestInit = {}, extraQs: Record<st
 }
 
 export async function POST(req: NextRequest) {
-  if (!VERCEL_TOKEN || !VERCEL_PROJECT_ID) {
+  if (!VERCEL_TOKEN || !VERCEL_SITES_PROJECT_ID) {
     return NextResponse.json(
-      { error: 'VERCEL_TOKEN / VERCEL_PROJECT_ID no configurados en .env.local' },
+      { error: 'VERCEL_TOKEN / VERCEL_SITES_PROJECT_ID no configurados en .env.local' },
       { status: 500 },
     )
   }
@@ -41,14 +41,15 @@ export async function POST(req: NextRequest) {
   // ── 1. Load landing from Supabase (with client HTML fallback) ─────────────
   const supabase = await createClient()
 
-  let rawHtml  = htmlFromClient || ''
-  let bizName  = bizNameFromClient || 'Empresa'
+  let rawHtml     = htmlFromClient || ''
+  let bizName     = bizNameFromClient || 'Empresa'
   let subdomain: string | null = null
+  let existingMeta: Record<string, unknown> = {}
 
   if (landingId && landingId !== 'preview') {
     const { data: landing } = await supabase
       .from('landing_pages')
-      .select('id, html_content, business_name, subdomain, survey_data')
+      .select('id, html_content, business_name, subdomain, survey_data, metadata')
       .eq('id', landingId)
       .single()
 
@@ -57,6 +58,7 @@ export async function POST(req: NextRequest) {
       bizName   = landing.business_name || bizName
       subdomain = landing.subdomain as string | null
     }
+    existingMeta = (landing?.metadata as Record<string, unknown> | null) ?? {}
     // If Supabase lookup failed but client sent HTML, use that (rawHtml already set above)
   }
 
@@ -112,22 +114,40 @@ export async function POST(req: NextRequest) {
 
   // ── 4. Assign subdomain alias ─────────────────────────────────────────────
   // Re-use existing subdomain if already deployed; otherwise create new one.
-  const shortId    = (landingId || 'standalone').replace(/-/g, '').slice(0, 10)
-  const subdomainAlias = subdomain || `${shortId}.${BASE_DOMAIN}`
+  const shortId = (landingId || 'standalone').replace(/-/g, '').slice(0, 4)
+  
+  // Create a readable slug from business name
+  const slug = (bizName || 'site')
+    .toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '') // remove accents
+    .replace(/[^a-z0-9]+/g, '-')                   // replace non-alphanumeric with hyphen
+    .replace(/^-+|-+$/g, '')                       // trim hyphens
+    .slice(0, 30)
+
+  const subdomainAlias = subdomain 
+    ? subdomain.replace(/^https?:\/\//, '').split('/')[0] // extract host from stored URL
+    : `${slug}-${shortId}.${BASE_DOMAIN}`
 
   const aliasRes = await vercelFetch(`/v2/deployments/${deploy.id}/aliases`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ alias: subdomainAlias }),
+  }, { projectId: VERCEL_SITES_PROJECT_ID! })
+
+  console.log('DEBUG [Deploy]:', { 
+    id: deploy.id, 
+    vercelUrl: deploy.url, 
+    intendedAlias: subdomainAlias 
   })
 
   // Use alias URL if it worked, otherwise fall back to Vercel's auto-generated URL
   let url: string
   if (aliasRes.ok) {
+    console.log('DEBUG [Alias]: SUCCESS')
     url = `https://${subdomainAlias}`
   } else {
-    const aliasErr = await aliasRes.text()
-    console.warn(`Alias failed (${aliasRes.status}):`, aliasErr)
+    const aliasErr = await aliasRes.json().catch(() => ({ message: 'Cannot parse error' }))
+    console.warn(`DEBUG [Alias]: FAILED (${aliasRes.status})`, aliasErr)
     // deploy.url from Vercel is like "claude-saas-xxxx.vercel.app" (no protocol)
     url = `https://${deploy.url}`
   }
@@ -135,7 +155,11 @@ export async function POST(req: NextRequest) {
   // ── 5. Update DB ──────────────────────────────────────────────────────────
   await supabase
     .from('landing_pages')
-    .update({ subdomain: url, status: 'published' })
+    .update({
+      subdomain: url,
+      status: 'published',
+      metadata: { ...existingMeta, deploy_id: deploy.id },
+    })
     .eq('id', landingId)
 
   return NextResponse.json({ url, deployId: deploy.id })

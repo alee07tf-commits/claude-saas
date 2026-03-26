@@ -65,6 +65,17 @@ export default function PreviewPage() {
   const [deployedUrl, setDeployedUrl] = useState<string | null>(null)
   const [deployError, setDeployError] = useState('')
 
+  // Domain connection panel
+  const [showDomainPanel, setShowDomainPanel]   = useState(false)
+  const [domainInput, setDomainInput]           = useState('')
+  const [connectingDomain, setConnectingDomain] = useState(false)
+  const [domainError, setDomainError]           = useState('')
+  const [domainResult, setDomainResult]         = useState<{
+    domain: string
+    dns: { type: string; host: string; value: string; note: string }
+    message: string
+  } | null>(null)
+
   // Forgi chat
   const [chatOpen, setChatOpen]   = useState(false)
   const [chatInput, setChatInput] = useState('')
@@ -396,6 +407,33 @@ export default function PreviewPage() {
     }
   }
 
+  async function handleConnectDomain() {
+    const domain = domainInput.trim()
+    if (!domain || connectingDomain) return
+    setConnectingDomain(true)
+    setDomainError('')
+    setDomainResult(null)
+    try {
+      const res = await fetch('/api/connect-domain', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ landingId: id, customDomain: domain }),
+      })
+      const data = await res.json() as {
+        domain?: string
+        dns?: { type: string; host: string; value: string; note: string }
+        message?: string
+        error?: string
+      }
+      if (!res.ok || data.error) throw new Error(data.error || `Error ${res.status}`)
+      setDomainResult({ domain: data.domain!, dns: data.dns!, message: data.message! })
+    } catch (err) {
+      setDomainError(err instanceof Error ? err.message : 'Error al conectar dominio')
+    } finally {
+      setConnectingDomain(false)
+    }
+  }
+
   if (noData) {
     return (
       <div style={{
@@ -481,19 +519,32 @@ export default function PreviewPage() {
 
           {/* Deploy / Deployed */}
           {deployedUrl ? (
-            <a
-              href={deployedUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                padding: '8px 20px', borderRadius: '9px', textDecoration: 'none',
-                background: 'linear-gradient(135deg, #22C55E, #16A34A)',
-                color: '#fff', fontSize: '13px', fontWeight: 800,
-                display: 'flex', alignItems: 'center', gap: '7px',
-              }}
-            >
-              ✓ Ver en vivo →
-            </a>
+            <>
+              <a
+                href={deployedUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  padding: '8px 20px', borderRadius: '9px', textDecoration: 'none',
+                  background: 'linear-gradient(135deg, #22C55E, #16A34A)',
+                  color: '#fff', fontSize: '13px', fontWeight: 800,
+                  display: 'flex', alignItems: 'center', gap: '7px',
+                }}
+              >
+                ✓ Ver en vivo →
+              </a>
+              <button
+                onClick={() => { setShowDomainPanel(o => !o); setDomainError(''); }}
+                style={{
+                  padding: '8px 16px', borderRadius: '9px', border: `1px solid ${UI.border}`,
+                  background: showDomainPanel ? UI.bgAlt : UI.surface,
+                  color: UI.accent, fontSize: '13px', fontWeight: 700, cursor: 'pointer',
+                  display: 'flex', alignItems: 'center', gap: '6px',
+                }}
+              >
+                🔗 Mi dominio
+              </button>
+            </>
           ) : (
             <button
               onClick={handleDeploy}
@@ -699,6 +750,168 @@ export default function PreviewPage() {
                 opacity: isWorking ? 0.4 : 1, transition: 'opacity .15s',
               }}
             >➤</button>
+          </div>
+        </div>
+      )}
+
+      {/* ── DOMAIN PANEL ── */}
+      {showDomainPanel && deployedUrl && (
+        <div style={{
+          position: 'fixed', bottom: '92px', left: '24px', zIndex: 200,
+          width: '360px', maxWidth: 'calc(100vw - 32px)',
+          background: UI.surface, borderRadius: '16px',
+          border: `1px solid ${UI.border}`,
+          boxShadow: '0 12px 48px rgba(157,78,221,.15)',
+          display: 'flex', flexDirection: 'column', overflow: 'hidden',
+          animation: 'forgiSlideUp .2s ease',
+          fontFamily: UI.font,
+        }}>
+          {/* Header */}
+          <div style={{
+            padding: '14px 16px',
+            background: `linear-gradient(135deg, ${UI.accent}22, ${UI.accentAlt}22)`,
+            borderBottom: `1px solid ${UI.border}`,
+            display: 'flex', alignItems: 'center', gap: '10px',
+          }}>
+            <span style={{ fontSize: '20px', lineHeight: 1 }}>🔗</span>
+            <div style={{ flex: 1 }}>
+              <div style={{ fontWeight: 700, fontSize: '14px', color: UI.text }}>Conectar dominio</div>
+              <div style={{ fontSize: '11px', color: UI.gray }}>Apunta tu dominio a esta landing</div>
+            </div>
+            <button
+              onClick={() => setShowDomainPanel(false)}
+              style={{ background: 'none', border: 'none', cursor: 'pointer', color: UI.gray, fontSize: '16px', lineHeight: 1, padding: '4px' }}
+            >✕</button>
+          </div>
+
+          {/* Body */}
+          <div style={{ padding: '16px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+            {/* LandForge URL */}
+            <div>
+              <div style={{ fontSize: '11px', color: UI.gray, marginBottom: '4px', fontWeight: 600 }}>URL ACTUAL (LandForge)</div>
+              <a
+                href={deployedUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  fontSize: '12px', color: UI.accent, textDecoration: 'none',
+                  wordBreak: 'break-all', display: 'block',
+                  padding: '7px 10px', borderRadius: '8px',
+                  background: UI.bgAlt, border: `1px solid ${UI.border}`,
+                }}
+              >
+                {deployedUrl}
+              </a>
+            </div>
+
+            {/* Domain input */}
+            {!domainResult && (
+              <>
+                <div>
+                  <div style={{ fontSize: '11px', color: UI.gray, marginBottom: '6px', fontWeight: 600 }}>TU DOMINIO PROPIO</div>
+                  <div style={{ display: 'flex', gap: '8px' }}>
+                    <input
+                      value={domainInput}
+                      onChange={e => setDomainInput(e.target.value)}
+                      onKeyDown={e => e.key === 'Enter' && handleConnectDomain()}
+                      placeholder="landing.tuempresa.com"
+                      disabled={connectingDomain}
+                      style={{
+                        flex: 1, background: UI.bgAlt, border: `1px solid ${UI.border}`,
+                        borderRadius: '8px', padding: '8px 11px',
+                        color: UI.text, fontSize: '13px', outline: 'none',
+                        fontFamily: UI.font, opacity: connectingDomain ? 0.6 : 1,
+                      }}
+                    />
+                    <button
+                      onClick={handleConnectDomain}
+                      disabled={connectingDomain || !domainInput.trim()}
+                      style={{
+                        padding: '8px 14px', borderRadius: '8px', border: 'none',
+                        background: `linear-gradient(135deg, ${UI.accent}, ${UI.accentAlt})`,
+                        color: '#fff', fontSize: '13px', fontWeight: 700,
+                        cursor: connectingDomain ? 'wait' : 'pointer',
+                        flexShrink: 0, opacity: connectingDomain || !domainInput.trim() ? 0.5 : 1,
+                        transition: 'opacity .15s',
+                      }}
+                    >
+                      {connectingDomain
+                        ? <span style={{ display: 'inline-block', animation: 'spin 0.7s linear infinite' }}>⟳</span>
+                        : 'Conectar'}
+                    </button>
+                  </div>
+                </div>
+                {domainError && (
+                  <p style={{ fontSize: '12px', color: '#EF4444', margin: 0 }}>⚠ {domainError}</p>
+                )}
+              </>
+            )}
+
+            {/* DNS instructions (after success) */}
+            {domainResult && (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+                <div style={{ padding: '10px', borderRadius: '8px', background: '#DCFCE7', border: '1px solid #BBF7D0', color: '#166534', fontSize: '13px', fontWeight: 600 }}>
+                  {domainResult.message}
+                </div>
+
+                <div>
+                  <div style={{ fontSize: '11px', color: UI.gray, marginBottom: '8px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                    Configuración DNS Requerida
+                  </div>
+                  
+                  <div style={{
+                    background: '#0F172A', borderRadius: '12px', padding: '16px',
+                    fontFamily: UI.mono, fontSize: '13px', border: '1px solid #334155',
+                    display: 'flex', flexDirection: 'column', gap: '10px',
+                    boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                  }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid #334155', paddingBottom: '8px' }}>
+                      <span style={{ color: '#94A3B8' }}>Tipo</span>
+                      <span style={{ color: '#F8FAFC', fontWeight: 700, background: '#334155', padding: '2px 6px', borderRadius: '4px' }}>{domainResult.dns.type}</span>
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid #334155', paddingBottom: '8px' }}>
+                      <span style={{ color: '#94A3B8' }}>Nombre / Host</span>
+                      <span style={{ color: '#F8FAFC' }}>{domainResult.dns.host}</span>
+                    </div>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                      <span style={{ color: '#94A3B8' }}>Valor / Destino</span>
+                      <span style={{ color: '#A78BFA', wordBreak: 'break-all', fontWeight: 700 }}>{domainResult.dns.value}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div style={{ 
+                  background: '#F8FAFC', padding: '12px', borderRadius: '10px', border: '1px solid #E2E8F0',
+                  fontSize: '12px', color: '#475569', lineHeight: '1.6'
+                }}>
+                  <p style={{ marginBottom: '8px' }}>
+                    <strong>¿Cómo hacerlo?</strong> Ve a tu proveedor de dominios (GoDaddy, Namecheap, etc.) y añade el registro indicado arriba.
+                  </p>
+                  <ul style={{ paddingLeft: '18px' }}>
+                    <li><strong>Dominio principal:</strong> Usa el registro tipo <b>A</b> con host <b>@</b>.</li>
+                    <li><strong>Subdominio:</strong> Usa el registro <b>CNAME</b> con el nombre (ej. "web").</li>
+                  </ul>
+                </div>
+
+                <p style={{ fontSize: '11px', color: UI.gray, textAlign: 'center' }}>
+                  ⏳ Los cambios pueden tardar desde unos minutos hasta 48h.
+                </p>
+
+                <button
+                  onClick={() => { setDomainResult(null); setDomainInput('') }}
+                  style={{
+                    padding: '8px', background: 'transparent',
+                    border: `1px solid ${UI.border}`, borderRadius: '8px',
+                    fontSize: '12px', color: UI.gray, fontWeight: 600,
+                    cursor: 'pointer', fontFamily: UI.font, transition: 'all 0.2s',
+                  }}
+                  onMouseEnter={e => e.currentTarget.style.background = '#F3E8FF'}
+                  onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
+                >
+                  ← Configurar otro dominio
+                </button>
+              </div>
+            )}
           </div>
         </div>
       )}

@@ -2,27 +2,34 @@ import { NextResponse } from 'next/server';
 import { stripe } from '@/lib/stripe';
 import { createClient } from '@supabase/supabase-js';
 
-// Define expected plan price IDs (we grab these from env vars for the 3 plans)
-const PLANS: Record<string, string> = {
-  starter: process.env.STRIPE_PRICE_ID_STARTER!,
-  agency: process.env.STRIPE_PRICE_ID_AGENCY!,
-  agency_pro: process.env.STRIPE_PRICE_ID_AGENCY_PRO!
+// Define expected plan price IDs (per interval)
+const PLANS: Record<string, Record<string, string | undefined>> = {
+  starter: {
+    month: process.env.STRIPE_PRICE_ID_STARTER,
+    year: process.env.STRIPE_PRICE_ID_STARTER_ANNUAL || process.env.STRIPE_PRICE_ID_STARTER
+  },
+  agency: {
+    month: process.env.STRIPE_PRICE_ID_AGENCY,
+    year: process.env.STRIPE_PRICE_ID_AGENCY_ANNUAL || process.env.STRIPE_PRICE_ID_AGENCY
+  },
+  agency_pro: {
+    month: process.env.STRIPE_PRICE_ID_AGENCY_PRO,
+    year: process.env.STRIPE_PRICE_ID_AGENCY_PRO_ANNUAL || process.env.STRIPE_PRICE_ID_AGENCY_PRO
+  }
 };
 
-// Se usa server client admin porque las llamadas API no siempre vienen de forms, pero aquí necesitamos validar el user actual.
-// Por simplicidad en app router, recibiremos un request authenticado:
 import { createServerClient } from '@supabase/ssr';
 import { cookies } from 'next/headers';
 
 export async function POST(req: Request) {
   try {
-    const { planId } = await req.json();
+    const { planId, interval = 'month' } = await req.json();
 
-    if (!planId || !PLANS[planId]) {
-      return NextResponse.json({ error: 'Invalid plan ID' }, { status: 400 });
+    const priceId = PLANS[planId]?.[interval];
+
+    if (!planId || !priceId) {
+      return NextResponse.json({ error: 'Invalid plan or interval ID' }, { status: 400 });
     }
-
-    const priceId = PLANS[planId];
     
     // Configurar cliente de supabase (usuario logueado)
     const cookieStore = await cookies();
