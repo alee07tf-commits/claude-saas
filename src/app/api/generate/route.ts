@@ -760,8 +760,8 @@ export async function POST(request: NextRequest) {
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
-  const genLimit = await checkUserLimit(user.id, 'generations')
-  const lanLimit = await checkUserLimit(user.id, 'landings')
+  const genLimit = await checkUserLimit(user.id, 'generations', user.email ?? undefined)
+  const lanLimit = await checkUserLimit(user.id, 'landings', user.email ?? undefined)
   if (!genLimit.allowed) return NextResponse.json({ error: 'Has alcanzado el límite de generaciones AI mensuales de tu plan. Actualiza a un plan superior para escalar sin límites.' }, { status: 403 })
   if (!lanLimit.allowed) return NextResponse.json({ error: 'Has alcanzado el límite de landings de tu plan. Borra una landing antigua o mejora tu plan para continuar construyendo.' }, { status: 403 })
 

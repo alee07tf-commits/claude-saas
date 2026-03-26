@@ -143,6 +143,18 @@ function extractSectionHtml(fullHtml: string, sectionId: string): string | null 
   return null
 }
 
+function urlToEmbed(input: string): string {
+  const trimmed = input.trim()
+  if (trimmed.startsWith('<iframe') || trimmed.startsWith('<')) return trimmed
+  // YouTube: youtube.com/watch?v=ID, youtu.be/ID, youtube.com/embed/ID
+  const ytMatch = trimmed.match(/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/)
+  if (ytMatch) return `<iframe width="560" height="315" src="https://www.youtube.com/embed/${ytMatch[1]}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
+  // Vimeo: vimeo.com/ID
+  const vmMatch = trimmed.match(/vimeo\.com\/(\d+)/)
+  if (vmMatch) return `<iframe width="560" height="315" src="https://player.vimeo.com/video/${vmMatch[1]}" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>`
+  return trimmed
+}
+
 function replaceSectionHtml(full: string, old: string, next: string): string {
   const idx = full.indexOf(old)
   if (idx === -1) return full
@@ -190,12 +202,22 @@ export default function EditorPage() {
   const [undoHtml, setUndoHtml]         = useState<string | null>(null)
 
   // Panel mode
-  const [panelMode, setPanelMode]       = useState<'blocks' | 'global' | 'score'>('blocks')
+  const [panelMode, setPanelMode]       = useState<'blocks' | 'global' | 'score' | 'knowledge'>('blocks')
 
   // Conversion Score state
   const [scoreData, setScoreData]       = useState<ScoreResult | null>(null)
   const [scoring, setScoring]           = useState(false)
   const [scoreError, setScoreError]     = useState('')
+
+  // Knowledge base state
+  const [kbItems, setKbItems]           = useState<Array<{ id: string; title: string; content_type: string; content_text?: string; created_at: string }>>([])
+  const [kbLoading, setKbLoading]       = useState(false)
+  const [kbTitle, setKbTitle]           = useState('')
+  const [kbContent, setKbContent]       = useState('')
+  const [kbSaving, setKbSaving]         = useState(false)
+  const [kbError, setKbError]           = useState('')
+  const [kbFileUploading, setKbFileUploading] = useState(false)
+  const kbFileRef                       = useRef<HTMLInputElement>(null)
 
   // Global chat state
   const [chatMessages, setChatMessages] = useState<ChatMsg[]>([
@@ -333,7 +355,7 @@ export default function EditorPage() {
         body: JSON.stringify({
           sectionId: selected.id, sectionLabel: selected.label, sectionHtml, userPrompt: prompt.trim(),
           ...(blockImage ? { imageUrl: blockImage.url } : {}),
-          ...(blockEmbed.trim() ? { embedCode: blockEmbed.trim() } : {}),
+          ...(blockEmbed.trim() ? { embedCode: urlToEmbed(blockEmbed) } : {}),
         }),
       })
       if (!res.ok) { const d = await res.json().catch(() => ({})); throw new Error((d as { error?: string }).error || `Error ${res.status}`) }
@@ -360,7 +382,7 @@ export default function EditorPage() {
         body: JSON.stringify({
           fullHtml: html, userPrompt: userText,
           ...(chatImage ? { imageUrl: chatImage.url } : {}),
-          ...(chatEmbed.trim() ? { embedCode: chatEmbed.trim() } : {}),
+          ...(chatEmbed.trim() ? { embedCode: urlToEmbed(chatEmbed) } : {}),
         }),
       })
       if (!res.ok) { const d = await res.json().catch(() => ({})); throw new Error((d as { error?: string }).error || `Error ${res.status}`) }
@@ -436,6 +458,67 @@ export default function EditorPage() {
     if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') { e.preventDefault(); handleGlobalEdit() }
   }
 
+  // ── Knowledge base helpers ──────────────────────────────────────────────
+  async function loadKnowledge() {
+    if (!id) return
+    setKbLoading(true)
+    try {
+      const res = await fetch(`/api/chatbot-knowledge?landingId=${id}`)
+      const data = await res.json() as { items?: typeof kbItems }
+      setKbItems(data.items ?? [])
+    } catch { /* ignore */ }
+    finally { setKbLoading(false) }
+  }
+
+  async function handleAddKnowledge() {
+    if (!kbContent.trim() || kbSaving || !id) return
+    setKbSaving(true)
+    setKbError('')
+    try {
+      const res = await fetch('/api/chatbot-knowledge', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ landingId: id, title: kbTitle || 'Info', content: kbContent }),
+      })
+      const data = await res.json() as { item?: typeof kbItems[0]; error?: string }
+      if (!res.ok || data.error) throw new Error(data.error || 'Error')
+      setKbItems(prev => [data.item!, ...prev])
+      setKbTitle('')
+      setKbContent('')
+    } catch (err) {
+      setKbError(err instanceof Error ? err.message : 'Error al guardar')
+    } finally { setKbSaving(false) }
+  }
+
+  async function handleUploadKnowledgeFile(file: File) {
+    if (!id) return
+    setKbFileUploading(true)
+    setKbError('')
+    try {
+      const form = new FormData()
+      form.append('landingId', id)
+      form.append('title', file.name)
+      form.append('file', file)
+      const res = await fetch('/api/chatbot-knowledge', { method: 'POST', body: form })
+      const data = await res.json() as { item?: typeof kbItems[0]; error?: string }
+      if (!res.ok || data.error) throw new Error(data.error || 'Error')
+      setKbItems(prev => [data.item!, ...prev])
+    } catch (err) {
+      setKbError(err instanceof Error ? err.message : 'Error al subir archivo')
+    } finally { setKbFileUploading(false) }
+  }
+
+  async function handleDeleteKnowledge(itemId: string) {
+    try {
+      await fetch('/api/chatbot-knowledge', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: itemId }),
+      })
+      setKbItems(prev => prev.filter(i => i.id !== itemId))
+    } catch { /* ignore */ }
+  }
+
   // ─────────────────────────────────────────────────────────────────────────
   if (noData) return (
     <div style={{ minHeight:'100vh', background:UI.bg, display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', gap:'16px', fontFamily:UI.font, color:UI.text }}>
@@ -498,8 +581,8 @@ export default function EditorPage() {
             </div>
             {/* Tabs */}
             <div style={{ display:'flex', gap:'3px', padding:'3px', borderRadius:'10px', background:UI.bgAlt, border:`1px solid ${UI.border}` }}>
-              {([['blocks','✨ Bloques'],['global','💬 Global'],['score','📊 Score']] as const).map(([mode, label]) => (
-                <button key={mode} onClick={() => { setPanelMode(mode); if (mode!=='blocks') setSelected(null) }}
+              {([['blocks','✨ Bloques'],['global','💬 Global'],['score','📊 Score'],['knowledge','🧠 Info']] as const).map(([mode, label]) => (
+                <button key={mode} onClick={() => { setPanelMode(mode); if (mode!=='blocks') setSelected(null); if (mode==='knowledge') loadKnowledge() }}
                   style={{ flex:1, padding:'7px 0', borderRadius:'7px', border:'none', fontSize:'11px', fontWeight:700, cursor:'pointer', transition:'all .15s',
                     background: panelMode===mode ? `linear-gradient(135deg,${UI.accent},${UI.accentAlt})` : 'transparent',
                     color: panelMode===mode ? UI.white : UI.gray,
@@ -608,7 +691,7 @@ export default function EditorPage() {
                   </div>
                   {chatShowEmbed && (
                     <textarea value={chatEmbed} onChange={e => setChatEmbed(e.target.value)} disabled={chatApplying}
-                      placeholder={'Pega el <iframe> de YouTube o Vimeo...'}
+                      placeholder={'Pega URL de YouTube/Vimeo o código <iframe>...'}
                       rows={2}
                       style={{ width:'100%', padding:'8px 10px', borderRadius:'7px', background:UI.surface, border:`1px solid ${UI.border}`, color:UI.text, fontSize:'11px', lineHeight:'1.5', fontFamily:UI.mono, resize:'vertical', outline:'none', boxSizing:'border-box' }}
                       onFocus={e => { (e.target as HTMLTextAreaElement).style.borderColor=UI.accent }}
@@ -718,6 +801,109 @@ export default function EditorPage() {
             </div>
           )}
 
+          {/* ── KNOWLEDGE TAB ────────────────────────────────────────────── */}
+          {panelMode === 'knowledge' && (
+            <div style={{ flex:1, display:'flex', flexDirection:'column', padding:'16px', gap:'14px', overflowY:'auto' }}>
+              <div style={{ padding:'10px 14px', borderRadius:'10px', background:`${UI.accent}0A`, border:`1px solid ${UI.accent}20` }}>
+                <p style={{ fontSize:'12px', fontWeight:700, color:UI.accent, marginBottom:'4px' }}>🧠 Base de conocimiento</p>
+                <p style={{ fontSize:'11px', color:UI.gray, lineHeight:1.5 }}>
+                  Añade información extra sobre el negocio. Forgi Chatbot la usará para responder mejor a los visitantes.
+                </p>
+              </div>
+
+              {/* Add text form */}
+              <div style={{ display:'flex', flexDirection:'column', gap:'8px' }}>
+                <input
+                  value={kbTitle}
+                  onChange={e => setKbTitle(e.target.value)}
+                  placeholder="Título (ej: Precios, FAQ, Horarios)"
+                  style={{ padding:'8px 10px', borderRadius:'8px', border:`1px solid ${UI.border}`, background:UI.bgAlt, color:UI.text, fontSize:'12px', outline:'none', fontFamily:UI.font }}
+                />
+                <textarea
+                  value={kbContent}
+                  onChange={e => setKbContent(e.target.value)}
+                  placeholder="Escribe la información que quieres que el chatbot sepa..."
+                  rows={4}
+                  style={{ padding:'8px 10px', borderRadius:'8px', border:`1px solid ${UI.border}`, background:UI.bgAlt, color:UI.text, fontSize:'12px', outline:'none', fontFamily:UI.font, resize:'vertical', lineHeight:1.5 }}
+                />
+                <div style={{ display:'flex', gap:'6px' }}>
+                  <button
+                    onClick={handleAddKnowledge}
+                    disabled={kbSaving || !kbContent.trim()}
+                    style={{
+                      flex:1, padding:'8px', borderRadius:'8px', border:'none',
+                      background:`linear-gradient(135deg,${UI.accent},${UI.accentAlt})`,
+                      color:'#fff', fontSize:'12px', fontWeight:700, cursor: kbSaving ? 'wait' : 'pointer',
+                      opacity: kbSaving || !kbContent.trim() ? 0.5 : 1, transition:'opacity .15s',
+                    }}
+                  >
+                    {kbSaving ? '⟳ Guardando...' : '+ Añadir texto'}
+                  </button>
+                  <input
+                    ref={kbFileRef}
+                    type="file"
+                    accept=".txt,.pdf,.doc,.docx"
+                    style={{ display:'none' }}
+                    onChange={e => { const f = e.target.files?.[0]; if (f) handleUploadKnowledgeFile(f); e.target.value = '' }}
+                  />
+                  <button
+                    onClick={() => kbFileRef.current?.click()}
+                    disabled={kbFileUploading}
+                    style={{
+                      padding:'8px 12px', borderRadius:'8px', border:`1px solid ${UI.border}`,
+                      background:UI.surface, color:UI.accent, fontSize:'12px', fontWeight:700,
+                      cursor: kbFileUploading ? 'wait' : 'pointer',
+                      opacity: kbFileUploading ? 0.5 : 1,
+                    }}
+                  >
+                    {kbFileUploading ? '⟳' : '📎 Archivo'}
+                  </button>
+                </div>
+              </div>
+
+              {kbError && (
+                <div style={{ padding:'8px 10px', borderRadius:'8px', background:'#EF444412', border:'1px solid #EF444430', fontSize:'11px', color:'#EF4444' }}>
+                  ⚠ {kbError}
+                </div>
+              )}
+
+              {/* Items list */}
+              {kbLoading ? (
+                <div style={{ textAlign:'center', padding:'20px', color:UI.gray, fontSize:'13px' }}>
+                  <span style={{ display:'inline-block', animation:'spin .7s linear infinite' }}>⟳</span> Cargando...
+                </div>
+              ) : kbItems.length === 0 ? (
+                <p style={{ fontSize:'12px', color:UI.dimGray, textAlign:'center', padding:'16px 0' }}>
+                  Sin información añadida todavía
+                </p>
+              ) : (
+                <div style={{ display:'flex', flexDirection:'column', gap:'8px' }}>
+                  {kbItems.map(item => (
+                    <div key={item.id} style={{
+                      padding:'10px 12px', borderRadius:'10px',
+                      background:UI.bgAlt, border:`1px solid ${UI.border}`,
+                    }}>
+                      <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:'4px' }}>
+                        <span style={{ fontSize:'12px', fontWeight:700, color:UI.text }}>
+                          {item.content_type === 'file' ? '📎' : '📝'} {item.title}
+                        </span>
+                        <button
+                          onClick={() => handleDeleteKnowledge(item.id)}
+                          style={{ background:'none', border:'none', cursor:'pointer', color:'#EF4444', fontSize:'13px', padding:'0 2px' }}
+                        >✕</button>
+                      </div>
+                      {item.content_text && (
+                        <p style={{ fontSize:'11px', color:UI.gray, lineHeight:1.4, maxHeight:'60px', overflow:'hidden', textOverflow:'ellipsis' }}>
+                          {item.content_text.slice(0, 200)}{item.content_text.length > 200 ? '...' : ''}
+                        </p>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+
           {/* ── BLOCKS TAB ──────────────────────────────────────────────── */}
           {panelMode === 'blocks' && <div style={{ padding:'20px' }}>
 
@@ -817,7 +1003,7 @@ export default function EditorPage() {
                   </button>
                   {blockShowEmbed && (
                     <textarea value={blockEmbed} onChange={e => setBlockEmbed(e.target.value)} disabled={applying}
-                      placeholder={'Pega el <iframe> de YouTube o Vimeo...\nEj: <iframe src="https://www.youtube.com/embed/..." ...>'}
+                      placeholder={'Pega URL de YouTube/Vimeo o código <iframe>...\nEj: <iframe src="https://www.youtube.com/embed/..." ...>'}
                       rows={3}
                       style={{ width:'100%', padding:'9px 11px', borderRadius:'8px', background:UI.surface, border:`1px solid ${UI.border}`, color:UI.text, fontSize:'12px', lineHeight:'1.5', fontFamily:UI.mono, resize:'vertical', outline:'none', boxSizing:'border-box' }}
                       onFocus={e => { (e.target as HTMLTextAreaElement).style.borderColor=UI.accent }}

@@ -16,7 +16,7 @@ const BRAND = {
 
 export default async function RegisterPage({ searchParams }: { searchParams: Promise<{ error?: string; next?: string; confirm?: string }> }) {
     const params = await searchParams
-    const next = params?.next || '/dashboard'
+    const next = params?.next || '/survey'
 
     if (params?.confirm) {
         return (

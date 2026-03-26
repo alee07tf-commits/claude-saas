@@ -42,12 +42,20 @@ function getSupabaseAdmin() {
  * Verifica si el usuario puede realizar una acción según su suscripción y uso actual.
  * Devuelve un boolean y opcionalmente el plan actual.
  */
-export async function checkUserLimit(userId: string, action: ActionType): Promise<{ allowed: boolean, plan: PlanType, limit: number, usage: number }> {
+export async function checkUserLimit(userId: string, action: ActionType, callerEmail?: string): Promise<{ allowed: boolean, plan: PlanType, limit: number, usage: number }> {
   try {
     const supabaseAdmin = getSupabaseAdmin();
 
-    const { data: userData } = await supabaseAdmin.auth.admin.getUserById(userId);
-    const userEmail = userData?.user?.email;
+    // Admin bypass: check email from caller first (avoids admin client dependency)
+    let userEmail = callerEmail;
+    if (!userEmail) {
+      try {
+        const { data: userData } = await supabaseAdmin.auth.admin.getUserById(userId);
+        userEmail = userData?.user?.email;
+      } catch (e) {
+        console.warn('Admin getUserById failed (service role key may be wrong):', e);
+      }
+    }
 
     if (userEmail && userEmail === process.env.ADMIN_EMAIL) {
       return { allowed: true, plan: 'agency_pro', limit: 999999, usage: 0 };
@@ -83,7 +91,8 @@ export async function checkUserLimit(userId: string, action: ActionType): Promis
 
     if (usageError && usageError.code !== 'PGRST116') {
       console.error('Error fetching usage metrics:', usageError);
-      return { allowed: false, plan, limit, usage: 0 };
+      // If table doesn't exist or query fails, assume 0 usage (allow the action)
+      return { allowed: true, plan, limit, usage: 0 };
     }
 
     const currentUsage = usage ? (usage as unknown as Record<string, number>)[`${action}_count`] ?? 0 : 0;
@@ -91,7 +100,9 @@ export async function checkUserLimit(userId: string, action: ActionType): Promis
     return { allowed: currentUsage < limit, plan, limit, usage: currentUsage };
   } catch (err) {
     console.error('Error checking user limits:', err);
-    return { allowed: false, plan: 'none', limit: 0, usage: 0 };
+    // On unexpected errors (missing tables, bad keys), allow the action
+    // to avoid blocking users due to infrastructure issues
+    return { allowed: true, plan: 'none', limit: 999, usage: 0 };
   }
 }
 
@@ -101,22 +112,22 @@ export async function checkUserLimit(userId: string, action: ActionType): Promis
 export async function incrementUserUsage(userId: string, action: ActionType): Promise<boolean> {
   const column = `${action}_count`;
   try {
-    // Para simplificar, obtenemos y sumamos 1. En un entorno de alta concurrencia
-    // lo ideal es una función de base de datos SQL o RPC increment_counter(user_id, columna).
     const { data: userUsage } = await getSupabaseAdmin()
       .from('usage_metrics')
       .select(column)
       .eq('user_id', userId)
       .maybeSingle();
-      
+
     const currentVal = userUsage ? (userUsage as unknown as Record<string, number>)[column] ?? 0 : 0;
-      
-    // Si no existía, el trigger de Auth debía haberlo creado. Si falló, intentamos hacer un upsert (si supabase lo permite así).
+
+    // Upsert: inserta la fila si no existe, actualiza si ya existe
     const { error } = await getSupabaseAdmin()
       .from('usage_metrics')
-      .update({ [column]: currentVal + 1 })
-      .eq('user_id', userId);
-      
+      .upsert(
+        { user_id: userId, [column]: currentVal + 1 },
+        { onConflict: 'user_id' }
+      );
+
     if (error) {
       console.error('Error incrementing usage:', error);
       return false;

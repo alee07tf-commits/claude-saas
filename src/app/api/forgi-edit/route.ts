@@ -13,7 +13,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'No autorizado. Inicia sesión para usar el editor.' }, { status: 401 })
   }
 
-  const limit = await checkUserLimit(user.id, 'editions')
+  const limit = await checkUserLimit(user.id, 'editions', user.email ?? undefined)
   if (!limit.allowed) {
     return NextResponse.json({ error: 'Has alcanzado el límite de ediciones Forgi de tu plan.' }, { status: 403 })
   }

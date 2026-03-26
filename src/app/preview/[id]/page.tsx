@@ -75,6 +75,12 @@ export default function PreviewPage() {
     dns: { type: string; host: string; value: string; note: string }
     message: string
   } | null>(null)
+  const [verifying, setVerifying]               = useState(false)
+  const [verifyStatus, setVerifyStatus]         = useState<{ status: string; message: string } | null>(null)
+
+  // Link href editor
+  const [linkEdit, setLinkEdit] = useState<{ linkIdx: string; href: string; sectionId: string; top: number; left: number } | null>(null)
+  const [linkHrefInput, setLinkHrefInput] = useState('')
 
   // Forgi chat
   const [chatOpen, setChatOpen]   = useState(false)
@@ -286,6 +292,29 @@ export default function PreviewPage() {
     if(e.key==='Escape'){e.preventDefault();cancelEdit(eEl);}
     else if(e.key==='Enter'&&!e.shiftKey&&eEl.tagName!=='P'&&eEl.tagName!=='LI'){e.preventDefault();saveEdit(eEl);}
   });
+
+  // ── Link href editor (single click on <a>) ──────────────────────────────
+  var linkIdx=0;
+  document.querySelectorAll('[data-section] a[href], [data-section] button[onclick]').forEach(function(el){
+    el.setAttribute('data-forgi-link-idx',String(linkIdx++));
+    el.addEventListener('click',function(e){
+      if(eEl)return; // don't interfere with text editing
+      e.preventDefault();e.stopPropagation();
+      var href=el.getAttribute('href')||'';
+      var r=el.getBoundingClientRect();
+      var sec=el.closest('[data-section]');
+      window.parent.postMessage({type:'forgi-link-click',href:href,linkIdx:el.getAttribute('data-forgi-link-idx'),sectionId:sec?sec.getAttribute('data-section'):'',top:r.top,left:r.left,width:r.width},'*');
+    });
+  });
+  window.addEventListener('message',function(e){
+    if(e.data&&e.data.type==='forgi-link-update'){
+      var el=document.querySelector('[data-forgi-link-idx=\"'+e.data.linkIdx+'\"]');
+      if(!el)return;
+      el.setAttribute('href',e.data.newHref);
+      var sec=el.closest('[data-section]');
+      if(sec)window.parent.postMessage({type:'forgi-text-edit',sectionId:sec.getAttribute('data-section'),sectionHtml:sec.outerHTML},'*');
+    }
+  });
 })();`
 
   // Listen for messages from the iframe (section-edit clicks + inline text edits)
@@ -294,6 +323,9 @@ export default function PreviewPage() {
       if (e.data?.type === 'forgi-section-edit') {
         setSelectedSection({ id: e.data.sectionId, label: e.data.sectionLabel })
         setChatOpen(true)
+      } else if (e.data?.type === 'forgi-link-click') {
+        setLinkEdit({ linkIdx: e.data.linkIdx, href: e.data.href, sectionId: e.data.sectionId, top: e.data.top, left: e.data.left })
+        setLinkHrefInput(e.data.href || '')
       } else if (e.data?.type === 'forgi-text-edit') {
         if (!liveHtmlRef.current) return
         const oldSec = extractSectionHtml(liveHtmlRef.current, e.data.sectionId)
@@ -431,6 +463,35 @@ export default function PreviewPage() {
       setDomainError(err instanceof Error ? err.message : 'Error al conectar dominio')
     } finally {
       setConnectingDomain(false)
+    }
+  }
+
+  function handleSaveLinkHref() {
+    if (!linkEdit) return
+    iframeRef.current?.contentWindow?.postMessage({
+      type: 'forgi-link-update',
+      linkIdx: linkEdit.linkIdx,
+      newHref: linkHrefInput.trim(),
+    }, '*')
+    setLinkEdit(null)
+  }
+
+  async function handleVerifyDomain() {
+    if (!domainResult?.domain || verifying) return
+    setVerifying(true)
+    setVerifyStatus(null)
+    try {
+      const res = await fetch('/api/verify-domain', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ domain: domainResult.domain }),
+      })
+      const data = await res.json() as { status: string; message: string }
+      setVerifyStatus(data)
+    } catch {
+      setVerifyStatus({ status: 'error', message: 'Error al verificar' })
+    } finally {
+      setVerifying(false)
     }
   }
 
@@ -596,6 +657,49 @@ export default function PreviewPage() {
           style={{ flex: 1, width: '100%', minHeight: 'calc(100vh - 92px)', border: 'none', display: 'block' }}
           title="Landing page preview"
         />
+      )}
+
+      {/* ── LINK HREF EDITOR POPOVER ── */}
+      {linkEdit && (
+        <div style={{
+          position: 'fixed', top: Math.min(linkEdit.top + 56 + 40, window.innerHeight - 120), left: Math.max(16, linkEdit.left),
+          zIndex: 300, background: UI.surface, borderRadius: '12px',
+          border: `1px solid ${UI.border}`, boxShadow: '0 8px 32px rgba(157,78,221,.18)',
+          padding: '12px', width: '340px', maxWidth: 'calc(100vw - 32px)',
+          fontFamily: UI.font, animation: 'forgiSlideUp .15s ease',
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
+            <span style={{ fontSize: '12px', fontWeight: 700, color: UI.accent }}>🔗 Editar enlace</span>
+            <button onClick={() => setLinkEdit(null)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: UI.gray, fontSize: '14px' }}>✕</button>
+          </div>
+          <div style={{ display: 'flex', gap: '6px' }}>
+            <input
+              value={linkHrefInput}
+              onChange={e => setLinkHrefInput(e.target.value)}
+              onKeyDown={e => e.key === 'Enter' && handleSaveLinkHref()}
+              placeholder="https://ejemplo.com"
+              autoFocus
+              style={{
+                flex: 1, padding: '8px 10px', borderRadius: '8px',
+                border: `1px solid ${UI.border}`, background: UI.bgAlt,
+                color: UI.text, fontSize: '13px', outline: 'none', fontFamily: UI.font,
+              }}
+            />
+            <button
+              onClick={handleSaveLinkHref}
+              style={{
+                padding: '8px 14px', borderRadius: '8px', border: 'none',
+                background: `linear-gradient(135deg, ${UI.accent}, ${UI.accentAlt})`,
+                color: '#fff', fontSize: '12px', fontWeight: 700, cursor: 'pointer', flexShrink: 0,
+              }}
+            >Guardar</button>
+          </div>
+          {linkEdit.href && (
+            <div style={{ fontSize: '11px', color: UI.gray, marginTop: '6px', wordBreak: 'break-all' }}>
+              Actual: {linkEdit.href}
+            </div>
+          )}
+        </div>
       )}
 
       {/* ── FORGI FLOATING BUTTON ── */}
@@ -897,8 +1001,40 @@ export default function PreviewPage() {
                   ⏳ Los cambios pueden tardar desde unos minutos hasta 48h.
                 </p>
 
+                {/* Verify domain button */}
                 <button
-                  onClick={() => { setDomainResult(null); setDomainInput('') }}
+                  onClick={handleVerifyDomain}
+                  disabled={verifying}
+                  style={{
+                    padding: '10px', borderRadius: '8px', border: 'none',
+                    background: verifyStatus?.status === 'verified'
+                      ? 'linear-gradient(135deg, #22C55E, #16A34A)'
+                      : `linear-gradient(135deg, ${UI.accent}, ${UI.accentAlt})`,
+                    color: '#fff', fontSize: '13px', fontWeight: 700,
+                    cursor: verifying ? 'wait' : 'pointer',
+                    opacity: verifying ? 0.6 : 1, transition: 'opacity .15s',
+                    fontFamily: UI.font,
+                  }}
+                >
+                  {verifying
+                    ? <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}><span style={{ display: 'inline-block', animation: 'spin 0.7s linear infinite' }}>⟳</span> Verificando...</span>
+                    : verifyStatus?.status === 'verified'
+                      ? '✓ Dominio verificado'
+                      : '🔍 Verificar conexión DNS'}
+                </button>
+                {verifyStatus && verifyStatus.status !== 'verified' && (
+                  <div style={{
+                    padding: '8px 10px', borderRadius: '8px', fontSize: '12px', lineHeight: 1.5,
+                    background: verifyStatus.status === 'pending' ? '#FEF9C3' : '#FEE2E2',
+                    border: `1px solid ${verifyStatus.status === 'pending' ? '#FDE68A' : '#FECACA'}`,
+                    color: verifyStatus.status === 'pending' ? '#854D0E' : '#991B1B',
+                  }}>
+                    {verifyStatus.message}
+                  </div>
+                )}
+
+                <button
+                  onClick={() => { setDomainResult(null); setDomainInput(''); setVerifyStatus(null) }}
                   style={{
                     padding: '8px', background: 'transparent',
                     border: `1px solid ${UI.border}`, borderRadius: '8px',

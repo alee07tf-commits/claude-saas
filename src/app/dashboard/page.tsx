@@ -1,4 +1,5 @@
 import { createClient } from '@/lib/supabase/server'
+import { checkUserLimit } from '@/lib/limits'
 import DeleteButton from '@/components/DeleteButton'
 import BillingButton from '@/components/BillingButton'
 
@@ -62,6 +63,16 @@ export default async function DashboardPage() {
     .limit(200)
 
   const rows = (landings ?? []) as LandingRow[]
+
+  // Usage limits for the indicator
+  let usageInfo: { plan: string; used: number; limit: number } | null = null
+  if (user) {
+    try {
+      const lanLimit = await checkUserLimit(user.id, 'landings', user.email ?? undefined)
+      const planLabels: Record<string, string> = { none: 'Gratis', starter: 'Starter', agency: 'Agency', agency_pro: 'Agency Pro' }
+      usageInfo = { plan: planLabels[lanLimit.plan] || lanLimit.plan, used: lanLimit.usage, limit: lanLimit.limit }
+    } catch { /* ignore */ }
+  }
 
   return (
     <div style={{
@@ -128,16 +139,43 @@ export default async function DashboardPage() {
       {/* ── MAIN ───────────────────────────────────────────────── */}
       <main style={{ maxWidth: '960px', margin: '0 auto', padding: '48px 24px 80px' }}>
 
-        {/* Title */}
-        <div style={{ marginBottom: '40px' }}>
-          <h1 style={{ fontSize: '26px', fontWeight: 800, letterSpacing: '-0.5px', marginBottom: '6px' }}>
-            Mis landings
-          </h1>
-          <p style={{ color: T.gray, fontSize: '15px' }}>
-            {rows.length === 0
-              ? 'Aún no has generado ninguna landing.'
-              : `${rows.length} landing${rows.length !== 1 ? 's' : ''} generada${rows.length !== 1 ? 's' : ''}`}
-          </p>
+        {/* Title + Usage */}
+        <div style={{ marginBottom: '40px', display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '16px', flexWrap: 'wrap' }}>
+          <div>
+            <h1 style={{ fontSize: '26px', fontWeight: 800, letterSpacing: '-0.5px', marginBottom: '6px' }}>
+              Mis landings
+            </h1>
+            <p style={{ color: T.gray, fontSize: '15px' }}>
+              {rows.length === 0
+                ? 'Aún no has generado ninguna landing.'
+                : `${rows.length} landing${rows.length !== 1 ? 's' : ''} generada${rows.length !== 1 ? 's' : ''}`}
+            </p>
+          </div>
+          {usageInfo && usageInfo.limit < 999999 && (
+            <div style={{
+              padding: '10px 16px', borderRadius: '12px',
+              background: T.card, border: `1px solid ${T.border}`,
+              fontSize: '12px', display: 'flex', flexDirection: 'column', gap: '6px', minWidth: '160px',
+            }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <span style={{ fontWeight: 700, color: T.text }}>Plan {usageInfo.plan}</span>
+                <span style={{ color: T.accent, fontWeight: 800 }}>{usageInfo.used}/{usageInfo.limit}</span>
+              </div>
+              <div style={{ height: '5px', borderRadius: '3px', background: `${T.border}`, overflow: 'hidden' }}>
+                <div style={{
+                  height: '100%', borderRadius: '3px',
+                  width: `${Math.min(100, (usageInfo.used / usageInfo.limit) * 100)}%`,
+                  background: usageInfo.used >= usageInfo.limit
+                    ? 'linear-gradient(90deg, #EF4444, #DC2626)'
+                    : `linear-gradient(90deg, ${T.accent}, ${T.accentAlt})`,
+                  transition: 'width .4s ease',
+                }} />
+              </div>
+              <span style={{ color: T.gray, fontSize: '11px' }}>
+                {usageInfo.used >= usageInfo.limit ? 'Límite alcanzado' : `${usageInfo.limit - usageInfo.used} landing${usageInfo.limit - usageInfo.used !== 1 ? 's' : ''} disponible${usageInfo.limit - usageInfo.used !== 1 ? 's' : ''}`}
+              </span>
+            </div>
+          )}
         </div>
 
         {/* Error state */}
@@ -159,23 +197,33 @@ export default async function DashboardPage() {
           <div style={{
             textAlign: 'center', padding: '80px 24px',
             border: `1px dashed ${T.border}`, borderRadius: '16px',
+            background: `linear-gradient(180deg, ${T.accent}08, transparent)`,
           }}>
-            <div style={{ fontSize: '48px', marginBottom: '16px' }}>🚀</div>
-            <p style={{ fontSize: '18px', fontWeight: 700, marginBottom: '8px' }}>
-              Genera tu primera landing
+            <div style={{ fontSize: '56px', marginBottom: '16px' }}>✨</div>
+            <p style={{ fontSize: '22px', fontWeight: 800, marginBottom: '8px', letterSpacing: '-0.3px' }}>
+              Tu primera landing es gratis
             </p>
-            <p style={{ color: T.gray, fontSize: '14px', marginBottom: '28px' }}>
-              Completa la encuesta en menos de 5 minutos y la IA la construye por ti.
+            <p style={{ color: T.gray, fontSize: '15px', marginBottom: '12px', maxWidth: '380px', margin: '0 auto 12px', lineHeight: 1.6 }}>
+              Responde unas preguntas sobre tu negocio y la IA creará una landing profesional en minutos.
             </p>
+            <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', marginBottom: '28px', flexWrap: 'wrap' }}>
+              {['Editable 100%', 'Chatbot IA incluido', 'Publicación instantánea'].map(t => (
+                <span key={t} style={{
+                  padding: '4px 12px', borderRadius: '20px', fontSize: '12px', fontWeight: 600,
+                  background: T.accent + '15', color: T.accent, border: `1px solid ${T.accent}25`,
+                }}>{t}</span>
+              ))}
+            </div>
             <a
               href="/survey"
               style={{
-                display: 'inline-block', padding: '12px 32px', borderRadius: '10px',
+                display: 'inline-block', padding: '14px 40px', borderRadius: '12px',
                 background: `linear-gradient(135deg, ${T.accent}, ${T.accentAlt})`,
-                color: '#FFFFFF', fontSize: '15px', fontWeight: 800, textDecoration: 'none',
+                color: '#FFFFFF', fontSize: '16px', fontWeight: 800, textDecoration: 'none',
+                boxShadow: `0 4px 16px ${T.accent}40`,
               }}
             >
-              Crear landing →
+              Crear mi landing gratis →
             </a>
           </div>
         )}

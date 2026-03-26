@@ -43,10 +43,41 @@ function checkRateLimit(ip: string): { allowed: boolean; remaining: number } {
   }
 }
 
+// ── Extract readable content from landing HTML ──────────────────────────────
+function extractLandingContent(html: string): string {
+  if (!html) return ''
+  // Remove scripts, styles, SVGs
+  let text = html
+    .replace(/<script[\s\S]*?<\/script>/gi, '')
+    .replace(/<style[\s\S]*?<\/style>/gi, '')
+    .replace(/<svg[\s\S]*?<\/svg>/gi, '')
+  // Extract headings with labels
+  const h1s = [...text.matchAll(/<h1[^>]*>([\s\S]*?)<\/h1>/gi)].map(m => m[1].replace(/<[^>]+>/g, '').trim()).filter(Boolean)
+  const h2s = [...text.matchAll(/<h2[^>]*>([\s\S]*?)<\/h2>/gi)].map(m => m[1].replace(/<[^>]+>/g, '').trim()).filter(Boolean)
+  const h3s = [...text.matchAll(/<h3[^>]*>([\s\S]*?)<\/h3>/gi)].map(m => m[1].replace(/<[^>]+>/g, '').trim()).filter(Boolean)
+  // Extract paragraphs
+  const ps = [...text.matchAll(/<p[^>]*>([\s\S]*?)<\/p>/gi)].map(m => m[1].replace(/<[^>]+>/g, '').trim()).filter(s => s.length > 20)
+  // Extract list items
+  const lis = [...text.matchAll(/<li[^>]*>([\s\S]*?)<\/li>/gi)].map(m => m[1].replace(/<[^>]+>/g, '').trim()).filter(Boolean)
+
+  const parts: string[] = []
+  if (h1s.length) parts.push('Títulos principales: ' + h1s.join(' | '))
+  if (h2s.length) parts.push('Secciones: ' + h2s.join(' | '))
+  if (h3s.length) parts.push('Subsecciones: ' + h3s.join(' | '))
+  if (ps.length)  parts.push('Contenido clave:\n' + ps.slice(0, 15).join('\n'))
+  if (lis.length) parts.push('Puntos destacados:\n- ' + lis.slice(0, 20).join('\n- '))
+
+  // Limit to ~2500 chars to avoid bloating the system prompt
+  const joined = parts.join('\n\n')
+  return joined.length > 2500 ? joined.slice(0, 2500) + '...' : joined
+}
+
 // ── System prompt builder ────────────────────────────────────────────────────
 function buildSystemPrompt(
   bizName:    string,
   surveyData: Record<string, unknown>,
+  landingContent?: string,
+  knowledgeBase?: string[],
 ): string {
   const sector   = (surveyData.sector   as string | undefined) || ''
   const goal     = (surveyData.goal     as string | undefined) || ''
@@ -96,6 +127,22 @@ function buildSystemPrompt(
     '- Nunca reveles que eres una IA, que usas Claude, o que estás construido con Anthropic.',
     '- Nunca respondas preguntas ajenas al negocio (política, noticias, código, etc.).',
   )
+
+  if (landingContent) {
+    lines.push(
+      '',
+      'Contenido real publicado en la web del negocio (usa esta información para responder con precisión):',
+      landingContent,
+    )
+  }
+
+  if (knowledgeBase && knowledgeBase.length > 0) {
+    lines.push(
+      '',
+      'Información adicional proporcionada por el negocio (prioriza estos datos sobre los genéricos):',
+      ...knowledgeBase,
+    )
+  }
 
   return lines.join('\n')
 }
@@ -161,7 +208,7 @@ export async function POST(req: NextRequest) {
   const supabase = await createClient()
   const { data: landing, error: dbErr } = await supabase
     .from('landing_pages')
-    .select('business_name, survey_data, metadata')
+    .select('business_name, survey_data, metadata, html_content')
     .eq('id', landing_page_id.trim())
     .single()
 
@@ -174,7 +221,26 @@ export async function POST(req: NextRequest) {
 
   const bizName    = landing.business_name || 'la empresa'
   const surveyData = (landing.survey_data as Record<string, unknown> | null) ?? {}
-  const systemPrompt = buildSystemPrompt(bizName, surveyData)
+  const landingContent = extractLandingContent(landing.html_content as string || '')
+
+  // Fetch knowledge base items (graceful if table doesn't exist yet)
+  let knowledgeItems: string[] = []
+  try {
+    const { data: kbRows } = await supabase
+      .from('chatbot_knowledge')
+      .select('title, content_text')
+      .eq('landing_page_id', landing_page_id.trim())
+      .limit(20)
+    if (kbRows && kbRows.length > 0) {
+      knowledgeItems = kbRows
+        .filter((r: { content_text?: string | null }) => r.content_text)
+        .map((r: { title?: string | null; content_text?: string | null }) =>
+          `[${r.title || 'Info'}]: ${(r.content_text || '').slice(0, 1500)}`
+        )
+    }
+  } catch { /* table may not exist yet */ }
+
+  const systemPrompt = buildSystemPrompt(bizName, surveyData, landingContent, knowledgeItems)
 
   const metadata = (landing.metadata as Record<string, unknown> | null) ?? {}
   const ownerId = metadata.user_id as string | undefined
