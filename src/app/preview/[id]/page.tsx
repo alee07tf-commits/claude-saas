@@ -468,11 +468,41 @@ export default function PreviewPage() {
 
   function handleSaveLinkHref() {
     if (!linkEdit) return
+    const newHref = linkHrefInput.trim()
+
+    // 1. Update iframe visually
     iframeRef.current?.contentWindow?.postMessage({
       type: 'forgi-link-update',
       linkIdx: linkEdit.linkIdx,
-      newHref: linkHrefInput.trim(),
+      newHref,
     }, '*')
+
+    // 2. Update HTML directly in parent (don't rely on iframe roundtrip)
+    if (liveHtmlRef.current && linkEdit.sectionId) {
+      const oldSec = extractSectionHtml(liveHtmlRef.current, linkEdit.sectionId)
+      if (oldSec) {
+        // Escape special regex chars in the old href
+        const escaped = linkEdit.href.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+        const updatedSec = oldSec.replace(
+          new RegExp(`href=(["'])${escaped}\\1`),
+          `href="${ newHref.replace(/"/g, '&quot;') }"`,
+        )
+        if (updatedSec !== oldSec) {
+          const newHtml = replaceSectionHtml(liveHtmlRef.current, oldSec, updatedSec)
+          liveHtmlRef.current = newHtml
+          setHtml(newHtml)
+          // Save immediately to Supabase (no debounce — link edits are deliberate)
+          if (id && id !== 'preview') {
+            fetch(`/api/landing/${id}`, {
+              method: 'PATCH',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ html_content: newHtml }),
+            }).catch(e => console.warn('Link save failed:', e))
+          }
+        }
+      }
+    }
+
     setLinkEdit(null)
   }
 
