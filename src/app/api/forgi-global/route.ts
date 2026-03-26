@@ -3,6 +3,16 @@ import { NextRequest } from 'next/server'
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! })
 
+const FORGI_GLOBAL_SYSTEM = `Eres Forgi, el asistente de edición de LandForge. Editas landing pages HTML completas.
+
+Reglas:
+- Devuelve el documento HTML completo y válido (<!DOCTYPE>, <html>, <head>, <body>)
+- Mantén todas las secciones intactas excepto lo que el usuario pide cambiar
+- Si añades secciones, incluye data-section="[id]" y data-section-label="[Nombre]"
+- Mantén clases CSS, variables CSS y estilos existentes
+- SIEMPRE cierra con </body></html>
+- Sin comentarios ni markdown, solo HTML puro`
+
 export async function POST(req: NextRequest) {
   const body = await req.json() as { fullHtml?: string; userPrompt?: string; imageUrl?: string; embedCode?: string }
   const { fullHtml, userPrompt, imageUrl, embedCode } = body
@@ -24,25 +34,11 @@ export async function POST(req: NextRequest) {
 
         const anthropicStream = client.messages.stream({
           model: 'claude-sonnet-4-6',
-          max_tokens: 48000,
+          max_tokens: 24000,
+          system: [{ type: 'text' as const, text: FORGI_GLOBAL_SYSTEM, cache_control: { type: 'ephemeral' as const } }],
           messages: [{
             role: 'user',
-            content: `Eres Forgi, el asistente de edición de LandForge. El usuario quiere hacer un cambio global en su landing page.
-
-HTML completo actual de la landing:
-\`\`\`html
-${fullHtml}
-\`\`\`
-
-El usuario quiere: ${userPrompt}${imageUrl ? `\n\nImagen adjunta — usa esta URL en el HTML donde el usuario indique: ${imageUrl}` : ''}${embedCode ? `\n\nCódigo embed de video a insertar donde el usuario indique:\n${embedCode}` : ''}
-
-Devuelve el HTML completo modificado. Reglas estrictas:
-- Mantén todas las secciones existentes intactas excepto lo que el usuario pide cambiar o añadir
-- Si añades secciones nuevas, incluye atributos data-section="[id]" y data-section-label="[Nombre]" en el elemento raíz de la sección
-- Mantén las mismas clases CSS, variables CSS y estilos del resto del documento
-- Devuelve el documento HTML completo y válido (con <!DOCTYPE>, <html>, <head>, <body>)
-- SIEMPRE cierra el HTML correctamente con </body></html>
-- Sin comentarios explicativos, sin bloques de código markdown, solo el HTML puro`,
+            content: `HTML completo actual:\n\`\`\`html\n${fullHtml}\n\`\`\`\n\nCambio solicitado: ${userPrompt}${imageUrl ? `\n\nImagen adjunta: ${imageUrl}` : ''}${embedCode ? `\n\nEmbed:\n${embedCode}` : ''}`,
           }],
         })
 

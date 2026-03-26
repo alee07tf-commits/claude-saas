@@ -358,9 +358,36 @@ export default function EditorPage() {
           ...(blockEmbed.trim() ? { embedCode: urlToEmbed(blockEmbed) } : {}),
         }),
       })
+      // Handle SSE streaming response
       if (!res.ok) { const d = await res.json().catch(() => ({})); throw new Error((d as { error?: string }).error || `Error ${res.status}`) }
-      const data = await res.json() as { newSectionHtml: string }
-      const newHtml = replaceSectionHtml(html, sectionHtml, data.newSectionHtml)
+      if (!res.body) throw new Error('No se recibió respuesta del servidor')
+
+      const reader = res.body.getReader()
+      const decoder = new TextDecoder()
+      let buf = ''
+      let newSectionHtml = ''
+
+      try {
+        while (true) {
+          const { done, value } = await reader.read()
+          if (done) break
+          buf += decoder.decode(value, { stream: true })
+          const parts = buf.split('\n\n')
+          buf = parts.pop() ?? ''
+          for (const part of parts) {
+            if (!part.startsWith('data: ')) continue
+            try {
+              const ev = JSON.parse(part.slice(6)) as { type: string; text?: string; newSectionHtml?: string; msg?: string }
+              if (ev.type === 'chunk' && ev.text) { /* streaming chunks — Haiku is fast, just accumulate */ }
+              else if (ev.type === 'done' && ev.newSectionHtml) newSectionHtml = ev.newSectionHtml
+              else if (ev.type === 'error') throw new Error(ev.msg || 'Error de IA')
+            } catch (pe) { if (pe instanceof Error && pe.message !== 'Unexpected end of JSON input') throw pe }
+          }
+        }
+      } finally { reader.releaseLock() }
+
+      if (!newSectionHtml) throw new Error('La IA no devolvió HTML')
+      const newHtml = replaceSectionHtml(html, sectionHtml, newSectionHtml)
       if (newHtml === html) throw new Error('No se pudo localizar la sección para reemplazar')
       persistHtml(newHtml)
       setPrompt(''); setBlockImage(null); setBlockEmbed(''); setBlockShowEmbed(false); setApplySuccess(true)

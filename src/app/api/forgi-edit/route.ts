@@ -5,6 +5,14 @@ import { checkUserLimit, incrementUserUsage } from '@/lib/limits'
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! })
 
+const FORGI_EDIT_SYSTEM = `Eres Forgi, el asistente de edición de LandForge. Editas secciones individuales de landing pages HTML.
+
+Reglas estrictas:
+- Devuelve SOLO el HTML modificado de la sección
+- Mantén exactamente: data-section, data-section-label, clases CSS, id, tag raíz, estilos visuales
+- Solo modifica lo que el usuario pide
+- Sin comentarios, sin explicaciones, sin bloques de código markdown. Solo HTML puro`
+
 export async function POST(req: NextRequest) {
   const supabase = await createClient()
 
@@ -34,14 +42,22 @@ export async function POST(req: NextRequest) {
 
   const label = sectionLabel || sectionId || 'Sección'
 
-  try {
-    // Use Haiku for section edits — 5-10x faster, sufficient for targeted changes
-    const response = await client.messages.create({
-      model: 'claude-haiku-4-5-20251001',
-      max_tokens: 8000,
-      messages: [{
-        role: 'user',
-        content: `Eres Forgi, el asistente de edición de LandForge. El usuario quiere modificar la sección "${label}" de su landing page.
+  const encoder = new TextEncoder()
+
+  const readableStream = new ReadableStream({
+    async start(controller) {
+      const send = (data: object) => {
+        try { controller.enqueue(encoder.encode(`data: ${JSON.stringify(data)}\n\n`)) } catch {}
+      }
+
+      try {
+        const anthropicStream = client.messages.stream({
+          model: 'claude-haiku-4-5-20251001',
+          max_tokens: 4000,
+          system: [{ type: 'text' as const, text: FORGI_EDIT_SYSTEM, cache_control: { type: 'ephemeral' as const } }],
+          messages: [{
+            role: 'user',
+            content: `Sección "${label}" de la landing page.
 
 HTML actual de la sección:
 \`\`\`html
@@ -50,40 +66,48 @@ ${sectionHtml}
 
 El usuario quiere: ${userPrompt}${imageUrl ? `\n\nImagen adjunta — usa esta URL en el HTML donde el usuario indique: ${imageUrl}` : ''}${embedCode ? `\n\nCódigo embed de video a insertar donde el usuario indique:\n${embedCode}` : ''}
 
-Devuelve SOLO el HTML modificado de esta sección. Mantén exactamente:
-- Los atributos data-section y data-section-label del elemento raíz
-- Las mismas clases CSS (section, section-${sectionId}, etc.)
-- El mismo id y tag del elemento raíz
-- El mismo estilo visual general (colores CSS, fuentes, layout)
-- Todo el CSS inline o clases — no los elimines
+Mantén exactamente: data-section, data-section-label, clases CSS (section, section-${sectionId}, etc.), id, tag raíz, estilos visuales. Solo HTML puro.`,
+          }],
+        })
 
-Solo modifica lo que el usuario pide. Sin comentarios, sin explicaciones, sin bloques de código markdown. Solo el HTML puro.`,
-      }],
-    })
+        let fullResult = ''
+        for await (const event of anthropicStream) {
+          if (event.type === 'content_block_delta' && event.delta.type === 'text_delta') {
+            fullResult += event.delta.text
+            send({ type: 'chunk', text: event.delta.text })
+          }
+        }
 
-    const content = response.content[0]
-    if (content.type !== 'text') {
-      return NextResponse.json({ error: 'Respuesta inesperada de la IA' }, { status: 500 })
-    }
+        const finalMsg = await anthropicStream.finalMessage()
+        fullResult = fullResult.trim()
 
-    let newSectionHtml = content.text.trim()
+        // Strip accidental code fences
+        const fence = fullResult.match(/```(?:html)?\n?([\s\S]*?)```/)
+        if (fence) fullResult = fence[1].trim()
 
-    // Strip accidental code fences
-    const fence = newSectionHtml.match(/```(?:html)?\n?([\s\S]*?)```/)
-    if (fence) newSectionHtml = fence[1].trim()
+        if (!fullResult) throw new Error('La IA devolvió una respuesta vacía')
 
-    if (!newSectionHtml) {
-      return NextResponse.json({ error: 'La IA devolvió una respuesta vacía' }, { status: 500 })
-    }
+        await incrementUserUsage(user.id, 'editions')
 
-    await incrementUserUsage(user.id, 'editions')
+        send({
+          type: 'done',
+          newSectionHtml: fullResult,
+          tokensUsed: finalMsg.usage.input_tokens + finalMsg.usage.output_tokens,
+        })
+      } catch (err) {
+        const msg = err instanceof Error ? err.message : String(err)
+        send({ type: 'error', msg: `Error de IA: ${msg}` })
+      } finally {
+        controller.close()
+      }
+    },
+  })
 
-    return NextResponse.json({
-      newSectionHtml,
-      tokensUsed: response.usage.input_tokens + response.usage.output_tokens,
-    })
-  } catch (err) {
-    const msg = err instanceof Error ? err.message : String(err)
-    return NextResponse.json({ error: `Error de IA: ${msg}` }, { status: 500 })
-  }
+  return new Response(readableStream, {
+    headers: {
+      'Content-Type': 'text/event-stream; charset=utf-8',
+      'Cache-Control': 'no-cache, no-transform',
+      'X-Accel-Buffering': 'no',
+    },
+  })
 }

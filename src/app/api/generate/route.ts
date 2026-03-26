@@ -809,8 +809,8 @@ export async function POST(request: NextRequest) {
 
         const anthropicStream = client.messages.stream({
           model: 'claude-sonnet-4-6',
-          max_tokens: 48000,
-          system: HTML_DESIGNER_SYSTEM,
+          max_tokens: 24000,
+          system: [{ type: 'text' as const, text: HTML_DESIGNER_SYSTEM, cache_control: { type: 'ephemeral' as const } }],
           messages: [{ role: 'user', content: buildHtmlPrompt(surveyData, serpAnalysis, domainContent, designConcept, seoStrategy) }],
         })
 
