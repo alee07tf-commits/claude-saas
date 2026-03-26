@@ -1,7 +1,9 @@
 import { signup } from '@/app/login/actions'
 import Link from 'next/link'
+import { SubmitButton } from '@/components/SubmitButton'
 
 const BRAND = {
+// ... (rest of the file is fine until the form)
     name: "LandForge",
     accent: "#9D4EDD",
     accentAlt: "#7B2CBF",
@@ -12,10 +14,11 @@ const BRAND = {
     text: "#1A1A2E",
 };
 
-export default function RegisterPage({ searchParams }: { searchParams: { error?: string; next?: string; confirm?: string } }) {
-    const next = searchParams?.next || '/dashboard'
+export default async function RegisterPage({ searchParams }: { searchParams: Promise<{ error?: string; next?: string; confirm?: string }> }) {
+    const params = await searchParams
+    const next = params?.next || '/dashboard'
 
-    if (searchParams?.confirm) {
+    if (params?.confirm) {
         return (
             <div style={{
                 minHeight: "100vh", background: BRAND.bg, color: BRAND.text,
@@ -24,19 +27,46 @@ export default function RegisterPage({ searchParams }: { searchParams: { error?:
             }}>
                 <div style={{
                     background: BRAND.card, border: `1px solid ${BRAND.border}`,
-                    padding: "40px", borderRadius: "16px", width: "100%", maxWidth: "400px",
-                    boxShadow: "0 8px 32px rgba(157,78,221,0.10)", textAlign: "center",
+                    padding: "48px 40px", borderRadius: "24px", width: "100%", maxWidth: "440px",
+                    boxShadow: "0 12px 48px rgba(157,78,221,0.12)", textAlign: "center",
                 }}>
-                    <div style={{ fontSize: "48px", marginBottom: "16px" }}>📬</div>
-                    <h1 style={{ fontSize: "22px", fontWeight: 700, marginBottom: "8px" }}>Revisa tu email</h1>
-                    <p style={{ color: BRAND.gray, fontSize: "14px", marginBottom: "24px" }}>
-                        Te hemos enviado un enlace de confirmación. Haz clic en él para activar tu cuenta y acceder a LandForge.
+                    <div style={{ 
+                        fontSize: "64px", marginBottom: "24px",
+                        animation: "bounce 2s infinite ease-in-out"
+                    }}>📬</div>
+                    <h1 style={{ fontSize: "26px", fontWeight: 800, marginBottom: "12px", letterSpacing: "-0.5px" }}>¡Casi listo! Revisa tu email</h1>
+                    <p style={{ color: BRAND.gray, fontSize: "15px", lineHeight: "1.6", marginBottom: "32px" }}>
+                        Te hemos enviado un enlace mágico de confirmación.<br/>
+                        <strong>Haz clic en él para activar tu cuenta</strong> y generar tu primera landing gratis.
                     </p>
+                    
+                    <div style={{ 
+                        background: "rgba(157, 78, 221, 0.05)", 
+                        padding: "16px", borderRadius: "12px", 
+                        fontSize: "13px", color: BRAND.gray, textAlign: "left",
+                        marginBottom: "32px", border: "1px solid rgba(157, 78, 221, 0.1)"
+                    }}>
+                        <p style={{ margin: 0 }}><strong>¿No lo encuentras?</strong></p>
+                        <ul style={{ margin: "8px 0 0 18px", padding: 0 }}>
+                            <li>Busca en la carpeta de <strong>Spam</strong></li>
+                            <li>Asegúrate de que el email sea correcto</li>
+                            <li>Espera un par de minutos</li>
+                        </ul>
+                    </div>
+
                     <Link href="/login" style={{
-                        display: "inline-block", padding: "12px 28px", borderRadius: "10px",
+                        display: "block", width: "100%", padding: "14px", borderRadius: "12px",
                         background: `linear-gradient(135deg, ${BRAND.accent}, ${BRAND.accentAlt})`,
-                        color: "#FFFFFF", textDecoration: "none", fontWeight: 700, fontSize: "14px",
-                    }}>← Ir al login</Link>
+                        color: "#FFFFFF", textDecoration: "none", fontWeight: 700, fontSize: "15px",
+                        boxShadow: "0 4px 12px rgba(157,78,221,0.25)"
+                    }}>Volver al Login</Link>
+                    
+                    <style dangerouslySetInnerHTML={{ __html: `
+                        @keyframes bounce {
+                            0%, 100% { transform: translateY(0); }
+                            50% { transform: translateY(-10px); }
+                        }
+                    `}} />
                 </div>
             </div>
         )
@@ -66,7 +96,7 @@ export default function RegisterPage({ searchParams }: { searchParams: { error?:
                     <p style={{ color: BRAND.gray, fontSize: "14px" }}>Regístrate gratis para exportar tu landing</p>
                 </div>
 
-                {searchParams?.error && (
+                {params?.error && (
                     <div style={{
                         background: "rgba(239, 68, 68, 0.1)", color: "#EF4444",
                         padding: "12px", borderRadius: "8px", fontSize: "14px",
@@ -105,17 +135,16 @@ export default function RegisterPage({ searchParams }: { searchParams: { error?:
                             minLength={6}
                         />
                     </div>
-                    <button
-                        type="submit"
+                    <SubmitButton
+                        loadingText="Creando cuenta..."
                         style={{
                             marginTop: "8px", width: "100%", padding: "14px", borderRadius: "10px",
                             background: `linear-gradient(135deg, ${BRAND.accent}, ${BRAND.accentAlt})`,
                             color: "#FFFFFF", fontWeight: 700, fontSize: "15px", border: "none",
-                            cursor: "pointer", transition: "opacity 0.2s"
                         }}
                     >
                         Registrarse
-                    </button>
+                    </SubmitButton>
                 </form>
 
                 <p style={{ textAlign: "center", marginTop: "32px", fontSize: "14px", color: BRAND.gray }}>

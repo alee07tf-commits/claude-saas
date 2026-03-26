@@ -24,10 +24,10 @@ export const PLAN_LIMITS: Record<PlanType, Record<ActionType, number>> = {
     chatbot_messages: 999999
   },
   none: {
-    landings: 0,
-    generations: 0,
-    editions: 0,
-    chatbot_messages: 0
+    landings: 1,
+    generations: 5,
+    editions: 10,
+    chatbot_messages: 100
   }
 };
 

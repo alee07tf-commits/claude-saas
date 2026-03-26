@@ -1,5 +1,6 @@
 import { login } from './actions'
 import Link from 'next/link'
+import { SubmitButton } from '@/components/SubmitButton'
 
 const BRAND = {
     name: "LandForge",
@@ -12,8 +13,9 @@ const BRAND = {
     text: "#1A1A2E",
 };
 
-export default function LoginPage({ searchParams }: { searchParams: { error?: string; next?: string } }) {
-    const next = searchParams?.next || '/survey'
+export default async function LoginPage({ searchParams }: { searchParams: Promise<{ error?: string; next?: string }> }) {
+    const params = await searchParams
+    const next = params?.next || '/survey'
     return (
         <div style={{
             minHeight: "100vh", background: BRAND.bg, color: BRAND.text,
@@ -38,7 +40,7 @@ export default function LoginPage({ searchParams }: { searchParams: { error?: st
                     <p style={{ color: BRAND.gray, fontSize: "14px" }}>Inicia sesión para continuar</p>
                 </div>
 
-                {searchParams?.error && (
+                {params?.error && (
                     <div style={{
                         background: "rgba(239, 68, 68, 0.1)", color: "#EF4444",
                         padding: "12px", borderRadius: "8px", fontSize: "14px",
@@ -79,17 +81,17 @@ export default function LoginPage({ searchParams }: { searchParams: { error?: st
                             placeholder="••••••••"
                         />
                     </div>
-                    <button
-                        type="submit"
+                    
+                    <SubmitButton
+                        loadingText="Entrando..."
                         style={{
                             marginTop: "8px", width: "100%", padding: "14px", borderRadius: "10px",
                             background: `linear-gradient(135deg, ${BRAND.accent}, ${BRAND.accentAlt})`,
                             color: "#FFFFFF", fontWeight: 700, fontSize: "15px", border: "none",
-                            cursor: "pointer", transition: "opacity 0.2s"
                         }}
                     >
                         Iniciar Sesión
-                    </button>
+                    </SubmitButton>
                 </form>
 
                 <p style={{ textAlign: "center", marginTop: "32px", fontSize: "14px", color: BRAND.gray }}>
