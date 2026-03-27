@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Blog sobre CRO, Ventas B2B y Generación de Landing Pages | LandForge",
+  title: "Blog sobre CRO, Ventas B2B y Generación de Landing Pages",
   description:
     "Aprende a disparar la tasa de conversión de tus landing pages y campañas B2B. SEO Programático, Inteligencia artificial, Chatbots y SXO.",
   keywords: [
@@ -11,6 +11,15 @@ export const metadata: Metadata = {
     "blog ventas b2b ia",
     "guias seo programatico",
   ],
+  alternates: {
+    canonical: "https://landforge.digital/blog",
+  },
+  openGraph: {
+    title: "Blog sobre CRO, Ventas B2B y Generación de Landing Pages",
+    description:
+      "Aprende a disparar la tasa de conversión de tus landing pages y campañas B2B. SEO Programático, Inteligencia artificial, Chatbots y SXO.",
+    url: "https://landforge.digital/blog",
+  },
 };
 
 export default function BlogIndex() {

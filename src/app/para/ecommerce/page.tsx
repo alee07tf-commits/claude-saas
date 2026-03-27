@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Landing Pages para eCommerce y Tiendas Online con IA | LandForge",
+  title: "Landing Pages para eCommerce y Tiendas Online con IA",
   description:
     "Genera landing pages de producto ultrarrápidas para Shopify y WooCommerce. La IA crea tu embudo en 30s y Forgi evita el abandono de carrito respondiendo objeciones 24/7.",
   keywords: [
@@ -12,6 +12,15 @@ export const metadata: Metadata = {
     "chatbot ia para tiendas online",
     "landing pages conversion shopify",
   ],
+  alternates: {
+    canonical: "https://landforge.digital/para/ecommerce",
+  },
+  openGraph: {
+    title: "Landing Pages para eCommerce y Tiendas Online con IA",
+    description:
+      "Genera landing pages de producto ultrarrápidas para Shopify y WooCommerce. La IA crea tu embudo en 30s y Forgi evita el abandono de carrito respondiendo objeciones 24/7.",
+    url: "https://landforge.digital/para/ecommerce",
+  },
 };
 
 const faqSchema = {

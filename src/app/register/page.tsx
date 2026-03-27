@@ -1,6 +1,12 @@
+import type { Metadata } from "next";
 import { signup } from '@/app/login/actions'
 import Link from 'next/link'
 import { SubmitButton } from '@/components/SubmitButton'
+
+export const metadata: Metadata = {
+  title: "Crear Cuenta",
+  robots: { index: false, follow: false },
+};
 
 const BRAND = {
 // ... (rest of the file is fine until the form)

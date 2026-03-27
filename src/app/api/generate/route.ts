@@ -3,7 +3,14 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { checkUserLimit, incrementUserUsage } from '@/lib/limits'
 
-const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! })
+// Extend Vercel function timeout — generation can take 60-120s
+export const maxDuration = 120
+
+const client = new Anthropic({
+  apiKey: process.env.ANTHROPIC_API_KEY!,
+  timeout: 100_000,        // 100s timeout for API calls
+  maxRetries: 2,           // SDK-level retry on transient errors (429, 500, 529)
+})
 
 // ─────────────────────────────────────────────────────────────────
 // LABELS / MAPS
@@ -829,6 +836,11 @@ export async function POST(request: NextRequest) {
         try { controller.enqueue(encoder.encode(`data: ${JSON.stringify(data)}\n\n`)) } catch {}
       }
 
+      // Keepalive: send a comment every 8s to prevent proxy/CDN from closing the connection
+      const keepalive = setInterval(() => {
+        try { controller.enqueue(encoder.encode(': keepalive\n\n')) } catch {}
+      }, 8000)
+
       try {
         // All pre-processing in parallel (saves 5-15s vs sequential)
         send({ type: 'progress', msg: 'Analizando sector y diseñando tu landing...' })
@@ -910,6 +922,7 @@ export async function POST(request: NextRequest) {
         const isOverloaded = msg.includes('overloaded') || msg.includes('529') || msg.includes('Overloaded')
         send({ type: 'error', msg: isOverloaded ? 'El servidor de IA está saturado. Inténtalo de nuevo en unos segundos.' : `Error: ${msg}`, overloaded: isOverloaded })
       } finally {
+        clearInterval(keepalive)
         controller.close()
       }
     },

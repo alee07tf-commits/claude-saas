@@ -1,6 +1,12 @@
+import type { Metadata } from "next";
 import { login } from './actions'
 import Link from 'next/link'
 import { SubmitButton } from '@/components/SubmitButton'
+
+export const metadata: Metadata = {
+  title: "Iniciar Sesión",
+  robots: { index: false, follow: false },
+};
 
 const BRAND = {
     name: "LandForge",

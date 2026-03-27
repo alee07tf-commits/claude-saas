@@ -1,6 +1,7 @@
 import { createClient } from '@supabase/supabase-js'
 import { NextRequest, NextResponse } from 'next/server'
 import { buildForgiWidget } from '@/lib/forgi-widget'
+import { checkFeatureAccess } from '@/lib/limits'
 
 export const dynamic = 'force-dynamic'
 
@@ -24,7 +25,7 @@ export async function GET(
   // Look up landing by custom_domain
   const { data: landing } = await supabase
     .from('landing_pages')
-    .select('id, html_content, business_name, status')
+    .select('id, html_content, business_name, status, user_id')
     .eq('custom_domain', domain)
     .eq('status', 'published')
     .single()
@@ -39,7 +40,12 @@ export async function GET(
   let html = landing.html_content
   if (!html.includes('data-forgi-widget')) {
     const appUrl = process.env.NEXT_PUBLIC_SITE_URL || `https://${BASE_DOMAIN}`
-    const widget = buildForgiWidget(landing.id, appUrl, landing.business_name || 'Empresa')
+    let whiteLabel = false
+    if (landing.user_id) {
+      const wlAccess = await checkFeatureAccess(landing.user_id, 'white_label')
+      whiteLabel = wlAccess.allowed
+    }
+    const widget = buildForgiWidget(landing.id, appUrl, landing.business_name || 'Empresa', whiteLabel)
     html = html.replace(/<\/body>/i, `${widget}\n</body>`)
   }
 

@@ -8,17 +8,20 @@ export function buildForgiWidget(
   landingId: string,
   appUrl: string,
   bizName: string,
+  whiteLabel: boolean = false,
 ): string {
   // Escape values for safe JS string embedding
   const safeId      = JSON.stringify(landingId)
   const safeAppUrl  = JSON.stringify(appUrl.replace(/\/$/, ''))
   const safeBizName = JSON.stringify(bizName)
+  const wl          = whiteLabel ? 'true' : 'false'
 
   const script = /* js */`
 (function() {
   var LANDING_ID = ${safeId};
   var APP_URL    = ${safeAppUrl};
   var BIZ_NAME   = ${safeBizName};
+  var WHITE_LABEL = ${wl};
   var API_URL    = APP_URL + '/api/forgi-chat';
   var HISTORY    = [];   // kept separately for the fetch payload
 
@@ -118,8 +121,8 @@ export function buildForgiWidget(
     '<div id="forgi-header">',
     '  <div id="forgi-header-avatar">✨</div>',
     '  <div>',
-    '    <div id="forgi-header-title">Forgi · ' + BIZ_NAME + '</div>',
-    '    <div id="forgi-header-sub">Asistente virtual</div>',
+    '    <div id="forgi-header-title">' + (WHITE_LABEL ? BIZ_NAME : 'Forgi · ' + BIZ_NAME) + '</div>',
+    '    <div id="forgi-header-sub">' + (WHITE_LABEL ? 'Chat en vivo' : 'Asistente virtual') + '</div>',
     '  </div>',
     '  <button id="forgi-close" title="Cerrar">✕</button>',
     '</div>',

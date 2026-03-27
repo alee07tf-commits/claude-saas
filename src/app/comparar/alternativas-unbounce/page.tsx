@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Las 4 Mejores Alternativas a Unbounce con IA en 2026 | LandForge",
+  title: "Las 4 Mejores Alternativas a Unbounce con IA en 2026",
   description:
     "Unbounce sube precios cada año. Descubre las 4 mejores alternativas a Unbounce para agencias en 2026: comparativa de precios, funcionalidades IA y tasas de conversión reales.",
   keywords: [
@@ -14,6 +14,12 @@ export const metadata: Metadata = {
   ],
   alternates: {
     canonical: "https://landforge.digital/comparar/alternativas-unbounce",
+  },
+  openGraph: {
+    title: "Las 4 Mejores Alternativas a Unbounce con IA en 2026",
+    description:
+      "Unbounce sube precios cada año. Descubre las 4 mejores alternativas a Unbounce para agencias en 2026: comparativa de precios, funcionalidades IA y tasas de conversión reales.",
+    url: "https://landforge.digital/comparar/alternativas-unbounce",
   },
 };
 

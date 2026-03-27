@@ -1,4 +1,5 @@
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://landforge.digital";
+// SEO canonical domain — hardcoded to prevent env var overrides on Vercel
+const SITE_URL = "https://landforge.digital";
 
 const organizationSchema = {
   "@context": "https://schema.org",

@@ -32,9 +32,10 @@ export async function POST(req: NextRequest) {
     userPrompt?: string
     imageUrl?: string
     embedCode?: string
+    targetElement?: { tag: string; text: string }
   }
 
-  const { sectionId, sectionLabel, sectionHtml, userPrompt, imageUrl, embedCode } = body
+  const { sectionId, sectionLabel, sectionHtml, userPrompt, imageUrl, embedCode, targetElement } = body
 
   if (!sectionHtml || !userPrompt) {
     return NextResponse.json({ error: 'Faltan parámetros: sectionHtml y userPrompt son requeridos' }, { status: 400 })
@@ -64,7 +65,7 @@ HTML actual de la sección:
 ${sectionHtml}
 \`\`\`
 
-El usuario quiere: ${userPrompt}${imageUrl ? `\n\nImagen adjunta — usa esta URL en el HTML donde el usuario indique: ${imageUrl}` : ''}${embedCode ? `\n\nCódigo embed de video a insertar donde el usuario indique:\n${embedCode}` : ''}
+El usuario quiere: ${userPrompt}${targetElement ? `\n\nIMPORTANTE: El usuario quiere modificar ÚNICAMENTE el elemento <${targetElement.tag}> que contiene: "${targetElement.text}". NO cambies ningún otro elemento de la sección. Solo modifica ese elemento específico y devuelve la sección completa.` : ''}${imageUrl ? `\n\nImagen adjunta — usa esta URL en el HTML donde el usuario indique: ${imageUrl}` : ''}${embedCode ? `\n\nCódigo embed de video a insertar donde el usuario indique:\n${embedCode}` : ''}
 
 Mantén exactamente: data-section, data-section-label, clases CSS (section, section-${sectionId}, etc.), id, tag raíz, estilos visuales. Solo HTML puro.`,
           }],

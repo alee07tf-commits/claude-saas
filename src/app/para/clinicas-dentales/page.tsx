@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Crear Landing Pages para Clínicas Dentales con IA | LandForge",
+  title: "Crear Landing Pages para Clínicas Dentales con IA",
   description:
     "Capta más pacientes para tu clínica dental. Genera tu página de captación en 30 segundos con IA, lanza un chatbot que agenda citas 24/7 y convierte el tráfico de Google Ads en consultas reales.",
   keywords: [
@@ -12,6 +12,15 @@ export const metadata: Metadata = {
     "captar pacientes clinica dental",
     "marketing digital clinicas dentales",
   ],
+  alternates: {
+    canonical: "https://landforge.digital/para/clinicas-dentales",
+  },
+  openGraph: {
+    title: "Crear Landing Pages para Clínicas Dentales con IA",
+    description:
+      "Capta más pacientes para tu clínica dental. Genera tu página de captación en 30 segundos con IA, lanza un chatbot que agenda citas 24/7 y convierte el tráfico de Google Ads en consultas reales.",
+    url: "https://landforge.digital/para/clinicas-dentales",
+  },
 };
 
 const faqSchema = {

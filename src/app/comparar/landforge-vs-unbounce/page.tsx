@@ -12,6 +12,15 @@ export const metadata: Metadata = {
     "mejor alternativa unbounce agencias",
     "comparativa herramientas landing page ia",
   ],
+  alternates: {
+    canonical: "https://landforge.digital/comparar/landforge-vs-unbounce",
+  },
+  openGraph: {
+    title: "LandForge vs Unbounce 2026: ¿Cuál es la Mejor Alternativa para Agencias?",
+    description:
+      "Comparativa honesta entre LandForge (IA generativa + chatbot de ventas en 30s) y Unbounce (editor visual clásico). Descubre cuál encaja mejor según precio, velocidad y conversión.",
+    url: "https://landforge.digital/comparar/landforge-vs-unbounce",
+  },
 };
 
 const articleSchema = {

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Landing Pages para Inmobiliarias con IA — Capta Compradores 24/7 | LandForge",
+  title: "Landing Pages para Inmobiliarias con IA — Capta Compradores 24/7",
   description:
     "Genera landing pages de inmuebles para compraventa y alquiler en 30 segundos. Forgi atiende consultas sobre precio, zona y visitas las 24 horas para que no pierdas ningún lead.",
   keywords: [
@@ -12,6 +12,15 @@ export const metadata: Metadata = {
     "chatbot ia agencia inmobiliaria",
     "marketing digital inmobiliarias",
   ],
+  alternates: {
+    canonical: "https://landforge.digital/para/inmobiliarias",
+  },
+  openGraph: {
+    title: "Landing Pages para Inmobiliarias con IA — Capta Compradores 24/7",
+    description:
+      "Genera landing pages de inmuebles para compraventa y alquiler en 30 segundos. Forgi atiende consultas sobre precio, zona y visitas las 24 horas para que no pierdas ningún lead.",
+    url: "https://landforge.digital/para/inmobiliarias",
+  },
 };
 
 const faqSchema = {

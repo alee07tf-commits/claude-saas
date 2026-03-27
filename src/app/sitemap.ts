@@ -143,18 +143,36 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.85,
     },
-    // ── Conversión ──
+    // ── Nuevas páginas (Marzo 2026) ──
     {
-      url: `${SITE_URL}/register`,
+      url: `${SITE_URL}/precios`,
       lastModified: new Date(),
-      changeFrequency: "yearly",
-      priority: 0.7,
+      changeFrequency: "monthly",
+      priority: 0.95,
     },
     {
-      url: `${SITE_URL}/login`,
+      url: `${SITE_URL}/comparar/landforge-vs-carrd`,
       lastModified: new Date(),
-      changeFrequency: "yearly",
-      priority: 0.3,
+      changeFrequency: "monthly",
+      priority: 0.85,
+    },
+    {
+      url: `${SITE_URL}/features/conversion-score`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.85,
+    },
+    {
+      url: `${SITE_URL}/blog/mejores-herramientas-crear-landing-pages`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: `${SITE_URL}/blog/landing-page-para-agencias-guia`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.85,
     },
   ];
 }

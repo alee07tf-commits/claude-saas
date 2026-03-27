@@ -12,6 +12,15 @@ export const metadata: Metadata = {
     "tipos de landing pages",
     "como funciona una landing page",
   ],
+  alternates: {
+    canonical: "https://landforge.digital/blog/que-es-una-landing-page",
+  },
+  openGraph: {
+    title: "Qué es una Landing Page y Para Qué Sirve en 2026 | Guía Completa",
+    description:
+      "Aprende qué es una landing page, para qué sirve, qué diferencia a una landing page de una web normal y cómo crear una que convierta visitas en clientes. Guía completa 2026.",
+    url: "https://landforge.digital/blog/que-es-una-landing-page",
+  },
 };
 
 const articleSchema = {

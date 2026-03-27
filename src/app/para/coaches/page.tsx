@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Landing Pages para Coaches y Formadores con IA | LandForge",
+  title: "Landing Pages para Coaches y Formadores con IA",
   description:
     "Crea tu página de programa de coaching o formación en 30 segundos. Forgi cualifica los prospectos antes de la llamada de descubrimiento y filtra si encajan con tu método.",
   keywords: [
@@ -12,6 +12,15 @@ export const metadata: Metadata = {
     "chatbot cualificacion coaching",
     "marketing digital coaches",
   ],
+  alternates: {
+    canonical: "https://landforge.digital/para/coaches",
+  },
+  openGraph: {
+    title: "Landing Pages para Coaches y Formadores con IA",
+    description:
+      "Crea tu página de programa de coaching o formación en 30 segundos. Forgi cualifica los prospectos antes de la llamada de descubrimiento y filtra si encajan con tu método.",
+    url: "https://landforge.digital/para/coaches",
+  },
 };
 
 const faqSchema = {

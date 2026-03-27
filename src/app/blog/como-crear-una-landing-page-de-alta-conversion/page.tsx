@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Script from "next/script";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://landforge.digital";
+// SEO canonical domain — hardcoded to prevent env var overrides on Vercel
+const SITE_URL = "https://landforge.digital";
 
 const articleSchema = {
   "@context": "https://schema.org",
@@ -69,23 +70,23 @@ const faqSchema = {
 };
 
 export const metadata: Metadata = {
-  title: "Cómo Crear una Landing Page de Alta Conversión en 2026 (Guía Completa) | LandForge",
+  title: "Cómo Crear una Landing Page de Alta Conversión en 2026 (Guía Completa)",
   description:
     "Guía completa para crear una landing page de alta conversión en 2026: estructura, copywriting, CTA, velocidad y herramientas IA. Paso a paso con ejemplos reales.",
   alternates: {
     canonical: `${SITE_URL}/blog/como-crear-una-landing-page-de-alta-conversion`,
   },
   openGraph: {
-    title: "Cómo Crear una Landing Page de Alta Conversión en 2026",
+    title: "Cómo Crear una Landing Page de Alta Conversión en 2026 (Guía Completa)",
     description:
-      "Todo lo que necesitas saber para crear landing pages que conviertan. Estructura, copywriting, CTA, velocidad y cómo hacerlo con IA en 30 segundos.",
+      "Guía completa para crear una landing page de alta conversión en 2026: estructura, copywriting, CTA, velocidad y herramientas IA. Paso a paso con ejemplos reales.",
     url: `${SITE_URL}/blog/como-crear-una-landing-page-de-alta-conversion`,
     siteName: "LandForge",
     type: "article",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Cómo crear una landing page de alta conversión en 2026",
+    title: "Cómo Crear una Landing Page de Alta Conversión en 2026 (Guía Completa)",
     description: "Guía completa con estructura, copy, CTA y herramientas IA. Paso a paso.",
   },
 };

@@ -15,6 +15,12 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://landforge.digital/blog/como-crear-landing-page-alta-conversion",
   },
+  openGraph: {
+    title: "Cómo Crear una Landing Page de Alta Conversión en 2026 (Guía Completa)",
+    description:
+      "Guía paso a paso para crear landing pages que convierten. Estructura, copywriting, CTA, velocidad de carga y chatbot de ventas. Con ejemplos reales y plantilla gratuita.",
+    url: "https://landforge.digital/blog/como-crear-landing-page-alta-conversion",
+  },
 };
 
 const articleSchema = {

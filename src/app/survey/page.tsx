@@ -420,91 +420,134 @@ export default function SurveyPage() {
   }
 
   async function generate() {
+    const MAX_RETRIES = 2;
     setLoading(true);
     setError("");
     startElapsed();
     setRetryable(false);
     setLimitReached(false);
     setGeneratePhase("Iniciando...");
-    try {
-      const surveyData = {
-        pageType, sections,
-        keyword, location, domain,
-        businessInfo,
-        competitors: filledCompetitors,
-        competitorAnalyses: competitorAnalyses.filter(Boolean),
-        objective, tone,
-        hasOffer, offerTypes, offerDetail, ctaText,
-        yearsExperience, clientsCount, rating, certifications,
-        generateFakeStats,
-        primaryColor: selectedPalette.primary,
-        secondaryColor: selectedPalette.accent,
-        typography, theme, language,
-        ...(typography === "custom" ? { customFonts: { heading: customHeadingFont, body: customBodyFont } } : {}),
-      };
 
-      const res = await fetch("/api/generate", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ surveyData, platform: "html" }),
-      });
+    const surveyData = {
+      pageType, sections,
+      keyword, location, domain,
+      businessInfo,
+      competitors: filledCompetitors,
+      competitorAnalyses: competitorAnalyses.filter(Boolean),
+      objective, tone,
+      hasOffer, offerTypes, offerDetail, ctaText,
+      yearsExperience, clientsCount, rating, certifications,
+      generateFakeStats,
+      primaryColor: selectedPalette.primary,
+      secondaryColor: selectedPalette.accent,
+      typography, theme, language,
+      ...(typography === "custom" ? { customFonts: { heading: customHeadingFont, body: customBodyFont } } : {}),
+    };
 
-      // Non-SSE error (auth/limits return JSON)
-      if (!res.ok) {
-        const d = await res.json().catch(() => ({})) as { error?: string; overloaded?: boolean };
-        if (res.status === 403) setLimitReached(true);
-        if (d.overloaded) setRetryable(true);
-        throw new Error(d.error || `Error ${res.status}`);
-      }
-      if (!res.body) throw new Error("No se recibió respuesta del servidor");
-
-      // Consume SSE stream
-      const reader = res.body.getReader();
-      const decoder = new TextDecoder();
-      let buf = "";
-      let landingId = "";
-      const htmlChunks: string[] = [];
-
+    for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
       try {
-        while (true) {
-          const { done, value } = await reader.read();
-          if (done) break;
-          buf += decoder.decode(value, { stream: true });
-          const parts = buf.split("\n\n");
-          buf = parts.pop() ?? "";
-          for (const part of parts) {
-            if (!part.startsWith("data: ")) continue;
-            try {
-              const ev = JSON.parse(part.slice(6)) as { type: string; msg?: string; html?: string; id?: string; overloaded?: boolean };
-              if (ev.type === "progress" && ev.msg) setGeneratePhase(ev.msg);
-              else if (ev.type === "chunk" && ev.html) htmlChunks.push(ev.html);
-              else if (ev.type === "done") landingId = ev.id || "preview";
-              else if (ev.type === "error") {
-                if (ev.overloaded) setRetryable(true);
-                throw new Error(ev.msg || "Error al generar");
+        if (attempt > 0) {
+          setGeneratePhase(`Reintentando (${attempt}/${MAX_RETRIES})...`);
+          await new Promise(r => setTimeout(r, 1500 * attempt)); // backoff: 1.5s, 3s
+        }
+
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 150_000); // 2.5 min timeout
+
+        let res: Response;
+        try {
+          res = await fetch("/api/generate", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ surveyData, platform: "html" }),
+            signal: controller.signal,
+          });
+        } catch (fetchErr) {
+          clearTimeout(timeout);
+          const isAbort = fetchErr instanceof DOMException && fetchErr.name === "AbortError";
+          const msg = isAbort ? "La generación tardó demasiado" : "Error de conexión";
+          if (attempt < MAX_RETRIES) continue; // retry silently
+          throw new Error(msg);
+        }
+
+        // Non-SSE error (auth/limits return JSON) — don't retry auth/limit errors
+        if (!res.ok) {
+          clearTimeout(timeout);
+          const d = await res.json().catch(() => ({})) as { error?: string; overloaded?: boolean };
+          if (res.status === 403) { setLimitReached(true); throw new Error(d.error || `Error ${res.status}`); }
+          if (res.status === 401) throw new Error(d.error || "No autorizado");
+          if (d.overloaded || res.status === 529) {
+            if (attempt < MAX_RETRIES) continue; // retry overloaded
+            setRetryable(true);
+          }
+          if (attempt < MAX_RETRIES && res.status >= 500) continue; // retry server errors
+          throw new Error(d.error || `Error ${res.status}`);
+        }
+        if (!res.body) { clearTimeout(timeout); throw new Error("No se recibió respuesta del servidor"); }
+
+        // Consume SSE stream
+        const reader = res.body.getReader();
+        const decoder = new TextDecoder();
+        let buf = "";
+        let landingId = "";
+        const htmlChunks: string[] = [];
+        let streamError: string | null = null;
+
+        try {
+          while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+            buf += decoder.decode(value, { stream: true });
+            const parts = buf.split("\n\n");
+            buf = parts.pop() ?? "";
+            for (const part of parts) {
+              if (!part.startsWith("data: ")) continue; // skip keepalive comments
+              try {
+                const ev = JSON.parse(part.slice(6)) as { type: string; msg?: string; html?: string; id?: string; overloaded?: boolean };
+                if (ev.type === "progress" && ev.msg) setGeneratePhase(ev.msg);
+                else if (ev.type === "chunk" && ev.html) htmlChunks.push(ev.html);
+                else if (ev.type === "done") landingId = ev.id || "preview";
+                else if (ev.type === "error") {
+                  if (ev.overloaded) setRetryable(true);
+                  streamError = ev.msg || "Error al generar";
+                }
+              } catch (parseErr) {
+                if (parseErr instanceof Error && parseErr.message !== "Unexpected end of JSON input") throw parseErr;
               }
-            } catch (parseErr) {
-              if (parseErr instanceof Error && parseErr.message !== "Unexpected end of JSON input") throw parseErr;
             }
           }
+        } finally {
+          reader.releaseLock();
+          clearTimeout(timeout);
         }
-      } finally {
-        reader.releaseLock();
-      }
 
-      const fullHtml = htmlChunks.join("");
-      if (!fullHtml || !fullHtml.toLowerCase().includes("<html")) {
-        throw new Error("No se recibió HTML válido del servidor");
-      }
+        // If the stream sent an error event, check if retryable
+        if (streamError) {
+          const isRetryable = streamError.includes("saturado") || streamError.includes("overloaded");
+          if (isRetryable && attempt < MAX_RETRIES) continue;
+          throw new Error(streamError);
+        }
 
-      stopElapsed();
-      sessionStorage.setItem("previewHtml", fullHtml);
-      sessionStorage.setItem("surveyData", JSON.stringify(surveyData));
-      router.push(`/preview/${landingId || "preview"}`);
-    } catch (err) {
-      stopElapsed();
-      setError(err instanceof Error ? err.message : "Error desconocido");
-      setLoading(false);
+        const fullHtml = htmlChunks.join("");
+        if (!fullHtml || !fullHtml.toLowerCase().includes("<html")) {
+          if (attempt < MAX_RETRIES) continue; // retry empty/invalid responses
+          throw new Error("No se recibió HTML válido del servidor");
+        }
+
+        stopElapsed();
+        sessionStorage.setItem("previewHtml", fullHtml);
+        sessionStorage.setItem("surveyData", JSON.stringify(surveyData));
+        router.push(`/preview/${landingId || "preview"}`);
+        return; // success — exit retry loop
+      } catch (err) {
+        if (attempt >= MAX_RETRIES) {
+          stopElapsed();
+          setError(err instanceof Error ? err.message : "Error desconocido");
+          setLoading(false);
+          return;
+        }
+        // else: continue to next attempt
+      }
     }
   }
 

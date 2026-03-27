@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Aumentar Conversión en Landing Page (La Estrategia Definitiva) | LandForge",
+  title: "Aumentar Conversión en Landing Page (La Estrategia Definitiva)",
   description:
     "Aprende paso a paso cómo subir la tasa de conversión en tus landing pages B2B con herramientas sin código, SEO y Chatbots de Inteligencia Artificial.",
   keywords: [
@@ -9,6 +9,15 @@ export const metadata: Metadata = {
     "estrategias CRO landing pages",
     "chatbot ventas conversion",
   ],
+  alternates: {
+    canonical: "https://landforge.digital/blog/como-aumentar-conversion-landing-page",
+  },
+  openGraph: {
+    title: "Aumentar Conversión en Landing Page (La Estrategia Definitiva)",
+    description:
+      "Aprende paso a paso cómo subir la tasa de conversión en tus landing pages B2B con herramientas sin código, SEO y Chatbots de Inteligencia Artificial.",
+    url: "https://landforge.digital/blog/como-aumentar-conversion-landing-page",
+  },
 };
 
 export default function BlogPostAumentarConversion() {

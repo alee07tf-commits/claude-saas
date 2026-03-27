@@ -11,6 +11,15 @@ export const metadata: Metadata = {
     "mejor herramienta landing page ia agencias",
     "alternativas landing page builder",
   ],
+  alternates: {
+    canonical: "https://landforge.digital/comparar",
+  },
+  openGraph: {
+    title: "Comparativas: LandForge vs Competencia — ¿Cuál es la Mejor Opción?",
+    description:
+      "Comparativas honestas de LandForge con las principales herramientas de landing pages: Webflow, Unbounce y Leadpages. Encuentra la herramienta que mejor encaja con tu negocio.",
+    url: "https://landforge.digital/comparar",
+  },
 };
 
 const comparativas = [

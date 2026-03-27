@@ -1,5 +1,7 @@
 import Anthropic from '@anthropic-ai/sdk'
 import { NextRequest, NextResponse } from 'next/server'
+import { createClient } from '@/lib/supabase/server'
+import { checkFeatureAccess } from '@/lib/limits'
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! })
 
@@ -7,6 +9,15 @@ type Criterion = { name: string; score: number; feedback: string }
 type ScoreResult = { score: number; criteria: Criterion[]; top_recommendations: string[] }
 
 export async function POST(req: NextRequest) {
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
+
+  const access = await checkFeatureAccess(user.id, 'conversion_score', user.email ?? undefined)
+  if (!access.allowed) {
+    return NextResponse.json({ error: 'El Conversion Score está disponible desde el plan Starter. Mejora tu plan para acceder.' }, { status: 403 })
+  }
+
   const body = await req.json() as { fullHtml?: string }
   const { fullHtml } = body
 

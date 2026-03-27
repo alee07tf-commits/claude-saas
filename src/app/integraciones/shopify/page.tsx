@@ -2,16 +2,25 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "LandForge + WordPress: Integración Fácil para Landing Pages con IA",
+  title: "LandForge + Shopify: Landing Pages con IA para tu Tienda Online",
   description:
-    "Descubre cómo integrar LandForge con WordPress para añadir landing pages con chatbot IA a tu web actual sin tocar el código ni mover el hosting.",
+    "Genera landing pages de producto para Shopify con IA en 30 segundos. Forgi chatbot responde dudas de compradores 24/7 y reduce el abandono de carrito.",
   keywords: [
-    "integrar landing page ia wordpress",
-    "landforge wordpress plugin",
-    "landing page chatbot wordpress",
-    "crear landing page wordpress ia",
-    "mejor alternativa elementor ia",
+    "integrar landing page ia shopify",
+    "landforge shopify integracion",
+    "landing page chatbot shopify",
+    "crear landing page shopify ia",
+    "mejor alternativa shopify landing pages",
   ],
+  alternates: {
+    canonical: "https://landforge.digital/integraciones/shopify",
+  },
+  openGraph: {
+    title: "LandForge + Shopify: Landing Pages con IA para tu Tienda Online",
+    description:
+      "Genera landing pages de producto para Shopify con IA en 30 segundos. Forgi chatbot responde dudas de compradores 24/7 y reduce el abandono de carrito.",
+    url: "https://landforge.digital/integraciones/shopify",
+  },
 };
 
 const faqSchema = {

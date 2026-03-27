@@ -1,5 +1,7 @@
 import Anthropic from '@anthropic-ai/sdk'
 import { NextRequest, NextResponse } from 'next/server'
+import { createClient } from '@/lib/supabase/server'
+import { checkFeatureAccess } from '@/lib/limits'
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! })
 
@@ -30,6 +32,15 @@ function extractMeta(html: string) {
 
 export async function POST(request: NextRequest) {
   try {
+    const supabase = await createClient()
+    const { data: { user } } = await supabase.auth.getUser()
+    if (!user) return NextResponse.json({ success: false, error: 'No autorizado', data: null }, { status: 401 })
+
+    const access = await checkFeatureAccess(user.id, 'competitor_analysis', user.email ?? undefined)
+    if (!access.allowed) {
+      return NextResponse.json({ success: false, error: 'El análisis de competidores está disponible desde el plan Agency. Mejora tu plan para acceder.', data: null }, { status: 403 })
+    }
+
     const { domain } = await request.json()
     if (!domain) return NextResponse.json({ error: 'Domain required' }, { status: 400 })
 

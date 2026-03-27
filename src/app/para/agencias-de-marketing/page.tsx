@@ -12,6 +12,15 @@ export const metadata: Metadata = {
     "herramienta automatizar agencia marketing",
     "inteligencia artificial agencias seo",
   ],
+  alternates: {
+    canonical: "https://landforge.digital/para/agencias-de-marketing",
+  },
+  openGraph: {
+    title: "LandForge para Agencias de Marketing: Landings IA con White Label",
+    description:
+      "Escala tu Agencia de Marketing con LandForge. Genera landings infinitas para tus clientes en 30 segundos, entrega con tu marca (White Label) y automatiza el soporte con Forgi Chatbot IA.",
+    url: "https://landforge.digital/para/agencias-de-marketing",
+  },
 };
 
 const faqSchema = {

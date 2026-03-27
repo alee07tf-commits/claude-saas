@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Landing Pages para Restaurantes y Hostelería con IA | LandForge",
+  title: "Landing Pages para Restaurantes y Hostelería con IA",
   description:
     "Genera la web de tu restaurante en 30 segundos. Forgi gestiona reservas y consultas sobre menú, alergenos y horarios mientras atiendes las mesas. Sin programar.",
   keywords: [
@@ -12,6 +12,15 @@ export const metadata: Metadata = {
     "marketing digital hosteleria",
     "pagina web bar cafeteria ia",
   ],
+  alternates: {
+    canonical: "https://landforge.digital/para/restaurantes",
+  },
+  openGraph: {
+    title: "Landing Pages para Restaurantes y Hostelería con IA",
+    description:
+      "Genera la web de tu restaurante en 30 segundos. Forgi gestiona reservas y consultas sobre menú, alergenos y horarios mientras atiendes las mesas. Sin programar.",
+    url: "https://landforge.digital/para/restaurantes",
+  },
 };
 
 const faqSchema = {

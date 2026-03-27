@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Chatbot de Ventas para tu Web con IA: Guía Completa 2026 | LandForge",
+  title: "Chatbot de Ventas para tu Web con IA: Guía Completa 2026",
   description:
     "Aprende cómo un chatbot de ventas con IA puede atender, cualificar y convertir a los visitantes de tu web las 24 horas. Guía completa con casos reales y cómo activarlo en 30 segundos.",
   keywords: [
@@ -12,6 +12,15 @@ export const metadata: Metadata = {
     "como poner chatbot ia web",
     "chatbot conversion leads ia 2026",
   ],
+  alternates: {
+    canonical: "https://landforge.digital/blog/chatbot-ventas-para-web",
+  },
+  openGraph: {
+    title: "Chatbot de Ventas para tu Web con IA: Guía Completa 2026",
+    description:
+      "Aprende cómo un chatbot de ventas con IA puede atender, cualificar y convertir a los visitantes de tu web las 24 horas. Guía completa con casos reales y cómo activarlo en 30 segundos.",
+    url: "https://landforge.digital/blog/chatbot-ventas-para-web",
+  },
 };
 
 const articleSchema = {

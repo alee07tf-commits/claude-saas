@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Forgi Chatbot: Asistente de Ventas IA 24/7 para tu Landing Page | LandForge",
+  title: "Forgi Chatbot: Asistente de Ventas IA 24/7 para tu Landing Page",
   description:
     "Forgi es el chatbot de ventas con IA que atiende, cualifica y convierte a los visitantes de tu landing page las 24 horas. Se configura solo en 30 segundos. Sin código.",
   keywords: [
@@ -12,6 +12,15 @@ export const metadata: Metadata = {
     "chatbot conversion landing page",
     "forgi chatbot landforge",
   ],
+  alternates: {
+    canonical: "https://landforge.digital/features/forgi-chatbot",
+  },
+  openGraph: {
+    title: "Forgi Chatbot: Asistente de Ventas IA 24/7 para tu Landing Page",
+    description:
+      "Forgi es el chatbot de ventas con IA que atiende, cualifica y convierte a los visitantes de tu landing page las 24 horas. Se configura solo en 30 segundos. Sin código.",
+    url: "https://landforge.digital/features/forgi-chatbot",
+  },
 };
 
 const faqSchema = {

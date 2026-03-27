@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Diseño Web y Landing Pages para Abogados con IA | LandForge",
+  title: "Diseño Web y Landing Pages para Abogados con IA",
   description:
     "Capta más prospectos para tu despacho legal sin programar. La IA genera tu web jurídica en 30s y Forgi atiende primeras consultas legales 24/7, cualificando casos antes de tu intervención.",
   keywords: [
@@ -12,6 +12,15 @@ export const metadata: Metadata = {
     "chatbot ia abogados primeras consultas",
     "web para despacho de abogados",
   ],
+  alternates: {
+    canonical: "https://landforge.digital/para/abogados",
+  },
+  openGraph: {
+    title: "Diseño Web y Landing Pages para Abogados con IA",
+    description:
+      "Capta más prospectos para tu despacho legal sin programar. La IA genera tu web jurídica en 30s y Forgi atiende primeras consultas legales 24/7, cualificando casos antes de tu intervención.",
+    url: "https://landforge.digital/para/abogados",
+  },
 };
 
 const faqSchema = {

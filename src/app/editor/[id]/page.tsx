@@ -26,27 +26,32 @@ const FORGI_SCRIPT = `
   if(document.getElementById('_forgi_btn'))return;
   var cur=null;
   var eEl=null;
+  var elMode=false,elSection=null,elCur=null;
   var btn=document.createElement('button');
   btn.id='_forgi_btn';
   btn.innerHTML='&#10024;&nbsp;Editar';
   btn.style.cssText=['position:fixed','z-index:2147483647','display:none','top:0','right:16px','padding:7px 16px','background:linear-gradient(135deg,#9D4EDD,#7B2CBF)','color:#FFFFFF','border:none','border-radius:8px','font-weight:800','font-size:12px','cursor:pointer','font-family:system-ui,sans-serif','box-shadow:0 4px 20px rgba(157,78,221,.5)','white-space:nowrap','letter-spacing:.02em','transition:transform .1s'].join(';');
   document.body.appendChild(btn);
   var sty=document.createElement('style');
-  sty.textContent='._fhl{outline:2px solid #9D4EDD!important;outline-offset:-2px!important;}';
+  sty.textContent='._fhl{outline:2px solid #9D4EDD!important;outline-offset:-2px!important;}._fehl{outline:2px dashed #00E5A0!important;outline-offset:2px!important;cursor:pointer!important;}';
   document.head.appendChild(sty);
   function closest(el){while(el&&el!==document.body){if(el.dataset&&el.dataset.section)return el;el=el.parentElement;}return null;}
   function showBtn(sec){var r=sec.getBoundingClientRect();btn.style.top=(Math.max(r.top,8)+8)+'px';btn.style.display='block';btn.dataset.s=sec.dataset.section||'';btn.dataset.l=sec.dataset.sectionLabel||sec.dataset.section||'Sección';}
-  document.addEventListener('mouseover',function(e){if(eEl)return;if(e.target===btn||btn.contains(e.target))return;var sec=closest(e.target);if(!sec){if(cur){cur.classList.remove('_fhl');cur=null;}btn.style.display='none';return;}if(sec===cur)return;if(cur)cur.classList.remove('_fhl');cur=sec;sec.classList.add('_fhl');showBtn(sec);},{passive:true});
-  document.addEventListener('scroll',function(){btn.style.display='none';if(cur){cur.classList.remove('_fhl');cur=null;}},{passive:true,capture:true});
-  document.addEventListener('mouseleave',function(){btn.style.display='none';if(cur){cur.classList.remove('_fhl');cur=null;}});
+  var SEL_TAGS={H1:1,H2:1,H3:1,H4:1,H5:1,H6:1,P:1,IMG:1,UL:1,OL:1,BLOCKQUOTE:1,FIGURE:1,VIDEO:1,IFRAME:1};
+  function isSelEl(el){if(!el||!el.tagName)return false;if(el.tagName in SEL_TAGS)return true;if((el.tagName==='A'||el.tagName==='BUTTON')&&el.textContent&&el.textContent.trim())return true;if((el.tagName==='DIV'||el.tagName==='ARTICLE')&&el.querySelectorAll('h1,h2,h3,h4,h5,h6,p,img').length>=2)return true;return false;}
+  function findSelEl(el){while(el&&el!==elSection&&el!==document.body){if(isSelEl(el))return el;el=el.parentElement;}return null;}
+  document.addEventListener('mouseover',function(e){if(eEl)return;if(e.target===btn||btn.contains(e.target))return;if(elMode&&elSection){var sel=findSelEl(e.target);if(!sel||!elSection.contains(sel)){if(elCur){elCur.classList.remove('_fehl');elCur=null;}return;}if(sel===elCur)return;if(elCur)elCur.classList.remove('_fehl');elCur=sel;sel.classList.add('_fehl');return;}var sec=closest(e.target);if(!sec){if(cur){cur.classList.remove('_fhl');cur=null;}btn.style.display='none';return;}if(sec===cur)return;if(cur)cur.classList.remove('_fhl');cur=sec;sec.classList.add('_fhl');showBtn(sec);},{passive:true});
+  document.addEventListener('scroll',function(){btn.style.display='none';if(cur){cur.classList.remove('_fhl');cur=null;}if(elCur){elCur.classList.remove('_fehl');elCur=null;}},{passive:true,capture:true});
+  document.addEventListener('mouseleave',function(){btn.style.display='none';if(cur){cur.classList.remove('_fhl');cur=null;}if(elCur){elCur.classList.remove('_fehl');elCur=null;}});
   btn.addEventListener('mouseenter',function(){btn.style.transform='translateY(-1px)';});
   btn.addEventListener('mouseleave',function(){btn.style.transform='';});
   btn.addEventListener('click',function(e){e.stopPropagation();window.parent.postMessage({type:'forgi-edit',sectionId:btn.dataset.s,sectionLabel:btn.dataset.l},'*');});
-  var ETAGS={H1:1,H2:1,H3:1,H4:1,H5:1,H6:1,P:1,SPAN:1,A:1,BUTTON:1,LI:1,STRONG:1,EM:1,LABEL:1,TD:1,TH:1};
+  var ETAGS={H1:1,H2:1,H3:1,H4:1,H5:1,H6:1,P:1,SPAN:1,A:1,BUTTON:1,LI:1,STRONG:1,EM:1,LABEL:1,TD:1,TH:1,BLOCKQUOTE:1,FIGCAPTION:1,SMALL:1,B:1,I:1,U:1,MARK:1,DT:1,DD:1,CITE:1,TIME:1,ADDRESS:1,SUMMARY:1,LEGEND:1,CAPTION:1,DEL:1,INS:1,SUB:1,SUP:1};
+  var INLINE={SPAN:1,STRONG:1,EM:1,A:1,B:1,I:1,U:1,SMALL:1,MARK:1,SUB:1,SUP:1,ABBR:1,CITE:1,CODE:1,TIME:1,DEL:1,INS:1,BR:1,WBR:1,Q:1,LABEL:1,BUTTON:1,IMG:1};
   function isEditable(el){
     if(el.tagName in ETAGS)return true;
-    // Leaf DIVs with no child elements (pills, badges, custom buttons)
-    if(el.tagName==='DIV'&&el.children.length===0&&el.textContent.trim().length>0)return true;
+    // DIV/ARTICLE with text and only inline children (badges, pills, card titles, stat values)
+    if((el.tagName==='DIV'||el.tagName==='ARTICLE')&&el.textContent.trim().length>0){var ok=true;for(var i=0;i<el.children.length;i++){if(!(el.children[i].tagName in INLINE)){ok=false;break;}}if(ok)return true;}
     return false;
   }
   function startEdit(el){
@@ -82,9 +87,10 @@ const FORGI_SCRIPT = `
   }
   document.querySelectorAll('[data-section] *').forEach(function(el){
     if(!isEditable(el))return;
-    el.addEventListener('dblclick',function(e){e.stopPropagation();e.preventDefault();startEdit(el);});
+    el.addEventListener('dblclick',function(e){if(elMode)return;e.stopPropagation();e.preventDefault();startEdit(el);});
   });
   document.addEventListener('click',function(e){
+    if(elMode&&elCur&&!eEl){e.preventDefault();var tag=elCur.tagName;var text=tag==='IMG'?(elCur.getAttribute('alt')||'[imagen]'):(elCur.textContent?elCur.textContent.trim().slice(0,80):'');window.parent.postMessage({type:'forgi-element-select',sectionId:elSection?elSection.getAttribute('data-section'):'',elementTag:tag,elementText:text},'*');return;}
     if(!eEl||eEl===e.target||eEl.contains(e.target))return;
     saveEdit(eEl);
   });
@@ -99,6 +105,7 @@ const FORGI_SCRIPT = `
     el.setAttribute('data-forgi-link-idx',String(linkIdx++));
     el.addEventListener('click',function(e){
       if(eEl)return;
+      if(elMode)return;
       e.preventDefault();e.stopPropagation();
       var href=el.getAttribute('href')||'';
       var r=el.getBoundingClientRect();
@@ -107,7 +114,10 @@ const FORGI_SCRIPT = `
     });
   });
   window.addEventListener('message',function(e){
-    if(e.data&&e.data.type==='forgi-link-update'){
+    if(!e.data)return;
+    if(e.data.type==='forgi-enter-element-mode'){elMode=true;elSection=document.querySelector('[data-section="'+e.data.sectionId+'"]');if(elSection)elSection.style.boxShadow='inset 0 0 0 2px rgba(157,78,221,0.2)';btn.style.display='none';if(cur){cur.classList.remove('_fhl');cur=null;}}
+    else if(e.data.type==='forgi-exit-element-mode'){if(elCur){elCur.classList.remove('_fehl');elCur=null;}if(elSection){elSection.style.boxShadow='';elSection=null;}elMode=false;}
+    else if(e.data.type==='forgi-link-update'){
       var el=document.querySelector('[data-forgi-link-idx="'+e.data.linkIdx+'"]');
       if(!el)return;
       el.setAttribute('href',e.data.newHref);
@@ -195,6 +205,13 @@ const SECTION_ICONS: Record<string, string> = {
   contact: '📩', cta_final: '🚀', navbar: '📌', footer: '🔻',
 }
 
+const ELEMENT_ICONS: Record<string, string> = {
+  H1: '📝', H2: '📝', H3: '📝', H4: '📝', H5: '📝', H6: '📝',
+  P: '¶', A: '🔗', BUTTON: '🔘', IMG: '🖼️', UL: '📋', OL: '📋',
+  BLOCKQUOTE: '💬', FIGURE: '🖼️', VIDEO: '🎬', IFRAME: '🎬',
+  DIV: '📦', ARTICLE: '📦',
+}
+
 // ─────────────────────────────────────────────────────────────────────────
 export default function EditorPage() {
   const { id } = useParams<{ id: string }>()
@@ -224,6 +241,9 @@ export default function EditorPage() {
   const [blockEmbed, setBlockEmbed]         = useState('')
   const [blockShowEmbed, setBlockShowEmbed] = useState(false)
   const blockFileRef                        = useRef<HTMLInputElement>(null)
+
+  // Element-level editor state
+  const [selectedElement, setSelectedElement] = useState<{ elementTag: string; elementText: string } | null>(null)
 
   // Undo (shared between block + global edits)
   const [undoHtml, setUndoHtml]         = useState<string | null>(null)
@@ -279,10 +299,19 @@ export default function EditorPage() {
     }, 2000)
   }
 
-  // Reset block attachments when switching sections
+  // Reset block attachments + element selection when switching sections
   useEffect(() => {
-    setBlockImage(null); setBlockUploadErr(''); setBlockEmbed(''); setBlockShowEmbed(false)
+    setBlockImage(null); setBlockUploadErr(''); setBlockEmbed(''); setBlockShowEmbed(false); setSelectedElement(null)
   }, [selected])
+
+  // Enter/exit element mode in iframe when section is selected
+  useEffect(() => {
+    if (selected && panelMode === 'blocks') {
+      iframeRef.current?.contentWindow?.postMessage({ type: 'forgi-enter-element-mode', sectionId: selected.id }, '*')
+    } else {
+      iframeRef.current?.contentWindow?.postMessage({ type: 'forgi-exit-element-mode' }, '*')
+    }
+  }, [selected, panelMode])
 
   // Shared image upload helper
   async function uploadImage(
@@ -341,6 +370,8 @@ export default function EditorPage() {
       } else if (e.data.type === 'forgi-link-click') {
         setLinkEdit({ linkIdx: e.data.linkIdx, href: e.data.href, sectionId: e.data.sectionId, top: e.data.top, left: e.data.left })
         setLinkHrefInput(e.data.href || '')
+      } else if (e.data.type === 'forgi-element-select') {
+        setSelectedElement({ elementTag: e.data.elementTag, elementText: e.data.elementText })
       } else if (e.data.type === 'forgi-text-edit') {
         if (!liveHtmlRef.current) return
         const oldSec = extractSectionHtml(liveHtmlRef.current, e.data.sectionId)
@@ -416,6 +447,7 @@ export default function EditorPage() {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           sectionId: selected.id, sectionLabel: selected.label, sectionHtml, userPrompt: prompt.trim(),
+          ...(selectedElement ? { targetElement: { tag: selectedElement.elementTag, text: selectedElement.elementText } } : {}),
           ...(blockImage ? { imageUrl: blockImage.url } : {}),
           ...(blockEmbed.trim() ? { embedCode: urlToEmbed(blockEmbed) } : {}),
         }),
@@ -452,7 +484,7 @@ export default function EditorPage() {
       const newHtml = replaceSectionHtml(html, sectionHtml, newSectionHtml)
       if (newHtml === html) throw new Error('No se pudo localizar la sección para reemplazar')
       persistHtml(newHtml)
-      setPrompt(''); setBlockImage(null); setBlockEmbed(''); setBlockShowEmbed(false); setApplySuccess(true)
+      setPrompt(''); setBlockImage(null); setBlockEmbed(''); setBlockShowEmbed(false); setSelectedElement(null); setApplySuccess(true)
       setTimeout(() => setApplySuccess(false), 3000)
     } catch (err) { setApplyError(err instanceof Error ? err.message : 'Error inesperado') }
     finally { setApplying(false) }
@@ -1088,10 +1120,37 @@ export default function EditorPage() {
                     style={{ padding:'4px 10px', borderRadius:'6px', background:'transparent', border:`1px solid ${UI.border}`, color:UI.gray, fontSize:'12px', cursor:'pointer' }}>✕</button>
                 </div>
                 <div style={{ height:'1px', background:UI.border }} />
+
+                {/* Element selection indicator */}
+                {selectedElement ? (
+                  <div style={{ display:'flex', alignItems:'center', gap:'8px' }}>
+                    <button onClick={() => setSelectedElement(null)}
+                      style={{ padding:'4px 8px', borderRadius:'6px', border:`1px solid ${UI.border}`, background:'transparent', color:UI.accent, fontSize:'11px', fontWeight:700, cursor:'pointer', flexShrink:0, whiteSpace:'nowrap' }}>
+                      ← Sección
+                    </button>
+                    <div style={{ flex:1, padding:'6px 10px', borderRadius:'7px', background:'#00E5A012', border:'1px solid #00E5A025', overflow:'hidden' }}>
+                      <span style={{ fontSize:'12px', fontWeight:700, color:'#00E5A0' }}>
+                        {ELEMENT_ICONS[selectedElement.elementTag] || '📦'} {selectedElement.elementTag}
+                      </span>
+                      {selectedElement.elementText && (
+                        <span style={{ fontSize:'11px', color:UI.gray, marginLeft:'6px' }}>
+                          &ldquo;{selectedElement.elementText.slice(0, 35)}{selectedElement.elementText.length > 35 ? '...' : ''}&rdquo;
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                ) : (
+                  <div style={{ padding:'8px 10px', borderRadius:'7px', background:`${UI.accent}08`, fontSize:'11px', color:UI.dimGray, lineHeight:'1.5' }}>
+                    💡 Click en un elemento de la sección para editarlo con Forgi. Doble-click para editar texto directamente.
+                  </div>
+                )}
+
                 <div>
-                  <label style={{ display:'block', fontSize:'12px', fontWeight:700, color:UI.gray, marginBottom:'8px' }}>¿Qué quieres cambiar?</label>
+                  <label style={{ display:'block', fontSize:'12px', fontWeight:700, color:UI.gray, marginBottom:'8px' }}>
+                    {selectedElement ? `¿Qué quieres cambiar de este ${selectedElement.elementTag}?` : '¿Qué quieres cambiar?'}
+                  </label>
                   <textarea value={prompt} onChange={e => setPrompt(e.target.value)} onKeyDown={onBlockKeyDown} disabled={applying}
-                    placeholder='Ej: "Cambia el headline" · "Añade badge de oferta" · "Haz el CTA más llamativo"'
+                    placeholder={selectedElement ? 'Ej: "Cambia el texto por..." · "Hazlo más llamativo" · "Añade un icono"' : 'Ej: "Cambia el headline" · "Añade badge de oferta" · "Haz el CTA más llamativo"'}
                     rows={5}
                     style={{ width:'100%', padding:'12px', borderRadius:'10px', background:UI.surface, border:`1px solid ${UI.border}`, color:UI.text, fontSize:'13px', lineHeight:'1.6', fontFamily:UI.font, resize:'vertical', outline:'none', boxSizing:'border-box', opacity:applying?0.6:1 }}
                     onFocus={e => { (e.target as HTMLTextAreaElement).style.borderColor=UI.accent }}

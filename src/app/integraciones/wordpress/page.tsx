@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Landing Pages para WordPress sin Elementor ni Divi | LandForge",
+  title: "Landing Pages para WordPress sin Elementor ni Divi",
   description:
     "Integra landing pages generadas por IA en tu WordPress en 1 minuto. Sin plugins pesados, sin romper Core Web Vitals. La alternativa a Elementor que no mata el SEO de tu web.",
   keywords: [
@@ -12,6 +12,15 @@ export const metadata: Metadata = {
     "plugin seo landing page wordpress ia",
     "mejor que divi wordpress",
   ],
+  alternates: {
+    canonical: "https://landforge.digital/integraciones/wordpress",
+  },
+  openGraph: {
+    title: "Landing Pages para WordPress sin Elementor ni Divi",
+    description:
+      "Integra landing pages generadas por IA en tu WordPress en 1 minuto. Sin plugins pesados, sin romper Core Web Vitals. La alternativa a Elementor que no mata el SEO de tu web.",
+    url: "https://landforge.digital/integraciones/wordpress",
+  },
 };
 
 const faqSchema = {

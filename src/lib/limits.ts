@@ -3,6 +3,7 @@ import { createClient } from '@supabase/supabase-js';
 // Tipos de métricas y planes
 export type PlanType = 'starter' | 'agency' | 'agency_pro' | 'none';
 export type ActionType = 'landings' | 'generations' | 'editions' | 'chatbot_messages';
+export type FeatureType = 'conversion_score' | 'competitor_analysis' | 'custom_domain' | 'white_label';
 
 export const PLAN_LIMITS: Record<PlanType, Record<ActionType, number>> = {
   starter: {
@@ -13,12 +14,12 @@ export const PLAN_LIMITS: Record<PlanType, Record<ActionType, number>> = {
   },
   agency: {
     landings: 20,
-    generations: 50,
+    generations: 100,
     editions: 200,
     chatbot_messages: 3000
   },
   agency_pro: {
-    landings: 999999, // Ilimitado visualmente y a nivel código
+    landings: 999999,
     generations: 999999,
     editions: 999999,
     chatbot_messages: 999999
@@ -31,11 +32,75 @@ export const PLAN_LIMITS: Record<PlanType, Record<ActionType, number>> = {
   }
 };
 
+// Feature access per plan (true = available)
+export const PLAN_FEATURES: Record<PlanType, Record<FeatureType, boolean>> = {
+  starter: {
+    conversion_score: true,
+    competitor_analysis: false,
+    custom_domain: false,
+    white_label: false,
+  },
+  agency: {
+    conversion_score: true,
+    competitor_analysis: true,
+    custom_domain: true,
+    white_label: false,
+  },
+  agency_pro: {
+    conversion_score: true,
+    competitor_analysis: true,
+    custom_domain: true,
+    white_label: true,
+  },
+  none: {
+    conversion_score: false,
+    competitor_analysis: false,
+    custom_domain: false,
+    white_label: false,
+  },
+};
+
 function getSupabaseAdmin() {
   return createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.SUPABASE_SERVICE_ROLE_KEY!
   );
+}
+
+/**
+ * Verifica si el usuario tiene acceso a una feature según su plan.
+ */
+export async function checkFeatureAccess(userId: string, feature: FeatureType, callerEmail?: string): Promise<{ allowed: boolean, plan: PlanType }> {
+  try {
+    const supabaseAdmin = getSupabaseAdmin();
+
+    let userEmail = callerEmail;
+    if (!userEmail) {
+      try {
+        const { data: userData } = await supabaseAdmin.auth.admin.getUserById(userId);
+        userEmail = userData?.user?.email;
+      } catch (e) {
+        console.warn('Admin getUserById failed:', e);
+      }
+    }
+
+    if (userEmail && userEmail === process.env.ADMIN_EMAIL) {
+      return { allowed: true, plan: 'agency_pro' };
+    }
+
+    const { data: subscription } = await supabaseAdmin
+      .from('subscriptions')
+      .select('plan_id, status')
+      .eq('user_id', userId)
+      .eq('status', 'active')
+      .maybeSingle();
+
+    const plan: PlanType = (subscription?.plan_id as PlanType) || 'none';
+    return { allowed: PLAN_FEATURES[plan][feature], plan };
+  } catch (err) {
+    console.error('Error checking feature access:', err);
+    return { allowed: false, plan: 'none' };
+  }
 }
 
 /**

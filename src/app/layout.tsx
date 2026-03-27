@@ -14,10 +14,11 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://landforge.digital";
+// SEO canonical domain — hardcoded to prevent env var overrides on Vercel
+const SEO_DOMAIN = "https://landforge.digital";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(SITE_URL),
+  metadataBase: new URL(SEO_DOMAIN),
   title: {
     default: "LandForge: Generador de Landing Pages con IA para Agencias",
     template: "%s | LandForge",
@@ -34,7 +35,7 @@ export const metadata: Metadata = {
     "software landing pages agencias",
     "Forgi chatbot",
   ],
-  authors: [{ name: "LandForge", url: SITE_URL }],
+  authors: [{ name: "LandForge", url: SEO_DOMAIN }],
   creator: "ZappyApps",
   publisher: "ZappyApps",
   robots: {
@@ -51,7 +52,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "es_ES",
-    url: SITE_URL,
+    url: SEO_DOMAIN,
     siteName: "LandForge",
     title: "Generador de Landing Pages con IA | LandForge — Para Agencias",
     description:
@@ -73,7 +74,7 @@ export const metadata: Metadata = {
     images: ["/og-image.png"],
   },
   alternates: {
-    canonical: SITE_URL,
+    canonical: SEO_DOMAIN,
   },
   verification: {
     google: "us_XVp55NflCdbjuEdvb3gcRAVD37DTsdy5ey3GgDiU",

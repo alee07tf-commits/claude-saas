@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Forgi Editor: Crea y Edita Landing Pages con IA por Bloques | LandForge",
+  title: "Forgi Editor: Crea y Edita Landing Pages con IA por Bloques",
   description:
     "El editor de landing pages más rápido del mercado. Describe en lenguaje natural lo que quieres cambiar y Forgi lo aplica al instante. Sin arrastrar ni soltar. Sin código.",
   keywords: [
@@ -12,6 +12,15 @@ export const metadata: Metadata = {
     "generador paginas ia bloques",
     "forgi editor landforge",
   ],
+  alternates: {
+    canonical: "https://landforge.digital/features/forgi-editor",
+  },
+  openGraph: {
+    title: "Forgi Editor: Crea y Edita Landing Pages con IA por Bloques",
+    description:
+      "El editor de landing pages más rápido del mercado. Describe en lenguaje natural lo que quieres cambiar y Forgi lo aplica al instante. Sin arrastrar ni soltar. Sin código.",
+    url: "https://landforge.digital/features/forgi-editor",
+  },
 };
 
 const faqSchema = {
