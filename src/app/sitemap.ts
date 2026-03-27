@@ -174,5 +174,57 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.85,
     },
+    // ── Mes 2 — Comparativas ──
+    {
+      url: `${SITE_URL}/comparar/landforge-vs-instapage`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.85,
+    },
+    {
+      url: `${SITE_URL}/comparar/alternativas-webflow`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.85,
+    },
+    // ── Mes 2 — Integraciones ──
+    {
+      url: `${SITE_URL}/integraciones/zapier`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.85,
+    },
+    {
+      url: `${SITE_URL}/integraciones/hubspot`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.85,
+    },
+    // ── Mes 2 — Silos B2B ──
+    {
+      url: `${SITE_URL}/para/gimnasios`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
+      url: `${SITE_URL}/para/startups-saas`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    // ── Mes 2 — Blog ──
+    {
+      url: `${SITE_URL}/blog/que-es-un-chatbot-de-ventas-ia`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.85,
+    },
+    {
+      url: `${SITE_URL}/blog/ab-testing-landing-pages-guia`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
   ];
 }
