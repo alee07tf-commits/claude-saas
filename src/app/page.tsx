@@ -170,30 +170,6 @@ const FAQ = ({ question, answer }: { question: string; answer: string }) => {
   );
 };
 
-/* ─── Demo Video ─── */
-const DemoVideo = () => (
-  <div style={{
-    borderRadius: "16px", overflow: "hidden",
-    border: `1px solid ${BRAND.border}`,
-    boxShadow: `0 24px 64px rgba(157,78,221,0.14)`,
-    maxWidth: "900px", margin: "0 auto",
-  }}>
-    <video
-      src="/demo-landforge.mp4"
-      autoPlay
-      muted
-      loop
-      playsInline
-      disablePictureInPicture
-      controlsList="nodownload nofullscreen noremoteplayback"
-      style={{
-        width: "100%", height: "auto", display: "block",
-        borderRadius: "16px", pointerEvents: "none",
-      }}
-    />
-  </div>
-);
-
 /* ─── Section badge helper ─── */
 const SectionBadge = ({ label }: { label: string }) => (
   <span style={{
@@ -532,7 +508,7 @@ export default function LandForgeLanding() {
             >
               Generar mi primera landing <ArrowRight />
             </a>
-            <a href="#demo" style={{
+            <a href="#comofunciona" style={{
               display: "inline-flex", alignItems: "center", gap: "8px",
               background: "transparent", color: BRAND.accent,
               padding: "15px 32px", borderRadius: "12px",
@@ -541,27 +517,13 @@ export default function LandForgeLanding() {
             }}
               onMouseEnter={e => e.currentTarget.style.borderColor = BRAND.accent}
               onMouseLeave={e => e.currentTarget.style.borderColor = BRAND.border}
-            >Ver demo</a>
+            >Cómo funciona</a>
           </div>
           <p style={{ fontSize: "13px", color: BRAND.gray, margin: 0 }}>
             Sin tarjeta · 1 landing gratis · Cancela cuando quieras
           </p>
         </div>
 
-      </section>
-
-      {/* ── DEMO PREVIEW ── */}
-      <section id="demo" style={{ padding: "0 24px 100px", maxWidth: "980px", margin: "0 auto" }}>
-        <div style={{ textAlign: "center", marginBottom: "48px" }}>
-          <SectionBadge label="ASÍ QUEDA" />
-          <h2 style={{ fontSize: "clamp(26px, 3.5vw, 40px)", fontWeight: 800, letterSpacing: "-1px", marginTop: "16px", color: BRAND.text }}>
-            Genera tu landing page con IA en 30 segundos
-          </h2>
-          <p style={{ color: BRAND.gray, fontSize: "16px", maxWidth: "500px", margin: "12px auto 0" }}>
-            Lo que ves es exactamente lo que tus visitantes ven. Publicada, online, lista para recibir tráfico.
-          </p>
-        </div>
-        <DemoVideo />
       </section>
 
       {/* ── HOW IT WORKS ── */}
