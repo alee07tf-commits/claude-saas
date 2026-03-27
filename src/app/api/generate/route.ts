@@ -275,11 +275,31 @@ JSON-LD SCHEMA justo antes del script de animaciones:
 • CTAs sueltos (no en cards): centrar con margin:0 auto o flex justify-content:center
 • Formularios: labels y campos left-aligned
 
+━━━ LAYOUT QUALITY — REGLAS CRÍTICAS DE CALIDAD VISUAL ━━━
+• Grids de cards: SIEMPRE usar align-items:stretch en el grid → tarjetas de la misma altura por fila
+• Cards: SIEMPRE display:flex;flex-direction:column — card-desc u última p con flex:1 para anclar CTA al fondo
+• Iconos en cards: contenedor fijo SIEMPRE width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0 — nunca se distorsiona
+• Avatares testimoniales: width:48px;height:48px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px
+• Stats números: SIEMPRE font-size:clamp(2.5rem,6vw,5rem);font-weight:800;color:var(--primary);line-height:1 — nunca inferior
+• Padding de secciones: section{padding:80px 0} — hero: padding:120px 0 80px (desplaza la navbar)
+• Contenedor universal en CADA sección: .container{max-width:1200px;margin-inline:auto;padding-inline:32px}
+• .card{overflow:hidden} — evita desbordamiento de contenido
+• Hero split/.hero-deco: min-height:320px;border-radius:24px;overflow:hidden — el decorativo SIEMPRE tiene contenido visible
+
+━━━ BOTONES Y FORMULARIOS — CSS EXACTO ━━━
+• .cta-primary,.cta-secondary{padding:14px 32px;border-radius:50px;font-weight:700;font-size:1rem;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:8px;text-decoration:none;white-space:nowrap}
+• .cta-primary{background:var(--primary);color:#fff;border:none} .cta-primary:hover{filter:brightness(1.1);transform:translateY(-2px);box-shadow:0 8px 24px color-mix(in srgb,var(--primary) 35%,transparent)}
+• .cta-secondary{background:transparent;border:2px solid var(--primary);color:var(--primary)} .cta-secondary:hover{background:var(--primary);color:#fff}
+• Inputs/textarea: width:100%;padding:12px 16px;border:1.5px solid color-mix(in srgb,var(--primary) 25%,transparent);border-radius:var(--radius);font-size:1rem;color:var(--text);background:var(--surface);outline:none;transition:border-color .2s;font-family:inherit — input:focus,textarea:focus{border-color:var(--primary)}
+• label{display:block;font-weight:600;font-size:14px;color:var(--text);margin-bottom:6px}
+• Badges: padding:4px 14px;border-radius:100px;font-size:12px;font-weight:700;display:inline-flex;align-items:center;gap:6px
+
 ━━━ CSS RULES ━━━
 • Un único <style> en <head> — vanilla CSS puro, sin CDN
 • CSS custom props: --primary, --accent, --bg, --surface, --text, --muted, --radius
-• CSS COMPACTO: máx 350 líneas, shorthand, selectores agrupados con coma, sin comentarios, sin duplicados
+• CSS COMPACTO: máx 250 líneas, shorthand, selectores agrupados con coma, sin comentarios, sin duplicados — NO repitas reglas
 • NO estilos inline en HTML
+• Usa .container en cada sección para el centrado y máx-ancho — no pongas max-width en cada sección individualmente
 • Centrado de bloques: margin-inline:auto + max-width. Grid centered: place-items:center. Flex: justify-content:center align-items:center
 • Ritmo visual: secciones alternas con background:var(--surface) / var(--bg)
 • Sección con --primary bg (stats o cta_final): usar color:#fff en sus textos
@@ -765,10 +785,11 @@ ${sectionsList}
 10. CTA principal en botones: "${effectiveCta}"
 11. Keywords LSI: ${(seoStrategy.lsiKeywords as string[] || []).join(', ')} — incluir naturalmente en subtítulos y párrafos
 
-━━━ CRÍTICO — GENERACIÓN COMPLETA ━━━
+━━━ CRÍTICO — GENERACIÓN COMPLETA Y RÁPIDA ━━━
 • Genera ABSOLUTAMENTE TODAS las secciones pedidas. Nunca omitas ninguna.
-• CSS conciso: shorthand, selectores agrupados con coma, sin comentarios, sin duplicados.
-• HTML conciso: 1-2 frases por párrafo. Sin texto largo innecesario.
+• CSS: objetivo 200-250 líneas. Shorthand, selectores agrupados con coma, sin comentarios, cero duplicados. Usa .container universal — no repitas max-width por sección.
+• HTML conciso: 1-2 frases por párrafo. Descripciones de servicios/beneficios: máx 2 líneas. Sin palabrería, sin texto de relleno.
+• Texto total objetivo: 10000-14000 tokens (landing de calidad, carga rápida, generación ágil).
 • SIEMPRE termina el documento con </footer></body></html>. Si hay presión de longitud, recorta texto de párrafos pero NUNCA dejes el HTML incompleto ni omitas secciones.
 
 Genera el HTML ahora.`
@@ -825,7 +846,7 @@ export async function POST(request: NextRequest) {
 
         const anthropicStream = client.messages.stream({
           model: 'claude-sonnet-4-6',
-          max_tokens: 24000,
+          max_tokens: 16000,
           system: [{ type: 'text' as const, text: HTML_DESIGNER_SYSTEM, cache_control: { type: 'ephemeral' as const } }],
           messages: [{ role: 'user', content: buildHtmlPrompt(surveyData, serpAnalysis, domainContent, designConcept, seoStrategy) }],
         })
