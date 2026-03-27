@@ -109,65 +109,93 @@ async function scrapeDomain(domain: string): Promise<string> {
 }
 
 // ─────────────────────────────────────────────────────────────────
-// AGENT 3 — DESIGN CONCEPT (Haiku, fast creative brief)
+// DESIGN CONCEPT — Code-based random selection (guaranteed variety)
+// Replaces Haiku agent: faster (0ms vs 2-3s) + truly random layouts
 // ─────────────────────────────────────────────────────────────────
-async function generateDesignConcept(
-  pageType: string,
-  bi: Record<string, unknown> | null | undefined,
-  primaryColor: string,
-  accentColor: string,
-  theme: string,
-  sections: string[],
-  serpSnippet: string,
-): Promise<Record<string, unknown>> {
-  // Randomization seed forces visual variety across multiple generations
-  const seed = Math.floor(Math.random() * 9999)
-  try {
-    const response = await client.messages.create({
-      model: 'claude-haiku-4-5-20251001',
-      max_tokens: 900,
-      messages: [{
-        role: 'user',
-        content: `Director de arte web. Crea un concepto visual ÚNICO para esta landing. SEED de variedad: ${seed} — usa este número para elegir variantes distintas cada vez.
+function pick<T>(arr: T[]): T { return arr[Math.floor(Math.random() * arr.length)] }
 
-TIPO: ${PAGE_TYPE_LABELS[pageType] || pageType}
-NEGOCIO: ${bi?.businessName || '—'} | USP: ${bi?.usp || '—'} | Sector: ${bi?.sector || '—'}
-COLORES: principal=${primaryColor}, acento=${accentColor}, tema=${theme}
-SECCIONES: ${sections.join(', ')}
-COMPETIDORES: ${serpSnippet.slice(0, 250)}
+const LAYOUT_OPTIONS = {
+  hero:         ['split_left', 'split_right', 'centered_bold', 'diagonal_hero', 'magazine_left', 'fullscreen_overlay', 'asymmetric_grid'],
+  services:     ['grid_3col', 'grid_2col_icon_left', 'zigzag_alternating', 'cards_large', 'list_with_border_left', 'spotlight_feature', 'numbered_process', 'tabs_visual'],
+  testimonials: ['cards_3col', 'masonry_2col', 'single_spotlight', 'horizontal_scroll', 'quote_wall', 'rating_summary', 'video_style', 'timeline_reviews'],
+  stats:        ['fullwidth_numbers_centered', 'floating_cards_row', 'split_accent_bg', 'minimal_counters', 'icon_stats', 'progress_bars', 'ticker_banner', 'diagonal_split'],
+  pricing:      ['cards_3col', 'featured_center_elevated', 'comparison_table', 'single_focused', 'bold_cards', 'feature_matrix', 'minimal_list_pricing', 'two_tier'],
+  faq:          ['accordion_single_col', 'two_col_qa', 'numbered_cards', 'chat_bubbles', 'borderless_expand', 'icon_faq', 'grid_plain_faq', 'stepped_reveal'],
+  ctaFinal:     ['centered_gradient_bg', 'full_accent_bar', 'minimal_bordered', 'floating_card_cta', 'split_visual_cta', 'countdown_cta', 'testimonial_cta', 'diagonal_cta'],
+  howItWorks:   ['steps_horizontal', 'steps_timeline', 'steps_numbered_col', 'steps_icon_cards', 'alternating_cards_hiw', 'process_circle', 'flowchart_arrows', 'progress_steps'],
+  benefits:     ['icon_grid_4col', 'checklist_two_col', 'feature_zigzag', 'badge_highlights', 'comparison_without', 'stat_benefits', 'visual_list_benefits', 'grid_with_numbers'],
+  about:        ['split_story', 'values_grid', 'timeline_milestones', 'hero_about', 'mission_vision', 'stats_story', 'founder_spotlight'],
+  gallery:      ['masonry_3col', 'polaroid_cards', 'grid_with_overlay', 'featured_large_gallery', 'before_after_gallery', 'timeline_gallery', 'grid_uniform'],
+  team:         ['cards_3col_team', 'horizontal_info', 'minimal_list', 'founder_focus', 'cards_with_bio', 'minimal_avatars', 'department_sections'],
+  contact:      ['split_form_info', 'centered_card_form', 'minimal_form', 'multi_channel', 'map_prominent', 'two_step_contact', 'social_contact'],
+}
 
-Elige UN valor por campo. No repitas el mismo valor en generaciones sucesivas (el SEED te ayuda a variar).
-Responde SOLO con JSON válido (sin markdown):
-{
-  "heroLayout": "split_left|split_right|centered_bold|diagonal_hero|magazine_left|fullscreen_overlay|asymmetric_grid",
-  "heroDecorative": "descripción concreta del elemento decorativo CSS del hero (formas geométricas, gradientes, blobs, líneas)",
-  "servicesLayout": "grid_3col|grid_2col_icon_left|zigzag_alternating|cards_large|list_with_border_left|spotlight_feature|numbered_process|tabs_visual",
-  "testimonialsLayout": "cards_3col|masonry_2col|single_spotlight|horizontal_scroll|quote_wall|rating_summary|video_style|timeline_reviews",
-  "statsLayout": "fullwidth_numbers_centered|floating_cards_row|split_accent_bg|minimal_counters|icon_stats|progress_bars|ticker_banner|diagonal_split",
-  "pricingLayout": "cards_3col|featured_center_elevated|comparison_table|single_focused|bold_cards|feature_matrix|minimal_list_pricing|two_tier",
-  "faqLayout": "accordion_single_col|two_col_qa|numbered_cards|chat_bubbles|borderless_expand|icon_faq|grid_plain_faq|stepped_reveal",
-  "ctaFinalLayout": "centered_gradient_bg|full_accent_bar|minimal_bordered|floating_card_cta|split_visual_cta|countdown_cta|testimonial_cta|diagonal_cta",
-  "howItWorksLayout": "steps_horizontal|steps_timeline|steps_numbered_col|steps_icon_cards|alternating_cards_hiw|process_circle|flowchart_arrows|progress_steps",
-  "benefitsLayout": "icon_grid_4col|checklist_two_col|feature_zigzag|badge_highlights|comparison_without|stat_benefits|visual_list_benefits|grid_with_numbers",
-  "aboutLayout": "split_story|values_grid|timeline_milestones|hero_about|mission_vision|stats_story|founder_spotlight",
-  "galleryLayout": "masonry_3col|polaroid_cards|grid_with_overlay|featured_large_gallery|before_after_gallery|timeline_gallery|grid_uniform",
-  "teamLayout": "cards_3col_team|horizontal_info|minimal_list|founder_focus|cards_with_bio|minimal_avatars|department_sections",
-  "contactLayout": "split_form_info|centered_card_form|minimal_form|multi_channel|map_prominent|two_step_contact|social_contact",
-  "cardStyle": "rounded_shadow|flat_border|glassmorphism|gradient_fill|icon_top_colored",
-  "colorTreatment": "flat_clean|gradient_accents|color_block_sections|subtle_tints|bold_contrast",
-  "animationStyle": "fade_up_stagger|slide_in_cascade|scale_pop|clip_reveal|gentle_float",
-  "spacingRhythm": "compact|balanced|airy",
-  "personality": "corporate|premium|bold|playful|technical|warm|luxury|minimal",
-  "uniqueElement": "elemento visual diferenciador concreto que hace esta landing única (15 palabras)"
-}`,
-      }],
-    })
-    const content = response.content[0]
-    if (content.type !== 'text') return {}
-    const match = content.text.match(/\{[\s\S]*\}/)
-    if (!match) return {}
-    return JSON.parse(match[0])
-  } catch { return {} }
+const CARD_STYLES     = ['rounded_shadow', 'flat_border', 'glassmorphism', 'gradient_fill', 'icon_top_colored']
+const COLOR_TREATS    = ['flat_clean', 'gradient_accents', 'color_block_sections', 'subtle_tints', 'bold_contrast']
+const ANIM_STYLES     = ['fade_up_stagger', 'slide_in_cascade', 'scale_pop', 'clip_reveal', 'gentle_float']
+const SPACING         = ['compact', 'balanced', 'airy']
+const PERSONALITIES   = ['corporate', 'premium', 'bold', 'playful', 'technical', 'warm', 'luxury', 'minimal']
+
+const HERO_DECORATIVES = [
+  'Círculo de gradiente radial difuminado (blur 80px) detrás del texto con colores primary→accent',
+  'Tres formas geométricas flotantes: hexágono, círculo y triángulo con bordes de gradiente',
+  'Líneas diagonales paralelas con opacidad 0.1 cruzando el fondo + blob de color accent',
+  'Grid de puntos sutil en el fondo (radial-gradient repeating) + forma orgánica blob',
+  'Ondas SVG superpuestas en la parte inferior con gradiente primary→transparent',
+  'Patrón de cuadrícula con líneas finas + círculo grande de gradiente accent difuminado',
+  'Formas abstractas: rectángulos redondeados rotados con diferentes opacidades y tamaños',
+  'Efecto glassmorphism: card semi-transparente con backdrop-filter blur sobre gradiente de fondo',
+  'Anillos concéntricos de gradiente expandiéndose desde el centro con opacidad decreciente',
+  'Composición de bloques de color: 3 rectángulos superpuestos con rotación sutil y colores primary/accent/surface',
+  'Patrón de zigzag con clip-path en el fondo + esfera de gradiente flotante',
+  'Líneas curvas SVG entrelazadas con stroke de gradiente primary→accent',
+  'Mosaico de triángulos con diferentes opacidades del color primary formando un patrón geométrico',
+  'Efecto aurora: gradiente multicolor animado (primary, accent, surface) con blur 120px',
+  'Formas orgánicas tipo blob con border-radius irregular + partículas de puntos pequeños',
+]
+
+const UNIQUE_ELEMENTS = [
+  'Bordes de sección con clip-path ondulado que crea transiciones orgánicas entre secciones',
+  'Números de sección gigantes semitransparentes como fondo decorativo de cada bloque',
+  'Iconos animados con hover que cambian de color y escala en las cards de servicios',
+  'Línea conectora vertical con puntos de progreso que une todas las secciones visualmente',
+  'Efecto de profundidad con sombras en capas que da sensación 3D a las cards',
+  'Badges de color accent con micro-animación pulse en los elementos de trust/social proof',
+  'Separadores de sección con SVG decorativo único (no línea recta) entre cada bloque',
+  'Esquinas decorativas con formas geométricas en las cards principales del hero y CTA',
+  'Fondo con patrón sutil que cambia entre secciones (dots, lines, grid) creando ritmo visual',
+  'Hover interactivo en testimonios: la card se eleva y muestra borde gradient animado',
+  'Stats con efecto de contador animado y typography extra-bold que domina visualmente',
+  'CTA buttons con efecto de gradiente que se mueve en hover (background-position animation)',
+  'Sección hero con elemento decorativo asimétrico que rompe el grid de forma intencional',
+  'Tipografía del H1 con una palabra resaltada en color accent y peso visual diferente',
+  'Cards con corner-ribbon o badge diagonal que destaca la información más importante',
+]
+
+function generateDesignConcept(pageType: string): Record<string, unknown> {
+  return {
+    heroLayout:          pick(LAYOUT_OPTIONS.hero),
+    heroDecorative:      pick(HERO_DECORATIVES),
+    servicesLayout:      pick(LAYOUT_OPTIONS.services),
+    testimonialsLayout:  pick(LAYOUT_OPTIONS.testimonials),
+    statsLayout:         pick(LAYOUT_OPTIONS.stats),
+    pricingLayout:       pick(LAYOUT_OPTIONS.pricing),
+    faqLayout:           pick(LAYOUT_OPTIONS.faq),
+    ctaFinalLayout:      pick(LAYOUT_OPTIONS.ctaFinal),
+    howItWorksLayout:    pick(LAYOUT_OPTIONS.howItWorks),
+    benefitsLayout:      pick(LAYOUT_OPTIONS.benefits),
+    aboutLayout:         pick(LAYOUT_OPTIONS.about),
+    galleryLayout:       pick(LAYOUT_OPTIONS.gallery),
+    teamLayout:          pick(LAYOUT_OPTIONS.team),
+    contactLayout:       pick(LAYOUT_OPTIONS.contact),
+    cardStyle:           pick(CARD_STYLES),
+    colorTreatment:      pick(COLOR_TREATS),
+    animationStyle:      pick(ANIM_STYLES),
+    spacingRhythm:       pick(SPACING),
+    personality:         pick(PERSONALITIES),
+    uniqueElement:       pick(UNIQUE_ELEMENTS),
+    _pageType:           pageType, // kept for debugging
+  }
 }
 
 // ─────────────────────────────────────────────────────────────────
@@ -772,16 +800,12 @@ export async function POST(request: NextRequest) {
       try {
         // All pre-processing in parallel (saves 5-15s vs sequential)
         send({ type: 'progress', msg: 'Analizando sector y diseñando tu landing...' })
-        const [serpAnalysis, domainContent, designConcept, seoStrategy] = await Promise.all([
+        // Design concept: instant (code-based random), no AI call needed
+        const designConcept = generateDesignConcept(surveyData.pageType as string)
+
+        const [serpAnalysis, domainContent, seoStrategy] = await Promise.all([
           keyword ? analyzeSERP(keyword, location) : Promise.resolve(''),
           (!businessInfo && domain) ? scrapeDomain(domain) : Promise.resolve(''),
-          generateDesignConcept(
-            surveyData.pageType as string, businessInfo,
-            (surveyData.primaryColor as string) || '#6366F1',
-            (surveyData.secondaryColor as string) || '#F43F5E',
-            (surveyData.theme as string) || 'dark',
-            sectionKeys, '',
-          ),
           generateSEOStrategy(keyword, location, surveyData.pageType as string, businessInfo, ''),
         ])
 
