@@ -205,7 +205,7 @@ const FAQ = ({ question, answer }: { question: string; answer: string }) => {
 };
 
 /* ─── Demo Video ─── */
-const DEMO_VIDEO_ID = "rD215ycWs5U";
+const DEMO_VIDEO_ID = "MRS2BdlK8gs";
 const DemoVideo = () => (
   <div style={{
     borderRadius: "16px", overflow: "hidden",
