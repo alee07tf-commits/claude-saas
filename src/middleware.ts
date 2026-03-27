@@ -2,12 +2,49 @@ import { NextResponse, type NextRequest } from 'next/server'
 import { updateSession } from '@/lib/supabase/middleware'
 import { createServerClient } from '@supabase/ssr'
 
+const BASE_DOMAIN = process.env.LANDFORGE_DOMAIN || 'landforge.digital'
+
+// Hostnames that belong to the main app (not user landings)
+const APP_HOSTS = [
+    BASE_DOMAIN,
+    `www.${BASE_DOMAIN}`,
+    'localhost',
+    'localhost:3000',
+]
+
 // Routes that require authentication
 const PROTECTED = ['/survey', '/dashboard', '/preview', '/editor']
 
 export async function middleware(request: NextRequest) {
-    const response = await updateSession(request)
+    const hostname = (request.headers.get('host') || '').replace(/:\d+$/, '') // strip port
     const { pathname } = request.nextUrl
+
+    // ── Subdomain detection ──────────────────────────────────────────────────
+    // e.g. my-site.landforge.digital → rewrite to /s/my-site
+    const isSubdomain =
+        hostname.endsWith(`.${BASE_DOMAIN}`) &&
+        hostname !== BASE_DOMAIN &&
+        hostname !== `www.${BASE_DOMAIN}`
+
+    if (isSubdomain) {
+        const slug = hostname.replace(`.${BASE_DOMAIN}`, '')
+        const url = request.nextUrl.clone()
+        url.pathname = `/s/${slug}`
+        return NextResponse.rewrite(url)
+    }
+
+    // ── Custom domain detection ──────────────────────────────────────────────
+    // If hostname is not an app host and not a vercel.app domain, it's a custom domain
+    const isAppHost = APP_HOSTS.includes(hostname) || hostname.endsWith('.vercel.app')
+    if (!isAppHost && hostname.includes('.')) {
+        const url = request.nextUrl.clone()
+        // Use special prefix: /cd/ = custom domain lookup
+        url.pathname = `/cd/${hostname}`
+        return NextResponse.rewrite(url)
+    }
+
+    // ── Normal app middleware (auth) ─────────────────────────────────────────
+    const response = await updateSession(request)
 
     const supabase = createServerClient(
         process.env.NEXT_PUBLIC_SUPABASE_URL!,

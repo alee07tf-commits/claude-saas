@@ -1,9 +1,9 @@
 import { createClient } from '@/lib/supabase/server'
 import { NextRequest, NextResponse } from 'next/server'
 
-const VERCEL_TOKEN            = process.env.VERCEL_TOKEN
-const VERCEL_TEAM_ID          = process.env.VERCEL_TEAM_ID
-const VERCEL_SITES_PROJECT_ID = process.env.VERCEL_SITES_PROJECT_ID
+const VERCEL_TOKEN    = process.env.VERCEL_TOKEN
+const VERCEL_TEAM_ID  = process.env.VERCEL_TEAM_ID
+const VERCEL_PROJECT  = process.env.VERCEL_PROJECT_ID
 
 function vFetch(path: string, opts: RequestInit = {}) {
   const qs = VERCEL_TEAM_ID ? `?teamId=${VERCEL_TEAM_ID}` : ''
@@ -17,8 +17,8 @@ function vFetch(path: string, opts: RequestInit = {}) {
 }
 
 export async function POST(req: NextRequest) {
-  if (!VERCEL_TOKEN || !VERCEL_SITES_PROJECT_ID) {
-    return NextResponse.json({ error: 'Vercel no está configurado en el servidor (VERCEL_SITES_PROJECT_ID missing)' }, { status: 500 })
+  if (!VERCEL_TOKEN || !VERCEL_PROJECT) {
+    return NextResponse.json({ error: 'Vercel no está configurado en el servidor (VERCEL_PROJECT missing)' }, { status: 500 })
   }
 
   const body = await req.json() as { landingId?: string; customDomain?: string }
@@ -54,34 +54,15 @@ export async function POST(req: NextRequest) {
     }, { status: 400 })
   }
 
-  // ── 1. Use the project ID directly ───────────────────────────────────────
-  const projectId = VERCEL_SITES_PROJECT_ID
+  // ── 1. Add domain to the Vercel project (so DNS resolves to our app) ─────
+  await vFetch(`/v9/projects/${VERCEL_PROJECT}/domains`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name: domain }),
+  })
+  // Ignore errors — domain may already exist in the project
 
-  // ── 2. Add domain to the project ─────────────────────────────────────────
-  if (projectId) {
-    await vFetch(`/v9/projects/${projectId}/domains`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name: domain }),
-    })
-    // Ignore errors — domain may already exist in the project
-  }
-
-  // ── 3. Alias the specific deployment to the custom domain ─────────────────
-  const meta = (landing.metadata as Record<string, unknown> | null) ?? {}
-  const deployId = meta.deploy_id as string | undefined
-  let aliased = false
-
-  if (deployId) {
-    const aliasRes = await vFetch(`/v2/deployments/${deployId}/aliases`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ alias: domain }),
-    })
-    aliased = aliasRes.ok
-  }
-
-  // ── 4. Save custom_domain to DB ───────────────────────────────────────────
+  // ── 2. Save custom_domain to DB ───────────────────────────────────────────
   await supabase
     .from('landing_pages')
     .update({ custom_domain: domain })
@@ -107,9 +88,7 @@ export async function POST(req: NextRequest) {
         note: '',
       }
 
-  const message = aliased
-    ? '✅ Dominio conectado. Añade el registro DNS y estará activo en 24-48h.'
-    : '✅ Dominio registrado. Añade el registro DNS para activarlo. Si acabas de publicar, vuelve a publicar la landing para que el enlace tome efecto.'
+  const message = '✅ Dominio registrado. Añade el registro DNS y estará activo en 24-48h.'
 
-  return NextResponse.json({ domain, dns, aliased, message })
+  return NextResponse.json({ domain, dns, message })
 }
