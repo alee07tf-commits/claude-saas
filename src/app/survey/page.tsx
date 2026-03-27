@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 
 const T = {
@@ -236,6 +236,29 @@ export default function SurveyPage() {
   const [error, setError] = useState("");
   const [retryable, setRetryable] = useState(false);
   const [limitReached, setLimitReached] = useState(false);
+  const [countdown, setCountdown] = useState(0);
+  const countdownRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  // Countdown timer — cleanup on unmount
+  useEffect(() => {
+    return () => { if (countdownRef.current) clearInterval(countdownRef.current); };
+  }, []);
+
+  function startCountdown(seconds: number) {
+    setCountdown(seconds);
+    if (countdownRef.current) clearInterval(countdownRef.current);
+    countdownRef.current = setInterval(() => {
+      setCountdown(prev => {
+        if (prev <= 1) { if (countdownRef.current) clearInterval(countdownRef.current); return 0; }
+        return prev - 1;
+      });
+    }, 1000);
+  }
+
+  function stopCountdown() {
+    if (countdownRef.current) { clearInterval(countdownRef.current); countdownRef.current = null; }
+    setCountdown(0);
+  }
 
   // ── Step 1 ──────────────────────────────────────────────────────
   const [pageType, setPageType] = useState("");
@@ -367,6 +390,9 @@ export default function SurveyPage() {
   async function generate() {
     setLoading(true);
     setError("");
+    // Estimate based on section count: ~35s base + ~3s per section
+    const sectionCount = Object.values(sections).filter(Boolean).length || 5;
+    startCountdown(Math.round(35 + sectionCount * 3));
     setRetryable(false);
     setLimitReached(false);
     setGeneratePhase("Iniciando...");
@@ -440,10 +466,12 @@ export default function SurveyPage() {
         throw new Error("No se recibió HTML válido del servidor");
       }
 
+      stopCountdown();
       sessionStorage.setItem("previewHtml", fullHtml);
       sessionStorage.setItem("surveyData", JSON.stringify(surveyData));
       router.push(`/preview/${landingId || "preview"}`);
     } catch (err) {
+      stopCountdown();
       setError(err instanceof Error ? err.message : "Error desconocido");
       setLoading(false);
     }
@@ -1270,17 +1298,41 @@ export default function SurveyPage() {
               </button>
             </div>
             {loading && (
-              <div style={{ marginTop: "16px", display: "flex", flexDirection: "column", alignItems: "center", gap: "8px" }}>
-                <div style={{ display: "flex", gap: "6px", alignItems: "center" }}>
-                  {["🔍","🎨","✨"].map((icon, i) => {
-                    const phases = ["Analizando", "Diseñando", "Generando"];
-                    const active = phases.some(p => generatePhase.includes(p.slice(0,5)) || (i === 2 && !phases.slice(0,2).some(p2 => generatePhase.includes(p2.slice(0,5)))));
-                    return (
-                      <span key={i} style={{ fontSize: "16px", opacity: active ? 1 : 0.3, transition: "opacity 0.5s" }}>{icon}</span>
-                    );
-                  })}
+              <div style={{ marginTop: "20px", display: "flex", flexDirection: "column", alignItems: "center", gap: "12px" }}>
+                {/* Countdown timer */}
+                <div style={{
+                  display: "flex", alignItems: "center", gap: "10px",
+                  background: `linear-gradient(135deg, ${T.accent}18, ${T.accentAlt}18)`,
+                  border: `1px solid ${T.border}`,
+                  borderRadius: "12px", padding: "12px 20px",
+                }}>
+                  <div style={{
+                    width: "44px", height: "44px", borderRadius: "50%",
+                    background: `conic-gradient(${T.accent} ${countdown > 0 ? ((countdown / (35 + Object.values(sections).filter(Boolean).length * 3)) * 100) : 0}%, ${T.border} 0%)`,
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    transition: "background 1s linear",
+                  }}>
+                    <div style={{
+                      width: "36px", height: "36px", borderRadius: "50%",
+                      background: T.card, display: "flex", alignItems: "center", justifyContent: "center",
+                      fontFamily: T.mono, fontWeight: 700, fontSize: "14px", color: T.accent,
+                    }}>
+                      {countdown > 0 ? `${countdown}s` : "..."}
+                    </div>
+                  </div>
+                  <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
+                    <span style={{ fontSize: "13px", fontWeight: 700, color: T.text }}>
+                      {generatePhase || "Preparando..."}
+                    </span>
+                    <span style={{ fontSize: "11px", color: T.gray }}>
+                      {countdown > 0
+                        ? `Tiempo estimado: ~${countdown}s`
+                        : "Finalizando..."}
+                    </span>
+                  </div>
                 </div>
-                <div style={{ width: "200px", height: "3px", background: T.border, borderRadius: "2px", overflow: "hidden" }}>
+                {/* Progress bar */}
+                <div style={{ width: "240px", height: "3px", background: T.border, borderRadius: "2px", overflow: "hidden" }}>
                   <div style={{
                     height: "100%", borderRadius: "2px",
                     background: `linear-gradient(90deg, ${T.accent}, ${T.accentAlt})`,

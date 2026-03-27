@@ -74,28 +74,14 @@ async function analyzeSERP(keyword: string, location: string): Promise<string> {
         method: 'POST',
         headers: { 'X-API-KEY': process.env.SERPER_API_KEY, 'Content-Type': 'application/json' },
         body: JSON.stringify({ q: query, gl: 'es', hl: 'es', num: 5 }),
-        signal: AbortSignal.timeout(7000),
+        signal: AbortSignal.timeout(4000),
       })
       if (serperRes.ok) {
         const serpJson = await serperRes.json()
         const results: Array<{ title: string; link: string; snippet?: string }> = serpJson.organic || []
-
-        const topAnalyses = await Promise.allSettled(
-          results.slice(0, 2).map(async (r) => {
-            const pageRes = await fetch(r.link, {
-              headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36' },
-              signal: AbortSignal.timeout(5000),
-            })
-            const html = await pageRes.text()
-            return `[${r.title}]\n${extractHeadings(html)}`
-          })
-        )
-
-        const serpSummary = results.slice(0, 4).map((r, i) => `${i+1}. ${r.title} — ${r.snippet || '—'}`).join('\n')
-        const topStructures = topAnalyses.filter(r => r.status === 'fulfilled')
-          .map(r => (r as PromiseFulfilledResult<string>).value).join('\n\n')
-
-        return `SERP "${query}":\n${serpSummary}\n\nESTRUCTURA TOP:\n${topStructures}`
+        // Use SERP snippets directly — skip fetching individual pages (saves 5-10s)
+        const serpSummary = results.slice(0, 5).map((r, i) => `${i+1}. ${r.title} — ${r.snippet || '—'}`).join('\n')
+        return `SERP "${query}":\n${serpSummary}`
       }
     } catch (e) { console.warn('SERP:', e instanceof Error ? e.message : e) }
   }
@@ -111,7 +97,7 @@ async function scrapeDomain(domain: string): Promise<string> {
   try {
     const res = await fetch(url, {
       headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/121.0.0.0' },
-      signal: AbortSignal.timeout(10000),
+      signal: AbortSignal.timeout(5000),
     })
     const html = await res.text()
     const title = html.match(/<title[^>]*>([^<]+)<\/title>/i)?.[1] || ''
@@ -784,28 +770,23 @@ export async function POST(request: NextRequest) {
       }
 
       try {
-        // Phase 1+2: Research
-        send({ type: 'progress', msg: '🔍 Analizando sector y competidores...' })
-        const [serpAnalysis, domainContent] = await Promise.all([
+        // All pre-processing in parallel (saves 5-15s vs sequential)
+        send({ type: 'progress', msg: 'Analizando sector y diseñando tu landing...' })
+        const [serpAnalysis, domainContent, designConcept, seoStrategy] = await Promise.all([
           keyword ? analyzeSERP(keyword, location) : Promise.resolve(''),
           (!businessInfo && domain) ? scrapeDomain(domain) : Promise.resolve(''),
-        ])
-
-        // Phase 3: Design + SEO (parallel, Haiku)
-        send({ type: 'progress', msg: '🎨 Diseñando concepto visual y estrategia SEO...' })
-        const [designConcept, seoStrategy] = await Promise.all([
           generateDesignConcept(
             surveyData.pageType as string, businessInfo,
             (surveyData.primaryColor as string) || '#6366F1',
             (surveyData.secondaryColor as string) || '#F43F5E',
             (surveyData.theme as string) || 'dark',
-            sectionKeys, serpAnalysis.slice(0, 300),
+            sectionKeys, '',
           ),
-          generateSEOStrategy(keyword, location, surveyData.pageType as string, businessInfo, serpAnalysis.slice(0, 350)),
+          generateSEOStrategy(keyword, location, surveyData.pageType as string, businessInfo, ''),
         ])
 
-        // Phase 4: Stream HTML generation (Sonnet)
-        send({ type: 'progress', msg: '✨ Generando tu landing page...' })
+        // Stream HTML generation (Sonnet)
+        send({ type: 'progress', msg: 'Generando tu landing page...' })
 
         const anthropicStream = client.messages.stream({
           model: 'claude-sonnet-4-6',
