@@ -6,8 +6,11 @@ import { createHash } from 'crypto'
 const VERCEL_TOKEN            = process.env.VERCEL_TOKEN
 const VERCEL_TEAM_ID          = process.env.VERCEL_TEAM_ID     // optional (personal account = empty)
 const VERCEL_SITES_PROJECT_ID = process.env.VERCEL_SITES_PROJECT_ID
-const BASE_DOMAIN             = process.env.LANDFORGE_DOMAIN || 'landforge.io'
+const BASE_DOMAIN             = process.env.LANDFORGE_DOMAIN || 'landforge.digital'
 const APP_URL                 = process.env.APP_URL || (process.env.VERCEL_PROJECT_PRODUCTION_URL ? 'https://'+process.env.VERCEL_PROJECT_PRODUCTION_URL : (process.env.VERCEL_URL ? 'https://'+process.env.VERCEL_URL : 'http://localhost:3000'))
+
+// One-time setup flag — ensures Deployment Protection is disabled & wildcard domain is added
+let sitesProjectConfigured = false
 
 function vercelFetch(path: string, options: RequestInit = {}, extraQs: Record<string, string> = {}) {
   const params: Record<string, string> = { ...extraQs }
@@ -23,6 +26,48 @@ function vercelFetch(path: string, options: RequestInit = {}, extraQs: Record<st
   })
 }
 
+// Ensure Deployment Protection is OFF and wildcard domain is registered (runs once per cold start)
+async function ensureSitesProjectReady() {
+  if (sitesProjectConfigured) return
+  try {
+    // 1. Disable Vercel Authentication on the sites project so published pages are public
+    await vercelFetch(`/v9/projects/${VERCEL_SITES_PROJECT_ID}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        vercelAuthentication: { deploymentType: 'none' },
+        passwordProtection: null,
+        ssoProtection: null,
+      }),
+    })
+    console.log('[Deploy Setup] Deployment Protection disabled on sites project')
+
+    // 2. Add wildcard domain if not already present
+    const domainsRes = await vercelFetch(`/v9/projects/${VERCEL_SITES_PROJECT_ID}/domains`)
+    const domainsData = await domainsRes.json() as { domains?: Array<{ name: string }> }
+    const wildcardDomain = `*.${BASE_DOMAIN}`
+    const hasWildcard = domainsData.domains?.some((d: { name: string }) => d.name === wildcardDomain || d.name === BASE_DOMAIN)
+
+    if (!hasWildcard) {
+      const addRes = await vercelFetch(`/v10/projects/${VERCEL_SITES_PROJECT_ID}/domains`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: wildcardDomain }),
+      })
+      if (addRes.ok) {
+        console.log(`[Deploy Setup] Wildcard domain ${wildcardDomain} added to sites project`)
+      } else {
+        const err = await addRes.text()
+        console.warn(`[Deploy Setup] Could not add wildcard domain: ${err}`)
+      }
+    }
+
+    sitesProjectConfigured = true
+  } catch (e) {
+    console.warn('[Deploy Setup] Non-fatal setup error:', e)
+  }
+}
+
 export async function POST(req: NextRequest) {
   if (!VERCEL_TOKEN || !VERCEL_SITES_PROJECT_ID) {
     return NextResponse.json(
@@ -30,6 +75,9 @@ export async function POST(req: NextRequest) {
       { status: 500 },
     )
   }
+
+  // Auto-configure sites project (runs once)
+  await ensureSitesProjectReady()
 
   const body = await req.json() as { landingId?: string; html?: string; businessName?: string }
   const { landingId, html: htmlFromClient, businessName: bizNameFromClient } = body
@@ -126,8 +174,11 @@ export async function POST(req: NextRequest) {
     .replace(/^-+|-+$/g, '')                       // trim hyphens
     .slice(0, 30)
 
-  const subdomainAlias = subdomain 
-    ? subdomain.replace(/^https?:\/\//, '').split('/')[0] // extract host from stored URL
+  // Only re-use stored subdomain if it's a proper custom domain (not a .vercel.app fallback)
+  const storedHost = subdomain ? subdomain.replace(/^https?:\/\//, '').split('/')[0] : null
+  const isProperAlias = storedHost && storedHost.endsWith(`.${BASE_DOMAIN}`)
+  const subdomainAlias = isProperAlias
+    ? storedHost
     : `${slug}-${shortId}.${BASE_DOMAIN}`
 
   const aliasRes = await vercelFetch(`/v2/deployments/${deploy.id}/aliases`, {
