@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { useParams } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 
 type ChatMessage = {
   role: 'user' | 'forgi'
@@ -96,8 +96,25 @@ export default function PreviewPage() {
   const liveHtmlRef       = useRef<string | null>(null)  // tracks HTML including inline edits (no re-render)
   const supabaseSaveTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
+  // Publish success overlay + redirect
+  const router = useRouter()
+  const [publishOverlay, setPublishOverlay] = useState<{ url: string; countdown: number } | null>(null)
+
   // Keep liveHtmlRef in sync when html state changes (initial load, AI edit, undo)
   useEffect(() => { liveHtmlRef.current = html }, [html])
+
+  // Publish success overlay countdown → redirect to dashboard
+  useEffect(() => {
+    if (!publishOverlay) return
+    if (publishOverlay.countdown <= 0) {
+      router.push('/dashboard')
+      return
+    }
+    const t = setTimeout(() => {
+      setPublishOverlay(o => o ? { ...o, countdown: o.countdown - 1 } : null)
+    }, 1000)
+    return () => clearTimeout(t)
+  }, [publishOverlay?.countdown])
 
   function scheduleSupabaseSave(newHtml: string) {
     if (!id || id === 'preview') return
@@ -432,6 +449,7 @@ export default function PreviewPage() {
       }
       const data = await res.json() as { url: string }
       setDeployedUrl(data.url)
+      setPublishOverlay({ url: data.url, countdown: 5 })
     } catch (err) {
       setDeployError(err instanceof Error ? err.message : 'Error al publicar')
     } finally {
@@ -1078,6 +1096,76 @@ export default function PreviewPage() {
                 </button>
               </div>
             )}
+          </div>
+        </div>
+      )}
+
+      {/* ── PUBLISH SUCCESS OVERLAY ── */}
+      {publishOverlay && (
+        <div style={{
+          position: 'fixed', inset: 0, zIndex: 9999,
+          background: 'rgba(10,14,30,0.85)', backdropFilter: 'blur(8px)',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          fontFamily: UI.font,
+          animation: 'forgiSlideUp .25s ease',
+        }}>
+          <div style={{
+            background: UI.surface, borderRadius: '24px', padding: '48px 40px',
+            maxWidth: '480px', width: '90%', textAlign: 'center',
+            border: `1px solid ${UI.border}`,
+            boxShadow: '0 24px 64px rgba(0,0,0,0.35)',
+          }}>
+            <div style={{ fontSize: '56px', marginBottom: '16px' }}>🎉</div>
+            <h2 style={{ fontSize: '24px', fontWeight: 800, color: UI.text, marginBottom: '8px', letterSpacing: '-0.4px' }}>
+              ¡Tu landing está publicada!
+            </h2>
+            <p style={{ color: UI.gray, fontSize: '14px', marginBottom: '20px', lineHeight: 1.6 }}>
+              Tu página ya está en vivo y lista para recibir visitas.
+            </p>
+            <a
+              href={publishOverlay.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: 'inline-flex', alignItems: 'center', gap: '6px',
+                padding: '8px 16px', borderRadius: '8px',
+                background: `${UI.accent}15`, border: `1px solid ${UI.accent}30`,
+                color: UI.accent, fontSize: '13px', fontWeight: 600,
+                textDecoration: 'none', marginBottom: '28px', wordBreak: 'break-all',
+              }}
+            >
+              🌐 {publishOverlay.url}
+            </a>
+            <div style={{ display: 'flex', gap: '10px', justifyContent: 'center', flexWrap: 'wrap' }}>
+              <button
+                onClick={() => router.push('/dashboard')}
+                style={{
+                  padding: '12px 28px', borderRadius: '10px', border: 'none',
+                  background: `linear-gradient(135deg, ${UI.accent}, ${UI.accentAlt})`,
+                  color: '#fff', fontWeight: 800, fontSize: '15px', cursor: 'pointer',
+                  boxShadow: `0 4px 16px ${UI.accent}40`,
+                }}
+              >
+                Ir al Dashboard →
+              </button>
+              <a
+                href={publishOverlay.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  padding: '12px 28px', borderRadius: '10px',
+                  border: `1px solid ${UI.border}`,
+                  background: UI.surface, color: UI.accent,
+                  fontWeight: 700, fontSize: '15px', textDecoration: 'none',
+                  display: 'inline-flex', alignItems: 'center',
+                }}
+              >
+                Ver en vivo
+              </a>
+            </div>
+            <p style={{ color: UI.gray, fontSize: '12px', marginTop: '20px' }}>
+              Redirigiendo al dashboard en {publishOverlay.countdown}s...
+            </p>
           </div>
         </div>
       )}

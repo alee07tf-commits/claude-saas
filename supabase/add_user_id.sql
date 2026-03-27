@@ -40,3 +40,9 @@ CREATE POLICY "users_update_own" ON public.landing_pages
 CREATE POLICY "users_delete_own" ON public.landing_pages
   FOR DELETE TO authenticated
   USING (auth.uid() = user_id);
+
+-- Allow anonymous/public access to published landings
+-- (needed for forgi-chat widget called by landing visitors without a session)
+CREATE POLICY "anon_select_published" ON public.landing_pages
+  FOR SELECT TO anon
+  USING (status = 'published');
