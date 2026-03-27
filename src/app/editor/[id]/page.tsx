@@ -93,6 +93,28 @@ const FORGI_SCRIPT = `
     if(e.key==='Escape'){e.preventDefault();cancelEdit(eEl);}
     else if(e.key==='Enter'&&!e.shiftKey&&eEl.tagName!=='P'&&eEl.tagName!=='LI'){e.preventDefault();saveEdit(eEl);}
   });
+  // ── Link href editor (single click on <a>) ──────────────────────────────
+  var linkIdx=0;
+  document.querySelectorAll('[data-section] a[href], [data-section] button[onclick]').forEach(function(el){
+    el.setAttribute('data-forgi-link-idx',String(linkIdx++));
+    el.addEventListener('click',function(e){
+      if(eEl)return;
+      e.preventDefault();e.stopPropagation();
+      var href=el.getAttribute('href')||'';
+      var r=el.getBoundingClientRect();
+      var sec=el.closest('[data-section]');
+      window.parent.postMessage({type:'forgi-link-click',href:href,linkIdx:el.getAttribute('data-forgi-link-idx'),sectionId:sec?sec.getAttribute('data-section'):'',top:r.top,left:r.left,width:r.width},'*');
+    });
+  });
+  window.addEventListener('message',function(e){
+    if(e.data&&e.data.type==='forgi-link-update'){
+      var el=document.querySelector('[data-forgi-link-idx="'+e.data.linkIdx+'"]');
+      if(!el)return;
+      el.setAttribute('href',e.data.newHref);
+      var sec=el.closest('[data-section]');
+      if(sec)window.parent.postMessage({type:'forgi-text-edit',sectionId:sec.getAttribute('data-section'),sectionHtml:sec.outerHTML},'*');
+    }
+  });
 })();</script>`
 
 function buildEditorHtml(html: string): string {
@@ -182,6 +204,11 @@ export default function EditorPage() {
   const [iframeSrc, setIframeSrc]       = useState('')
   const [businessName, setBusinessName] = useState('')
   const [sections, setSections]         = useState<Array<{ id: string; label: string }>>([])
+
+  // Link editor state
+  const [linkEdit, setLinkEdit]         = useState<{ linkIdx: string; href: string; sectionId: string; top: number; left: number } | null>(null)
+  const [linkHrefInput, setLinkHrefInput] = useState('')
+  const iframeRef                       = useRef<HTMLIFrameElement>(null)
 
   // Block editor state
   const [selected, setSelected]         = useState<{ id: string; label: string } | null>(null)
@@ -311,6 +338,9 @@ export default function EditorPage() {
         setSelected({ id: e.data.sectionId, label: e.data.sectionLabel })
         setPrompt(''); setApplyError(''); setApplySuccess(false)
         setPanelMode('blocks')
+      } else if (e.data.type === 'forgi-link-click') {
+        setLinkEdit({ linkIdx: e.data.linkIdx, href: e.data.href, sectionId: e.data.sectionId, top: e.data.top, left: e.data.left })
+        setLinkHrefInput(e.data.href || '')
       } else if (e.data.type === 'forgi-text-edit') {
         if (!liveHtmlRef.current) return
         const oldSec = extractSectionHtml(liveHtmlRef.current, e.data.sectionId)
@@ -341,6 +371,38 @@ export default function EditorPage() {
         body: JSON.stringify({ html_content: newHtml }),
       }).catch(console.error)
     }
+  }
+
+  // ── Link href save ───────────────────────────────────────────────────────
+  function handleSaveLinkHref() {
+    if (!linkEdit) return
+    const newHref = linkHrefInput.trim()
+    // Update iframe visually
+    iframeRef.current?.contentWindow?.postMessage({ type: 'forgi-link-update', linkIdx: linkEdit.linkIdx, newHref }, '*')
+    // Update HTML in parent
+    if (liveHtmlRef.current && linkEdit.sectionId) {
+      const oldSec = extractSectionHtml(liveHtmlRef.current, linkEdit.sectionId)
+      if (oldSec) {
+        const escaped = linkEdit.href.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+        const updatedSec = oldSec.replace(
+          new RegExp(`href=(["'])${escaped}\\1`),
+          `href="${newHref.replace(/"/g, '&quot;')}"`,
+        )
+        if (updatedSec !== oldSec) {
+          const newHtml = replaceSectionHtml(liveHtmlRef.current, oldSec, updatedSec)
+          liveHtmlRef.current = newHtml
+          setHtml(newHtml)
+          if (id) {
+            fetch(`/api/landing/${id}`, {
+              method: 'PATCH',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ html_content: newHtml }),
+            }).catch(e => console.warn('Link save failed:', e))
+          }
+        }
+      }
+    }
+    setLinkEdit(null)
   }
 
   // ── Block edit ────────────────────────────────────────────────────────────
@@ -594,8 +656,49 @@ export default function EditorPage() {
 
         {/* IFRAME */}
         <div style={{ flex:1, overflow:'hidden', position:'relative', background:UI.bgAlt }}>
-          {iframeSrc && <iframe key={iframeSrc} src={iframeSrc} style={{ width:'100%', height:'100%', border:'none', display:'block' }} title="Forgi Editor" />}
+          {iframeSrc && <iframe key={iframeSrc} ref={iframeRef} src={iframeSrc} style={{ width:'100%', height:'100%', border:'none', display:'block' }} title="Forgi Editor" />}
           {!iframeSrc && <div style={{ position:'absolute', inset:0, display:'flex', alignItems:'center', justifyContent:'center' }}><div style={{ fontSize:'32px', animation:'spin 1.5s linear infinite' }}>⟳</div></div>}
+          {/* ── LINK HREF EDITOR POPOVER ── */}
+          {linkEdit && (
+            <div style={{
+              position: 'absolute', top: Math.min(linkEdit.top + 40, 500), left: Math.max(16, linkEdit.left),
+              zIndex: 300, background: UI.surface, borderRadius: '12px',
+              border: `1px solid ${UI.border}`, boxShadow: '0 8px 32px rgba(157,78,221,.18)',
+              padding: '12px', width: '340px', maxWidth: 'calc(100% - 32px)', fontFamily: UI.font,
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
+                <span style={{ fontSize: '12px', fontWeight: 700, color: UI.accent }}>🔗 Editar enlace</span>
+                <button onClick={() => setLinkEdit(null)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: UI.gray, fontSize: '14px' }}>✕</button>
+              </div>
+              <div style={{ display: 'flex', gap: '6px' }}>
+                <input
+                  value={linkHrefInput}
+                  onChange={e => setLinkHrefInput(e.target.value)}
+                  onKeyDown={e => e.key === 'Enter' && handleSaveLinkHref()}
+                  placeholder="https://ejemplo.com"
+                  autoFocus
+                  style={{
+                    flex: 1, padding: '8px 10px', borderRadius: '8px',
+                    border: `1px solid ${UI.border}`, background: UI.bgAlt,
+                    color: UI.text, fontSize: '13px', outline: 'none', fontFamily: UI.font,
+                  }}
+                />
+                <button
+                  onClick={handleSaveLinkHref}
+                  style={{
+                    padding: '8px 14px', borderRadius: '8px', border: 'none',
+                    background: `linear-gradient(135deg, ${UI.accent}, ${UI.accentAlt})`,
+                    color: '#fff', fontSize: '12px', fontWeight: 700, cursor: 'pointer', flexShrink: 0,
+                  }}
+                >Guardar</button>
+              </div>
+              {linkEdit.href && (
+                <div style={{ fontSize: '11px', color: UI.gray, marginTop: '6px', wordBreak: 'break-all' }}>
+                  Actual: {linkEdit.href}
+                </div>
+              )}
+            </div>
+          )}
         </div>
 
         {/* ── SIDE PANEL ─────────────────────────────────────────────────── */}
