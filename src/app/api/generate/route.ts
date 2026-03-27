@@ -38,10 +38,14 @@ const SECTION_DESCRIPTIONS: Record<string, string> = {
 }
 
 const TYPOGRAPHY_FONTS: Record<string, { heading: string; body: string; import: string }> = {
-  modern:   { heading: 'Syne',             body: 'Inter',          import: 'family=Inter:wght@400;500;600&family=Syne:wght@700;800' },
-  elegant:  { heading: 'Playfair Display', body: 'Raleway',        import: 'family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Raleway:wght@400;500;600' },
-  friendly: { heading: 'Poppins',          body: 'Nunito',         import: 'family=Nunito:wght@400;500;600&family=Poppins:wght@700;800' },
-  classic:  { heading: 'Merriweather',     body: 'Source Sans 3',  import: 'family=Merriweather:wght@700&family=Source+Sans+3:wght@400;600' },
+  bold:     { heading: 'Montserrat',          body: 'Open Sans',       import: 'family=Montserrat:wght@700;800&family=Open+Sans:wght@400;500;600' },
+  minimal:  { heading: 'Space Grotesk',       body: 'DM Sans',         import: 'family=Space+Grotesk:wght@500;700&family=DM+Sans:wght@400;500;600' },
+  friendly: { heading: 'Poppins',             body: 'Nunito',          import: 'family=Nunito:wght@400;500;600&family=Poppins:wght@700;800' },
+  luxury:   { heading: 'Cormorant Garamond',  body: 'Lato',            import: 'family=Cormorant+Garamond:wght@600;700&family=Lato:wght@400;700' },
+  // Legacy aliases for existing landings
+  modern:   { heading: 'Montserrat',          body: 'Open Sans',       import: 'family=Montserrat:wght@700;800&family=Open+Sans:wght@400;500;600' },
+  elegant:  { heading: 'Cormorant Garamond',  body: 'Lato',            import: 'family=Cormorant+Garamond:wght@600;700&family=Lato:wght@400;700' },
+  classic:  { heading: 'Montserrat',          body: 'Open Sans',       import: 'family=Montserrat:wght@700;800&family=Open+Sans:wght@400;500;600' },
 }
 
 // ─────────────────────────────────────────────────────────────────
@@ -605,7 +609,14 @@ function buildHtmlPrompt(
 ): string {
   const pageTypeLabel = PAGE_TYPE_LABELS[surveyData.pageType as string] || String(surveyData.pageType)
   const lang = surveyData.language === 'en' ? 'en' : 'es'
-  const fonts = TYPOGRAPHY_FONTS[surveyData.typography as string] || TYPOGRAPHY_FONTS.modern
+  const customFonts = surveyData.customFonts as { heading: string; body: string } | undefined
+  const fonts = (surveyData.typography === 'custom' && customFonts)
+    ? {
+        heading: customFonts.heading,
+        body: customFonts.body,
+        import: `family=${customFonts.heading.replace(/ /g, '+')}:wght@400;500;600;700;800&family=${customFonts.body.replace(/ /g, '+')}:wght@400;500;600`,
+      }
+    : TYPOGRAPHY_FONTS[surveyData.typography as string] || TYPOGRAPHY_FONTS.bold
   const isDark = surveyData.theme === 'dark'
 
   const sectionsRaw = surveyData.sections as Record<string, boolean> | undefined

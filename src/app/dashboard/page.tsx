@@ -109,7 +109,7 @@ export default async function DashboardPage() {
             <BillingButton />
           ) : (
             <a
-              href="/pricing"
+              href="/#pricing"
               style={{
                 padding: '9px 16px', borderRadius: '10px', border: `1px solid ${T.border}`,
                 background: T.card, color: T.accentAlt, fontSize: '13px', fontWeight: 700,

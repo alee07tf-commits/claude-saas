@@ -204,92 +204,28 @@ const FAQ = ({ question, answer }: { question: string; answer: string }) => {
   );
 };
 
-/* ─── Demo Preview Mockup ─── */
-const DemoPreview = () => (
+/* ─── Demo Video ─── */
+const DEMO_VIDEO_ID = "rD215ycWs5U";
+const DemoVideo = () => (
   <div style={{
     borderRadius: "16px", overflow: "hidden",
     border: `1px solid ${BRAND.border}`,
     boxShadow: `0 24px 64px rgba(157,78,221,0.14)`,
     maxWidth: "900px", margin: "0 auto",
+    position: "relative", paddingBottom: "56.25%", height: 0,
+    background: "#000",
   }}>
-    {/* Browser chrome */}
-    <div style={{
-      background: BRAND.bgAlt, padding: "12px 16px",
-      display: "flex", alignItems: "center", gap: "10px",
-      borderBottom: `1px solid ${BRAND.border}`,
-    }}>
-      <div style={{ display: "flex", gap: "6px" }}>
-        {["#FF5F57", "#FFBD2E", "#28CA41"].map((c, i) => (
-          <div key={i} style={{ width: "12px", height: "12px", borderRadius: "50%", background: c }} />
-        ))}
-      </div>
-      <div style={{
-        flex: 1, background: "#fff", borderRadius: "6px",
-        padding: "5px 12px", fontSize: "12px", color: BRAND.gray,
-        fontFamily: "'Space Mono', monospace", border: `1px solid ${BRAND.border}`,
-      }}>landforge.app/tu-negocio</div>
-      <div style={{
-        padding: "4px 12px", borderRadius: "6px", fontSize: "11px",
-        background: `${BRAND.accent}15`, color: BRAND.accent, fontWeight: 700,
-      }}>LIVE</div>
-    </div>
-    {/* Fake page content */}
-    <div style={{ background: "#FAF5FF" }}>
-      <div style={{ padding: "40px 32px 32px", textAlign: "center", borderBottom: "1px solid #EDE0FF" }}>
-        <div style={{
-          display: "inline-block", background: `${BRAND.accent}15`, color: BRAND.accent,
-          fontSize: "11px", fontWeight: 700, padding: "4px 12px", borderRadius: "20px", marginBottom: "14px",
-        }}>✓ Más de 300 clientes satisfechos</div>
-        <div style={{ fontSize: "28px", fontWeight: 800, color: BRAND.text, letterSpacing: "-1px", marginBottom: "10px" }}>
-          Implantes dentales en Madrid.<br />
-          <span style={{ color: BRAND.accent }}>Sin listas de espera.</span>
-        </div>
-        <div style={{ fontSize: "14px", color: BRAND.gray, maxWidth: "480px", margin: "0 auto 18px" }}>
-          Primera consulta gratuita · Financiación sin intereses · Clínica en el centro
-        </div>
-        <div style={{ display: "flex", gap: "10px", justifyContent: "center", flexWrap: "wrap" }}>
-          <div style={{
-            background: `linear-gradient(135deg, ${BRAND.accent}, ${BRAND.accentAlt})`,
-            color: "#fff", padding: "10px 24px", borderRadius: "10px", fontWeight: 800, fontSize: "14px",
-          }}>Reservar consulta gratis</div>
-          <div style={{
-            border: `1px solid ${BRAND.border}`, color: BRAND.text,
-            padding: "10px 24px", borderRadius: "10px", fontWeight: 600, fontSize: "14px",
-          }}>Ver tratamientos</div>
-        </div>
-      </div>
-      <div style={{ display: "flex", borderBottom: "1px solid #EDE0FF" }}>
-        {[["300+", "Pacientes"], ["15 años", "Experiencia"], ["98%", "Satisfacción"], ["€0", "1ª Consulta"]].map(([v, l]) => (
-          <div key={l} style={{ flex: 1, textAlign: "center", padding: "16px 8px", borderRight: "1px solid #EDE0FF" }}>
-            <div style={{ fontSize: "18px", fontWeight: 800, color: BRAND.accent }}>{v}</div>
-            <div style={{ fontSize: "11px", color: BRAND.gray }}>{l}</div>
-          </div>
-        ))}
-      </div>
-      <div style={{ display: "flex", padding: "20px", gap: "12px" }}>
-        {["Servicios", "Testimonios", "Precios", "FAQ"].map((s) => (
-          <div key={s} style={{
-            flex: 1, height: "48px", background: BRAND.bgAlt,
-            border: `1px solid ${BRAND.border}`, borderRadius: "8px",
-            display: "flex", alignItems: "center", justifyContent: "center",
-            fontSize: "12px", color: BRAND.accent, fontWeight: 600,
-          }}>{s}</div>
-        ))}
-      </div>
-    </div>
-    {/* Bottom bar */}
-    <div style={{
-      background: BRAND.bgAlt, padding: "12px 16px",
-      display: "flex", alignItems: "center", justifyContent: "space-between",
-      borderTop: `1px solid ${BRAND.border}`,
-    }}>
-      <span style={{ fontSize: "12px", color: BRAND.gray }}>11 secciones generadas · Landing publicada y online</span>
-      <div style={{
-        padding: "4px 12px", borderRadius: "6px",
-        background: `linear-gradient(135deg, ${BRAND.accent}, ${BRAND.accentAlt})`,
-        fontSize: "11px", color: "#fff", fontWeight: 700,
-      }}>🚀 Publicar landing</div>
-    </div>
+    <iframe
+      src={`https://www.youtube.com/embed/${DEMO_VIDEO_ID}?autoplay=1&mute=1&loop=1&playlist=${DEMO_VIDEO_ID}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1`}
+      title="Demo de LandForge"
+      allow="autoplay; encrypted-media"
+      allowFullScreen
+      style={{
+        position: "absolute", top: 0, left: 0,
+        width: "100%", height: "100%",
+        border: "none", borderRadius: "16px",
+      }}
+    />
   </div>
 );
 
@@ -319,6 +255,32 @@ export default function LandForgeLanding() {
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [billingInterval, setBillingInterval] = useState<'month' | 'year'>('month');
+  const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
+
+  const handleSubscribe = async (planId: string) => {
+    if (!isLoggedIn) {
+      window.location.href = `/register?next=/pricing-redirect&plan=${planId}&interval=${billingInterval}`;
+      return;
+    }
+    setLoadingPlan(planId);
+    try {
+      const res = await fetch('/api/stripe/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ planId, interval: billingInterval }),
+      });
+      const data = await res.json();
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        alert(data.error || 'Error al iniciar checkout');
+      }
+    } catch {
+      alert('Error de conexión');
+    } finally {
+      setLoadingPlan(null);
+    }
+  };
 
   const testimonials = [
     {
@@ -371,7 +333,7 @@ export default function LandForgeLanding() {
 
   const pricing = [
     {
-      name: "Starter", price: 49, period: "/mes",
+      id: "starter", name: "Starter", price: 49, period: "/mes",
       desc: "Perfecto para empezar a testear ideas.",
       cta: "Empezar con Starter", ctaNote: "Sin tarjeta · 14 días gratis",
       features: [
@@ -384,7 +346,7 @@ export default function LandForgeLanding() {
       highlight: false,
     },
     {
-      name: "Agency", price: 97, period: "/mes",
+      id: "agency", name: "Agency", price: 97, period: "/mes",
       desc: "Para agencias que manejan varios clientes.",
       cta: "Empezar con Agency", ctaNote: "Popular · 14 días gratis",
       features: [
@@ -399,7 +361,7 @@ export default function LandForgeLanding() {
       highlight: true,
     },
     {
-      name: "Agency Pro", price: 197, period: "/mes",
+      id: "agency_pro", name: "Agency Pro", price: 197, period: "/mes",
       desc: "El plan definitivo sin límites.",
       cta: "Ser Pro", ctaNote: "Soporte prioritario",
       features: [
@@ -642,7 +604,7 @@ export default function LandForgeLanding() {
             Lo que ves es exactamente lo que tus visitantes ven. Publicada, online, lista para recibir tráfico.
           </p>
         </div>
-        <DemoPreview />
+        <DemoVideo />
       </section>
 
       {/* ── HOW IT WORKS ── */}
@@ -972,18 +934,22 @@ export default function LandForgeLanding() {
                       </div>
                     ))}
                   </div>
-                  <a href="/register" style={{
-                    display: "block", textAlign: "center",
-                    padding: "13px 24px", borderRadius: "10px",
-                    background: plan.highlight ? `linear-gradient(135deg, ${BRAND.accent}, ${BRAND.accentAlt})` : "transparent",
-                    color: plan.highlight ? "#fff" : BRAND.accent,
-                    border: plan.highlight ? "none" : `1px solid ${BRAND.accent}`,
-                    fontWeight: 700, fontSize: "15px", textDecoration: "none",
-                    transition: "transform 0.2s",
-                  }}
+                  <button
+                    onClick={() => handleSubscribe(plan.id)}
+                    disabled={loadingPlan === plan.id}
+                    style={{
+                      display: "block", width: "100%", textAlign: "center",
+                      padding: "13px 24px", borderRadius: "10px", cursor: loadingPlan === plan.id ? "wait" : "pointer",
+                      background: plan.highlight ? `linear-gradient(135deg, ${BRAND.accent}, ${BRAND.accentAlt})` : "transparent",
+                      color: plan.highlight ? "#fff" : BRAND.accent,
+                      border: plan.highlight ? "none" : `1px solid ${BRAND.accent}`,
+                      fontWeight: 700, fontSize: "15px",
+                      transition: "transform 0.2s",
+                      opacity: loadingPlan === plan.id ? 0.7 : 1,
+                    }}
                     onMouseEnter={e => (e.currentTarget.style.transform = "translateY(-1px)")}
                     onMouseLeave={e => (e.currentTarget.style.transform = "translateY(0)")}
-                  >{plan.cta}</a>
+                  >{loadingPlan === plan.id ? "Procesando..." : plan.cta}</button>
                   <p style={{ textAlign: "center", fontSize: "12px", color: BRAND.gray, marginTop: "10px" }}>{plan.ctaNote}</p>
                 </div>
               );
@@ -1067,7 +1033,7 @@ export default function LandForgeLanding() {
                 {[
                   { label: "Forgi Chatbot — Ventas 24/7", href: "/features/forgi-chatbot" },
                   { label: "Forgi Editor — Edita con IA", href: "/features/forgi-editor" },
-                  { label: "Precios y Planes", href: "/pricing" },
+                  { label: "Precios y Planes", href: "/#pricing" },
                 ].map(item => (
                   <li key={item.href}>
                     <a href={item.href} style={{ fontSize: "14px", color: BRAND.gray, textDecoration: "none", display: "flex", alignItems: "center", gap: "6px" }}

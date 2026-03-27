@@ -72,7 +72,7 @@ export default function InmobiliariasLanding() {
               <Link href="/register" className="px-8 py-4 rounded-xl font-bold text-lg text-white transition hover:-translate-y-1" style={{ background: "linear-gradient(135deg, #9D4EDD, #7B2CBF)", boxShadow: "0 8px 24px rgba(157,78,221,0.3)" }}>
                 Crear landing de mi inmueble →
               </Link>
-              <Link href="#como-funciona" className="px-8 py-4 rounded-xl border-2 border-[#E0AAFF] text-[#9D4EDD] font-bold text-lg hover:border-[#9D4EDD] transition">
+              <Link href="#demo" className="px-8 py-4 rounded-xl border-2 border-[#E0AAFF] text-[#9D4EDD] font-bold text-lg hover:border-[#9D4EDD] transition">
                 Ver demo inmobiliaria
               </Link>
             </div>
@@ -105,6 +105,25 @@ export default function InmobiliariasLanding() {
                   <p className="text-white/60 leading-relaxed">{item.text}</p>
                 </div>
               ))}
+            </div>
+          </section>
+
+          {/* ── DEMO VIDEO ── */}
+          <section id="demo" className="px-6 py-24 bg-[#FAFAFA]">
+            <div className="max-w-4xl mx-auto">
+              <div className="text-center mb-12">
+                <span className="inline-block text-xs font-bold uppercase tracking-widest text-[#9D4EDD] bg-[#F3E8FF] px-4 py-1.5 rounded-full border border-[#E0AAFF] mb-4">Demo</span>
+                <h2 className="text-3xl font-extrabold">Mira cómo funciona LandForge</h2>
+              </div>
+              <div style={{ borderRadius: "16px", overflow: "hidden", border: "1px solid #E0AAFF", boxShadow: "0 24px 64px rgba(157,78,221,0.14)", position: "relative", paddingBottom: "56.25%", height: 0, background: "#000" }}>
+                <iframe
+                  src="https://www.youtube.com/embed/rD215ycWs5U?autoplay=1&mute=1&loop=1&playlist=rD215ycWs5U&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1"
+                  title="Demo de LandForge"
+                  allow="autoplay; encrypted-media"
+                  allowFullScreen
+                  style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: "none", borderRadius: "16px" }}
+                />
+              </div>
             </div>
           </section>
 

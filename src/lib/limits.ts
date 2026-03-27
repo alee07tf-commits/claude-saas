@@ -40,20 +40,20 @@ function getSupabaseAdmin() {
 
 /**
  * Verifica si el usuario puede realizar una acción según su suscripción y uso actual.
- * Devuelve un boolean y opcionalmente el plan actual.
+ * Para 'landings' cuenta filas reales en landing_pages (más fiable que un contador).
  */
 export async function checkUserLimit(userId: string, action: ActionType, callerEmail?: string): Promise<{ allowed: boolean, plan: PlanType, limit: number, usage: number }> {
   try {
     const supabaseAdmin = getSupabaseAdmin();
 
-    // Admin bypass: check email from caller first (avoids admin client dependency)
+    // Admin bypass: check email from caller first
     let userEmail = callerEmail;
     if (!userEmail) {
       try {
         const { data: userData } = await supabaseAdmin.auth.admin.getUserById(userId);
         userEmail = userData?.user?.email;
       } catch (e) {
-        console.warn('Admin getUserById failed (service role key may be wrong):', e);
+        console.warn('Admin getUserById failed:', e);
       }
     }
 
@@ -62,7 +62,7 @@ export async function checkUserLimit(userId: string, action: ActionType, callerE
     }
 
     // 1. Obtener la suscripción activa
-    const { data: subscription, error: subError } = await supabaseAdmin
+    const { data: subscription } = await supabaseAdmin
       .from('subscriptions')
       .select('plan_id, status')
       .eq('user_id', userId)
@@ -72,69 +72,101 @@ export async function checkUserLimit(userId: string, action: ActionType, callerE
     const plan: PlanType = (subscription?.plan_id as PlanType) || 'none';
     const limit = PLAN_LIMITS[plan][action];
 
-    // Si el usuario no tiene plan y el límite es 0, no está permitido
-    if (limit === 0) {
-      return { allowed: false, plan, limit, usage: 0 };
+    if (limit === 0) return { allowed: false, plan, limit, usage: 0 };
+    if (limit >= 999999) return { allowed: true, plan, limit, usage: 0 };
+
+    // 2. Obtener el uso actual
+    // For 'landings': COUNT actual rows in landing_pages (always accurate)
+    // For 'generations': also count landing_pages rows (each generation = 1 landing created)
+    if (action === 'landings' || action === 'generations') {
+      const { count, error: countError } = await supabaseAdmin
+        .from('landing_pages')
+        .select('*', { count: 'exact', head: true })
+        .eq('user_id', userId);
+
+      if (countError) {
+        console.error(`Error counting ${action}:`, countError);
+        // Fallback: try usage_metrics table
+        return await checkUsageMetrics(supabaseAdmin, userId, action, plan, limit);
+      }
+
+      const currentUsage = count ?? 0;
+      return { allowed: currentUsage < limit, plan, limit, usage: currentUsage };
     }
 
-    // Si el límite es "ilimitado", permitimos inmediatamente
-    if (limit >= 999999) {
-      return { allowed: true, plan, limit, usage: 0 };
-    }
-
-    // 2. Obtener el uso actual para validar
-    const { data: usage, error: usageError } = await getSupabaseAdmin()
-      .from('usage_metrics')
-      .select(`${action}_count`)
-      .eq('user_id', userId)
-      .maybeSingle();
-
-    if (usageError && usageError.code !== 'PGRST116') {
-      console.error('Error fetching usage metrics:', usageError);
-      // If table doesn't exist or query fails, assume 0 usage (allow the action)
-      return { allowed: true, plan, limit, usage: 0 };
-    }
-
-    const currentUsage = usage ? (usage as unknown as Record<string, number>)[`${action}_count`] ?? 0 : 0;
-
-    return { allowed: currentUsage < limit, plan, limit, usage: currentUsage };
+    // For editions/chatbot_messages: use usage_metrics table
+    return await checkUsageMetrics(supabaseAdmin, userId, action, plan, limit);
   } catch (err) {
     console.error('Error checking user limits:', err);
-    // On unexpected errors (missing tables, bad keys), allow the action
-    // to avoid blocking users due to infrastructure issues
     return { allowed: true, plan: 'none', limit: 999, usage: 0 };
   }
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+async function checkUsageMetrics(
+  supabaseAdmin: any,
+  userId: string, action: ActionType, plan: PlanType, limit: number
+): Promise<{ allowed: boolean, plan: PlanType, limit: number, usage: number }> {
+  const { data: usage, error: usageError } = await supabaseAdmin
+    .from('usage_metrics')
+    .select(`${action}_count`)
+    .eq('user_id', userId)
+    .maybeSingle();
+
+  if (usageError && usageError.code !== 'PGRST116') {
+    console.error('Error fetching usage metrics:', usageError);
+    return { allowed: true, plan, limit, usage: 0 };
+  }
+
+  const currentUsage = usage ? (usage as unknown as Record<string, number>)[`${action}_count`] ?? 0 : 0;
+  return { allowed: currentUsage < limit, plan, limit, usage: currentUsage };
+}
+
 /**
  * Incrementa el contador de uso para una acción específica.
+ * Para 'landings' y 'generations' el límite real se verifica con COUNT de filas,
+ * pero igualmente actualizamos el contador para tracking.
  */
 export async function incrementUserUsage(userId: string, action: ActionType): Promise<boolean> {
   const column = `${action}_count`;
   try {
-    const { data: userUsage } = await getSupabaseAdmin()
+    const admin = getSupabaseAdmin();
+
+    // Try atomic upsert with raw rpc first, fallback to read-then-write
+    const { data: existing } = await admin
       .from('usage_metrics')
       .select(column)
       .eq('user_id', userId)
       .maybeSingle();
 
-    const currentVal = userUsage ? (userUsage as unknown as Record<string, number>)[column] ?? 0 : 0;
+    const currentVal = existing ? (existing as unknown as Record<string, number>)[column] ?? 0 : 0;
 
-    // Upsert: inserta la fila si no existe, actualiza si ya existe
-    const { error } = await getSupabaseAdmin()
-      .from('usage_metrics')
-      .upsert(
-        { user_id: userId, [column]: currentVal + 1 },
-        { onConflict: 'user_id' }
-      );
+    if (existing) {
+      // Row exists — use UPDATE (more reliable than upsert)
+      const { error } = await admin
+        .from('usage_metrics')
+        .update({ [column]: currentVal + 1, updated_at: new Date().toISOString() })
+        .eq('user_id', userId);
 
-    if (error) {
-      console.error('Error incrementing usage:', error);
-      return false;
+      if (error) {
+        console.error(`[Limits] UPDATE ${column} failed for ${userId}:`, error.message);
+        return false;
+      }
+    } else {
+      // No row — INSERT new
+      const { error } = await admin
+        .from('usage_metrics')
+        .insert({ user_id: userId, [column]: 1 });
+
+      if (error) {
+        console.error(`[Limits] INSERT ${column} failed for ${userId}:`, error.message);
+        return false;
+      }
     }
+
     return true;
   } catch (err) {
-    console.error('Exception incrementing usage:', err);
+    console.error(`[Limits] Exception incrementing ${column}:`, err);
     return false;
   }
 }

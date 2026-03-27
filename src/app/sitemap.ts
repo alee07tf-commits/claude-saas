@@ -11,12 +11,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 1,
     },
-    {
-      url: `${SITE_URL}/pricing`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.9,
-    },
     // ── Silos B2B (Programático BOFU) ──
     {
       url: `${SITE_URL}/para/agencias-de-marketing`,

@@ -74,11 +74,40 @@ const PALETTES = [
 ];
 
 const TYPOGRAPHY_OPTS = [
-  { id: "modern",   label: "Moderna",   desc: "Clean, tech, agencias" },
-  { id: "elegant",  label: "Elegante",  desc: "Lujo, clínicas, premium" },
-  { id: "friendly", label: "Amigable",  desc: "B2C, salud, cercanía" },
-  { id: "classic",  label: "Clásica",   desc: "Corporativo, legal" },
+  { id: "bold",     label: "Impactante",  desc: "Bold, versátil, agencias",         preview: { heading: "Montserrat", body: "Open Sans" } },
+  { id: "minimal",  label: "Minimal",     desc: "Tech, startups, clean",            preview: { heading: "Space Grotesk", body: "DM Sans" } },
+  { id: "friendly", label: "Amigable",    desc: "B2C, salud, cercanía",             preview: { heading: "Poppins", body: "Nunito" } },
+  { id: "luxury",   label: "Premium",     desc: "Lujo, clínicas, high-end",         preview: { heading: "Cormorant Garamond", body: "Lato" } },
+  { id: "custom",   label: "Personalizada", desc: "Elige tu propia tipografía",     preview: { heading: "—", body: "—" } },
 ];
+
+// ─── Google Fonts for custom typography picker ────────────────
+const GOOGLE_FONTS = [
+  { name: "Poppins",             cat: "Sans" },
+  { name: "Inter",               cat: "Sans" },
+  { name: "Montserrat",          cat: "Sans" },
+  { name: "Open Sans",           cat: "Sans" },
+  { name: "Lato",                cat: "Sans" },
+  { name: "Raleway",             cat: "Sans" },
+  { name: "Nunito",              cat: "Sans" },
+  { name: "DM Sans",             cat: "Sans" },
+  { name: "Space Grotesk",       cat: "Sans" },
+  { name: "Outfit",              cat: "Sans" },
+  { name: "Plus Jakarta Sans",   cat: "Sans" },
+  { name: "Manrope",             cat: "Sans" },
+  { name: "Work Sans",           cat: "Sans" },
+  { name: "Rubik",               cat: "Sans" },
+  { name: "Syne",                cat: "Sans" },
+  { name: "Josefin Sans",        cat: "Sans" },
+  { name: "Playfair Display",    cat: "Serif" },
+  { name: "Cormorant Garamond",  cat: "Serif" },
+  { name: "Merriweather",        cat: "Serif" },
+  { name: "Lora",                cat: "Serif" },
+];
+
+const GFONTS_PREVIEW_URL = "https://fonts.googleapis.com/css2?" + GOOGLE_FONTS.map(f =>
+  `family=${f.name.replace(/ /g, "+")}:wght@400;700;800`
+).join("&") + "&display=swap";
 
 // ─── Step 4: Objective & Strategy ────────────────────────────────
 const OBJECTIVES = [
@@ -295,12 +324,18 @@ export default function SurveyPage() {
 
   // ── Step 7: Visual Style ────────────────────────────────────────
   const [palette, setPalette] = useState("mint");
-  const [typography, setTypography] = useState("modern");
+  const [customPrimary, setCustomPrimary] = useState("#6366F1");
+  const [customAccent, setCustomAccent] = useState("#F43F5E");
+  const [typography, setTypography] = useState("bold");
+  const [customHeadingFont, setCustomHeadingFont] = useState("Montserrat");
+  const [customBodyFont, setCustomBodyFont] = useState("Open Sans");
   const [theme, setTheme] = useState<"dark" | "light">("dark");
   const [language, setLanguage] = useState<"es" | "en">("es");
 
   // ── Derived ─────────────────────────────────────────────────────
-  const selectedPalette = PALETTES.find((p) => p.id === palette)!;
+  const selectedPalette = palette === "custom"
+    ? { id: "custom", label: "Personalizado", primary: customPrimary, accent: customAccent, preview: [customPrimary, customAccent, "#0A0E17"] }
+    : PALETTES.find((p) => p.id === palette)!;
   const activeSections = Object.entries(sections).filter(([, v]) => v).map(([k]) => k);
   const filledCompetitors = competitors.filter((c) => c.trim());
 
@@ -410,6 +445,7 @@ export default function SurveyPage() {
         primaryColor: selectedPalette.primary,
         secondaryColor: selectedPalette.accent,
         typography, theme, language,
+        ...(typography === "custom" ? { customFonts: { heading: customHeadingFont, body: customBodyFont } } : {}),
       };
 
       const res = await fetch("/api/generate", {
@@ -1142,25 +1178,245 @@ export default function SurveyPage() {
                     )}
                   </button>
                 ))}
+                {/* Custom color option */}
+                <button onClick={() => setPalette("custom")} style={{
+                  background: palette === "custom" ? T.bgAlt : T.card,
+                  border: `1.5px solid ${palette === "custom" ? T.accent : T.border}`,
+                  borderRadius: "12px", padding: "14px 16px", cursor: "pointer",
+                  textAlign: "left", display: "flex", alignItems: "center", gap: "12px",
+                  transition: "border-color 0.2s",
+                }}>
+                  <div style={{
+                    width: "18px", height: "18px", borderRadius: "4px", flexShrink: 0,
+                    background: `conic-gradient(#EF4444, #F59E0B, #10B981, #3B82F6, #8B5CF6, #EF4444)`,
+                  }} />
+                  <span style={{ fontSize: "13px", fontWeight: 600, color: palette === "custom" ? T.text : T.gray }}>
+                    Personalizado
+                  </span>
+                  {palette === "custom" && (
+                    <div style={{
+                      marginLeft: "auto", width: "16px", height: "16px", borderRadius: "50%",
+                      background: T.accent, display: "flex", alignItems: "center", justifyContent: "center",
+                      fontSize: "9px", color: T.white, flexShrink: 0,
+                    }}>✓</div>
+                  )}
+                </button>
               </div>
+
+              {/* Custom color picker panel */}
+              {palette === "custom" && (
+                <div style={{
+                  marginTop: "16px", padding: "20px", borderRadius: "12px",
+                  background: T.card, border: `1px solid ${T.accent}30`,
+                }}>
+                  <div style={{ display: "flex", gap: "24px", flexWrap: "wrap" }}>
+                    {/* Primary */}
+                    <div style={{ flex: 1, minWidth: "160px" }}>
+                      <label style={{ fontSize: "13px", fontWeight: 700, color: T.gray, display: "block", marginBottom: "10px" }}>
+                        Color principal
+                      </label>
+                      <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                        <input
+                          type="color"
+                          value={customPrimary}
+                          onChange={(e) => setCustomPrimary(e.target.value)}
+                          style={{
+                            width: "44px", height: "44px", border: "none", borderRadius: "10px",
+                            cursor: "pointer", padding: 0, background: "transparent",
+                          }}
+                        />
+                        <input
+                          value={customPrimary}
+                          onChange={(e) => { if (/^#[0-9A-Fa-f]{0,6}$/.test(e.target.value)) setCustomPrimary(e.target.value); }}
+                          maxLength={7}
+                          style={{
+                            ...inputStyle(true), width: "110px", fontFamily: T.mono,
+                            fontSize: "14px", textTransform: "uppercase",
+                          }}
+                        />
+                      </div>
+                    </div>
+                    {/* Accent */}
+                    <div style={{ flex: 1, minWidth: "160px" }}>
+                      <label style={{ fontSize: "13px", fontWeight: 700, color: T.gray, display: "block", marginBottom: "10px" }}>
+                        Color secundario
+                      </label>
+                      <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                        <input
+                          type="color"
+                          value={customAccent}
+                          onChange={(e) => setCustomAccent(e.target.value)}
+                          style={{
+                            width: "44px", height: "44px", border: "none", borderRadius: "10px",
+                            cursor: "pointer", padding: 0, background: "transparent",
+                          }}
+                        />
+                        <input
+                          value={customAccent}
+                          onChange={(e) => { if (/^#[0-9A-Fa-f]{0,6}$/.test(e.target.value)) setCustomAccent(e.target.value); }}
+                          maxLength={7}
+                          style={{
+                            ...inputStyle(true), width: "110px", fontFamily: T.mono,
+                            fontSize: "14px", textTransform: "uppercase",
+                          }}
+                        />
+                      </div>
+                    </div>
+                    {/* Preview */}
+                    <div style={{ flex: 1, minWidth: "160px" }}>
+                      <label style={{ fontSize: "13px", fontWeight: 700, color: T.gray, display: "block", marginBottom: "10px" }}>
+                        Vista previa
+                      </label>
+                      <div style={{
+                        height: "44px", borderRadius: "10px", overflow: "hidden",
+                        display: "flex",
+                      }}>
+                        <div style={{ flex: 1, background: customPrimary }} />
+                        <div style={{ flex: 1, background: customAccent }} />
+                        <div style={{ flex: 0.6, background: "#0A0E17" }} />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Tipografía */}
             <div style={{ marginBottom: "36px" }}>
               <h3 style={{ fontSize: "16px", fontWeight: 700, marginBottom: "16px" }}>Tipografía</h3>
-              <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
+              {/* Load preview fonts for preset options */}
+              <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600&family=Space+Grotesk:wght@700&family=DM+Sans:wght@400;700&family=Poppins:wght@700;800&family=Nunito:wght@400;600&family=Cormorant+Garamond:wght@700&family=Lato:wght@400;600&display=swap" rel="stylesheet" />
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: "12px" }}>
                 {TYPOGRAPHY_OPTS.map((t) => (
                   <button key={t.id} onClick={() => setTypography(t.id)} style={{
-                    padding: "12px 20px", borderRadius: "10px",
+                    padding: "16px 18px", borderRadius: "12px",
                     background: typography === t.id ? T.bgAlt : T.card,
                     border: `1.5px solid ${typography === t.id ? T.accent : T.border}`,
                     cursor: "pointer", textAlign: "left",
+                    transition: "border-color 0.2s, transform 0.2s",
+                    transform: typography === t.id ? "translateY(-2px)" : "translateY(0)",
                   }}>
-                    <div style={{ fontSize: "14px", fontWeight: 700, color: typography === t.id ? T.text : T.gray }}>{t.label}</div>
+                    <div style={{ fontSize: "14px", fontWeight: 700, color: typography === t.id ? T.text : T.gray }}>
+                      {t.label}
+                    </div>
                     <div style={{ fontSize: "12px", color: T.gray, marginTop: "2px" }}>{t.desc}</div>
+                    {t.id !== "custom" && (
+                      <div style={{ marginTop: "10px", borderTop: `1px solid ${T.border}`, paddingTop: "10px" }}>
+                        <div style={{ fontFamily: `'${t.preview.heading}', sans-serif`, fontWeight: 700, fontSize: "18px", color: T.text, lineHeight: 1.2 }}>
+                          Aa Titular
+                        </div>
+                        <div style={{ fontFamily: `'${t.preview.body}', sans-serif`, fontWeight: 400, fontSize: "13px", color: T.gray, marginTop: "4px" }}>
+                          {t.preview.heading} + {t.preview.body}
+                        </div>
+                      </div>
+                    )}
+                    {t.id === "custom" && (
+                      <div style={{ marginTop: "10px", borderTop: `1px solid ${T.border}`, paddingTop: "10px" }}>
+                        <div style={{ fontSize: "13px", color: T.accent }}>
+                          Elige heading + body
+                        </div>
+                      </div>
+                    )}
                   </button>
                 ))}
               </div>
+
+              {/* Custom font picker */}
+              {typography === "custom" && (
+                <div style={{
+                  marginTop: "16px", padding: "20px", borderRadius: "12px",
+                  background: T.card, border: `1px solid ${T.accent}30`,
+                }}>
+                  {/* Load all Google Fonts for preview */}
+                  <link href={GFONTS_PREVIEW_URL} rel="stylesheet" />
+
+                  {/* Heading font */}
+                  <div style={{ marginBottom: "24px" }}>
+                    <label style={{ fontSize: "13px", fontWeight: 700, color: T.gray, display: "block", marginBottom: "10px" }}>
+                      Fuente de titulares
+                    </label>
+                    <div style={{
+                      display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(150px, 1fr))", gap: "8px",
+                      maxHeight: "200px", overflowY: "auto", padding: "4px",
+                    }}>
+                      {GOOGLE_FONTS.map((f) => (
+                        <button key={f.name} onClick={() => setCustomHeadingFont(f.name)} style={{
+                          padding: "10px 12px", borderRadius: "8px",
+                          background: customHeadingFont === f.name ? T.bgAlt : "transparent",
+                          border: `1.5px solid ${customHeadingFont === f.name ? T.accent : T.border}`,
+                          cursor: "pointer", textAlign: "left",
+                          transition: "border-color 0.2s",
+                        }}>
+                          <div style={{
+                            fontFamily: `'${f.name}', sans-serif`, fontWeight: 700,
+                            fontSize: "16px", color: customHeadingFont === f.name ? T.text : T.gray,
+                            lineHeight: 1.3,
+                          }}>
+                            Aa Bb Cc
+                          </div>
+                          <div style={{ fontSize: "10px", color: T.gray, marginTop: "2px", fontFamily: T.font }}>
+                            {f.name} <span style={{ opacity: 0.6 }}>{f.cat}</span>
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Body font */}
+                  <div style={{ marginBottom: "16px" }}>
+                    <label style={{ fontSize: "13px", fontWeight: 700, color: T.gray, display: "block", marginBottom: "10px" }}>
+                      Fuente de texto
+                    </label>
+                    <div style={{
+                      display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(150px, 1fr))", gap: "8px",
+                      maxHeight: "200px", overflowY: "auto", padding: "4px",
+                    }}>
+                      {GOOGLE_FONTS.map((f) => (
+                        <button key={f.name} onClick={() => setCustomBodyFont(f.name)} style={{
+                          padding: "10px 12px", borderRadius: "8px",
+                          background: customBodyFont === f.name ? T.bgAlt : "transparent",
+                          border: `1.5px solid ${customBodyFont === f.name ? T.accent : T.border}`,
+                          cursor: "pointer", textAlign: "left",
+                          transition: "border-color 0.2s",
+                        }}>
+                          <div style={{
+                            fontFamily: `'${f.name}', sans-serif`, fontWeight: 400,
+                            fontSize: "14px", color: customBodyFont === f.name ? T.text : T.gray,
+                            lineHeight: 1.4,
+                          }}>
+                            El texto se ve asi
+                          </div>
+                          <div style={{ fontSize: "10px", color: T.gray, marginTop: "2px", fontFamily: T.font }}>
+                            {f.name} <span style={{ opacity: 0.6 }}>{f.cat}</span>
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Combined preview */}
+                  <div style={{
+                    padding: "16px", borderRadius: "10px",
+                    background: T.bg, border: `1px solid ${T.border}`,
+                  }}>
+                    <div style={{ fontSize: "11px", color: T.gray, marginBottom: "8px", textTransform: "uppercase", letterSpacing: "1px", fontFamily: T.mono }}>
+                      Vista previa
+                    </div>
+                    <div style={{
+                      fontFamily: `'${customHeadingFont}', sans-serif`,
+                      fontWeight: 700, fontSize: "22px", color: T.text, lineHeight: 1.2,
+                    }}>
+                      Tu landing page profesional
+                    </div>
+                    <div style={{
+                      fontFamily: `'${customBodyFont}', sans-serif`,
+                      fontWeight: 400, fontSize: "14px", color: T.gray, marginTop: "6px", lineHeight: 1.5,
+                    }}>
+                      Este es un ejemplo del texto del cuerpo que aparecerá en la landing page generada con estas fuentes.
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Fondo + Idioma */}
@@ -1233,8 +1489,8 @@ export default function SurveyPage() {
                   ? `${[yearsExperience, clientsCount, rating, certifications].filter(Boolean).length} dato(s)`
                   : generateFakeStats ? "IA generará" : "—"],
                 ["Secciones", `${activeSections.length} incluidas`],
-                ["Paleta", PALETTES.find((p) => p.id === palette)?.label || ""],
-                ["Tipografía", TYPOGRAPHY_OPTS.find((t) => t.id === typography)?.label || ""],
+                ["Paleta", palette === "custom" ? `Personalizado (${customPrimary} / ${customAccent})` : PALETTES.find((p) => p.id === palette)?.label || ""],
+                ["Tipografía", typography === "custom" ? `${customHeadingFont} + ${customBodyFont}` : TYPOGRAPHY_OPTS.find((t) => t.id === typography)?.label || ""],
                 ["Idioma", language === "es" ? "Español" : "English"],
               ].map(([k, v]) => (
                 <div key={k} style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
@@ -1259,7 +1515,7 @@ export default function SurveyPage() {
               }}>
                 <span>⚠ {error}</span>
                 {limitReached && (
-                  <a href="/pricing" style={{
+                  <a href="/#pricing" style={{
                     flexShrink: 0, padding: "6px 16px", borderRadius: "8px", border: "none",
                     background: "linear-gradient(135deg, #9D4EDD, #7B2CBF)", color: "#fff",
                     fontSize: "13px", fontWeight: 700, cursor: "pointer", textDecoration: "none",
