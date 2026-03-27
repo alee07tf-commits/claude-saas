@@ -171,25 +171,24 @@ const FAQ = ({ question, answer }: { question: string; answer: string }) => {
 };
 
 /* ─── Demo Video ─── */
-const DEMO_VIDEO_ID = "MRS2BdlK8gs";
 const DemoVideo = () => (
   <div style={{
     borderRadius: "16px", overflow: "hidden",
     border: `1px solid ${BRAND.border}`,
     boxShadow: `0 24px 64px rgba(157,78,221,0.14)`,
     maxWidth: "900px", margin: "0 auto",
-    position: "relative", paddingBottom: "56.25%", height: 0,
-    background: "#000",
   }}>
-    <iframe
-      src={`https://www.youtube.com/embed/${DEMO_VIDEO_ID}?autoplay=1&mute=1&loop=1&playlist=${DEMO_VIDEO_ID}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1`}
-      title="Demo de LandForge"
-      allow="autoplay; encrypted-media"
-      allowFullScreen
+    <video
+      src="/demo-landforge.mp4"
+      autoPlay
+      muted
+      loop
+      playsInline
+      disablePictureInPicture
+      controlsList="nodownload nofullscreen noremoteplayback"
       style={{
-        position: "absolute", top: 0, left: 0,
-        width: "100%", height: "100%",
-        border: "none", borderRadius: "16px",
+        width: "100%", height: "auto", display: "block",
+        borderRadius: "16px", pointerEvents: "none",
       }}
     />
   </div>

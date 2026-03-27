@@ -115,14 +115,8 @@ export default function RestaurantesLanding() {
                 <span className="inline-block text-xs font-bold uppercase tracking-widest text-[#9D4EDD] bg-[#F3E8FF] px-4 py-1.5 rounded-full border border-[#E0AAFF] mb-4">Demo</span>
                 <h2 className="text-3xl font-extrabold">Mira cómo funciona LandForge</h2>
               </div>
-              <div style={{ borderRadius: "16px", overflow: "hidden", border: "1px solid #E0AAFF", boxShadow: "0 24px 64px rgba(157,78,221,0.14)", position: "relative", paddingBottom: "56.25%", height: 0, background: "#000" }}>
-                <iframe
-                  src="https://www.youtube.com/embed/MRS2BdlK8gs?autoplay=1&mute=1&loop=1&playlist=MRS2BdlK8gs&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1"
-                  title="Demo de LandForge"
-                  allow="autoplay; encrypted-media"
-                  allowFullScreen
-                  style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: "none", borderRadius: "16px" }}
-                />
+              <div style={{ borderRadius: "16px", overflow: "hidden", border: "1px solid #E0AAFF", boxShadow: "0 24px 64px rgba(157,78,221,0.14)" }}>
+                <video src="/demo-landforge.mp4" autoPlay muted loop playsInline disablePictureInPicture controlsList="nodownload nofullscreen noremoteplayback" style={{ width: "100%", height: "auto", display: "block", borderRadius: "16px", pointerEvents: "none" }} />
               </div>
             </div>
           </section>
