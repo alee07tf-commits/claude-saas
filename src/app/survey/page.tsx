@@ -265,28 +265,25 @@ export default function SurveyPage() {
   const [error, setError] = useState("");
   const [retryable, setRetryable] = useState(false);
   const [limitReached, setLimitReached] = useState(false);
-  const [countdown, setCountdown] = useState(0);
-  const countdownRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const [elapsed, setElapsed] = useState(0);
+  const elapsedRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  // Countdown timer — cleanup on unmount
+  // Elapsed timer — cleanup on unmount
   useEffect(() => {
-    return () => { if (countdownRef.current) clearInterval(countdownRef.current); };
+    return () => { if (elapsedRef.current) clearInterval(elapsedRef.current); };
   }, []);
 
-  function startCountdown(seconds: number) {
-    setCountdown(seconds);
-    if (countdownRef.current) clearInterval(countdownRef.current);
-    countdownRef.current = setInterval(() => {
-      setCountdown(prev => {
-        if (prev <= 1) { if (countdownRef.current) clearInterval(countdownRef.current); return 0; }
-        return prev - 1;
-      });
+  function startElapsed() {
+    setElapsed(0);
+    if (elapsedRef.current) clearInterval(elapsedRef.current);
+    elapsedRef.current = setInterval(() => {
+      setElapsed(prev => prev + 1);
     }, 1000);
   }
 
-  function stopCountdown() {
-    if (countdownRef.current) { clearInterval(countdownRef.current); countdownRef.current = null; }
-    setCountdown(0);
+  function stopElapsed() {
+    if (elapsedRef.current) { clearInterval(elapsedRef.current); elapsedRef.current = null; }
+    setElapsed(0);
   }
 
   // ── Step 1 ──────────────────────────────────────────────────────
@@ -425,9 +422,7 @@ export default function SurveyPage() {
   async function generate() {
     setLoading(true);
     setError("");
-    // Estimate based on section count: ~35s base + ~3s per section
-    const sectionCount = Object.values(sections).filter(Boolean).length || 5;
-    startCountdown(Math.round(35 + sectionCount * 3));
+    startElapsed();
     setRetryable(false);
     setLimitReached(false);
     setGeneratePhase("Iniciando...");
@@ -502,12 +497,12 @@ export default function SurveyPage() {
         throw new Error("No se recibió HTML válido del servidor");
       }
 
-      stopCountdown();
+      stopElapsed();
       sessionStorage.setItem("previewHtml", fullHtml);
       sessionStorage.setItem("surveyData", JSON.stringify(surveyData));
       router.push(`/preview/${landingId || "preview"}`);
     } catch (err) {
-      stopCountdown();
+      stopElapsed();
       setError(err instanceof Error ? err.message : "Error desconocido");
       setLoading(false);
     }
@@ -1555,34 +1550,43 @@ export default function SurveyPage() {
             </div>
             {loading && (
               <div style={{ marginTop: "20px", display: "flex", flexDirection: "column", alignItems: "center", gap: "12px" }}>
-                {/* Countdown timer */}
+                {/* Elapsed timer */}
                 <div style={{
-                  display: "flex", alignItems: "center", gap: "10px",
+                  display: "flex", alignItems: "center", gap: "14px",
                   background: `linear-gradient(135deg, ${T.accent}18, ${T.accentAlt}18)`,
                   border: `1px solid ${T.border}`,
-                  borderRadius: "12px", padding: "12px 20px",
+                  borderRadius: "12px", padding: "14px 20px",
                 }}>
-                  <div style={{
-                    width: "44px", height: "44px", borderRadius: "50%",
-                    background: `conic-gradient(${T.accent} ${countdown > 0 ? ((countdown / (35 + Object.values(sections).filter(Boolean).length * 3)) * 100) : 0}%, ${T.border} 0%)`,
-                    display: "flex", alignItems: "center", justifyContent: "center",
-                    transition: "background 1s linear",
-                  }}>
+                  {/* Spinning ring */}
+                  <div style={{ position: "relative", width: "44px", height: "44px", flexShrink: 0 }}>
                     <div style={{
-                      width: "36px", height: "36px", borderRadius: "50%",
-                      background: T.card, display: "flex", alignItems: "center", justifyContent: "center",
-                      fontFamily: T.mono, fontWeight: 700, fontSize: "14px", color: T.accent,
+                      position: "absolute", inset: 0, borderRadius: "50%",
+                      border: `3px solid ${T.border}`,
+                    }} />
+                    <div style={{
+                      position: "absolute", inset: 0, borderRadius: "50%",
+                      border: `3px solid transparent`,
+                      borderTopColor: T.accent,
+                      animation: "spin 1s linear infinite",
+                    }} />
+                    <div style={{
+                      position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center",
+                      fontFamily: T.mono, fontWeight: 700, fontSize: "12px", color: T.accent,
                     }}>
-                      {countdown > 0 ? `${countdown}s` : "..."}
+                      {elapsed}s
                     </div>
                   </div>
-                  <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
+                  <div style={{ display: "flex", flexDirection: "column", gap: "3px" }}>
                     <span style={{ fontSize: "13px", fontWeight: 700, color: T.text }}>
                       {generatePhase || "Preparando..."}
                     </span>
                     <span style={{ fontSize: "11px", color: T.gray }}>
-                      {countdown > 0
-                        ? `Tiempo estimado: ~${countdown}s`
+                      {elapsed < 30
+                        ? "La IA está diseñando tu landing..."
+                        : elapsed < 75
+                        ? "Generando el HTML y el copy..."
+                        : elapsed < 110
+                        ? "Casi lista, puliendo los detalles..."
                         : "Finalizando..."}
                     </span>
                   </div>
