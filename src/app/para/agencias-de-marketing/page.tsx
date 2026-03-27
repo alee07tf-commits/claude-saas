@@ -160,12 +160,12 @@ export default function AgenciasLanding() {
           {/* ── 5. SOCIAL PROOF ── */}
           <section className="px-6 py-24 bg-white">
             <div className="max-w-5xl mx-auto">
-              <h2 className="text-3xl font-extrabold text-center mb-16">Lo que opinan agencias que usan LandForge</h2>
+              <h2 className="text-3xl font-extrabold text-center mb-16">Usuarios que han probado LandForge antes de su lanzamiento</h2>
               <div className="grid md:grid-cols-3 gap-8">
                 {[
-                  { text: "Cerramos la reunión de ventas y el mismo día entregamos la propuesta con una landing real del negocio del cliente. La tasa de cierre se disparó al 80%.", name: "Carlos M.", role: "Director Creativo — Agencia Creative, Madrid", result: "→ 80% tasa de cierre desde día 1" },
-                  { text: "LandForge nos ha eliminado completamente la figura del 'diseñador de landings'. Ahora un trafficker genera la página en el mismo proceso de configuración de campaña.", name: "Ana R.", role: "Head of Performance — Pulse Digital, Barcelona", result: "→ 0 horas de diseño por landing" },
-                  { text: "El White Label es la feature que necesitaba. Soy freelance y mis clientes ahora piensan que tengo un equipo de desarrollo detrás. Lo que soy es un cliente de LandForge Unlimited.", name: "Jorge L.", role: "Freelance SEO & Ads, Valencia", result: "→ Posicionado como agencia completa en solitario" },
+                  { text: "Cerramos la reunión de ventas y el mismo día entregamos la propuesta con una landing real del negocio del cliente. La tasa de cierre se disparó al 80%.", name: "Carlos R.", role: "Consultor de marketing, Madrid", result: "→ 80% tasa de cierre desde día 1" },
+                  { text: "LandForge nos ha eliminado completamente la figura del 'diseñador de landings'. Ahora un trafficker genera la página en el mismo proceso de configuración de campaña.", name: "Ana P.", role: "Especialista en performance, Barcelona", result: "→ 0 horas de diseño por landing" },
+                  { text: "El White Label es la feature que necesitaba. Soy freelance y mis clientes ahora piensan que tengo un equipo de desarrollo detrás. Lo que soy es un cliente de LandForge Unlimited.", name: "Jorge L.", role: "Freelance SEO & Ads, Valencia", result: "→ Posicionado como profesional completo en solitario" },
                 ].map((t) => (
                   <div key={t.name} className="bg-[#FAFAFA] border border-gray-100 rounded-2xl p-8 flex flex-col justify-between">
                     <div>

@@ -143,11 +143,11 @@ export default function AbogadosLanding() {
           {/* ── 4. SOCIAL PROOF ── */}
           <section className="px-6 py-24 bg-[#F3E8FF]">
             <div className="max-w-5xl mx-auto">
-              <h2 className="text-3xl font-extrabold text-center mb-16">Lo que dicen abogados que usan LandForge</h2>
+              <h2 className="text-3xl font-extrabold text-center mb-16">Usuarios del sector legal que han probado LandForge</h2>
               <div className="grid md:grid-cols-2 gap-8">
                 {[
-                  { text: "Tenía una web de empresa genérica que no aparecía en Google. Creé una landing específica para 'abogado de divorcios en Sevilla' con LandForge y en 6 semanas empecé a recibir consultas orgánicas desde Google.", name: "Jorge M.", role: "Abogado Independiente — Especialidad Familia, Sevilla", result: "→ Primeras consultas orgánicas en 6 semanas" },
-                  { text: "El mayor beneficio es que Forgi descarta los casos que no son mi especialidad sin que yo tenga que hacer una llamada. Solo me llegan casos de derecho laboral que además pueden permitirse mis honorarios.", name: "Patricia L.", role: "Socia — Bufete García & López, Madrid", result: "→ 60% menos de llamadas no cualificadas" },
+                  { text: "Tenía una web de empresa genérica que no aparecía en Google. Creé una landing específica para 'abogado de divorcios en Sevilla' con LandForge y en 6 semanas empecé a recibir consultas orgánicas desde Google.", name: "Jorge M.", role: "Abogado independiente, Sevilla", result: "→ Primeras consultas orgánicas en 6 semanas" },
+                  { text: "El mayor beneficio es que Forgi descarta los casos que no son mi especialidad sin que yo tenga que hacer una llamada. Solo me llegan casos de derecho laboral que además pueden permitirse mis honorarios.", name: "Patricia L.", role: "Abogada laboralista, Madrid", result: "→ 60% menos de llamadas no cualificadas" },
                 ].map((t) => (
                   <div key={t.name} className="bg-white rounded-2xl border border-[#E0AAFF] p-8 flex flex-col justify-between">
                     <div>

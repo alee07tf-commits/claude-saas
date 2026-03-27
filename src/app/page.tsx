@@ -48,40 +48,6 @@ const XIcon = () => (
 );
 
 
-/* ─── Avatar Stack ─── */
-const avatars = [
-  { initials: "CM", bg: "#7C3AED" },
-  { initials: "AL", bg: "#DB2777" },
-  { initials: "RV", bg: "#D97706" },
-  { initials: "PG", bg: "#059669" },
-  { initials: "MF", bg: "#2563EB" },
-];
-
-const AvatarStack = ({ count = "200+" }: { count?: string }) => (
-  <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-    <div style={{ display: "flex" }}>
-      {avatars.map((a, i) => (
-        <div key={i} style={{
-          width: "34px", height: "34px", borderRadius: "50%",
-          background: a.bg, border: "2px solid #fff",
-          display: "flex", alignItems: "center", justifyContent: "center",
-          fontSize: "12px", fontWeight: 700, color: "#fff",
-          marginLeft: i === 0 ? 0 : "-10px", zIndex: avatars.length - i,
-          position: "relative",
-        }}>{a.initials}</div>
-      ))}
-    </div>
-    <div>
-      <div style={{ display: "flex", gap: "2px", marginBottom: "2px" }}>
-        {[...Array(5)].map((_, i) => <StarFull key={i} />)}
-      </div>
-      <span style={{ fontSize: "13px", color: BRAND.gray }}>
-        <strong style={{ color: BRAND.text }}>{count} agencias</strong> ya lo usan
-      </span>
-    </div>
-  </div>
-);
-
 /* ─── Step Card ─── */
 const StepCard = ({ number, title, description, delay }: {
   number: string; title: string; description: string; delay: number;
@@ -285,17 +251,17 @@ export default function LandForgeLanding() {
   const testimonials = [
     {
       text: "Antes tardaba 3 horas en montar una landing. Ahora en 10 minutos tengo una página profesional publicada y con Forgi atendiendo clientes mientras duermo.",
-      name: "Carlos M.", role: "Agencia Creative, Madrid",
+      name: "Carlos R.", role: "Consultor de marketing, Madrid",
       result: "→ De 3h a 10 min. Forgi convierte visitantes en leads automáticamente.",
     },
     {
       text: "Mis clientes flipan cuando les muestro la landing generada en la misma reunión de briefing. Y que además incluya un chatbot que ya sabe todo sobre su negocio es el cierre.",
-      name: "María L.", role: "Diseñadora web freelance",
+      name: "María G.", role: "Diseñadora web freelance, Valencia",
       result: "→ Cierra más proyectos mostrando resultado en vivo.",
     },
     {
       text: "Lo usamos para todos los clientes nuevos. La landing sale lista para vender y Forgi nos ahorra contratar soporte. El Conversion Score nos ayuda a mejorar cada página.",
-      name: "Agencia Pulse", role: "Agencia digital, Barcelona",
+      name: "Pablo T.", role: "Emprendedor digital, Barcelona",
       result: "→ Tasa de cierre del 80% mostrando la preview al cliente.",
     },
   ];
@@ -583,14 +549,6 @@ export default function LandForgeLanding() {
           </p>
         </div>
 
-        {/* Avatar stack */}
-        <div style={{
-          marginTop: "52px",
-          opacity: heroVisible ? 1 : 0,
-          transition: "all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.45s",
-        }}>
-          <AvatarStack count="200+" />
-        </div>
       </section>
 
       {/* ── DEMO PREVIEW ── */}
@@ -842,12 +800,12 @@ export default function LandForgeLanding() {
       </section>
 
       {/* ── TESTIMONIALS ── */}
-      <section id="testimonios" aria-label="Testimonios de agencias que usan LandForge" style={{ padding: "80px 24px 100px", background: BRAND.bgAlt }}>
+      <section id="testimonios" aria-label="Testimonios de usuarios de LandForge" style={{ padding: "80px 24px 100px", background: BRAND.bgAlt }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: "56px" }}>
             <SectionBadge label="TESTIMONIOS" />
             <h2 style={{ fontSize: "clamp(26px, 3.5vw, 40px)", fontWeight: 800, letterSpacing: "-1px", marginTop: "16px", color: BRAND.text }}>
-              Agencias digitales que ya crean landing pages con LandForge
+              Usuarios que han probado LandForge antes de su lanzamiento
             </h2>
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "20px" }}>
@@ -1003,9 +961,6 @@ export default function LandForgeLanding() {
           <p style={{ fontSize: "13px", color: BRAND.gray, marginTop: "14px" }}>
             Sin tarjeta · 1 landing gratis · Cancela cuando quieras
           </p>
-          <div style={{ marginTop: "28px", display: "flex", justifyContent: "center" }}>
-            <AvatarStack count="200+" />
-          </div>
         </div>
       </section>
 

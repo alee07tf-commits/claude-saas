@@ -133,11 +133,11 @@ export default function EcommerceLanding() {
           {/* ── 4. SOCIAL PROOF ── */}
           <section className="px-6 py-24 bg-[#F3E8FF]">
             <div className="max-w-5xl mx-auto">
-              <h2 className="text-3xl font-extrabold text-center mb-16">Tiendas online que han mejorado su ROAS con LandForge</h2>
+              <h2 className="text-3xl font-extrabold text-center mb-16">Usuarios de eCommerce que han probado LandForge</h2>
               <div className="grid md:grid-cols-2 gap-8">
                 {[
-                  { text: "Teníamos un ROAS de 1.8x enviando el tráfico de TikTok a la homepage. Creamos una landing específica para la campaña en LandForge y en 3 semanas el ROAS subió a 3.4x. Sin tocar el anuncio.", name: "Sergio V.", role: "Fundador — TiendaRapida.es (Dropshipping)", result: "→ ROAS de 1.8x a 3.4x en 3 semanas" },
-                  { text: "Forgi nos soluciona el problema de los clientes que no compran porque no saben si enviamos a Canarias. Ahora Forgi lo responde automáticamente y hemos bajado la tasa de rebote en un 35%.", name: "Laura P.", role: "Directora eCommerce — ModaOnline España", result: "→ 35% menos tasa de rebote en product pages" },
+                  { text: "Teníamos un ROAS de 1.8x enviando el tráfico de TikTok a la homepage. Creamos una landing específica para la campaña en LandForge y en 3 semanas el ROAS subió a 3.4x. Sin tocar el anuncio.", name: "Sergio V.", role: "Emprendedor eCommerce, Madrid", result: "→ ROAS de 1.8x a 3.4x en 3 semanas" },
+                  { text: "Forgi nos soluciona el problema de los clientes que no compran porque no saben si enviamos a Canarias. Ahora Forgi lo responde automáticamente y hemos bajado la tasa de rebote en un 35%.", name: "Laura P.", role: "Gestora de tienda online, Sevilla", result: "→ 35% menos tasa de rebote en product pages" },
                 ].map((t) => (
                   <div key={t.name} className="bg-white rounded-2xl border border-[#E0AAFF] p-8 flex flex-col justify-between">
                     <div>

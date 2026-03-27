@@ -155,11 +155,11 @@ export default function RestaurantesLanding() {
           {/* ── 4. SOCIAL PROOF ── */}
           <section className="px-6 py-24 bg-[#F3E8FF]">
             <div className="max-w-5xl mx-auto">
-              <h2 className="text-3xl font-extrabold text-center mb-16">Restaurantes que han llenado sus mesas con LandForge</h2>
+              <h2 className="text-3xl font-extrabold text-center mb-16">Usuarios de hostelería que han probado LandForge</h2>
               <div className="grid md:grid-cols-2 gap-8">
                 {[
-                  { text: "Antes de LandForge, perdíamos todas las reservas que entraban por la noche. Ahora Forgi pregunta cuántas personas son, la fecha y si tienen alguna alergia, y nos lo manda todo por la mañana. Sin perder ninguna. En el primer mes de uso reservamos 24 mesas extra que antes se perdían.", name: "Javier A.", role: "Propietario — Restaurante La Taberna de Javier, Zaragoza", result: "→ 24 reservas nuevas en el primer mes" },
-                  { text: "Le costaba mucho tiempo a mi encargado responder siempre las mismas preguntas sobre el menú del día. Forgi lo tiene todo y responde en segundos. Ahora mi personal se centra en dar un mejor servicio y las valoraciones en Google nos han subido del 4.1 al 4.7.", name: "Ana G.", role: "Gerente — Bistrot Mediterráneo, Valencia", result: "→ Valoración Google de 4.1 a 4.7 en 2 meses" },
+                  { text: "Antes de LandForge, perdíamos todas las reservas que entraban por la noche. Ahora Forgi pregunta cuántas personas son, la fecha y si tienen alguna alergia, y nos lo manda todo por la mañana. Sin perder ninguna. En el primer mes de uso reservamos 24 mesas extra que antes se perdían.", name: "Javier A.", role: "Hostelero, Zaragoza", result: "→ 24 reservas nuevas en el primer mes" },
+                  { text: "Le costaba mucho tiempo a mi encargado responder siempre las mismas preguntas sobre el menú del día. Forgi lo tiene todo y responde en segundos. Ahora mi personal se centra en dar un mejor servicio y las valoraciones en Google nos han subido del 4.1 al 4.7.", name: "Ana G.", role: "Gerente de restaurante, Valencia", result: "→ Valoración Google de 4.1 a 4.7 en 2 meses" },
                 ].map((t) => (
                   <div key={t.name} className="bg-white rounded-2xl border border-[#E0AAFF] p-8 flex flex-col justify-between">
                     <div>

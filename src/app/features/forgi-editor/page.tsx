@@ -178,11 +178,11 @@ export default function ForgiEditorPage() {
           {/* ── 4. SOCIAL PROOF ── */}
           <section className="px-6 py-24 bg-[#F3E8FF]">
             <div className="max-w-5xl mx-auto">
-              <h2 className="text-3xl font-extrabold text-center mb-16">Agencias que han multiplicado su velocidad de entrega</h2>
+              <h2 className="text-3xl font-extrabold text-center mb-16">Usuarios que han multiplicado su velocidad con Forgi Editor</h2>
               <div className="grid md:grid-cols-2 gap-8">
                 {[
-                  { text: "Antes tardábamos una semana en hacer una landing para un cliente. Ahora generamos la base en 30 segundos, el cliente la revisa y en una videollamada de 30 minutos le aplicamos todos sus cambios con Forgi Editor. El mismo día está publicada.", name: "Raúl T.", role: "CEO — ThinkLab Digital, Madrid", result: "→ De 1 semana a 1 día por landing de cliente" },
-                  { text: "Lo que más me costaba era que el cliente pedía un cambio, yo lo hacía en Elementor, él lo veía y pedía otro. Con Forgi simplemente le doy acceso al editor y él mismo escribe los cambios. Llegamos al resultado final mucho más rápido.", name: "Lucía V.", role: "Freelance Designer & Developer, Sevilla", result: "→ Revisiones del cliente reducidas de 6 a 1" },
+                  { text: "Antes tardábamos una semana en hacer una landing para un cliente. Ahora generamos la base en 30 segundos, el cliente la revisa y en una videollamada de 30 minutos le aplicamos todos sus cambios con Forgi Editor. El mismo día está publicada.", name: "Raúl T.", role: "Consultor digital, Madrid", result: "→ De 1 semana a 1 día por landing de cliente" },
+                  { text: "Lo que más me costaba era que el cliente pedía un cambio, yo lo hacía en Elementor, él lo veía y pedía otro. Con Forgi simplemente le doy acceso al editor y él mismo escribe los cambios. Llegamos al resultado final mucho más rápido.", name: "Lucía V.", role: "Diseñadora web freelance, Sevilla", result: "→ Revisiones del cliente reducidas de 6 a 1" },
                 ].map((t) => (
                   <div key={t.name} className="bg-white rounded-2xl border border-[#E0AAFF] p-8 flex flex-col justify-between">
                     <div>

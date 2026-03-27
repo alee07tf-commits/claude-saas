@@ -155,11 +155,11 @@ export default function InmobiliariasLanding() {
           {/* ── 4. SOCIAL PROOF ── */}
           <section className="px-6 py-24 bg-[#F3E8FF]">
             <div className="max-w-5xl mx-auto">
-              <h2 className="text-3xl font-extrabold text-center mb-16">Agencias inmobiliarias que venden más con LandForge</h2>
+              <h2 className="text-3xl font-extrabold text-center mb-16">Usuarios del sector inmobiliario que han probado LandForge</h2>
               <div className="grid md:grid-cols-2 gap-8">
                 {[
-                  { text: "Creamos landings específicas para las 5 propiedades de más valor de nuestra cartera y enviamos el tráfico de Google Ads allí. Las solicitudes de visita subieron un 55% respecto a enviar el tráfico a la web de la agencia.", name: "Fernando A.", role: "Director Comercial — Inmobiliaria Arcos, Madrid", result: "→ +55% en solicitudes de visita desde campañas" },
-                  { text: "Le dimos acceso a Forgi para atender consultas nocturnas y fines de semana. En el primer mes capturó 22 leads cualificados que ningún comercial hubiera podido atender. Cerramos 3 operaciones directamente de esos leads.", name: "Carmen R.", role: "Gerente — Grupo Residencial Valencia", result: "→ 22 leads cualificados sin intervención del equipo" },
+                  { text: "Creamos landings específicas para las 5 propiedades de más valor de nuestra cartera y enviamos el tráfico de Google Ads allí. Las solicitudes de visita subieron un 55% respecto a enviar el tráfico a la web general.", name: "Fernando A.", role: "Profesional inmobiliario, Madrid", result: "→ +55% en solicitudes de visita desde campañas" },
+                  { text: "Le dimos acceso a Forgi para atender consultas nocturnas y fines de semana. En el primer mes capturó 22 leads cualificados que ningún comercial hubiera podido atender. Cerramos 3 operaciones directamente de esos leads.", name: "Carmen R.", role: "Gestora inmobiliaria, Valencia", result: "→ 22 leads cualificados sin intervención del equipo" },
                 ].map((t) => (
                   <div key={t.name} className="bg-white rounded-2xl border border-[#E0AAFF] p-8 flex flex-col justify-between">
                     <div>

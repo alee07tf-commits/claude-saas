@@ -245,22 +245,22 @@ export default function ClinicasDentalesLanding() {
           {/* ── 5. SOCIAL PROOF ── */}
           <section className="px-6 py-24 bg-white">
             <div className="max-w-5xl mx-auto">
-              <h2 className="text-3xl font-extrabold text-center mb-16">Lo que opinan directores de clínicas y dentistas</h2>
+              <h2 className="text-3xl font-extrabold text-center mb-16">Usuarios del sector dental que han probado LandForge</h2>
               <div className="grid md:grid-cols-3 gap-8">
                 {[
                   {
                     text: "Antes tardábamos 4 semanas y 1.200€ en montar una landing para cada campaña nueva. Con LandForge lo tenemos en 10 minutos por 97€ al mes. La calculadora es fácil.",
-                    name: "Dra. Laura M.", role: "Directora — Clínica Dental Madrid Centro",
+                    name: "Laura M.", role: "Directora de clínica dental, Madrid",
                     result: "→ De 4 semanas a 10 minutos por landing",
                   },
                   {
                     text: "Forgi nos ahorra contestar 30 llamadas diarias de presupuesto de Invisalign. El chatbot cualifica al paciente y cuando llega a nuestra consulta ya viene informado y convencido.",
-                    name: "Dr. Alejandro S.", role: "Jefe Clínico — Sonrisa Perfecta Barcelona",
+                    name: "Alejandro S.", role: "Odontólogo, Barcelona",
                     result: "→ 30% más de citas confirmadas al mes",
                   },
                   {
                     text: "Lanzamos LandForge para la campaña de blanqueamientos de verano el mismo día que cerramos el contrato con la radio local. Imposible haberlo hecho con otro software.",
-                    name: "Marta C.", role: "Marketing Manager — Grupo DentalPlus",
+                    name: "Marta C.", role: "Responsable de marketing dental, Málaga",
                     result: "→ Landing lista el mismo día del lanzamiento",
                   },
                 ].map((t) => (

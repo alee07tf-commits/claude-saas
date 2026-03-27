@@ -128,11 +128,11 @@ export default function CoachesLanding() {
           {/* ── 4. SOCIAL PROOF ── */}
           <section className="px-6 py-24 bg-[#F3E8FF]">
             <div className="max-w-5xl mx-auto">
-              <h2 className="text-3xl font-extrabold text-center mb-16">Coaches y formadores que han multiplicado su cierre</h2>
+              <h2 className="text-3xl font-extrabold text-center mb-16">Usuarios del mundo coaching que han probado LandForge</h2>
               <div className="grid md:grid-cols-2 gap-8">
                 {[
-                  { text: "Antes de LandForge, el 50% de mis llamadas de descubrimiento eran con personas que al final no tenían presupuesto o no estaban motivadas. Ahora Forgi las filtra antes y el 80% de mis llamadas son con prospectos que ya quieren cerrar.", name: "Marta J.", role: "Business Coach — Especialidad Emprendedoras", result: "→ Tasa de cierre de llamadas del 30% al 80%" },
-                  { text: "Lancé el programa de enero con una Sales Page creada en LandForge. 48 horas después, Forgi había cualificado 34 solicitudes de llamada. Cerré 12 plazas en 2 semanas sin publicidad de pago, solo con mi comunidad de Instagram.", name: "Daniel P.", role: "Coach de Productividad y Hábitos", result: "→ 12 plazas cerradas sin publicidad en 2 semanas" },
+                  { text: "Antes de LandForge, el 50% de mis llamadas de descubrimiento eran con personas que al final no tenían presupuesto o no estaban motivadas. Ahora Forgi las filtra antes y el 80% de mis llamadas son con prospectos que ya quieren cerrar.", name: "Marta J.", role: "Coach de negocios, Madrid", result: "→ Tasa de cierre de llamadas del 30% al 80%" },
+                  { text: "Lancé el programa de enero con una Sales Page creada en LandForge. 48 horas después, Forgi había cualificado 34 solicitudes de llamada. Cerré 12 plazas en 2 semanas sin publicidad de pago, solo con mi comunidad de Instagram.", name: "Daniel P.", role: "Coach de productividad, Barcelona", result: "→ 12 plazas cerradas sin publicidad en 2 semanas" },
                 ].map((t) => (
                   <div key={t.name} className="bg-white rounded-2xl border border-[#E0AAFF] p-8 flex flex-col justify-between">
                     <div>

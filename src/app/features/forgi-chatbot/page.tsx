@@ -235,11 +235,11 @@ export default function ForgiChatbotPage() {
           {/* ── 4. SOCIAL PROOF ── */}
           <section className="px-6 py-24 bg-[#F3E8FF]">
             <div className="max-w-5xl mx-auto">
-              <h2 className="text-3xl font-extrabold text-center mb-16">Resultados reales de Forgi en empresas como la tuya</h2>
+              <h2 className="text-3xl font-extrabold text-center mb-16">Usuarios que han probado Forgi Chatbot en sus negocios</h2>
               <div className="grid md:grid-cols-2 gap-8">
                 {[
-                  { text: "Antes de Forgi, perdíamos el 60% de las consultas nocturnas porque nadie respondía. Ahora Forgi atiende a las 2 de la mañana, cualifica si el caso es urgente o no, y recoge sus datos. Por la mañana tenemos 5-6 leads cualificados esperando.", name: "Dr. Marcos F.", role: "Director — Clínica Dental Sonrisa Madrid", result: "→ De 0 a 5-6 leads nocturnos cualificados/día" },
-                  { text: "Lo que más me sorprendió es que no tuve que configurar absolutamente nada. Creé la landing de mi agencia, Forgi leyó el contenido y al 4to día ya estaba cualificando prospectos con las preguntas exactas que yo mismo les haría.", name: "Sandra M.", role: "Fundadora — Growth Marketing Agency, Barcelona", result: "→ Configurado en 0 minutos. Operativo en 30 segundos" },
+                  { text: "Antes de Forgi, perdíamos el 60% de las consultas nocturnas porque nadie respondía. Ahora Forgi atiende a las 2 de la mañana, cualifica si el caso es urgente o no, y recoge sus datos. Por la mañana tenemos 5-6 leads cualificados esperando.", name: "Marcos F.", role: "Director de clínica, Madrid", result: "→ De 0 a 5-6 leads nocturnos cualificados/día" },
+                  { text: "Lo que más me sorprendió es que no tuve que configurar absolutamente nada. Creé la landing de mi negocio, Forgi leyó el contenido y al 4to día ya estaba cualificando prospectos con las preguntas exactas que yo mismo les haría.", name: "Sandra M.", role: "Consultora de marketing, Barcelona", result: "→ Configurado en 0 minutos. Operativo en 30 segundos" },
                 ].map((t) => (
                   <div key={t.name} className="bg-white rounded-2xl border border-[#E0AAFF] p-8 flex flex-col justify-between">
                     <div>
