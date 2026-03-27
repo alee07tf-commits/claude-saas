@@ -4,12 +4,13 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Comparativas: LandForge vs Competencia — ¿Cuál es la Mejor Opción?",
   description:
-    "Comparativas honestas de LandForge con las principales herramientas de landing pages: Webflow, Unbounce y Leadpages. Encuentra la herramienta que mejor encaja con tu negocio.",
+    "Comparativas honestas de LandForge con las principales herramientas de landing pages: Webflow, Unbounce, Instapage, Carrd y Leadpages. Encuentra la herramienta que mejor encaja con tu negocio.",
   keywords: [
     "comparativa herramientas landing pages",
     "landforge vs alternativas",
     "mejor herramienta landing page ia agencias",
     "alternativas landing page builder",
+    "alternativas unbounce webflow leadpages",
   ],
   alternates: {
     canonical: "https://landforge.digital/comparar",
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Comparativas: LandForge vs Competencia — ¿Cuál es la Mejor Opción?",
     description:
-      "Comparativas honestas de LandForge con las principales herramientas de landing pages: Webflow, Unbounce y Leadpages. Encuentra la herramienta que mejor encaja con tu negocio.",
+      "Comparativas honestas de LandForge con las principales herramientas de landing pages: Webflow, Unbounce, Instapage, Carrd y Leadpages. Encuentra la herramienta que mejor encaja con tu negocio.",
     url: "https://landforge.digital/comparar",
   },
 };
@@ -40,12 +41,44 @@ const comparativas = [
     winner: "LandForge para agencias · Unbounce para SmartTraffic enterprise",
   },
   {
+    title: "LandForge vs Instapage",
+    desc: "Instapage domina el A/B testing enterprise y los heatmaps nativos. LandForge genera landing pages con IA en 30 segundos. Comparativa de precio, velocidad y conversión para agencias.",
+    badge: "IA vs A/B Testing Enterprise",
+    link: "/comparar/landforge-vs-instapage",
+    icon: "🧪",
+    winner: "LandForge para velocidad y precio · Instapage para A/B testing avanzado",
+  },
+  {
+    title: "LandForge vs Carrd",
+    desc: "Carrd es barato y simple, pero ¿convierte? Comparativa completa entre LandForge (IA + chatbot + agencias) y Carrd (one-page builder). Descubre cuál necesitas según tu proyecto.",
+    badge: "IA vs Simplicidad",
+    link: "/comparar/landforge-vs-carrd",
+    icon: "💰",
+    winner: "LandForge para conversión profesional · Carrd para páginas personales",
+  },
+  {
     title: "Alternativas a Leadpages",
     desc: "¿Leadpages se queda corto para tu agencia? Ranking de las 3 mejores alternativas con IA nativa en 2026, comparativa de precios y análisis de funcionalidades.",
     badge: "Ranking 2026",
     link: "/comparar/alternativas-leadpages",
     icon: "🏆",
     winner: "LandForge como mejor alternativa con IA nativa integrada",
+  },
+  {
+    title: "Alternativas a Unbounce",
+    desc: "Unbounce sube precios cada año. Descubre las 4 mejores alternativas a Unbounce para agencias en 2026: comparativa de precios, funcionalidades IA y tasas de conversión reales.",
+    badge: "Ranking 2026",
+    link: "/comparar/alternativas-unbounce",
+    icon: "🔄",
+    winner: "LandForge como alternativa más completa con IA y chatbot incluido",
+  },
+  {
+    title: "Alternativas a Webflow",
+    desc: "¿Webflow es demasiado complejo o caro para tus landing pages? Las 5 mejores alternativas con IA, chatbot y velocidad optimizada para agencias en 2026.",
+    badge: "Ranking 2026",
+    link: "/comparar/alternativas-webflow",
+    icon: "🔀",
+    winner: "LandForge para agencias que priorizan velocidad sobre control visual",
   },
 ];
 
@@ -110,23 +143,28 @@ export default function ComparativasHub() {
                     <th className="p-5 text-center font-bold text-[#9D4EDD]">LandForge</th>
                     <th className="p-5 text-center font-bold text-[#6B7280]">Webflow</th>
                     <th className="p-5 text-center font-bold text-[#6B7280]">Unbounce</th>
+                    <th className="p-5 text-center font-bold text-[#6B7280]">Instapage</th>
+                    <th className="p-5 text-center font-bold text-[#6B7280]">Carrd</th>
                     <th className="p-5 text-center font-bold text-[#6B7280]">Leadpages</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-100 text-center">
                   {[
-                    ["Precio inicial", "0€ gratis", "14$/mes", "99$/mes", "49$/mes"],
-                    ["IA generativa completa", "✅", "❌", "⚠️ Parcial", "⚠️ Parcial"],
-                    ["Chatbot de ventas nativo", "✅ Forgi", "❌", "❌", "❌"],
-                    ["Velocidad de creación", "30 segundos", "Días", "Horas", "Horas"],
-                    ["Ideal para agencias", "✅", "⚠️", "✅", "⚠️"],
-                    ["Idioma en español", "✅ Nativo", "⚠️", "⚠️", "⚠️"],
-                  ].map(([criterio, lf, wf, ub, lp]) => (
+                    ["Precio inicial", "0€ gratis", "14$/mes", "99$/mes", "199$/mes", "9$/año", "49$/mes"],
+                    ["IA generativa completa", "✅", "❌", "⚠️ Parcial", "❌", "❌", "⚠️ Parcial"],
+                    ["Chatbot de ventas nativo", "✅ Forgi", "❌", "❌", "❌", "❌", "❌"],
+                    ["Velocidad de creación", "30 segundos", "Días", "Horas", "Horas", "Minutos", "Horas"],
+                    ["A/B testing nativo", "⚠️ Próximamente", "❌", "✅", "✅", "❌", "✅"],
+                    ["Ideal para agencias", "✅", "⚠️", "✅", "✅", "❌", "⚠️"],
+                    ["Idioma en español", "✅ Nativo", "⚠️", "⚠️", "⚠️", "⚠️", "⚠️"],
+                  ].map(([criterio, lf, wf, ub, ip, ca, lp]) => (
                     <tr key={criterio}>
                       <td className="p-4 text-left font-semibold">{criterio}</td>
                       <td className="p-4 font-bold text-[#9D4EDD] bg-[#FAF5FF]">{lf}</td>
                       <td className="p-4 text-[#6B7280]">{wf}</td>
                       <td className="p-4 text-[#6B7280]">{ub}</td>
+                      <td className="p-4 text-[#6B7280]">{ip}</td>
+                      <td className="p-4 text-[#6B7280]">{ca}</td>
                       <td className="p-4 text-[#6B7280]">{lp}</td>
                     </tr>
                   ))}

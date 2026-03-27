@@ -9,17 +9,17 @@ export const metadata: Metadata = {
     description: "Guía definitiva de A/B testing para landing pages: proceso paso a paso, herramientas comparadas, casos de éxito y framework ICE para priorizar tests.",
     type: "article", publishedTime: "2026-03-18T08:00:00Z", modifiedTime: "2026-03-27T10:00:00Z", authors: ["LandForge"],
   },
-  alternates: { canonical: "/blog/ab-testing-landing-pages-guia" },
+  alternates: { canonical: "https://landforge.digital/blog/ab-testing-landing-pages-guia" },
 };
 
 const articleSchema = {
   "@context": "https://schema.org", "@type": "Article",
   headline: "A/B Testing en Landing Pages: Guía Completa para Maximizar Conversiones",
-  author: { "@type": "Organization", name: "LandForge", url: "https://landforge.site" },
-  publisher: { "@type": "Organization", name: "LandForge", url: "https://landforge.site" },
+  author: { "@type": "Organization", name: "LandForge", url: "https://landforge.digital" },
+  publisher: { "@type": "Organization", name: "LandForge", url: "https://landforge.digital" },
   datePublished: "2026-03-18", dateModified: "2026-03-27",
   description: "Guía completa de A/B testing para landing pages: proceso, herramientas, framework ICE, casos reales y errores comunes.",
-  mainEntityOfPage: { "@type": "WebPage", "@id": "https://landforge.site/blog/ab-testing-landing-pages-guia" },
+  mainEntityOfPage: { "@type": "WebPage", "@id": "https://landforge.digital/blog/ab-testing-landing-pages-guia" },
 };
 
 const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: [
@@ -31,9 +31,9 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", mainEn
 ] };
 
 const breadcrumbSchema = { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
-  { "@type": "ListItem", position: 1, name: "Inicio", item: "https://landforge.site" },
-  { "@type": "ListItem", position: 2, name: "Blog", item: "https://landforge.site/blog" },
-  { "@type": "ListItem", position: 3, name: "A/B Testing en Landing Pages", item: "https://landforge.site/blog/ab-testing-landing-pages-guia" },
+  { "@type": "ListItem", position: 1, name: "Inicio", item: "https://landforge.digital" },
+  { "@type": "ListItem", position: 2, name: "Blog", item: "https://landforge.digital/blog" },
+  { "@type": "ListItem", position: 3, name: "A/B Testing en Landing Pages", item: "https://landforge.digital/blog/ab-testing-landing-pages-guia" },
 ] };
 
 function StatBox({ stat, label }: { stat: string; label: string }) {

@@ -987,7 +987,8 @@ export default function LandForgeLanding() {
                 {[
                   { label: "Forgi Chatbot — Ventas 24/7", href: "/features/forgi-chatbot" },
                   { label: "Forgi Editor — Edita con IA", href: "/features/forgi-editor" },
-                  { label: "Precios y Planes", href: "/#pricing" },
+                  { label: "Conversion Score", href: "/features/conversion-score" },
+                  { label: "Precios y Planes", href: "/precios" },
                 ].map(item => (
                   <li key={item.href}>
                     <a href={item.href} style={{ fontSize: "14px", color: BRAND.gray, textDecoration: "none", display: "flex", alignItems: "center", gap: "6px" }}
@@ -1014,6 +1015,9 @@ export default function LandForgeLanding() {
                   { label: "Agencias Inmobiliarias", href: "/para/inmobiliarias" },
                   { label: "Coaches y Formadores", href: "/para/coaches" },
                   { label: "Despachos de Abogados", href: "/para/abogados" },
+                  { label: "Restaurantes", href: "/para/restaurantes" },
+                  { label: "Gimnasios y Fitness", href: "/para/gimnasios" },
+                  { label: "Startups SaaS", href: "/para/startups-saas" },
                 ].map(item => (
                   <li key={item.href}>
                     <a href={item.href} style={{ fontSize: "14px", color: BRAND.gray, textDecoration: "none", display: "flex", alignItems: "center", gap: "6px" }}
@@ -1036,8 +1040,10 @@ export default function LandForgeLanding() {
                 {[
                   { label: "LandForge vs Webflow", href: "/comparar/landforge-vs-webflow" },
                   { label: "LandForge vs Unbounce", href: "/comparar/landforge-vs-unbounce" },
+                  { label: "LandForge vs Instapage", href: "/comparar/landforge-vs-instapage" },
                   { label: "Alternativas a Leadpages", href: "/comparar/alternativas-leadpages" },
-                  { label: "WordPress vs LandForge", href: "/integraciones/wordpress" },
+                  { label: "Alternativas a Webflow", href: "/comparar/alternativas-webflow" },
+                  { label: "Ver todas las comparativas", href: "/comparar" },
                 ].map(item => (
                   <li key={item.href}>
                     <a href={item.href} style={{ fontSize: "14px", color: BRAND.gray, textDecoration: "none", display: "flex", alignItems: "center", gap: "6px" }}
@@ -1050,7 +1056,31 @@ export default function LandForgeLanding() {
               </ul>
             </div>
 
-            {/* Hub 4: Blog y Recursos */}
+            {/* Hub 4: Integraciones */}
+            <div>
+              <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "16px" }}>
+                <span style={{ fontSize: "18px" }}>🔗</span>
+                <span style={{ fontWeight: 800, fontSize: "14px", color: BRAND.text }}>Integraciones</span>
+              </div>
+              <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "10px" }}>
+                {[
+                  { label: "LandForge + WordPress", href: "/integraciones/wordpress" },
+                  { label: "LandForge + Shopify", href: "/integraciones/shopify" },
+                  { label: "LandForge + HubSpot", href: "/integraciones/hubspot" },
+                  { label: "LandForge + Zapier", href: "/integraciones/zapier" },
+                ].map(item => (
+                  <li key={item.href}>
+                    <a href={item.href} style={{ fontSize: "14px", color: BRAND.gray, textDecoration: "none", display: "flex", alignItems: "center", gap: "6px" }}
+                      onMouseEnter={e => (e.currentTarget.style.color = BRAND.accent)}
+                      onMouseLeave={e => (e.currentTarget.style.color = BRAND.gray)}>
+                      <span style={{ color: BRAND.accent, flexShrink: 0 }}>→</span>{item.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Hub 5: Blog y Recursos */}
             <div>
               <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "16px" }}>
                 <span style={{ fontSize: "18px" }}>📚</span>
@@ -1061,6 +1091,8 @@ export default function LandForgeLanding() {
                   { label: "Qué es una Landing Page", href: "/blog/que-es-una-landing-page" },
                   { label: "Cómo Aumentar la Conversión", href: "/blog/como-aumentar-conversion-landing-page" },
                   { label: "Chatbot de Ventas para tu Web", href: "/blog/chatbot-ventas-para-web" },
+                  { label: "Qué es un Chatbot de Ventas IA", href: "/blog/que-es-un-chatbot-de-ventas-ia" },
+                  { label: "Guía de A/B Testing", href: "/blog/ab-testing-landing-pages-guia" },
                   { label: "Ver todos los artículos", href: "/blog" },
                 ].map(item => (
                   <li key={item.href}>

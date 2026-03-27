@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Que es un Chatbot de Ventas con IA y Como Puede Triplicar tus Leads | LandForge",
+  title: "Qué es un Chatbot de Ventas con IA: Guía Definitiva 2026",
   description:
     "Descubre que es un chatbot de ventas con inteligencia artificial, como funciona, tipos, beneficios y como implementarlo en tu web para multiplicar tus leads cualificados.",
   openGraph: {
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     authors: ["LandForge"],
   },
   alternates: {
-    canonical: "/blog/que-es-un-chatbot-de-ventas-ia",
+    canonical: "https://landforge.digital/blog/que-es-un-chatbot-de-ventas-ia",
   },
 };
 
@@ -31,7 +31,7 @@ const articleSchema = {
     "Guia definitiva sobre chatbots de ventas con inteligencia artificial: definicion, funcionamiento tecnico, beneficios, comparativa y guia de implementacion.",
   mainEntityOfPage: {
     "@type": "WebPage",
-    "@id": "https://landforge.site/blog/que-es-un-chatbot-de-ventas-ia",
+    "@id": "https://landforge.digital/blog/que-es-un-chatbot-de-ventas-ia",
   },
 };
 

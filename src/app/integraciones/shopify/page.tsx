@@ -29,26 +29,26 @@ const faqSchema = {
   mainEntity: [
     {
       "@type": "Question",
-      name: "¿Tengo que instalar algún plugin de WordPress para usar LandForge?",
+      name: "¿Tengo que instalar algún plugin de Shopify para usar LandForge?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "No. LandForge funciona de forma independiente a tu WordPress actual. Creas la landing en LandForge, la publicas en su propio subdominio o dominio personalizado, y desde tu WordPress simplemente añades el botón o el enlace que lleva a esa landing. No necesitas plugins, ni acceso al código, ni tocar tu WordPress.",
+        text: "No. LandForge funciona independientemente de tu Shopify. Las landings se publican en su propio dominio o subdominio. Solo enlazas el CTA de la landing con tu página de producto o carrito de Shopify.",
       },
     },
     {
       "@type": "Question",
-      name: "¿LandForge puede reemplazar a Elementor o Divi?",
+      name: "¿LandForge puede reemplazar al constructor de páginas de Shopify?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Para landing pages de conversión específicas (captación de leads, ventas de un producto, reservas), LandForge es más eficiente que Elementor porque genera la página con IA en 30 segundos y viene con chatbot de ventas integrado. Elementor sigue siendo útil para el diseño de la web corporativa completa. Muchas agencias usan ambas herramientas: WordPress + Elementor para la web, LandForge para las landings de campañas.",
+        text: "Para landing pages de conversión específicas (lanzamientos, campañas, eventos), LandForge es más eficiente. Para las páginas de producto del catálogo completo, el constructor de Shopify sigue siendo la herramienta adecuada.",
       },
     },
     {
       "@type": "Question",
-      name: "¿Las landing pages de LandForge afectan al SEO de mi dominio de WordPress?",
+      name: "¿Las landing pages de LandForge afectan al SEO de mi Shopify?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "No de forma negativa. Las landing pages de LandForge tienen su propia URL y su propio rendimiento SEO. Si las alojas en un subdominio (landing.tuempresa.com), no afectan al dominio principal. Si usas un subdominio del tipo tuempresa.landforge.app, es un dominio completamente independiente.",
+        text: "No negativamente. Las landings de LandForge tienen su propia URL independiente, por lo que no afectan al dominio principal de tu tienda Shopify.",
       },
     },
   ],

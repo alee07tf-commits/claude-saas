@@ -55,7 +55,7 @@ const softwareSchema = {
     },
     {
       "@type": "Offer",
-      name: "Pro",
+      name: "Starter",
       price: "49",
       priceCurrency: "EUR",
       priceSpecification: {
@@ -69,7 +69,7 @@ const softwareSchema = {
     },
     {
       "@type": "Offer",
-      name: "Unlimited",
+      name: "Agency",
       price: "97",
       priceCurrency: "EUR",
       priceSpecification: {
@@ -81,6 +81,20 @@ const softwareSchema = {
       description:
         "Landings ilimitadas, ediciones ilimitadas, chatbot ilimitado, white label, 5 usuarios",
     },
+    {
+      "@type": "Offer",
+      name: "Agency Pro",
+      price: "197",
+      priceCurrency: "EUR",
+      priceSpecification: {
+        "@type": "UnitPriceSpecification",
+        price: "197",
+        priceCurrency: "EUR",
+        unitCode: "MON",
+      },
+      description:
+        "Todo en Agency + 20 usuarios, soporte prioritario, API access, custom branding",
+    },
   ],
   aggregateRating: {
     "@type": "AggregateRating",
@@ -91,68 +105,8 @@ const softwareSchema = {
   },
 };
 
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: [
-    {
-      "@type": "Question",
-      name: "¿Puedo editar la landing después de generarla?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Sí. Forgi Editor te permite seleccionar cualquier sección y pedirle cambios con lenguaje natural. También puedes editar textos directamente haciendo doble clic. Sin tocar código.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "¿Necesito saber programar para usar LandForge?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "No. Todo funciona con formularios y con Forgi. Describes lo que quieres y la IA lo hace por ti. Sin código en ningún momento.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "¿Qué tipo de landing pages genera LandForge?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Landing pages de servicios, captación de leads, producto, restaurantes, clínicas, eCommerce, SaaS y más. La IA adapta estructura y copy al sector de tu negocio.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "¿Puedo usarlo para mis clientes como agencia?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Exactamente para eso está diseñado. Cada landing es tuya para usar con tus clientes. El plan Unlimited incluye white label para que no aparezca la marca LandForge.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "¿Qué es Forgi Chatbot?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Es un asistente de ventas IA que se activa automáticamente en tu landing publicada. Se entrena con los datos de tu negocio y atiende a los visitantes 24/7, resolviendo dudas y guiándolos hacia la conversión. Sin configurar nada.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "¿Dónde se publica mi landing page?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Se publica automáticamente en un subdominio gratuito tipo tu-negocio.landforge.app. En los planes Pro y Unlimited puedes conectar tu propio dominio con SSL incluido.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "¿Cuánto tarda en generar una landing page?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Entre 30 segundos y 2 minutos dependiendo de la complejidad. El formulario de información del negocio se completa en 5 minutos máximo.",
-      },
-    },
-  ],
-};
+// FAQPage schema removed from global component to prevent duplicate
+// FAQPage conflicts with per-page FAQ schemas. Each page defines its own.
 
 export function SchemaMarkup() {
   return (
@@ -164,10 +118,6 @@ export function SchemaMarkup() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
     </>
   );
