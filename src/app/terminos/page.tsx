@@ -52,10 +52,10 @@ export default function TerminosCondiciones() {
             <Link href="/" className="text-[#9D4EDD] underline hover:text-[#7B2CBF] transition-colors">
               https://landforge.digital
             </Link>
-            , propiedad de <strong className="text-[#1A1A2E]">[NOMBRE_EMPRESA]</strong> (en
+            , propiedad de <strong className="text-[#1A1A2E]">Alejandro Manuel Bethencourt Rodríguez</strong> (en
             adelante, &laquo;LandForge&raquo;, &laquo;nosotros&raquo; o &laquo;la
-            Empresa&raquo;), con CIF/NIF <strong className="text-[#1A1A2E]">[CIF/NIF]</strong> y
-            domicilio fiscal en <strong className="text-[#1A1A2E]">[DIRECCIÓN_FISCAL]</strong>.
+            Empresa&raquo;), con NIF <strong className="text-[#1A1A2E]">42266036V</strong> y
+            domicilio fiscal en <strong className="text-[#1A1A2E]">Calle Abreu y Valdés, 5, San Cristóbal de La Laguna, Santa Cruz de Tenerife</strong>.
           </p>
 
           {/* ── 1. Definiciones ── */}
@@ -489,7 +489,7 @@ export default function TerminosCondiciones() {
               española. Para la resolución de cualquier controversia derivada de la
               interpretación o el cumplimiento de estos Términos, las partes se someten a la
               jurisdicción de los Juzgados y Tribunales de{" "}
-              <strong className="text-[#1A1A2E]">[CIUDAD]</strong>, con renuncia expresa a
+              San Cristóbal de La Laguna (Santa Cruz de Tenerife), con renuncia expresa a
               cualquier otro fuero que pudiera corresponderles.
             </p>
             <p className="text-[#6B7280] leading-relaxed">

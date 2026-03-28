@@ -58,15 +58,15 @@ export default function AvisoLegalPage() {
             <ul className="space-y-2 ml-1">
               <li>
                 <span className="font-semibold">Denominación social:</span>{" "}
-                <span className="text-[#6B7280]">[NOMBRE_EMPRESA]</span> (en adelante, &ldquo;LandForge&rdquo;)
+                Alejandro Manuel Bethencourt Rodríguez (en adelante, &ldquo;LandForge&rdquo;)
               </li>
               <li>
                 <span className="font-semibold">CIF / NIF:</span>{" "}
-                <span className="text-[#6B7280]">[CIF/NIF]</span>
+                42266036V
               </li>
               <li>
                 <span className="font-semibold">Domicilio social:</span>{" "}
-                <span className="text-[#6B7280]">[DIRECCIÓN_FISCAL]</span>
+                Calle Abreu y Valdés, 5, San Cristóbal de La Laguna, Santa Cruz de Tenerife
               </li>
               <li>
                 <span className="font-semibold">Correo electrónico:</span>{" "}
@@ -261,7 +261,7 @@ export default function AvisoLegalPage() {
               legislación española. Para la resolución de cualquier controversia que
               pudiera derivarse del acceso o uso de este sitio web, LandForge y el
               usuario acuerdan someterse expresamente a los Juzgados y Tribunales de{" "}
-              <span className="text-[#6B7280] font-medium">[CIUDAD]</span>, con renuncia
+              San Cristóbal de La Laguna (Santa Cruz de Tenerife), con renuncia
               expresa a cualquier otro fuero que pudiera corresponderles, salvo que la
               legislación aplicable disponga imperativamente otro fuero.
             </p>
@@ -269,7 +269,7 @@ export default function AvisoLegalPage() {
               En el caso de que el usuario tenga su domicilio fuera de España, LandForge
               y el usuario se someten, con renuncia expresa a cualquier otro fuero, a los
               Juzgados y Tribunales de{" "}
-              <span className="text-[#6B7280] font-medium">[CIUDAD]</span> (España).
+              San Cristóbal de La Laguna (Santa Cruz de Tenerife, España).
             </p>
           </section>
 
