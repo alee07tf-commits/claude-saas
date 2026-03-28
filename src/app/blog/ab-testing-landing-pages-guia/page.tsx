@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "A/B Testing en Landing Pages: Guía Completa para Maximizar Conversiones",
-  description: "Aprende cómo hacer A/B testing en landing pages paso a paso. Herramientas, framework de priorización ICE, ejemplos reales y errores comunes. Guía 2026.",
+  title: "A/B Testing en Landing Pages: Guía CRO 2026",
+  description: "Aprende a hacer A/B testing en landing pages paso a paso. Herramientas, framework ICE, ejemplos reales y errores comunes.",
   openGraph: {
-    title: "A/B Testing en Landing Pages: Guía Completa para Maximizar Conversiones",
+    title: "A/B Testing en Landing Pages: Guía CRO 2026",
     description: "Guía definitiva de A/B testing para landing pages: proceso paso a paso, herramientas comparadas, casos de éxito y framework ICE para priorizar tests.",
     type: "article", publishedTime: "2026-03-18T08:00:00Z", modifiedTime: "2026-03-27T10:00:00Z", authors: ["Alejandro Bethencourt"],
   },

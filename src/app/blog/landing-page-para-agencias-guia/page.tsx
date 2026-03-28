@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Landing Pages para Agencias: Guía Definitiva para Escalar en 2026",
+  title: "Guía Landing Pages para Agencias (2026)",
   description:
-    "Cómo crear, entregar y escalar landing pages como agencia de marketing. Automatización con IA, white label, pricing para clientes y flujo de trabajo profesional.",
+    "Crea, entrega y escala landing pages como agencia. IA, white label, pricing para clientes y flujo de trabajo profesional.",
   keywords: [
     "landing pages para agencias de marketing",
     "como crear landing pages para clientes",
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     canonical: "https://landforge.digital/blog/landing-page-para-agencias-guia",
   },
   openGraph: {
-    title: "Landing Pages para Agencias: Guía Definitiva para Escalar en 2026",
+    title: "Guía Landing Pages para Agencias (2026)",
     description:
       "Cómo crear, entregar y escalar landing pages como agencia de marketing.",
     url: "https://landforge.digital/blog/landing-page-para-agencias-guia",

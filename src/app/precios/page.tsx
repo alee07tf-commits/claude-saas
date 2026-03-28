@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Precios y Planes de LandForge — Desde 49€/mes",
+  title: "Precios y Planes — Desde 49€/mes",
   description:
     "Planes claros y sin sorpresas para agencias. Desde 49€/mes con 14 días gratis. Compara Starter, Agency y Agency Pro. 20% dto. anual.",
   keywords: [
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     canonical: "https://landforge.digital/precios",
   },
   openGraph: {
-    title: "Precios y Planes de LandForge — Desde 49€/mes",
+    title: "Precios y Planes — Desde 49€/mes",
     description:
       "Planes claros y sin sorpresas para agencias de marketing. Desde 49€/mes con 14 días gratis.",
     url: "https://landforge.digital/precios",

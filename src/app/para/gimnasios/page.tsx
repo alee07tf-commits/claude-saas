@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Landing Pages para Gimnasios con IA: Capta Más Socios en 30s",
+  title: "Landing Pages para Gimnasios con IA",
   description:
-    "Crea landing pages para tu gimnasio en 30 segundos con IA. Capta socios con páginas optimizadas para Google Ads y un chatbot que responde sobre horarios, precios y clases de prueba 24/7.",
+    "Genera landing pages para tu gimnasio en 30s con IA. Chatbot que responde sobre horarios, precios y clases de prueba 24/7.",
   keywords: [
     "landing page gimnasio",
     "crear landing page para gimnasio",
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     canonical: "https://landforge.digital/para/gimnasios",
   },
   openGraph: {
-    title: "Landing Pages para Gimnasios con IA: Capta Más Socios en 30s",
+    title: "Landing Pages para Gimnasios con IA",
     description:
       "Crea landing pages para tu gimnasio en 30 segundos con IA. Capta socios con páginas optimizadas para Google Ads y un chatbot que responde sobre horarios, precios y clases de prueba 24/7.",
     url: "https://landforge.digital/para/gimnasios",

@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Las 10 Mejores Herramientas para Crear Landing Pages en 2026",
+  title: "10 Mejores Herramientas Landing Pages (2026)",
   description:
-    "Comparativa actualizada de las 10 mejores herramientas para crear landing pages en 2026. Analizamos precio, facilidad de uso, IA, conversion y para quien es cada una.",
+    "Comparativa de las 10 mejores herramientas para crear landing pages en 2026. Precio, facilidad, IA, conversión y para quién es cada una.",
   keywords: [
     "mejores herramientas crear landing pages",
     "herramientas landing pages 2026",
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     canonical: "https://landforge.digital/blog/mejores-herramientas-crear-landing-pages",
   },
   openGraph: {
-    title: "Las 10 Mejores Herramientas para Crear Landing Pages en 2026",
+    title: "10 Mejores Herramientas Landing Pages (2026)",
     description:
       "Comparativa actualizada de las 10 mejores herramientas para crear landing pages en 2026.",
     url: "https://landforge.digital/blog/mejores-herramientas-crear-landing-pages",

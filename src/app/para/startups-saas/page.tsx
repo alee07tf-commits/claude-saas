@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Landing Pages para Startups SaaS con IA: Del MVP al Scale-Up",
+  title: "Landing Pages para Startups SaaS con IA",
   description:
-    "Genera landing pages para tu startup SaaS en 30 segundos con IA. Product Hunt launch pages, free trial signups, demo requests y pricing pages. Forgi cualifica leads B2B 24/7 antes de agendar demo.",
+    "Crea landing pages SaaS con IA en 30s. Product Hunt launches, signups, demos y pricing. Forgi cualifica leads B2B 24/7.",
   keywords: [
     "landing page startups saas",
     "crear landing page saas",
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     canonical: "https://landforge.digital/para/startups-saas",
   },
   openGraph: {
-    title: "Landing Pages para Startups SaaS con IA: Del MVP al Scale-Up",
+    title: "Landing Pages para Startups SaaS con IA",
     description:
       "Genera landing pages para tu startup SaaS en 30 segundos con IA. Product Hunt launch pages, free trial signups, demo requests y pricing pages. Forgi cualifica leads B2B 24/7 antes de agendar demo.",
     url: "https://landforge.digital/para/startups-saas",
