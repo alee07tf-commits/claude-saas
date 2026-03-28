@@ -96,12 +96,21 @@ export default function PreviewPage() {
   const liveHtmlRef       = useRef<string | null>(null)  // tracks HTML including inline edits (no re-render)
   const supabaseSaveTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
+  // User plan (for feature gating in UI)
+  const [userPlan, setUserPlan] = useState<string>('none')
+  const canCustomDomain = userPlan === 'agency' || userPlan === 'agency_pro'
+
   // Publish success overlay + redirect
   const router = useRouter()
   const [publishOverlay, setPublishOverlay] = useState<{ url: string; countdown: number } | null>(null)
 
   // Keep liveHtmlRef in sync when html state changes (initial load, AI edit, undo)
   useEffect(() => { liveHtmlRef.current = html }, [html])
+
+  // Load user plan for feature gating
+  useEffect(() => {
+    fetch('/api/user-plan').then(r => r.json()).then(d => { if (d.plan) setUserPlan(d.plan) }).catch(() => {})
+  }, [])
 
   // Publish success overlay countdown → redirect to dashboard
   useEffect(() => {
@@ -956,8 +965,35 @@ export default function PreviewPage() {
               </a>
             </div>
 
-            {/* Domain input */}
-            {!domainResult && (
+            {/* Domain input or upsell */}
+            {!domainResult && !canCustomDomain && (
+              <div style={{
+                padding: '16px', borderRadius: '12px',
+                background: `linear-gradient(135deg, ${UI.accent}08, ${UI.accentAlt}08)`,
+                border: `1px solid ${UI.border}`,
+                textAlign: 'center',
+              }}>
+                <div style={{ fontSize: '24px', marginBottom: '8px' }}>🔒</div>
+                <div style={{ fontSize: '13px', fontWeight: 700, color: UI.text, marginBottom: '4px' }}>
+                  Dominio propio no disponible en tu plan
+                </div>
+                <div style={{ fontSize: '12px', color: UI.gray, marginBottom: '12px', lineHeight: 1.5 }}>
+                  Conecta tu propio dominio a tus landings con el plan Agency o superior.
+                </div>
+                <a
+                  href="/#pricing"
+                  style={{
+                    display: 'inline-block', padding: '8px 20px', borderRadius: '8px',
+                    background: `linear-gradient(135deg, ${UI.accent}, ${UI.accentAlt})`,
+                    color: '#fff', fontSize: '13px', fontWeight: 700,
+                    textDecoration: 'none', transition: 'opacity .15s',
+                  }}
+                >
+                  Ver plan Agency
+                </a>
+              </div>
+            )}
+            {!domainResult && canCustomDomain && (
               <>
                 <div>
                   <div style={{ fontSize: '11px', color: UI.gray, marginBottom: '6px', fontWeight: 600 }}>TU DOMINIO PROPIO</div>
