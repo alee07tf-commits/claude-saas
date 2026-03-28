@@ -67,7 +67,7 @@ export async function GET(
 
   const { data, error } = await supabase
     .from('landing_pages')
-    .select('id, html_content, business_name, survey_data, status, metadata')
+    .select('id, html_content, business_name, survey_data, status, metadata, subdomain')
     .eq('id', id)
     .single()
 
@@ -81,5 +81,6 @@ export async function GET(
     status:       data.status,
     surveyData:   data.survey_data,
     metadata:     data.metadata,
+    subdomain:    data.subdomain,
   })
 }

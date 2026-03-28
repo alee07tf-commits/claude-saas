@@ -403,10 +403,11 @@ export default function PreviewPage() {
     } else if (id && id !== 'preview') {
       fetch(`/api/landing/${id}`)
         .then((r) => r.json())
-        .then((data: { html?: string; surveyData?: Record<string, unknown> }) => {
+        .then((data: { html?: string; surveyData?: Record<string, unknown>; subdomain?: string }) => {
           if (data.html) {
             setHtml(data.html)
             if (data.surveyData) setSurveyData(data.surveyData)
+            if (data.subdomain) setDeployedUrl(data.subdomain)
           } else {
             setNoData(true)
           }
