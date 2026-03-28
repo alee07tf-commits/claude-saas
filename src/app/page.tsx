@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import { createClient } from "@/lib/supabase/client";
+import Link from "next/link";
 
 const BRAND = {
   name: "LandForge",
@@ -1089,9 +1090,21 @@ export default function LandForgeLanding() {
           }}>L</div>
           <span style={{ fontWeight: 700, fontSize: "14px", fontFamily: "'Space Mono', monospace", color: BRAND.text }}>{BRAND.name}</span>
         </div>
-        <p style={{ color: BRAND.gray, fontSize: "13px" }}>
+        <p style={{ color: BRAND.gray, fontSize: "13px", marginBottom: "12px" }}>
           © 2026 {BRAND.name} · Creado para agencias que valoran su tiempo
         </p>
+        <nav style={{ display: "flex", justifyContent: "center", gap: "16px", flexWrap: "wrap" }}>
+          {[
+            { href: "/aviso-legal", label: "Aviso Legal" },
+            { href: "/politica-privacidad", label: "Privacidad" },
+            { href: "/politica-cookies", label: "Cookies" },
+            { href: "/terminos", label: "Términos" },
+          ].map(l => (
+            <Link key={l.href} href={l.href} style={{ fontSize: "12px", color: BRAND.gray, textDecoration: "none" }}>
+              {l.label}
+            </Link>
+          ))}
+        </nav>
       </footer>
 
       {/* Forgi chat widget is rendered globally via layout.tsx → ForgiChatWidget */}

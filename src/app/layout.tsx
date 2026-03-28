@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { SchemaMarkup } from "@/components/SchemaMarkup";
 import ForgiChatWidget from "@/components/ForgiChatWidget";
+import CookieConsent from "@/components/CookieConsent";
+import LegalFooter from "@/components/LegalFooter";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -94,7 +96,9 @@ export default function RootLayout({
       >
         <SchemaMarkup />
         {children}
+        <LegalFooter />
         <ForgiChatWidget />
+        <CookieConsent />
       </body>
     </html>
   );
