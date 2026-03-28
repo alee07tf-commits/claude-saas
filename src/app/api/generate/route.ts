@@ -858,7 +858,7 @@ export async function POST(request: NextRequest) {
 
         const anthropicStream = client.messages.stream({
           model: 'claude-sonnet-4-6',
-          max_tokens: 24000,
+          max_tokens: 32000,
           system: [{ type: 'text' as const, text: HTML_DESIGNER_SYSTEM, cache_control: { type: 'ephemeral' as const } }],
           messages: [{ role: 'user', content: buildHtmlPrompt(surveyData, serpAnalysis, domainContent, designConcept, seoStrategy) }],
         })
@@ -881,6 +881,26 @@ export async function POST(request: NextRequest) {
         }
         fullHtml = injectSectionAttributes(fullHtml)
         if (finalMsg.stop_reason === 'max_tokens') {
+          // Close any open HTML tags to prevent broken rendering
+          const openTags: string[] = []
+          const tagRegex = /<\/?([a-zA-Z][a-zA-Z0-9]*)\b[^>]*\/?>/g
+          const selfClosing = new Set(['br', 'hr', 'img', 'input', 'meta', 'link', 'area', 'base', 'col', 'embed', 'source', 'track', 'wbr'])
+          let match
+          while ((match = tagRegex.exec(fullHtml)) !== null) {
+            const tag = match[1].toLowerCase()
+            if (selfClosing.has(tag) || match[0].endsWith('/>')) continue
+            if (match[0].startsWith('</')) {
+              const idx = openTags.lastIndexOf(tag)
+              if (idx !== -1) openTags.splice(idx, 1)
+            } else {
+              openTags.push(tag)
+            }
+          }
+          // Close open tags in reverse order (innermost first)
+          for (let i = openTags.length - 1; i >= 0; i--) {
+            const tag = openTags[i]
+            if (tag !== 'body' && tag !== 'html') fullHtml += `</${tag}>`
+          }
           if (!fullHtml.includes('</body>')) fullHtml += '\n</body>'
           if (!fullHtml.includes('</html>')) fullHtml += '\n</html>'
         }
@@ -905,7 +925,11 @@ export async function POST(request: NextRequest) {
           })
           .select('id')
           .single()
-        if (dbError) console.error('DB error:', dbError)
+        if (dbError) {
+          console.error('DB error:', dbError)
+          send({ type: 'error', msg: 'Error al guardar la landing. Inténtalo de nuevo.' })
+          return
+        }
 
         await incrementUserUsage(user.id, 'generations')
         await incrementUserUsage(user.id, 'landings')
