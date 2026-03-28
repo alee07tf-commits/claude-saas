@@ -28,7 +28,7 @@ const articleSchema = {
   "@type": "Article",
   headline: "Las 10 Mejores Herramientas para Crear Landing Pages en 2026",
   description: "Comparativa actualizada de las 10 mejores herramientas para crear landing pages en 2026. Precio, facilidad de uso, IA, conversion y para quien es cada una.",
-  author: { "@type": "Organization", name: "LandForge" },
+  author: { "@type": "Person", name: "Alejandro Bethencourt", url: "https://landforge.digital/sobre-nosotros", jobTitle: "Fundador de LandForge", sameAs: "https://www.linkedin.com/in/alejandro-bethencourt-rodr%C3%ADguez/" },
   datePublished: "2026-03-27",
   dateModified: "2026-03-27",
   image: "https://landforge.digital/og-image.png",
@@ -314,7 +314,7 @@ export default function MejoresHerramientasLandingPages() {
               <div className="flex flex-wrap gap-4 text-sm text-[#6B7280]">
                 <span>Marzo 2026</span>
                 <span>12 min de lectura</span>
-                <span>LandForge Team</span>
+                <Link href="/sobre-nosotros" className="hover:underline">✍️ Alejandro Bethencourt</Link> <span className="text-[#6B7280]">— Fundador de LandForge</span>
               </div>
             </div>
 

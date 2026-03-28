@@ -28,7 +28,7 @@ const articleSchema = {
   "@type": "Article",
   headline: "Cómo Crear una Landing Page de Alta Conversión en 2026 (Guía Completa)",
   description: "Guía paso a paso con la estructura exacta para crear landing pages que convierten: copywriting, CTA, velocidad y chatbot IA.",
-  author: { "@type": "Organization", name: "LandForge" },
+  author: { "@type": "Person", name: "Alejandro Bethencourt", url: "https://landforge.digital/sobre-nosotros", jobTitle: "Fundador de LandForge", sameAs: "https://www.linkedin.com/in/alejandro-bethencourt-rodr%C3%ADguez/" },
   datePublished: "2026-02-15",
   dateModified: "2026-03-25",
   image: "https://landforge.digital/og-image.png",
@@ -153,7 +153,7 @@ export default function ComoCrearLandingPage() {
               <div className="flex flex-wrap gap-4 text-sm text-[#6B7280]">
                 <span>📅 Febrero 2026 (actualizado Marzo 2026)</span>
                 <span>⏱️ 10 min de lectura</span>
-                <span>✍️ LandForge Team</span>
+                <Link href="/sobre-nosotros" className="hover:underline">✍️ Alejandro Bethencourt</Link> <span className="text-[#6B7280]">— Fundador de LandForge</span>
               </div>
             </div>
 

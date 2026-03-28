@@ -28,7 +28,7 @@ const articleSchema = {
   "@type": "Article",
   headline: "Chatbot de Ventas para tu Web con IA: Guía Completa 2026",
   description: "Cómo implementar un chatbot de ventas con IA en tu landing page para atender, cualificar y convertir leads las 24 horas.",
-  author: { "@type": "Organization", name: "LandForge" },
+  author: { "@type": "Person", name: "Alejandro Bethencourt", url: "https://landforge.digital/sobre-nosotros", jobTitle: "Fundador de LandForge", sameAs: "https://www.linkedin.com/in/alejandro-bethencourt-rodr%C3%ADguez/" },
   datePublished: "2026-03-01",
   dateModified: "2026-03-25",
 };
@@ -85,7 +85,7 @@ export default function ChatbotVentasArticle() {
               <div className="mt-4 flex gap-4 text-sm text-[#6B7280]">
                 <span>📅 Marzo 2026</span>
                 <span>⏱️ 7 min de lectura</span>
-                <span>✍️ LandForge Team</span>
+                <Link href="/sobre-nosotros" className="hover:underline">✍️ Alejandro Bethencourt</Link> <span className="text-[#6B7280]">— Fundador de LandForge</span>
               </div>
             </div>
 

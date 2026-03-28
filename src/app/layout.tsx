@@ -37,9 +37,9 @@ export const metadata: Metadata = {
     "software landing pages agencias",
     "Forgi chatbot",
   ],
-  authors: [{ name: "LandForge", url: SEO_DOMAIN }],
-  creator: "ZappyApps",
-  publisher: "ZappyApps",
+  authors: [{ name: "Alejandro Bethencourt", url: `${SEO_DOMAIN}/sobre-nosotros` }],
+  creator: "LandForge",
+  publisher: "LandForge",
   robots: {
     index: true,
     follow: true,

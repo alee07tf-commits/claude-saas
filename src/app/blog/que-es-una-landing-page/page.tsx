@@ -29,7 +29,7 @@ const articleSchema = {
   headline: "Qué es una Landing Page y Para Qué Sirve en 2026",
   description:
     "Guía completa sobre qué es una landing page, sus tipos, diferencias con una web corporativa y cómo crear una de alta conversión.",
-  author: { "@type": "Organization", name: "LandForge" },
+  author: { "@type": "Person", name: "Alejandro Bethencourt", url: "https://landforge.digital/sobre-nosotros", jobTitle: "Fundador de LandForge", sameAs: "https://www.linkedin.com/in/alejandro-bethencourt-rodr%C3%ADguez/" },
   datePublished: "2026-03-01",
   dateModified: "2026-03-25",
   image: "https://landforge.digital/og-que-es-landing-page.jpg",
@@ -89,7 +89,7 @@ export default function QueEsLandingPage() {
               <div className="mt-4 flex gap-4 text-sm text-[#6B7280]">
                 <span>📅 Marzo 2026</span>
                 <span>⏱️ 8 min de lectura</span>
-                <span>✍️ LandForge Team</span>
+                <Link href="/sobre-nosotros" className="hover:underline">✍️ Alejandro Bethencourt</Link> <span className="text-[#6B7280]">— Fundador de LandForge</span>
               </div>
             </div>
 

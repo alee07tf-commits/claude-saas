@@ -19,6 +19,13 @@ const organizationSchema = {
     contactType: "customer support",
     email: "hola@landforge.digital",
   },
+  founder: {
+    "@type": "Person",
+    name: "Alejandro Bethencourt Rodríguez",
+    url: `${SITE_URL}/sobre-nosotros`,
+    jobTitle: "Fundador y CEO",
+    sameAs: "https://www.linkedin.com/in/alejandro-bethencourt-rodr%C3%ADguez/",
+  },
 };
 
 const softwareSchema = {

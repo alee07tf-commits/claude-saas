@@ -28,7 +28,7 @@ const articleSchema = {
   "@type": "Article",
   headline: "Cómo Aumentar la Conversión de tu Landing Page en 2026",
   description: "Guía práctica con 7 tácticas CRO probadas para mejorar la tasa de conversión de landing pages B2B.",
-  author: { "@type": "Organization", name: "LandForge", url: "https://landforge.digital" },
+  author: { "@type": "Person", name: "Alejandro Bethencourt", url: "https://landforge.digital/sobre-nosotros", jobTitle: "Fundador de LandForge", sameAs: "https://www.linkedin.com/in/alejandro-bethencourt-rodr%C3%ADguez/" },
   publisher: { "@type": "Organization", name: "LandForge", url: "https://landforge.digital" },
   datePublished: "2026-01-15",
   dateModified: "2026-03-27",
@@ -99,7 +99,7 @@ export default function BlogPostAumentarConversion() {
               <div className="mt-4 flex gap-4 text-sm text-[#6B7280]">
                 <span>📅 Actualizado marzo 2026</span>
                 <span>⏱️ 8 min de lectura</span>
-                <span>✍️ LandForge Team</span>
+                <Link href="/sobre-nosotros" className="hover:underline">✍️ Alejandro Bethencourt</Link> <span className="text-[#6B7280]">— Fundador de LandForge</span>
               </div>
             </div>
 

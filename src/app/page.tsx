@@ -952,6 +952,7 @@ export default function LandForgeLanding() {
                   { label: "Forgi Editor — Edita con IA", href: "/features/forgi-editor" },
                   { label: "Conversion Score", href: "/features/conversion-score" },
                   { label: "Precios y Planes", href: "/precios" },
+                  { label: "Sobre Nosotros", href: "/sobre-nosotros" },
                 ].map(item => (
                   <li key={item.href}>
                     <a href={item.href} style={{ fontSize: "14px", color: BRAND.gray, textDecoration: "none", display: "flex", alignItems: "center", gap: "6px" }}

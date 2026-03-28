@@ -29,7 +29,7 @@ const articleSchema = {
   headline: "Landing Pages para Agencias de Marketing: Guía Definitiva para Escalar en 2026",
   description:
     "Cómo crear, entregar y escalar landing pages como agencia de marketing. Automatización con IA, white label, pricing para clientes y flujo de trabajo profesional.",
-  author: { "@type": "Organization", name: "LandForge" },
+  author: { "@type": "Person", name: "Alejandro Bethencourt", url: "https://landforge.digital/sobre-nosotros", jobTitle: "Fundador de LandForge", sameAs: "https://www.linkedin.com/in/alejandro-bethencourt-rodr%C3%ADguez/" },
   datePublished: "2026-03-27",
   dateModified: "2026-03-27",
   image: "https://landforge.digital/og-image.png",
@@ -133,7 +133,7 @@ export default function LandingPageParaAgenciasGuia() {
               <div className="flex flex-wrap gap-4 text-sm text-[#6B7280]">
                 <span>Marzo 2026</span>
                 <span>12 min de lectura</span>
-                <span>LandForge Team</span>
+                <Link href="/sobre-nosotros" className="hover:underline">✍️ Alejandro Bethencourt</Link> <span className="text-[#6B7280]">— Fundador de LandForge</span>
               </div>
             </div>
 

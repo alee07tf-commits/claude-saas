@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     type: "article",
     publishedTime: "2026-03-15T10:00:00Z",
     modifiedTime: "2026-03-27T10:00:00Z",
-    authors: ["LandForge"],
+    authors: ["Alejandro Bethencourt"],
   },
   alternates: {
     canonical: "https://landforge.digital/blog/que-es-un-chatbot-de-ventas-ia",
@@ -23,7 +23,7 @@ const articleSchema = {
   "@context": "https://schema.org",
   "@type": "Article",
   headline: "Que es un Chatbot de Ventas con IA y Como Puede Triplicar tus Leads",
-  author: { "@type": "Organization", name: "LandForge" },
+  author: { "@type": "Person", name: "Alejandro Bethencourt", url: "https://landforge.digital/sobre-nosotros", jobTitle: "Fundador de LandForge", sameAs: "https://www.linkedin.com/in/alejandro-bethencourt-rodr%C3%ADguez/" },
   publisher: { "@type": "Organization", name: "LandForge" },
   datePublished: "2026-03-15",
   dateModified: "2026-03-27",
@@ -154,7 +154,7 @@ export default function BlogChatbotVentasIA() {
             puedes implementarlo hoy mismo sin necesidad de conocimientos técnicos.
           </p>
           <div className="flex flex-wrap items-center gap-4 text-sm text-[#6B7280]">
-            <span>Por <strong className="text-[#1A1A2E]">LandForge</strong></span>
+            <Link href="/sobre-nosotros" className="hover:underline">✍️ Alejandro Bethencourt</Link> <span className="text-[#6B7280]">— Fundador de LandForge</span>
             <span className="w-1 h-1 rounded-full bg-[#6B7280]" />
             <time dateTime="2026-03-15">15 marzo 2026</time>
             <span className="w-1 h-1 rounded-full bg-[#6B7280]" />

@@ -226,6 +226,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.9,
     },
+    // ── Sobre nosotros (E-E-A-T) ──
+    {
+      url: `${SITE_URL}/sobre-nosotros`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
     // ── Páginas legales ──
     {
       url: `${SITE_URL}/aviso-legal`,

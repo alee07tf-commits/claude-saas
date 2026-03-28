@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "A/B Testing en Landing Pages: Guía Completa para Maximizar Conversiones",
     description: "Guía definitiva de A/B testing para landing pages: proceso paso a paso, herramientas comparadas, casos de éxito y framework ICE para priorizar tests.",
-    type: "article", publishedTime: "2026-03-18T08:00:00Z", modifiedTime: "2026-03-27T10:00:00Z", authors: ["LandForge"],
+    type: "article", publishedTime: "2026-03-18T08:00:00Z", modifiedTime: "2026-03-27T10:00:00Z", authors: ["Alejandro Bethencourt"],
   },
   alternates: { canonical: "https://landforge.digital/blog/ab-testing-landing-pages-guia" },
 };
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 const articleSchema = {
   "@context": "https://schema.org", "@type": "Article",
   headline: "A/B Testing en Landing Pages: Guía Completa para Maximizar Conversiones",
-  author: { "@type": "Organization", name: "LandForge", url: "https://landforge.digital" },
+  author: { "@type": "Person", name: "Alejandro Bethencourt", url: "https://landforge.digital/sobre-nosotros", jobTitle: "Fundador de LandForge", sameAs: "https://www.linkedin.com/in/alejandro-bethencourt-rodr%C3%ADguez/" },
   publisher: { "@type": "Organization", name: "LandForge", url: "https://landforge.digital" },
   datePublished: "2026-03-18", dateModified: "2026-03-27",
   description: "Guía completa de A/B testing para landing pages: proceso, herramientas, framework ICE, casos reales y errores comunes.",
@@ -101,7 +101,7 @@ export default function ABTestingLandingPagesGuia() {
         </p>
 
         <div className="flex flex-wrap gap-4 text-xs text-[#6B7280] mb-10 border-b border-[#E0AAFF] pb-6">
-          <span>Autor: <strong className="text-[#1A1A2E]">LandForge</strong></span>
+          <Link href="/sobre-nosotros" className="hover:underline">✍️ Alejandro Bethencourt</Link> <span className="text-[#6B7280]">— Fundador de LandForge</span>
           <span>Publicado: 18 mar 2026</span>
           <span>Actualizado: 27 mar 2026</span>
           <span>Lectura: ~18 min</span>
