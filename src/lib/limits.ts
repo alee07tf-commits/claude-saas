@@ -153,13 +153,18 @@ async function checkUsageMetrics(
   supabaseAdmin: any,
   userId: string, action: ActionType, plan: PlanType, limit: number
 ): Promise<{ allowed: boolean, plan: PlanType, limit: number, usage: number }> {
+  // Ensure row exists for this user (handles users created before the trigger)
+  await supabaseAdmin
+    .from('usage_metrics')
+    .upsert({ user_id: userId }, { onConflict: 'user_id', ignoreDuplicates: true });
+
   const { data: usage, error: usageError } = await supabaseAdmin
     .from('usage_metrics')
     .select(`${action}_count`)
     .eq('user_id', userId)
-    .maybeSingle();
+    .single();
 
-  if (usageError && usageError.code !== 'PGRST116') {
+  if (usageError) {
     console.error('Error fetching usage metrics:', usageError);
     return { allowed: true, plan, limit, usage: 0 };
   }
@@ -170,44 +175,36 @@ async function checkUsageMetrics(
 
 /**
  * Incrementa el contador de uso para una acción específica.
- * Para 'landings' y 'generations' el límite real se verifica con COUNT de filas,
- * pero igualmente actualizamos el contador para tracking.
+ * Usa upsert para crear la fila si no existe (usuarios antiguos sin trigger).
  */
 export async function incrementUserUsage(userId: string, action: ActionType): Promise<boolean> {
   const column = `${action}_count`;
   try {
     const admin = getSupabaseAdmin();
 
-    // Try atomic upsert with raw rpc first, fallback to read-then-write
-    const { data: existing } = await admin
+    // 1. Ensure row exists (upsert with onConflict — idempotent)
+    await admin
+      .from('usage_metrics')
+      .upsert({ user_id: userId }, { onConflict: 'user_id', ignoreDuplicates: true });
+
+    // 2. Read current value
+    const { data: row } = await admin
       .from('usage_metrics')
       .select(column)
       .eq('user_id', userId)
-      .maybeSingle();
+      .single();
 
-    const currentVal = existing ? (existing as unknown as Record<string, number>)[column] ?? 0 : 0;
+    const currentVal = row ? (row as unknown as Record<string, number>)[column] ?? 0 : 0;
 
-    if (existing) {
-      // Row exists — use UPDATE (more reliable than upsert)
-      const { error } = await admin
-        .from('usage_metrics')
-        .update({ [column]: currentVal + 1, updated_at: new Date().toISOString() })
-        .eq('user_id', userId);
+    // 3. Increment
+    const { error } = await admin
+      .from('usage_metrics')
+      .update({ [column]: currentVal + 1, updated_at: new Date().toISOString() })
+      .eq('user_id', userId);
 
-      if (error) {
-        console.error(`[Limits] UPDATE ${column} failed for ${userId}:`, error.message);
-        return false;
-      }
-    } else {
-      // No row — INSERT new
-      const { error } = await admin
-        .from('usage_metrics')
-        .insert({ user_id: userId, [column]: 1 });
-
-      if (error) {
-        console.error(`[Limits] INSERT ${column} failed for ${userId}:`, error.message);
-        return false;
-      }
+    if (error) {
+      console.error(`[Limits] UPDATE ${column} failed for ${userId}:`, error.message);
+      return false;
     }
 
     return true;
