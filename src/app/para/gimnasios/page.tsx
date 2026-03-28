@@ -112,8 +112,8 @@ export default function GimnasiosLanding() {
               <Link href="/register" className="px-8 py-4 rounded-xl font-bold text-lg text-white transition duration-200 hover:-translate-y-1" style={{ background: "linear-gradient(135deg, #9D4EDD, #7B2CBF)", boxShadow: "0 8px 24px rgba(157,78,221,0.3)" }}>
                 Crear mi landing fitness gratis
               </Link>
-              <Link href="#demo" className="px-8 py-4 rounded-xl border-2 border-[#E0AAFF] text-[#9D4EDD] font-bold text-lg hover:border-[#9D4EDD] transition duration-200">
-                Ver demo gimnasio real
+              <Link href="#como-funciona" className="px-8 py-4 rounded-xl border-2 border-[#E0AAFF] text-[#9D4EDD] font-bold text-lg hover:border-[#9D4EDD] transition duration-200">
+                Cómo funciona
               </Link>
             </div>
             <p className="text-sm text-[#9D4EDD]">Sin tarjeta de credito · 14 dias gratis · Cancelacion inmediata</p>
@@ -150,16 +150,13 @@ export default function GimnasiosLanding() {
           </section>
 
           {/* -- 3. SOLUCION -- */}
-          <section id="demo" className="px-6 py-24 bg-white">
+          <section id="como-funciona" className="px-6 py-24 bg-white">
             <div className="max-w-5xl mx-auto">
               <div className="text-center mb-16">
                 <span className="inline-block text-xs font-bold uppercase tracking-widest text-[#9D4EDD] bg-[#F3E8FF] px-4 py-1.5 rounded-full border border-[#E0AAFF] mb-4">Como lo resuelve LandForge</span>
                 <h2 className="text-3xl md:text-4xl font-extrabold">
                   Convierte clics de Google Ads en socios entrando por la puerta de tu gimnasio
                 </h2>
-              </div>
-              <div className="mb-16 mx-auto" style={{ maxWidth: "800px", borderRadius: "16px", overflow: "hidden", border: "1px solid #E0AAFF", boxShadow: "0 24px 64px rgba(157,78,221,0.14)" }}>
-                <video src="/demo-landforge.mp4" autoPlay muted loop playsInline disablePictureInPicture controlsList="nodownload nofullscreen noremoteplayback" style={{ width: "100%", height: "auto", display: "block", borderRadius: "16px", pointerEvents: "none" }} />
               </div>
 
               <div className="flex flex-col gap-12">

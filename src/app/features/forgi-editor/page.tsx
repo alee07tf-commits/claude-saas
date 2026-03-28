@@ -85,8 +85,8 @@ export default function ForgiEditorPage() {
               <Link href="/register" className="px-8 py-4 rounded-xl font-bold text-lg text-white transition hover:-translate-y-1" style={{ background: "linear-gradient(135deg, #9D4EDD, #7B2CBF)", boxShadow: "0 8px 24px rgba(157,78,221,0.3)" }}>
                 Editar mi primera landing →
               </Link>
-              <Link href="#demo" className="px-8 py-4 rounded-xl border-2 border-[#E0AAFF] text-[#9D4EDD] font-bold text-lg hover:border-[#9D4EDD] transition">
-                Ver Forgi Editor en acción
+              <Link href="#como-funciona" className="px-8 py-4 rounded-xl border-2 border-[#E0AAFF] text-[#9D4EDD] font-bold text-lg hover:border-[#9D4EDD] transition">
+                Cómo funciona
               </Link>
             </div>
             <p className="text-sm text-[#9D4EDD]">Sin cuenta · Sin tarjeta · Listo en 30s</p>
@@ -101,16 +101,12 @@ export default function ForgiEditorPage() {
             </div>
           </section>
 
-          {/* ── 2. DEMO EDITOR ── */}
-          <section id="demo" className="px-6 py-24 bg-white">
+          {/* ── 2. CÓMO FUNCIONA ── */}
+          <section id="como-funciona" className="px-6 py-24 bg-white">
             <div className="max-w-5xl mx-auto">
               <div className="text-center mb-14">
                 <h2 className="text-3xl font-extrabold">Así trabaja Forgi Editor</h2>
                 <p className="text-[#6B7280] mt-3 max-w-xl mx-auto">En lugar de buscar un botón, arrastrar un elemento y ajustar el padding, simplemente escribes lo que quieres.</p>
-              </div>
-              {/* Video demo */}
-              <div className="mb-16 mx-auto" style={{ maxWidth: "800px", borderRadius: "16px", overflow: "hidden", border: "1px solid #E0AAFF", boxShadow: "0 24px 64px rgba(157,78,221,0.14)" }}>
-                <video src="/demo-landforge.mp4" autoPlay muted loop playsInline disablePictureInPicture controlsList="nodownload nofullscreen noremoteplayback" style={{ width: "100%", height: "auto", display: "block", borderRadius: "16px", pointerEvents: "none" }} />
               </div>
 
               <div className="grid md:grid-cols-2 gap-10 items-start">
