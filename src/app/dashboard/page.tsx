@@ -289,7 +289,7 @@ export default async function DashboardPage() {
                       Ver
                     </a>
                     <a
-                      href={`/preview/${row.id}`}
+                      href={row.subdomain ? `/preview/${row.id}?domain=1` : `/preview/${row.id}`}
                       style={{
                         padding: '8px 18px', borderRadius: '8px', textDecoration: 'none',
                         background: 'transparent', border: `1px solid ${T.border}`,

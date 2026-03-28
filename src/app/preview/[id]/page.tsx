@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { useParams, useRouter } from 'next/navigation'
+import { useParams, useRouter, useSearchParams } from 'next/navigation'
 
 type ChatMessage = {
   role: 'user' | 'forgi'
@@ -56,6 +56,7 @@ function replaceSectionHtml(fullHtml: string, oldSec: string, newSec: string): s
 
 export default function PreviewPage() {
   const { id } = useParams<{ id: string }>()
+  const searchParams = useSearchParams()
   const [html, setHtml]         = useState<string | null>(null)
   const [noData, setNoData]     = useState(false)
   const [iframeSrc, setIframeSrc] = useState('')
@@ -111,6 +112,11 @@ export default function PreviewPage() {
   useEffect(() => {
     fetch('/api/user-plan').then(r => r.json()).then(d => { if (d.plan) setUserPlan(d.plan) }).catch(() => {})
   }, [])
+
+  // Auto-open domain panel when coming from dashboard with ?domain=1
+  useEffect(() => {
+    if (searchParams.get('domain') === '1') setShowDomainPanel(true)
+  }, [searchParams])
 
   // Publish success overlay countdown → redirect to dashboard
   useEffect(() => {
