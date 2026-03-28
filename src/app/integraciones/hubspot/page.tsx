@@ -22,6 +22,17 @@ export const metadata: Metadata = {
   },
 };
 
+/* ── JSON-LD: BreadcrumbList ── */
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Inicio", item: "https://landforge.digital" },
+    { "@type": "ListItem", position: 2, name: "Integraciones", item: "https://landforge.digital/integraciones" },
+    { "@type": "ListItem", position: 3, name: "HubSpot", item: "https://landforge.digital/integraciones/hubspot" },
+  ],
+};
+
 /* ── JSON-LD: FAQPage ── */
 const faqSchema = {
   "@context": "https://schema.org",
@@ -77,6 +88,7 @@ const softwareSchema = {
 export default function IntegracionHubSpot() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }} />
 

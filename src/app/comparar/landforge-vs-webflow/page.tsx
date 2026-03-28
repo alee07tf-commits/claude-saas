@@ -27,7 +27,7 @@ const articleSchema = {
   "@type": "Article",
   headline: "LandForge vs Webflow 2026: Comparativa Completa para Agencias",
   description: "Análisis técnico y estratégico de LandForge versus Webflow para agencias de marketing que necesitan crear landing pages de alta conversión.",
-  author: { "@type": "Organization", name: "LandForge" },
+  author: { "@type": "Person", name: "Alejandro Bethencourt", url: "https://landforge.digital/sobre-nosotros", jobTitle: "Fundador de LandForge" },
   datePublished: "2026-03-01",
   dateModified: "2026-03-25",
 };

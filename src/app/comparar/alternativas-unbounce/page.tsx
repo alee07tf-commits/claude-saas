@@ -23,12 +23,22 @@ export const metadata: Metadata = {
   },
 };
 
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Inicio", item: "https://landforge.digital" },
+    { "@type": "ListItem", position: 2, name: "Comparativas", item: "https://landforge.digital/comparar" },
+    { "@type": "ListItem", position: 3, name: "Alternativas a Unbounce", item: "https://landforge.digital/comparar/alternativas-unbounce" },
+  ],
+};
+
 const articleSchema = {
   "@context": "https://schema.org",
   "@type": "Article",
   headline: "Las 4 Mejores Alternativas a Unbounce con IA en 2026",
   description: "Ranking de alternativas a Unbounce para agencias en 2026 con comparativa de precio y funcionalidades IA.",
-  author: { "@type": "Organization", name: "LandForge" },
+  author: { "@type": "Person", name: "Alejandro Bethencourt", url: "https://landforge.digital/sobre-nosotros", jobTitle: "Fundador de LandForge" },
   datePublished: "2026-03-01",
   dateModified: "2026-03-25",
 };
@@ -118,6 +128,7 @@ const alternatives = [
 export default function AlternativasUnbounce() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 

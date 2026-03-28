@@ -13,11 +13,21 @@ export const metadata: Metadata = {
   },
 };
 
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Inicio", item: "https://landforge.digital" },
+    { "@type": "ListItem", position: 2, name: "Comparativas", item: "https://landforge.digital/comparar" },
+    { "@type": "ListItem", position: 3, name: "Alternativas a Webflow", item: "https://landforge.digital/comparar/alternativas-webflow" },
+  ],
+};
+
 const articleSchema = {
   "@context": "https://schema.org", "@type": "Article",
   headline: "Las Mejores Alternativas a Webflow para Landing Pages en 2026",
   description: "Comparativa honesta de las 5 mejores alternativas a Webflow para crear landing pages con IA, chatbot y velocidad optimizada para agencias.",
-  author: { "@type": "Organization", name: "LandForge" },
+  author: { "@type": "Person", name: "Alejandro Bethencourt", url: "https://landforge.digital/sobre-nosotros", jobTitle: "Fundador de LandForge" },
   datePublished: "2026-03-20", dateModified: "2026-03-27",
 };
 
@@ -89,6 +99,7 @@ const faqs = [
 export default function AlternativasWebflow() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 

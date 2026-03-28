@@ -28,7 +28,7 @@ const articleSchema = {
   "@type": "Article",
   headline: "LandForge vs Unbounce 2026: Comparativa Completa para Agencias",
   description: "Análisis técnico y estratégico de LandForge versus Unbounce para agencias que necesitan escalar la producción de landing pages.",
-  author: { "@type": "Organization", name: "LandForge" },
+  author: { "@type": "Person", name: "Alejandro Bethencourt", url: "https://landforge.digital/sobre-nosotros", jobTitle: "Fundador de LandForge" },
   datePublished: "2026-03-01",
   dateModified: "2026-03-25",
 };

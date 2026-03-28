@@ -23,6 +23,16 @@ export const metadata: Metadata = {
   },
 };
 
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Inicio", item: "https://landforge.digital" },
+    { "@type": "ListItem", position: 2, name: "Funcionalidades", item: "https://landforge.digital/features" },
+    { "@type": "ListItem", position: 3, name: "Forgi Editor", item: "https://landforge.digital/features/forgi-editor" },
+  ],
+};
+
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -57,6 +67,7 @@ const faqSchema = {
 export default function ForgiEditorPage() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
       <div className="min-h-screen bg-[#FAFAFA] text-[#1A1A2E] font-sans">

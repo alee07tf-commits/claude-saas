@@ -9,6 +9,16 @@ export const metadata: Metadata = {
   openGraph: { title: "Integración Zapier: Automatiza tus Leads", description: "Conecta LandForge con Zapier y envía cada lead a tu CRM, email marketing, Slack y +5,000 apps. Sin código, en 2 minutos.", url: "https://landforge.digital/integraciones/zapier" },
 };
 
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Inicio", item: "https://landforge.digital" },
+    { "@type": "ListItem", position: 2, name: "Integraciones", item: "https://landforge.digital/integraciones" },
+    { "@type": "ListItem", position: 3, name: "Zapier", item: "https://landforge.digital/integraciones/zapier" },
+  ],
+};
+
 const faqSchema = {
   "@context": "https://schema.org", "@type": "FAQPage",
   mainEntity: [
@@ -29,6 +39,7 @@ const softwareSchema = {
 export default function IntegracionZapier() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }} />
 

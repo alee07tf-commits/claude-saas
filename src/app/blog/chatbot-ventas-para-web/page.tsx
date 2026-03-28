@@ -2,25 +2,35 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Chatbot de Ventas IA para tu Web (2026)",
+  title: "Cómo Poner un Chatbot de Ventas IA en tu Web",
   description:
-    "Descubre cómo un chatbot de ventas con IA atiende, cualifica y convierte visitantes de tu web 24/7. Comparativa de herramientas y cómo activarlo en 30s.",
+    "Guía paso a paso para instalar un chatbot de ventas con IA en tu web. Comparativa de 5 herramientas, configuración en 30s y errores a evitar.",
   keywords: [
-    "chatbot ventas web ia",
-    "chatbot ia landing page",
-    "asistente ventas automatico web",
     "como poner chatbot ia web",
-    "chatbot conversion leads ia 2026",
+    "instalar chatbot ventas web",
+    "mejor chatbot ventas ia 2026",
+    "comparativa chatbot ventas",
+    "chatbot conversion leads landing page",
   ],
   alternates: {
     canonical: "https://landforge.digital/blog/chatbot-ventas-para-web",
   },
   openGraph: {
-    title: "Chatbot de Ventas IA para tu Web (2026)",
+    title: "Cómo Poner un Chatbot de Ventas IA en tu Web",
     description:
-      "Descubre cómo un chatbot de ventas con IA atiende, cualifica y convierte visitantes de tu web 24/7. Comparativa de herramientas y cómo activarlo en 30s.",
+      "Guía paso a paso para instalar un chatbot de ventas con IA en tu web. Comparativa de 5 herramientas, configuración en 30s y errores a evitar.",
     url: "https://landforge.digital/blog/chatbot-ventas-para-web",
   },
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Inicio", item: "https://landforge.digital" },
+    { "@type": "ListItem", position: 2, name: "Blog", item: "https://landforge.digital/blog" },
+    { "@type": "ListItem", position: 3, name: "Chatbot de Ventas IA para Web", item: "https://landforge.digital/blog/chatbot-ventas-para-web" },
+  ],
 };
 
 const articleSchema = {
@@ -67,6 +77,7 @@ const faqSchema = {
 export default function ChatbotVentasArticle() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 

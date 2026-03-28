@@ -28,7 +28,7 @@ const articleSchema = {
   "@type": "Article",
   headline: "Las 5 Mejores Alternativas a Leadpages para Agencias en 2026",
   description: "Análisis y comparativa de alternativas a Leadpages para agencias digitales que buscan mayor velocidad, IA nativa y precio más justo.",
-  author: { "@type": "Organization", name: "LandForge" },
+  author: { "@type": "Person", name: "Alejandro Bethencourt", url: "https://landforge.digital/sobre-nosotros", jobTitle: "Fundador de LandForge" },
   datePublished: "2026-03-01",
   dateModified: "2026-03-25",
 };

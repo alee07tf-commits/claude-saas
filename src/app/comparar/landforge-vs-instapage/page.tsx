@@ -28,7 +28,7 @@ const articleSchema = {
   headline: "LandForge vs Instapage 2026: Comparativa Completa para Agencias",
   description:
     "Análisis técnico y estratégico de LandForge versus Instapage para agencias que necesitan escalar la producción de landing pages con IA o A/B testing enterprise.",
-  author: { "@type": "Organization", name: "LandForge" },
+  author: { "@type": "Person", name: "Alejandro Bethencourt", url: "https://landforge.digital/sobre-nosotros", jobTitle: "Fundador de LandForge" },
   datePublished: "2026-03-20",
   dateModified: "2026-03-27",
 };

@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Chatbot de Ventas con IA: Guía 2026",
+  title: "Qué es un Chatbot de Ventas con IA (2026)",
   description:
-    "Descubre qué es un chatbot de ventas con IA, cómo funciona, tipos, beneficios y cómo implementarlo en tu web para multiplicar leads.",
+    "Qué es un chatbot de ventas con IA, cómo funciona, 4 tipos que existen, beneficios frente a chat en vivo y cuándo merece la pena usarlo.",
   openGraph: {
-    title: "Chatbot de Ventas con IA: Guía Definitiva 2026",
+    title: "Qué es un Chatbot de Ventas con IA y Cómo Funciona",
     description:
-      "Guía definitiva sobre chatbots de ventas con IA: cómo funcionan, beneficios, comparativa de herramientas y pasos para implementarlo.",
+      "Qué es un chatbot de ventas con IA, 4 tipos que existen, beneficios frente a chat en vivo y cuándo merece la pena usarlo en tu negocio.",
     type: "article",
     publishedTime: "2026-03-15T10:00:00Z",
     modifiedTime: "2026-03-27T10:00:00Z",
