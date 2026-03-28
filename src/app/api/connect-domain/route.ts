@@ -1,5 +1,4 @@
 import { createClient } from '@/lib/supabase/server'
-import { checkFeatureAccess } from '@/lib/limits'
 import { NextRequest, NextResponse } from 'next/server'
 
 const VERCEL_TOKEN    = process.env.VERCEL_TOKEN
@@ -25,11 +24,6 @@ export async function POST(req: NextRequest) {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
-
-  const access = await checkFeatureAccess(user.id, 'custom_domain', user.email ?? undefined)
-  if (!access.allowed) {
-    return NextResponse.json({ error: 'El dominio propio está disponible desde el plan Agency. Mejora tu plan para conectar tu dominio.' }, { status: 403 })
-  }
 
   const body = await req.json() as { landingId?: string; customDomain?: string }
   const { landingId, customDomain } = body
