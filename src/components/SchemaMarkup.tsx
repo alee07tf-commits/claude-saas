@@ -36,8 +36,13 @@ const softwareSchema = {
   applicationSubCategory: "Landing Page Builder",
   operatingSystem: "Web",
   url: SITE_URL,
+  image: `${SITE_URL}/opengraph-image`,
   description:
     "Generador de landing pages con Inteligencia artificial enfocado en conversiones B2B. Incluye Chatbot de ventas 24/7 (Forgi), SEO programático integrado y builder sin código.",
+  brand: {
+    "@type": "Brand",
+    name: "LandForge",
+  },
   featureList: [
     "Generación de landing pages con IA en 30 segundos",
     "Forgi Editor: edición por bloques con IA",
@@ -49,7 +54,7 @@ const softwareSchema = {
     "Descarga HTML",
     "White label disponible",
   ],
-  screenshot: `${SITE_URL}/og-image.png`,
+  screenshot: `${SITE_URL}/opengraph-image`,
   offers: [
     {
       "@type": "Offer",
@@ -59,6 +64,7 @@ const softwareSchema = {
       description:
         "1 landing page, 5 ediciones Forgi Editor, 50 mensajes Forgi Chatbot/mes",
       availability: "https://schema.org/InStock",
+      url: `${SITE_URL}/register`,
     },
     {
       "@type": "Offer",
@@ -72,7 +78,9 @@ const softwareSchema = {
         unitCode: "MON",
       },
       description:
-        "10 landings activas, 100 ediciones Forgi Editor/mes, 2.000 mensajes Forgi Chatbot/mes, dominio propio",
+        "5 landings activas, generación con IA, Forgi Editor, Forgi Chatbot, Conversion Score",
+      availability: "https://schema.org/InStock",
+      url: `${SITE_URL}/precios`,
     },
     {
       "@type": "Offer",
@@ -86,7 +94,9 @@ const softwareSchema = {
         unitCode: "MON",
       },
       description:
-        "Landings ilimitadas, ediciones ilimitadas, chatbot ilimitado, white label, 5 usuarios",
+        "20 landings activas, dominio propio, todas las funciones del plan Starter",
+      availability: "https://schema.org/InStock",
+      url: `${SITE_URL}/precios`,
     },
     {
       "@type": "Offer",
@@ -100,7 +110,9 @@ const softwareSchema = {
         unitCode: "MON",
       },
       description:
-        "Todo en Agency + 20 usuarios, soporte prioritario, API access, custom branding",
+        "Landings ilimitadas, white label, soporte prioritario, todas las funciones del plan Agency",
+      availability: "https://schema.org/InStock",
+      url: `${SITE_URL}/precios`,
     },
   ],
   aggregateRating: {
@@ -110,6 +122,20 @@ const softwareSchema = {
     bestRating: "5",
     worstRating: "1",
   },
+  review: [
+    {
+      "@type": "Review",
+      author: { "@type": "Person", name: "Carlos R." },
+      reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" },
+      reviewBody: "Generamos 12 landings en una tarde para nuestros clientes. Antes tardábamos 3 días por landing.",
+    },
+    {
+      "@type": "Review",
+      author: { "@type": "Person", name: "María G." },
+      reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" },
+      reviewBody: "Forgi convierte el 23% de los visitantes que interactúan con él. Mejor que cualquier formulario.",
+    },
+  ],
 };
 
 // FAQPage schema removed from global component to prevent duplicate
