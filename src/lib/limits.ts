@@ -140,26 +140,7 @@ export async function checkUserLimit(userId: string, action: ActionType, callerE
     if (limit === 0) return { allowed: false, plan, limit, usage: 0 };
     if (limit >= 999999) return { allowed: true, plan, limit, usage: 0 };
 
-    // 2. Obtener el uso actual
-    // For 'landings': COUNT actual rows in landing_pages (always accurate)
-    // For 'generations': also count landing_pages rows (each generation = 1 landing created)
-    if (action === 'landings' || action === 'generations') {
-      const { count, error: countError } = await supabaseAdmin
-        .from('landing_pages')
-        .select('*', { count: 'exact', head: true })
-        .eq('user_id', userId);
-
-      if (countError) {
-        console.error(`Error counting ${action}:`, countError);
-        // Fallback: try usage_metrics table
-        return await checkUsageMetrics(supabaseAdmin, userId, action, plan, limit);
-      }
-
-      const currentUsage = count ?? 0;
-      return { allowed: currentUsage < limit, plan, limit, usage: currentUsage };
-    }
-
-    // For editions/chatbot_messages: use usage_metrics table
+    // 2. Obtener el uso actual desde usage_metrics (acumulativo, no se reduce al borrar)
     return await checkUsageMetrics(supabaseAdmin, userId, action, plan, limit);
   } catch (err) {
     console.error('Error checking user limits:', err);
