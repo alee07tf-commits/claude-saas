@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Conversion Score: Analiza y Mejora tu Landing Page con IA",
+  title: "Conversion Score: Analiza tu Landing con IA",
   description:
-    "El Conversion Score de LandForge analiza tu landing page en tiempo real y te da recomendaciones accionables para aumentar la conversión. Puntuación de 0 a 100 con desglose por categoría.",
+    "Analiza tu landing page en tiempo real con IA y recibe recomendaciones accionables para aumentar la conversión. Puntuación de 0 a 100 por categoría.",
   keywords: [
     "conversion score landing page",
     "analizar landing page conversion",
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     canonical: "https://landforge.digital/features/conversion-score",
   },
   openGraph: {
-    title: "Conversion Score: Analiza y Mejora tu Landing Page con IA",
+    title: "Conversion Score: Analiza tu Landing con IA",
     description:
       "Analiza tu landing page en tiempo real y recibe recomendaciones accionables para aumentar la conversión.",
     url: "https://landforge.digital/features/conversion-score",

@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Comparativas: LandForge vs Competencia — ¿Cuál es la Mejor Opción?",
+  title: "Comparativas: LandForge vs Competencia",
   description:
-    "Comparativas honestas de LandForge con las principales herramientas de landing pages: Webflow, Unbounce, Instapage, Carrd y Leadpages. Encuentra la herramienta que mejor encaja con tu negocio.",
+    "Comparativas honestas de LandForge vs Webflow, Unbounce, Instapage, Carrd y Leadpages. Encuentra la mejor herramienta de landing pages para ti.",
   keywords: [
     "comparativa herramientas landing pages",
     "landforge vs alternativas",
@@ -16,9 +16,9 @@ export const metadata: Metadata = {
     canonical: "https://landforge.digital/comparar",
   },
   openGraph: {
-    title: "Comparativas: LandForge vs Competencia — ¿Cuál es la Mejor Opción?",
+    title: "Comparativas: LandForge vs Competencia",
     description:
-      "Comparativas honestas de LandForge con las principales herramientas de landing pages: Webflow, Unbounce, Instapage, Carrd y Leadpages. Encuentra la herramienta que mejor encaja con tu negocio.",
+      "Comparativas honestas de LandForge vs Webflow, Unbounce, Instapage, Carrd y Leadpages. Encuentra la mejor herramienta de landing pages para ti.",
     url: "https://landforge.digital/comparar",
   },
 };

@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Forgi Editor: Crea y Edita Landing Pages con IA por Bloques",
+  title: "Forgi Editor: Edita Landings con IA",
   description:
-    "El editor de landing pages más rápido del mercado. Describe en lenguaje natural lo que quieres cambiar y Forgi lo aplica al instante. Sin arrastrar ni soltar. Sin código.",
+    "El editor de landing pages más rápido. Describe en lenguaje natural lo que quieres cambiar y Forgi lo aplica al instante. Sin código.",
   keywords: [
     "editor landing pages ia",
     "crear landing page lenguaje natural",
@@ -16,9 +16,9 @@ export const metadata: Metadata = {
     canonical: "https://landforge.digital/features/forgi-editor",
   },
   openGraph: {
-    title: "Forgi Editor: Crea y Edita Landing Pages con IA por Bloques",
+    title: "Forgi Editor: Edita Landings con IA",
     description:
-      "El editor de landing pages más rápido del mercado. Describe en lenguaje natural lo que quieres cambiar y Forgi lo aplica al instante. Sin arrastrar ni soltar. Sin código.",
+      "El editor de landing pages más rápido. Describe en lenguaje natural lo que quieres cambiar y Forgi lo aplica al instante. Sin código.",
     url: "https://landforge.digital/features/forgi-editor",
   },
 };
@@ -40,7 +40,7 @@ const faqSchema = {
       name: "¿Puedo editar el código HTML de las landings que genera LandForge?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "En los planes Pro y Unlimited tienes acceso al código fuente de tus landings, exportable como proyecto Next.js o como HTML estático. Puedes alojarla donde quieras y personalizar cada línea a tu gusto.",
+        text: "En los planes Agency y Agency Pro tienes acceso al código fuente de tus landings, exportable como proyecto Next.js o como HTML estático. Puedes alojarla donde quieras y personalizar cada línea a tu gusto.",
       },
     },
     {
@@ -71,9 +71,9 @@ export default function ForgiEditorPage() {
             </p>
 
             <h1 className="text-4xl md:text-6xl font-extrabold max-w-4xl tracking-tight leading-[1.05] mb-7">
-              Dile a Forgi qué cambiar.{" "}
+              Editor de Landing Pages con IA.{" "}
               <span style={{ background: "linear-gradient(135deg, #9D4EDD, #7B2CBF)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-                Lo hace en 5 segundos.
+                Describe el cambio, listo en 5 segundos.
               </span>
             </h1>
 
@@ -206,7 +206,7 @@ export default function ForgiEditorPage() {
               <div className="divide-y divide-gray-100">
                 {[
                   { q: "¿Forgi Editor es un editor de arrastrar y soltar?", a: "No. Forgi Editor funciona en lenguaje natural: describes el cambio que quieres y la IA lo implementa al instante. Mucho más rápido que cualquier drag & drop." },
-                  { q: "¿Puedo editar el código HTML de las landings?", a: "En los planes Pro y Unlimited tienes acceso al código fuente exportable como proyecto Next.js o HTML estático para alojar donde quieras." },
+                  { q: "¿Puedo editar el código HTML de las landings?", a: "En los planes Agency y Agency Pro tienes acceso al código fuente exportable como proyecto Next.js o HTML estático para alojar donde quieras." },
                   { q: "¿Cuánto tiempo tarda Forgi Editor en aplicar un cambio?", a: "La mayoría de cambios (textos, colores, secciones) los aplica en menos de 5 segundos. Cambios más complejos pueden tardar 10-20 segundos." },
                 ].map((faq) => (
                   <details key={faq.q} className="group py-5">

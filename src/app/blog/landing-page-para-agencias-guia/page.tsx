@@ -119,16 +119,16 @@ export default function LandingPageParaAgenciasGuia() {
             {/* HERO DEL ARTICULO */}
             <div className="mb-10">
               <p className="text-xs font-bold uppercase tracking-[2px] text-[#9D4EDD] mb-4">
-                Guia para Agencias &middot; TOFU &middot; Prioridad Alta
+                Guía para Agencias &middot; TOFU &middot; Prioridad Alta
               </p>
               <h1 className="text-3xl md:text-4xl font-extrabold leading-tight mb-6">
-                Landing Pages para Agencias de Marketing: Guia Definitiva para Escalar en 2026
+                Landing Pages para Agencias de Marketing: Guía Definitiva para Escalar en 2026
               </h1>
               <p className="text-lg text-[#6B7280] leading-relaxed mb-6">
-                Tus clientes necesitan landing pages para cada campana de Ads, cada servicio y cada promocion.
-                Pero construirlas manualmente te cuesta 4 a 8 horas por pagina, erosiona tus margenes y frena
-                el crecimiento de tu agencia. Esta guia te muestra como pasar de producir 5 landings al mes
-                a mas de 50 sin ampliar equipo, usando automatizacion con IA y un flujo de trabajo profesional.
+                Tus clientes necesitan landing pages para cada campaña de Ads, cada servicio y cada promoción.
+                Pero construirlas manualmente te cuesta 4 a 8 horas por página, erosiona tus márgenes y frena
+                el crecimiento de tu agencia. Esta guía te muestra cómo pasar de producir 5 landings al mes
+                a más de 50 sin ampliar equipo, usando automatización con IA y un flujo de trabajo profesional.
               </p>
               <div className="flex flex-wrap gap-4 text-sm text-[#6B7280]">
                 <span>Marzo 2026</span>
@@ -141,7 +141,7 @@ export default function LandingPageParaAgenciasGuia() {
 
             {/* INDICE */}
             <div className="bg-[#F3E8FF] border border-[#E0AAFF] rounded-2xl p-6 mb-12">
-              <p className="font-bold text-sm mb-3 uppercase tracking-wider text-[#9D4EDD]">Lo que vas a aprender en esta guia</p>
+              <p className="font-bold text-sm mb-3 uppercase tracking-wider text-[#9D4EDD]">Lo que vas a aprender en esta guía</p>
               <ol className="space-y-1.5 text-sm">
                 {tocItems.map((item, i) => (
                   <li key={item.anchor}>
@@ -161,7 +161,7 @@ export default function LandingPageParaAgenciasGuia() {
                   ["4-8h", "Tiempo medio para crear una landing manualmente"],
                   ["30s", "Tiempo con LandForge IA"],
                   ["67%", "Agencias que pierden margen en landing pages"],
-                  ["10x", "Capacidad de escala con automatizacion IA"],
+                  ["10x", "Capacidad de escala con automatización IA"],
                 ].map(([v, l]) => (
                   <div key={l} className="text-center">
                     <div className="text-2xl font-extrabold text-[#9D4EDD] mb-1">{v}</div>
@@ -173,18 +173,18 @@ export default function LandingPageParaAgenciasGuia() {
 
             {/* SECCION 1 — PROBLEMA */}
             <section id="problema">
-              <h2 className="text-2xl font-extrabold mb-4">1. El problema: por que las agencias pierden dinero con las landing pages</h2>
+              <h2 className="text-2xl font-extrabold mb-4">1. El problema: por qué las agencias pierden dinero con las landing pages</h2>
 
               <p className="text-[#6B7280] leading-relaxed mb-4">
-                La mayoria de agencias de marketing digital ofrecen landing pages como parte de sus paquetes de Google Ads, SEO o social media. El problema es que la produccion de esas landings se convierte en el cuello de botella operativo que nadie quiere admitir.
+                La mayoría de agencias de marketing digital ofrecen landing pages como parte de sus paquetes de Google Ads, SEO o social media. El problema es que la producción de esas landings se convierte en el cuello de botella operativo que nadie quiere admitir.
               </p>
 
               <p className="text-[#6B7280] leading-relaxed mb-4">
-                Hagamos numeros reales. Un disenador web junior cobra entre 20 y 35 euros por hora. Una landing page personalizada tarda entre 4 y 8 horas en crearse: briefing con el cliente, wireframe, diseno, maquetacion, copywriting, revision y publicacion. Eso son entre 80 y 280 euros de coste interno por landing. Si cobras al cliente 300 euros por landing, tu margen real es de entre 20 y 220 euros, sin contar el tiempo del project manager, las rondas de revision y las modificaciones post-entrega.
+                Hagamos números reales. Un diseñador web junior cobra entre 20 y 35 euros por hora. Una landing page personalizada tarda entre 4 y 8 horas en crearse: briefing con el cliente, wireframe, diseño, maquetación, copywriting, revisión y publicación. Eso son entre 80 y 280 euros de coste interno por landing. Si cobras al cliente 300 euros por landing, tu margen real es de entre 20 y 220 euros, sin contar el tiempo del project manager, las rondas de revisión y las modificaciones post-entrega.
               </p>
 
               <p className="text-[#6B7280] leading-relaxed mb-4">
-                Pero el problema mas grave no es el margen unitario, es el coste de oportunidad. Mientras tu equipo dedica 8 horas a una sola landing page para un cliente, esta dejando de atender a otros tres clientes que tambien la necesitan para manana. El resultado: retrasos, clientes frustrados y, en ultima instancia, perdida de cuentas.
+                Pero el problema más grave no es el margen unitario, es el coste de oportunidad. Mientras tu equipo dedica 8 horas a una sola landing page para un cliente, está dejando de atender a otros tres clientes que también la necesitan para mañana. El resultado: retrasos, clientes frustrados y, en última instancia, pérdida de cuentas.
               </p>
 
               <div className="bg-[#F3E8FF] border border-[#E0AAFF] rounded-2xl p-6 mb-6">
@@ -192,21 +192,21 @@ export default function LandingPageParaAgenciasGuia() {
                 <div className="space-y-3 text-sm text-[#6B7280]">
                   <div className="flex gap-3">
                     <span className="font-bold text-[#9D4EDD] flex-shrink-0">Cliente:</span>
-                    <span>&ldquo;Necesito la landing para el lunes, la campana empieza el martes.&rdquo;</span>
+                    <span>&ldquo;Necesito la landing para el lunes, la campaña empieza el martes.&rdquo;</span>
                   </div>
                   <div className="flex gap-3">
                     <span className="font-bold text-[#9D4EDD] flex-shrink-0">Agencia:</span>
-                    <span>&ldquo;Tenemos cola de 2 semanas, el disenador esta en otro proyecto.&rdquo;</span>
+                    <span>&ldquo;Tenemos cola de 2 semanas, el diseñador está en otro proyecto.&rdquo;</span>
                   </div>
                   <div className="flex gap-3">
                     <span className="font-bold text-[#9D4EDD] flex-shrink-0">Resultado:</span>
-                    <span>El cliente lanza la campana con una pagina generica que convierte al 1%. Culpa a la agencia. No renueva.</span>
+                    <span>El cliente lanza la campaña con una página genérica que convierte al 1%. Culpa a la agencia. No renueva.</span>
                   </div>
                 </div>
               </div>
 
               <p className="text-[#6B7280] leading-relaxed mb-4">
-                Esta situacion se repite en agencias de todos los tamanos. Las que sobreviven y escalan son las que automatizan la produccion de landing pages para poder entregar rapidez sin sacrificar calidad ni margen.
+                Esta situación se repite en agencias de todos los tamaños. Las que sobreviven y escalan son las que automatizan la producción de landing pages para poder entregar rapidez sin sacrificar calidad ni margen.
               </p>
             </section>
 
@@ -215,7 +215,7 @@ export default function LandingPageParaAgenciasGuia() {
               <h2 className="text-2xl font-extrabold mb-4">2. Los 3 modelos de negocio de landing pages para agencias</h2>
 
               <p className="text-[#6B7280] leading-relaxed mb-6">
-                Antes de hablar de herramientas, necesitas definir como encaja la creacion de landing pages en el modelo de negocio de tu agencia. Hay tres enfoques, cada uno con sus ventajas y limitaciones.
+                Antes de hablar de herramientas, necesitas definir cómo encaja la creación de landing pages en el modelo de negocio de tu agencia. Hay tres enfoques, cada uno con sus ventajas y limitaciones.
               </p>
 
               <div className="space-y-6 mb-6">
@@ -226,11 +226,11 @@ export default function LandingPageParaAgenciasGuia() {
                     <h3 className="font-extrabold text-lg">Incluida en paquete SEO / Ads</h3>
                   </div>
                   <p className="text-[#6B7280] text-sm leading-relaxed mb-3">
-                    La landing page es un entregable mas dentro de un paquete mensual de Google Ads o SEO. El cliente paga un fee mensual (por ejemplo 800 a 2.000 euros/mes) y la agencia incluye la creacion de 1-3 landing pages como parte del servicio.
+                    La landing page es un entregable más dentro de un paquete mensual de Google Ads o SEO. El cliente paga un fee mensual (por ejemplo 800 a 2.000 euros/mes) y la agencia incluye la creación de 1-3 landing pages como parte del servicio.
                   </p>
                   <div className="flex gap-4 text-xs">
-                    <span className="text-green-600 font-bold">Ventaja: facil de vender, el cliente ve valor integral</span>
-                    <span className="text-red-500 font-bold">Riesgo: el coste de produccion erosiona el margen del paquete</span>
+                    <span className="text-green-600 font-bold">Ventaja: fácil de vender, el cliente ve valor integral</span>
+                    <span className="text-red-500 font-bold">Riesgo: el coste de producción erosiona el margen del paquete</span>
                   </div>
                 </div>
 
@@ -241,11 +241,11 @@ export default function LandingPageParaAgenciasGuia() {
                     <h3 className="font-extrabold text-lg">Servicio independiente de landing pages</h3>
                   </div>
                   <p className="text-[#6B7280] text-sm leading-relaxed mb-3">
-                    Ofreces la creacion de landing pages como un servicio separado, con su propio pricing. El cliente paga por landing (entre 200 y 500 euros por unidad) o por proyecto. Funciona bien para clientes puntuales y lanzamientos especificos.
+                    Ofreces la creación de landing pages como un servicio separado, con su propio pricing. El cliente paga por landing (entre 200 y 500 euros por unidad) o por proyecto. Funciona bien para clientes puntuales y lanzamientos específicos.
                   </p>
                   <div className="flex gap-4 text-xs">
-                    <span className="text-green-600 font-bold">Ventaja: margen claro por unidad, facil de presupuestar</span>
-                    <span className="text-red-500 font-bold">Riesgo: ingresos irregulares, dificil de escalar sin equipo</span>
+                    <span className="text-green-600 font-bold">Ventaja: margen claro por unidad, fácil de presupuestar</span>
+                    <span className="text-red-500 font-bold">Riesgo: ingresos irregulares, difícil de escalar sin equipo</span>
                   </div>
                 </div>
 
@@ -253,42 +253,42 @@ export default function LandingPageParaAgenciasGuia() {
                 <div className="rounded-2xl border border-[#9D4EDD] bg-[#FAF5FF] p-6">
                   <div className="flex items-center gap-3 mb-3">
                     <span className="font-mono font-bold text-xl text-[#9D4EDD]">C</span>
-                    <h3 className="font-extrabold text-lg">Productizacion: Landing Page as a Service (LPaaS)</h3>
+                    <h3 className="font-extrabold text-lg">Productización: Landing Page as a Service (LPaaS)</h3>
                     <span className="text-xs bg-[#9D4EDD] text-white px-2 py-0.5 rounded-full">Recomendado</span>
                   </div>
                   <p className="text-[#6B7280] text-sm leading-relaxed mb-3">
-                    El modelo mas escalable. Creas un servicio productizado donde el cliente paga una suscripcion mensual (entre 500 y 2.000 euros/mes) que incluye la creacion de un numero determinado de landing pages al mes, mas mantenimiento, optimizacion y analytics. Es recurrente, predecible y automatizable.
+                    El modelo más escalable. Creas un servicio productizado donde el cliente paga una suscripción mensual (entre 500 y 2.000 euros/mes) que incluye la creación de un número determinado de landing pages al mes, más mantenimiento, optimización y analytics. Es recurrente, predecible y automatizable.
                   </p>
                   <div className="flex gap-4 text-xs">
                     <span className="text-green-600 font-bold">Ventaja: ingresos recurrentes (MRR), alta escalabilidad con IA</span>
-                    <span className="text-red-500 font-bold">Riesgo: requiere procesos bien definidos desde el dia uno</span>
+                    <span className="text-red-500 font-bold">Riesgo: requiere procesos bien definidos desde el día uno</span>
                   </div>
                 </div>
               </div>
 
               <p className="text-[#6B7280] leading-relaxed mb-4">
-                El modelo C (LPaaS) es el que mas se beneficia de la automatizacion con IA. Cuando puedes generar una landing page en 30 segundos en lugar de 8 horas, el coste de produccion se reduce a casi cero y el margen por cliente se dispara. Pero para que funcione, necesitas un software que soporte multi-cliente, white label y velocidad de ejecucion.
+                El modelo C (LPaaS) es el que más se beneficia de la automatización con IA. Cuando puedes generar una landing page en 30 segundos en lugar de 8 horas, el coste de producción se reduce a casi cero y el margen por cliente se dispara. Pero para que funcione, necesitas un software que soporte multi-cliente, white label y velocidad de ejecución.
               </p>
             </section>
 
             {/* SECCION 3 — AUTOMATIZAR CON IA */}
             <section id="automatizar" className="mt-14">
-              <h2 className="text-2xl font-extrabold mb-4">3. Como automatizar la creacion de landing pages con IA</h2>
+              <h2 className="text-2xl font-extrabold mb-4">3. Cómo automatizar la creación de landing pages con IA</h2>
 
               <p className="text-[#6B7280] leading-relaxed mb-4">
-                La automatizacion no significa perder control creativo. Significa eliminar las 6-7 horas de trabajo mecanico (maquetar, ajustar responsive, configurar formularios, optimizar velocidad) y centrarte en lo unico que realmente importa: la estrategia y el mensaje.
+                La automatización no significa perder control creativo. Significa eliminar las 6-7 horas de trabajo mecánico (maquetar, ajustar responsive, configurar formularios, optimizar velocidad) y centrarte en lo único que realmente importa: la estrategia y el mensaje.
               </p>
 
               <p className="text-[#6B7280] leading-relaxed mb-6">
-                Asi funciona el flujo automatizado con LandForge:
+                Así funciona el flujo automatizado con LandForge:
               </p>
 
               <div className="space-y-4 mb-6">
                 {[
-                  { step: "01", title: "Briefing estandarizado", time: "5 min", desc: "El cliente (o tu como agencia) completa la encuesta inteligente de LandForge: sector, publico objetivo, propuesta de valor, servicios, tono de comunicacion. Esta encuesta reemplaza la tipica reunion de 1 hora que nunca termina de concretar nada." },
-                  { step: "02", title: "Generacion con IA", time: "30 seg", desc: "La IA de LandForge genera la landing page completa: estructura, copywriting (con framework PAS), secciones de social proof, CTAs optimizados, formularios y chatbot de ventas (Forgi). Todo en menos de 30 segundos." },
-                  { step: "03", title: "Revision y ajustes", time: "15-30 min", desc: "Tu equipo revisa la landing generada. Con Forgi Editor, puedes ajustar textos, imagenes, colores y estructura en tiempo real sin tocar codigo. La mayoria de ajustes son cosmeticos: cambiar una foto, afinar un titular, ajustar colores de marca." },
-                  { step: "04", title: "Publicacion", time: "2 min", desc: "Publicas la landing en el dominio del cliente (white label). El chatbot Forgi se activa automaticamente, ya entrenado con el contenido del negocio. El tracking de conversiones queda configurado desde el primer momento." },
+                  { step: "01", title: "Briefing estandarizado", time: "5 min", desc: "El cliente (o tú como agencia) completa la encuesta inteligente de LandForge: sector, público objetivo, propuesta de valor, servicios, tono de comunicación. Esta encuesta reemplaza la típica reunión de 1 hora que nunca termina de concretar nada." },
+                  { step: "02", title: "Generación con IA", time: "30 seg", desc: "La IA de LandForge genera la landing page completa: estructura, copywriting (con framework PAS), secciones de social proof, CTAs optimizados, formularios y chatbot de ventas (Forgi). Todo en menos de 30 segundos." },
+                  { step: "03", title: "Revisión y ajustes", time: "15-30 min", desc: "Tu equipo revisa la landing generada. Con Forgi Editor, puedes ajustar textos, imágenes, colores y estructura en tiempo real sin tocar código. La mayoría de ajustes son cosméticos: cambiar una foto, afinar un titular, ajustar colores de marca." },
+                  { step: "04", title: "Publicación", time: "2 min", desc: "Publicas la landing en el dominio del cliente (white label). El chatbot Forgi se activa automáticamente, ya entrenado con el contenido del negocio. El tracking de conversiones queda configurado desde el primer momento." },
                 ].map((item) => (
                   <div key={item.step} className="flex gap-5 items-start">
                     <div className="flex-shrink-0 w-12 h-12 rounded-2xl flex items-center justify-center font-mono font-bold text-lg border-2 border-[#9D4EDD] bg-[#F3E8FF] text-[#9D4EDD]">
@@ -310,7 +310,7 @@ export default function LandingPageParaAgenciasGuia() {
                 <div className="grid grid-cols-2 gap-4">
                   {[
                     ["Antes (manual)", "4-8 horas por landing"],
-                    ["Despues (con IA)", "30-45 minutos por landing"],
+                    ["Después (con IA)", "30-45 minutos por landing"],
                     ["Ahorro de tiempo", "85-90% por unidad"],
                     ["Capacidad mensual", "De 5 landings a 50+"],
                   ].map(([label, value]) => (
@@ -325,26 +325,26 @@ export default function LandingPageParaAgenciasGuia() {
 
             {/* SECCION 4 — SOFTWARE */}
             <section id="software" className="mt-14">
-              <h2 className="text-2xl font-extrabold mb-4">4. Que buscar en un software de landing pages para agencias</h2>
+              <h2 className="text-2xl font-extrabold mb-4">4. Qué buscar en un software de landing pages para agencias</h2>
 
               <p className="text-[#6B7280] leading-relaxed mb-6">
-                No cualquier page builder sirve para agencias. Hay una diferencia enorme entre un constructor de paginas para freelancers y un software disenado para produccion profesional a escala. Estos son los criterios que debes evaluar:
+                No cualquier page builder sirve para agencias. Hay una diferencia enorme entre un constructor de páginas para freelancers y un software diseñado para producción profesional a escala. Estos son los criterios que debes evaluar:
               </p>
 
               <div className="space-y-3 mb-6">
                 {[
                   { feature: "White label completo", desc: "Dominio del cliente, sin branding del software visible. Tu marca, tu entrega.", critical: true },
-                  { feature: "Gestion multi-cliente", desc: "Panel centralizado para gestionar las landings de 10, 50 o 200 clientes desde un solo lugar.", critical: true },
-                  { feature: "Velocidad de produccion", desc: "Generacion en segundos, no en dias. La IA debe hacer el trabajo pesado: estructura, copy, responsive, SEO.", critical: true },
-                  { feature: "Tracking de conversiones", desc: "Analytics integrado: visitas, leads, tasa de conversion por landing y por cliente. Sin depender de herramientas externas.", critical: true },
-                  { feature: "Chatbot de ventas incluido", desc: "Un chatbot IA que se entrene automaticamente con el contenido del negocio y empiece a convertir desde el dia uno.", critical: false },
-                  { feature: "Editor visual (sin codigo)", desc: "Para hacer ajustes rapidos sin necesitar desarrolladores. Cambiar textos, imagenes y colores en tiempo real.", critical: false },
-                  { feature: "Optimizacion SEO nativa", desc: "Meta tags, Schema markup, velocidad de carga, Core Web Vitals optimizados desde la generacion.", critical: false },
-                  { feature: "Pricing escalable", desc: "Modelo de precios que escale contigo: que no te penalice por tener mas clientes ni por generar mas landings.", critical: false },
+                  { feature: "Gestión multi-cliente", desc: "Panel centralizado para gestionar las landings de 10, 50 o 200 clientes desde un solo lugar.", critical: true },
+                  { feature: "Velocidad de producción", desc: "Generación en segundos, no en días. La IA debe hacer el trabajo pesado: estructura, copy, responsive, SEO.", critical: true },
+                  { feature: "Tracking de conversiones", desc: "Analytics integrado: visitas, leads, tasa de conversión por landing y por cliente. Sin depender de herramientas externas.", critical: true },
+                  { feature: "Chatbot de ventas incluido", desc: "Un chatbot IA que se entrene automáticamente con el contenido del negocio y empiece a convertir desde el día uno.", critical: false },
+                  { feature: "Editor visual (sin código)", desc: "Para hacer ajustes rápidos sin necesitar desarrolladores. Cambiar textos, imágenes y colores en tiempo real.", critical: false },
+                  { feature: "Optimización SEO nativa", desc: "Meta tags, Schema markup, velocidad de carga, Core Web Vitals optimizados desde la generación.", critical: false },
+                  { feature: "Pricing escalable", desc: "Modelo de precios que escale contigo: que no te penalice por tener más clientes ni por generar más landings.", critical: false },
                 ].map((item) => (
                   <div key={item.feature} className={`flex gap-4 items-start rounded-xl p-4 ${item.critical ? "bg-[#F3E8FF] border border-[#E0AAFF]" : "bg-white border border-gray-200"}`}>
                     <span className={`flex-shrink-0 mt-0.5 text-sm font-bold ${item.critical ? "text-[#9D4EDD]" : "text-[#6B7280]"}`}>
-                      {item.critical ? "CRITICO" : "IMPORTANTE"}
+                      {item.critical ? "CRÍTICO" : "IMPORTANTE"}
                     </span>
                     <div>
                       <span className="font-bold text-sm">{item.feature}: </span>
@@ -355,16 +355,16 @@ export default function LandingPageParaAgenciasGuia() {
               </div>
 
               <p className="text-[#6B7280] leading-relaxed mb-4">
-                LandForge cumple todos estos criterios. Fue disenado desde el principio para agencias que necesitan producir landing pages a escala con white label, gestion multi-cliente y generacion con IA en segundos. Puedes explorar las funcionalidades del <Link href="/features/forgi-editor" className="text-[#9D4EDD] font-semibold hover:underline">editor visual Forgi Editor</Link> y del <Link href="/features/forgi-chatbot" className="text-[#9D4EDD] font-semibold hover:underline">chatbot de ventas Forgi</Link> en sus paginas dedicadas.
+                LandForge cumple todos estos criterios. Fue diseñado desde el principio para agencias que necesitan producir landing pages a escala con white label, gestión multi-cliente y generación con IA en segundos. Puedes explorar las funcionalidades del <Link href="/features/forgi-editor" className="text-[#9D4EDD] font-semibold hover:underline">editor visual Forgi Editor</Link> y del <Link href="/features/forgi-chatbot" className="text-[#9D4EDD] font-semibold hover:underline">chatbot de ventas Forgi</Link> en sus páginas dedicadas.
               </p>
             </section>
 
             {/* SECCION 5 — PRICING */}
             <section id="pricing" className="mt-14">
-              <h2 className="text-2xl font-extrabold mb-4">5. Como hacer pricing de landing pages para tus clientes</h2>
+              <h2 className="text-2xl font-extrabold mb-4">5. Cómo hacer pricing de landing pages para tus clientes</h2>
 
               <p className="text-[#6B7280] leading-relaxed mb-6">
-                El pricing es donde la mayoria de agencias deja dinero sobre la mesa. Si tu coste de produccion baja un 85% gracias a la IA, no necesitas trasladar todo ese ahorro al cliente. Necesitas encontrar el punto donde el precio refleje el valor que recibe el cliente, no el coste que tienes tu.
+                El pricing es donde la mayoría de agencias deja dinero sobre la mesa. Si tu coste de producción baja un 85% gracias a la IA, no necesitas trasladar todo ese ahorro al cliente. Necesitas encontrar el punto donde el precio refleje el valor que recibe el cliente, no el coste que tienes tú.
               </p>
 
               <div className="overflow-x-auto rounded-2xl border border-[#E0AAFF] mb-6">
@@ -380,9 +380,9 @@ export default function LandingPageParaAgenciasGuia() {
                   <tbody className="divide-y divide-gray-100">
                     {[
                       ["Por landing (one-shot)", "200 - 500 EUR", "Clientes puntuales, lanzamientos", "75-90%"],
-                      ["Retainer mensual", "500 - 2.000 EUR/mes", "Clientes con campanas activas", "80-92%"],
-                      ["Bundled con Ads", "800 - 3.000 EUR/mes", "Clientes que quieren gestion completa", "60-75%"],
-                      ["LPaaS (productizado)", "500 - 1.500 EUR/mes", "Escala maxima, MRR predecible", "85-95%"],
+                      ["Retainer mensual", "500 - 2.000 EUR/mes", "Clientes con campañas activas", "80-92%"],
+                      ["Bundled con Ads", "800 - 3.000 EUR/mes", "Clientes que quieren gestión completa", "60-75%"],
+                      ["LPaaS (productizado)", "500 - 1.500 EUR/mes", "Escala máxima, MRR predecible", "85-95%"],
                     ].map(([modelo, precio, mejor, margen]) => (
                       <tr key={modelo}>
                         <td className="p-4 font-semibold">{modelo}</td>
@@ -396,13 +396,13 @@ export default function LandingPageParaAgenciasGuia() {
               </div>
 
               <p className="text-xs text-[#6B7280] mb-6">
-                *Margen estimado usando LandForge como herramienta de produccion (coste de produccion &lt; 15 min por landing). Sin incluir costes fijos de la agencia.
+                *Margen estimado usando LandForge como herramienta de producción (coste de producción &lt; 15 min por landing). Sin incluir costes fijos de la agencia.
               </p>
 
               <div className="bg-[#F3E8FF] border border-[#E0AAFF] rounded-2xl p-6 mb-6">
                 <h3 className="text-lg font-bold mb-3 text-[#9D4EDD]">Consejo de pricing avanzado</h3>
                 <p className="text-[#6B7280] text-sm leading-relaxed">
-                  Nunca vendas &ldquo;una landing page&rdquo;. Vende &ldquo;un sistema de captacion de leads que incluye landing page optimizada para conversion + chatbot IA de ventas 24h + analytics de rendimiento&rdquo;. El valor percibido se multiplica por 3 y justifica precios de 500 euros o mas por unidad. La landing es el medio, no el producto. El producto es el resultado: leads cualificados.
+                  Nunca vendas &ldquo;una landing page&rdquo;. Vende &ldquo;un sistema de captación de leads que incluye landing page optimizada para conversión + chatbot IA de ventas 24h + analytics de rendimiento&rdquo;. El valor percibido se multiplica por 3 y justifica precios de 500 euros o más por unidad. La landing es el medio, no el producto. El producto es el resultado: leads cualificados.
                 </p>
               </div>
             </section>
@@ -412,18 +412,18 @@ export default function LandingPageParaAgenciasGuia() {
               <h2 className="text-2xl font-extrabold mb-4">6. El flujo de trabajo profesional: de briefing a entrega</h2>
 
               <p className="text-[#6B7280] leading-relaxed mb-6">
-                Un flujo de trabajo estandarizado es lo que separa a una agencia que entrega &ldquo;cuando puede&rdquo; de una que entrega en 48 horas de forma consistente. Aqui tienes el proceso completo, paso a paso.
+                Un flujo de trabajo estandarizado es lo que separa a una agencia que entrega &ldquo;cuando puede&rdquo; de una que entrega en 48 horas de forma consistente. Aquí tienes el proceso completo, paso a paso.
               </p>
 
               <div className="space-y-0 mb-6">
                 {[
-                  { step: "1", title: "Briefing con el cliente", time: "30 min", desc: "Reunion o formulario estandarizado donde recoges: objetivo de la campana, publico objetivo, propuesta de valor, diferenciadores, tono de marca y elementos obligatorios (logo, colores, legal). Usa siempre el mismo formulario para todos los clientes." },
-                  { step: "2", title: "Encuesta inteligente de LandForge", time: "5 min", desc: "Trasladas la informacion del briefing a la encuesta inteligente de LandForge. La IA necesita contexto de negocio para generar copy efectivo, no solo datos genericos. Cuanto mejor sea el input, mejor sera la landing resultante." },
-                  { step: "3", title: "Generacion con IA", time: "30 seg", desc: "LandForge genera la landing completa: hero, social proof, seccion de problema, solucion, testimonios, CTA, formulario de contacto y chatbot Forgi. Todo optimizado para conversion y SEO desde el primer render." },
-                  { step: "4", title: "Revision interna (QA)", time: "15 min", desc: "Tu account manager o disenador revisa la landing generada: verifica que el copy refleja la marca del cliente, que las imagenes son relevantes, que el CTA es claro y que no hay errores. Usa Forgi Editor para ajustes en tiempo real." },
-                  { step: "5", title: "Ajustes y personalizacion", time: "15-30 min", desc: "Aplicas los ajustes cosmeticos: colores de marca, foto del equipo, logo, testimonios reales del cliente. Tambien puedes anadir secciones especificas si el cliente las solicito en el briefing." },
-                  { step: "6", title: "Aprobacion del cliente", time: "Variable", desc: "Envias un enlace de preview al cliente. La mayoria aprueba con 0-2 cambios menores. Si incluyes una ronda de revision en tu pricing, cobras las rondas adicionales por separado." },
-                  { step: "7", title: "Publicacion y activacion", time: "2 min", desc: "Publicas en el dominio del cliente (white label). Forgi se activa como chatbot de ventas. El tracking de conversiones queda operativo. Envias al cliente el enlace final y el acceso al dashboard de analytics." },
+                  { step: "1", title: "Briefing con el cliente", time: "30 min", desc: "Reunión o formulario estandarizado donde recoges: objetivo de la campaña, público objetivo, propuesta de valor, diferenciadores, tono de marca y elementos obligatorios (logo, colores, legal). Usa siempre el mismo formulario para todos los clientes." },
+                  { step: "2", title: "Encuesta inteligente de LandForge", time: "5 min", desc: "Trasladas la información del briefing a la encuesta inteligente de LandForge. La IA necesita contexto de negocio para generar copy efectivo, no solo datos genéricos. Cuanto mejor sea el input, mejor será la landing resultante." },
+                  { step: "3", title: "Generación con IA", time: "30 seg", desc: "LandForge genera la landing completa: hero, social proof, sección de problema, solución, testimonios, CTA, formulario de contacto y chatbot Forgi. Todo optimizado para conversión y SEO desde el primer render." },
+                  { step: "4", title: "Revisión interna (QA)", time: "15 min", desc: "Tu account manager o diseñador revisa la landing generada: verifica que el copy refleja la marca del cliente, que las imágenes son relevantes, que el CTA es claro y que no hay errores. Usa Forgi Editor para ajustes en tiempo real." },
+                  { step: "5", title: "Ajustes y personalización", time: "15-30 min", desc: "Aplicas los ajustes cosméticos: colores de marca, foto del equipo, logo, testimonios reales del cliente. También puedes añadir secciones específicas si el cliente las solicitó en el briefing." },
+                  { step: "6", title: "Aprobación del cliente", time: "Variable", desc: "Envías un enlace de preview al cliente. La mayoría aprueba con 0-2 cambios menores. Si incluyes una ronda de revisión en tu pricing, cobras las rondas adicionales por separado." },
+                  { step: "7", title: "Publicación y activación", time: "2 min", desc: "Publicas en el dominio del cliente (white label). Forgi se activa como chatbot de ventas. El tracking de conversiones queda operativo. Envías al cliente el enlace final y el acceso al dashboard de analytics." },
                 ].map((item, idx) => (
                   <div key={item.step} className="flex gap-5 items-start py-5 border-b border-gray-100 last:border-b-0">
                     <div className="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm bg-[#9D4EDD] text-white">
@@ -442,24 +442,24 @@ export default function LandingPageParaAgenciasGuia() {
 
               <div className="bg-[#F3E8FF] border border-[#E0AAFF] rounded-xl px-5 py-3.5 mb-4">
                 <span className="text-xs font-extrabold text-[#9D4EDD] uppercase tracking-wider">Tiempo total: </span>
-                <span className="text-sm text-[#6B7280]">De briefing a landing publicada en menos de 48 horas (la mayoria en el mismo dia). Comparado con las 1-2 semanas del proceso manual tradicional.</span>
+                <span className="text-sm text-[#6B7280]">De briefing a landing publicada en menos de 48 horas (la mayoría en el mismo día). Comparado con las 1-2 semanas del proceso manual tradicional.</span>
               </div>
             </section>
 
             {/* SECCION 7 — CASE STUDY */}
             <section id="case-study" className="mt-14">
-              <h2 className="text-2xl font-extrabold mb-4">7. Case study: como escalar de 5 a 50 landings al mes</h2>
+              <h2 className="text-2xl font-extrabold mb-4">7. Case study: cómo escalar de 5 a 50 landings al mes</h2>
 
               <p className="text-[#6B7280] leading-relaxed mb-4">
-                Para ilustrar como funciona todo esto en la practica, veamos un caso hipotetico pero basado en patrones reales de agencias que usan herramientas de generacion con IA.
+                Para ilustrar cómo funciona todo esto en la práctica, veamos un caso hipotético pero basado en patrones reales de agencias que usan herramientas de generación con IA.
               </p>
 
               <div className="bg-white rounded-2xl border border-gray-200 p-6 mb-6">
-                <h3 className="font-extrabold mb-3">Agencia DigiScale (caso hipotetico)</h3>
+                <h3 className="font-extrabold mb-3">Agencia DigiScale (caso hipotético)</h3>
                 <div className="grid grid-cols-2 gap-4 text-sm mb-4">
                   <div>
                     <span className="text-[#6B7280]">Equipo:</span>
-                    <span className="font-bold ml-2">4 personas (fundador + 1 ads + 1 disenador + 1 account manager)</span>
+                    <span className="font-bold ml-2">4 personas (fundador + 1 ads + 1 diseñador + 1 account manager)</span>
                   </div>
                   <div>
                     <span className="text-[#6B7280]">Clientes:</span>
@@ -471,34 +471,34 @@ export default function LandingPageParaAgenciasGuia() {
                   </div>
                   <div>
                     <span className="text-[#6B7280]">Problema:</span>
-                    <span className="font-bold ml-2">No pueden aceptar mas clientes por falta de capacidad</span>
+                    <span className="font-bold ml-2">No pueden aceptar más clientes por falta de capacidad</span>
                   </div>
                 </div>
               </div>
 
               <h3 className="text-lg font-extrabold mb-3">Antes (proceso manual):</h3>
               <ul className="list-disc pl-6 mb-6 space-y-2 text-[#6B7280] text-sm">
-                <li>El disenador crea 5 landing pages al mes (una por semana, a veces menos)</li>
-                <li>Cada landing tarda 6-8 horas entre diseno, maquetacion y revisiones</li>
+                <li>El diseñador crea 5 landing pages al mes (una por semana, a veces menos)</li>
+                <li>Cada landing tarda 6-8 horas entre diseño, maquetación y revisiones</li>
                 <li>El account manager dedica 2 horas extra por landing en briefings y revisiones</li>
                 <li>Coste total por landing: ~240 EUR (tiempo del equipo)</li>
                 <li>Cobran 350 EUR por landing = margen de 110 EUR por unidad</li>
                 <li>Revenue mensual por landings: 1.750 EUR (5 x 350)</li>
                 <li>Margen mensual: 550 EUR</li>
-                <li>No pueden crecer sin contratar otro disenador (coste fijo de 1.800-2.500 EUR/mes)</li>
+                <li>No pueden crecer sin contratar otro diseñador (coste fijo de 1.800-2.500 EUR/mes)</li>
               </ul>
 
-              <h3 className="text-lg font-extrabold mb-3">Despues (con LandForge IA):</h3>
+              <h3 className="text-lg font-extrabold mb-3">Después (con LandForge IA):</h3>
               <ul className="list-disc pl-6 mb-6 space-y-2 text-[#6B7280] text-sm">
-                <li>El account manager genera las landings directamente con LandForge (sin depender del disenador)</li>
-                <li>Cada landing se genera en 30 segundos + 30 minutos de revision y personalizacion</li>
-                <li>El disenador se enfoca en proyectos de alto valor (webs completas, branding)</li>
+                <li>El account manager genera las landings directamente con LandForge (sin depender del diseñador)</li>
+                <li>Cada landing se genera en 30 segundos + 30 minutos de revisión y personalización</li>
+                <li>El diseñador se enfoca en proyectos de alto valor (webs completas, branding)</li>
                 <li>Coste total por landing: ~25 EUR (30 min de tiempo del account manager)</li>
                 <li>Migran a modelo LPaaS: 800 EUR/mes por cliente (incluye hasta 5 landings + chatbot + analytics)</li>
                 <li>Pasan de 12 a 25 clientes en 3 meses (sin contratar)</li>
                 <li>Revenue mensual: 20.000 EUR</li>
                 <li>Margen mensual: ~16.000 EUR</li>
-                <li>Produccion: 50+ landings al mes con el mismo equipo de 4 personas</li>
+                <li>Producción: 50+ landings al mes con el mismo equipo de 4 personas</li>
               </ul>
 
               <div className="bg-[#1A1A2E] text-white rounded-2xl p-6 mb-6">
@@ -518,24 +518,24 @@ export default function LandingPageParaAgenciasGuia() {
               </div>
 
               <p className="text-[#6B7280] leading-relaxed mb-4">
-                La clave no fue solo adoptar una herramienta de IA. Fue cambiar el modelo de negocio (de cobrar por landing a cobrar un retainer LPaaS) y estandarizar el flujo de trabajo para que una sola persona pudiera gestionar la produccion de 50 landings al mes.
+                La clave no fue solo adoptar una herramienta de IA. Fue cambiar el modelo de negocio (de cobrar por landing a cobrar un retainer LPaaS) y estandarizar el flujo de trabajo para que una sola persona pudiera gestionar la producción de 50 landings al mes.
               </p>
             </section>
 
             {/* CONCLUSION */}
             <section className="mt-14">
-              <h2 className="text-2xl font-extrabold mb-4">Conclusion: el futuro de las agencias esta en la automatizacion inteligente</h2>
+              <h2 className="text-2xl font-extrabold mb-4">Conclusión: el futuro de las agencias está en la automatización inteligente</h2>
 
               <p className="text-[#6B7280] leading-relaxed mb-4">
-                Las agencias que siguen produciendo landing pages manualmente estan compitiendo con las manos atadas. El mercado exige velocidad, calidad y escala, y eso solo se consigue con automatizacion inteligente que no sacrifique la personalizacion.
+                Las agencias que siguen produciendo landing pages manualmente están compitiendo con las manos atadas. El mercado exige velocidad, calidad y escala, y eso solo se consigue con automatización inteligente que no sacrifique la personalización.
               </p>
 
               <p className="text-[#6B7280] leading-relaxed mb-4">
-                La combinacion de un modelo de negocio productizado (LPaaS), un flujo de trabajo estandarizado y un software de generacion con IA como LandForge permite a agencias de 3-5 personas competir en produccion con equipos de 15-20. No se trata de reemplazar personas, sino de multiplicar su capacidad.
+                La combinación de un modelo de negocio productizado (LPaaS), un flujo de trabajo estandarizado y un software de generación con IA como LandForge permite a agencias de 3-5 personas competir en producción con equipos de 15-20. No se trata de reemplazar personas, sino de multiplicar su capacidad.
               </p>
 
               <p className="text-[#6B7280] leading-relaxed mb-4">
-                Si diriges una agencia de marketing y quieres escalar tu servicio de landing pages sin contratar, sin perder margen y sin comprometer la calidad de entrega, LandForge es la herramienta que necesitas probar. Para entender como funciona especificamente para agencias, visita nuestra <Link href="/para/agencias-de-marketing" className="text-[#9D4EDD] font-semibold hover:underline">pagina dedicada a agencias de marketing</Link>.
+                Si diriges una agencia de marketing y quieres escalar tu servicio de landing pages sin contratar, sin perder margen y sin comprometer la calidad de entrega, LandForge es la herramienta que necesitas probar. Para entender cómo funciona específicamente para agencias, visita nuestra <Link href="/para/agencias-de-marketing" className="text-[#9D4EDD] font-semibold hover:underline">página dedicada a agencias de marketing</Link>.
               </p>
             </section>
 
@@ -543,7 +543,7 @@ export default function LandingPageParaAgenciasGuia() {
             <section className="mt-14 rounded-2xl p-8" style={{ background: "linear-gradient(135deg, #9D4EDD 0%, #4C0099 100%)" }}>
               <h2 className="text-2xl font-extrabold text-white mb-4">Escala tu agencia con LandForge</h2>
               <p className="text-[#E0AAFF] leading-relaxed mb-6">
-                Genera landing pages profesionales para tus clientes en 30 segundos. White label, chatbot de ventas IA, gestion multi-cliente y analytics integrado. Todo lo que necesitas para pasar de 5 a 50+ landings al mes sin ampliar equipo.
+                Genera landing pages profesionales para tus clientes en 30 segundos. White label, chatbot de ventas IA, gestión multi-cliente y analytics integrado. Todo lo que necesitas para pasar de 5 a 50+ landings al mes sin ampliar equipo.
               </p>
               <ol className="space-y-2 text-[#E0AAFF] text-sm mb-6">
                 <li className="flex gap-3"><span className="font-bold text-white flex-shrink-0">1.</span>Crea tu cuenta gratuita en LandForge</li>
@@ -562,16 +562,16 @@ export default function LandingPageParaAgenciasGuia() {
               <div className="divide-y divide-gray-100">
                 {[
                   {
-                    q: "Puedo usar LandForge con white label para mis clientes?",
-                    a: "Si. LandForge permite publicar las landing pages en dominios personalizados de tus clientes, sin ninguna referencia visible a LandForge. Tus clientes ven tu marca, tu proceso y tu entrega. Tu controlas todo desde un panel multi-cliente donde gestionas todas las landings de todos tus clientes en un solo lugar.",
+                    q: "¿Puedo usar LandForge con white label para mis clientes?",
+                    a: "Sí. LandForge permite publicar las landing pages en dominios personalizados de tus clientes, sin ninguna referencia visible a LandForge. Tus clientes ven tu marca, tu proceso y tu entrega. Tú controlas todo desde un panel multi-cliente donde gestionas todas las landings de todos tus clientes en un solo lugar.",
                   },
                   {
-                    q: "Cuantas landing pages puede generar una agencia al mes con IA?",
-                    a: "No hay limite tecnico. Cada landing se genera en menos de 30 segundos. Una agencia con un proceso bien definido (briefing estandarizado + encuesta inteligente + generacion IA + revision rapida) puede producir entre 30 y 80 landing pages al mes con un solo account manager dedicado. El cuello de botella deja de ser la produccion y pasa a ser la captacion de clientes.",
+                    q: "¿Cuántas landing pages puede generar una agencia al mes con IA?",
+                    a: "No hay límite técnico. Cada landing se genera en menos de 30 segundos. Una agencia con un proceso bien definido (briefing estandarizado + encuesta inteligente + generación IA + revisión rápida) puede producir entre 30 y 80 landing pages al mes con un solo account manager dedicado. El cuello de botella deja de ser la producción y pasa a ser la captación de clientes.",
                   },
                   {
-                    q: "Que pasa si mi cliente quiere cambios despues de la entrega?",
-                    a: "LandForge incluye Forgi Editor, un editor visual en tiempo real que permite hacer ajustes de copy, imagenes, colores y estructura sin tocar codigo. Puedes hacer las revisiones tu mismo en minutos o, si tienes un plan de mantenimiento, cobrar un fee por ronda de cambios. La mayoria de agencias incluyen 1-2 rondas de revision en el precio inicial y cobran las adicionales.",
+                    q: "¿Qué pasa si mi cliente quiere cambios después de la entrega?",
+                    a: "LandForge incluye Forgi Editor, un editor visual en tiempo real que permite hacer ajustes de copy, imágenes, colores y estructura sin tocar código. Puedes hacer las revisiones tú mismo en minutos o, si tienes un plan de mantenimiento, cobrar un fee por ronda de cambios. La mayoría de agencias incluyen 1-2 rondas de revisión en el precio inicial y cobran las adicionales.",
                   },
                 ].map((faq) => (
                   <details key={faq.q} className="group py-5">
@@ -587,7 +587,7 @@ export default function LandingPageParaAgenciasGuia() {
 
             {/* ENLAZADO INTERNO */}
             <div className="mt-12 pt-8 border-t border-gray-100">
-              <p className="font-bold text-sm text-[#6B7280] mb-4">Articulos y paginas relacionadas</p>
+              <p className="font-bold text-sm text-[#6B7280] mb-4">Artículos y páginas relacionadas</p>
               <div className="flex flex-wrap gap-3">
                 <Link href="/para/agencias-de-marketing" className="text-[#9D4EDD] font-semibold text-sm border border-[#E0AAFF] rounded-lg px-4 py-2 hover:bg-[#F3E8FF] transition">
                   &rarr; LandForge para Agencias de Marketing
@@ -599,7 +599,7 @@ export default function LandingPageParaAgenciasGuia() {
                   &rarr; Forgi Chatbot de Ventas IA
                 </Link>
                 <Link href="/blog/como-crear-landing-page-alta-conversion" className="text-[#9D4EDD] font-semibold text-sm border border-[#E0AAFF] rounded-lg px-4 py-2 hover:bg-[#F3E8FF] transition">
-                  &rarr; Como Crear Landing Page Alta Conversion
+                  &rarr; Cómo Crear Landing Page Alta Conversión
                 </Link>
                 <Link href="/comparar/landforge-vs-webflow" className="text-[#9D4EDD] font-semibold text-sm border border-[#E0AAFF] rounded-lg px-4 py-2 hover:bg-[#F3E8FF] transition">
                   &rarr; LandForge vs Webflow

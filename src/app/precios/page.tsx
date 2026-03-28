@@ -4,7 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Precios y Planes de LandForge — Desde 49€/mes",
   description:
-    "Planes claros y sin sorpresas para agencias de marketing. Desde 49€/mes con 14 días gratis. Compara Starter, Agency y Agency Pro. Descuento del 20% en pago anual.",
+    "Planes claros y sin sorpresas para agencias. Desde 49€/mes con 14 días gratis. Compara Starter, Agency y Agency Pro. 20% dto. anual.",
   keywords: [
     "precios landforge",
     "planes landforge agencias",
@@ -190,9 +190,9 @@ export default function PreciosPage() {
             </p>
 
             <h1 className="text-4xl md:text-5xl font-extrabold max-w-4xl tracking-tight leading-tight mb-6">
-              Planes claros.{" "}
+              Precios de LandForge: Planes de Landing Pages{" "}
               <span style={{ background: "linear-gradient(135deg, #9D4EDD, #7B2CBF)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-                Sin sorpresas.
+                claros y sin sorpresas.
               </span>
             </h1>
 

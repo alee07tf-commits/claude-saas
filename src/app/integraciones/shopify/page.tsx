@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "LandForge + Shopify: Landing Pages con IA para tu Tienda Online",
+  title: "Integración Shopify: Landings con IA",
   description:
     "Genera landing pages de producto para Shopify con IA en 30 segundos. Forgi chatbot responde dudas de compradores 24/7 y reduce el abandono de carrito.",
   keywords: [
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     canonical: "https://landforge.digital/integraciones/shopify",
   },
   openGraph: {
-    title: "LandForge + Shopify: Landing Pages con IA para tu Tienda Online",
+    title: "Integración Shopify: Landings con IA",
     description:
       "Genera landing pages de producto para Shopify con IA en 30 segundos. Forgi chatbot responde dudas de compradores 24/7 y reduce el abandono de carrito.",
     url: "https://landforge.digital/integraciones/shopify",

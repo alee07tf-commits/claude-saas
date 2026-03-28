@@ -256,7 +256,7 @@ export default function LandForgeLanding() {
     },
     {
       q: "¿Puedo usarlo para mis clientes como agencia?",
-      a: "Exactamente para eso está diseñado. Cada landing es tuya para usar con tus clientes. El plan Unlimited incluye white label para que no aparezca la marca LandForge.",
+      a: "Exactamente para eso está diseñado. Cada landing es tuya para usar con tus clientes. El plan Agency Pro incluye white label para que no aparezca la marca LandForge.",
     },
     {
       q: "¿Qué es Forgi Chatbot?",

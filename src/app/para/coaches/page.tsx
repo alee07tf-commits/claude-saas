@@ -4,7 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Landing Pages para Coaches y Formadores con IA",
   description:
-    "Crea tu página de programa de coaching o formación en 30 segundos. Forgi cualifica los prospectos antes de la llamada de descubrimiento y filtra si encajan con tu método.",
+    "Crea tu landing de coaching en 30 segundos con IA. Forgi cualifica prospectos antes de la llamada y filtra si encajan con tu método.",
   keywords: [
     "landing page coach ia",
     "crear pagina web coach formador",
@@ -18,9 +18,19 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Landing Pages para Coaches y Formadores con IA",
     description:
-      "Crea tu página de programa de coaching o formación en 30 segundos. Forgi cualifica los prospectos antes de la llamada de descubrimiento y filtra si encajan con tu método.",
+      "Crea tu landing de coaching en 30 segundos con IA. Forgi cualifica prospectos antes de la llamada y filtra si encajan con tu método.",
     url: "https://landforge.digital/para/coaches",
   },
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Inicio", item: "https://landforge.digital" },
+    { "@type": "ListItem", position: 2, name: "Soluciones por Sector", item: "https://landforge.digital/para" },
+    { "@type": "ListItem", position: 3, name: "Coaches", item: "https://landforge.digital/para/coaches" },
+  ],
 };
 
 const faqSchema = {
@@ -58,6 +68,7 @@ export default function CoachesLanding() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
       <div className="min-h-screen bg-[#FAFAFA] text-[#1A1A2E] font-sans">
         <main>
@@ -65,6 +76,13 @@ export default function CoachesLanding() {
           {/* ── 1. HERO ── */}
           <section className="relative px-6 pt-32 pb-20 text-center flex flex-col items-center justify-center min-h-[90vh]">
             <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(circle at 50% 30%, rgba(157,78,221,0.06) 0%, transparent 65%)" }} />
+
+            <nav aria-label="Breadcrumb" className="text-xs text-[#6B7280] mb-6 flex gap-1">
+              <Link href="/" className="hover:text-[#9D4EDD]">Inicio</Link><span>/</span>
+              <Link href="/para" className="hover:text-[#9D4EDD]">Soluciones</Link><span>/</span>
+              <span className="text-[#9D4EDD]">Coaches</span>
+            </nav>
+
             <p className="text-xs font-bold uppercase tracking-[2px] text-[#9D4EDD] mb-5 bg-[#F3E8FF] border border-[#E0AAFF] px-4 py-1.5 rounded-full inline-block">
               Captación de Clientes para Coaches y Formadores
             </p>
@@ -185,7 +203,7 @@ export default function CoachesLanding() {
           <section className="px-6 py-24 text-center" style={{ background: "linear-gradient(135deg, #9D4EDD 0%, #4C0099 100%)" }}>
             <div className="max-w-3xl mx-auto">
               <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-5">Tu próximo programa lleno de clientes ideales</h2>
-              <p className="text-[#E0AAFF] text-lg mb-10">Crea tu Sales Page en 30 segundos y activa Forgi para que cualifique a tus prospectos mientras tú haces lo que mejor sabes hacer.</p>
+              <p className="text-[#E0AAFF] text-lg mb-10">Crea tu Sales Page en 30 segundos y activa Forgi para que cualifique a tus prospectos mientras tú haces lo que mejor sabes hacer. Revisa nuestros <Link href="/precios" className="text-white font-semibold underline underline-offset-2 hover:text-[#F3E8FF] transition">planes y precios</Link> para coaches.</p>
               <Link href="/register" className="inline-block bg-white text-[#9D4EDD] font-bold text-lg px-10 py-5 rounded-2xl hover:-translate-y-1 transition shadow-xl">
                 Crear mi página de coaching gratis →
               </Link>
@@ -196,9 +214,11 @@ export default function CoachesLanding() {
             <div className="max-w-5xl mx-auto">
               <h3 className="font-bold mb-5">Más casos de uso</h3>
               <div className="flex flex-wrap gap-4">
+                <Link href="/para/abogados" className="text-[#9D4EDD] font-semibold text-sm border border-[#E0AAFF] rounded-lg px-4 py-2 hover:bg-[#F3E8FF] transition">→ LandForge para Abogados</Link>
+                <Link href="/para/ecommerce" className="text-[#9D4EDD] font-semibold text-sm border border-[#E0AAFF] rounded-lg px-4 py-2 hover:bg-[#F3E8FF] transition">→ LandForge para eCommerce</Link>
                 <Link href="/para/agencias-de-marketing" className="text-[#9D4EDD] font-semibold text-sm border border-[#E0AAFF] rounded-lg px-4 py-2 hover:bg-[#F3E8FF] transition">→ Agencias de Marketing</Link>
                 <Link href="/features/forgi-chatbot" className="text-[#9D4EDD] font-semibold text-sm border border-[#E0AAFF] rounded-lg px-4 py-2 hover:bg-[#F3E8FF] transition">→ Forgi Chatbot 24/7</Link>
-                <Link href="/blog/como-aumentar-conversion-landing-page" className="text-[#9D4EDD] font-semibold text-sm border border-[#E0AAFF] rounded-lg px-4 py-2 hover:bg-[#F3E8FF] transition">→ Guía CRO: Aumentar la Conversión</Link>
+                <Link href="/blog/como-aumentar-conversion-landing-page" className="text-[#9D4EDD] font-semibold text-sm border border-[#E0AAFF] rounded-lg px-4 py-2 hover:bg-[#F3E8FF] transition">→ Guia CRO: Aumentar la Conversión</Link>
               </div>
             </div>
           </section>

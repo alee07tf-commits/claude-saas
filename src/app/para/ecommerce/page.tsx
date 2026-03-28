@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Landing Pages para eCommerce y Tiendas Online con IA",
+  title: "Landing Pages para eCommerce con IA",
   description:
-    "Genera landing pages de producto ultrarrápidas para Shopify y WooCommerce. La IA crea tu embudo en 30s y Forgi evita el abandono de carrito respondiendo objeciones 24/7.",
+    "Genera landing pages de producto para Shopify y WooCommerce con IA en 30s. Forgi evita el abandono de carrito respondiendo objeciones 24/7.",
   keywords: [
     "landing pages para ecommerce",
     "crear landing page producto dropshipping",
@@ -16,11 +16,21 @@ export const metadata: Metadata = {
     canonical: "https://landforge.digital/para/ecommerce",
   },
   openGraph: {
-    title: "Landing Pages para eCommerce y Tiendas Online con IA",
+    title: "Landing Pages para eCommerce con IA",
     description:
-      "Genera landing pages de producto ultrarrápidas para Shopify y WooCommerce. La IA crea tu embudo en 30s y Forgi evita el abandono de carrito respondiendo objeciones 24/7.",
+      "Genera landing pages de producto para Shopify y WooCommerce con IA en 30s. Forgi evita el abandono de carrito respondiendo objeciones 24/7.",
     url: "https://landforge.digital/para/ecommerce",
   },
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Inicio", item: "https://landforge.digital" },
+    { "@type": "ListItem", position: 2, name: "Soluciones por Sector", item: "https://landforge.digital/para" },
+    { "@type": "ListItem", position: 3, name: "eCommerce", item: "https://landforge.digital/para/ecommerce" },
+  ],
 };
 
 const faqSchema = {
@@ -62,9 +72,9 @@ export default function EcommerceLanding() {
             </p>
 
             <h1 className="text-4xl md:text-6xl font-extrabold max-w-4xl tracking-tight leading-[1.05] mb-7">
-              Más ventas por visita en tu tienda.{" "}
+              Landing Pages para eCommerce que{" "}
               <span style={{ background: "linear-gradient(135deg, #9D4EDD, #7B2CBF)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-                Sin cambiar tu Shopify.
+                multiplican tus ventas por visita.
               </span>
             </h1>
 
@@ -170,7 +180,7 @@ export default function EcommerceLanding() {
               <h2 className="text-3xl font-extrabold text-center mb-14">Preguntas frecuentes de tiendas online sobre LandForge</h2>
               <div className="divide-y divide-gray-100">
                 {[
-                  { q: "¿LandForge funciona con Shopify y WooCommerce?", a: "Sí. Puedes publicar la landing en tu propio dominio o en un subdominio de landforge.app, usarla perfectamente como destino de anuncios de TikTok Ads, Facebook Ads y Google Shopping." },
+                  { q: "¿LandForge funciona con Shopify y WooCommerce?", a: <span>Sí. Puedes publicar la landing en tu propio dominio o en un subdominio de landforge.app, usarla perfectamente como destino de anuncios de TikTok Ads, Facebook Ads y Google Shopping. Consulta nuestra <Link href="/integraciones/shopify" className="text-[#9D4EDD] font-semibold underline underline-offset-2 hover:text-[#7B2CBF] transition">integración con Shopify</Link> para más detalles.</span> },
                   { q: "¿LandForge carga rápido en móvil para las campañas de TikTok Ads?", a: "Las landings generadas en React por LandForge obtienen consistentemente puntuaciones de Core Web Vitals superiores a 90 en Google PageSpeed. El LCP suele estar por debajo de 1.5 segundos." },
                   { q: "¿Forgi puede responder sobre tiempos de envío y política de devoluciones?", a: "Sí. Cuando generas la landing, incluyes la información de tu tienda. Forgi la absorbe y responde con ese contexto exacto a cada visitante, 24 horas al día." },
                 ].map((faq) => (
@@ -190,7 +200,7 @@ export default function EcommerceLanding() {
           <section className="px-6 py-24 text-center" style={{ background: "linear-gradient(135deg, #9D4EDD 0%, #4C0099 100%)" }}>
             <div className="max-w-3xl mx-auto">
               <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-5">Tu próximo producto puede tener una landing lista hoy</h2>
-              <p className="text-[#E0AAFF] text-lg mb-10">Deja de enviar tráfico caro a tu homepage. Crea en 30 segundos la landing específica del producto que quieres vender esta semana.</p>
+              <p className="text-[#E0AAFF] text-lg mb-10">Deja de enviar tráfico caro a tu homepage. Crea en 30 segundos la landing específica del producto que quieres vender esta semana. Consulta nuestros <Link href="/precios" className="text-white font-semibold underline underline-offset-2 hover:text-[#F3E8FF] transition">planes y precios</Link> para eCommerce.</p>
               <Link href="/register" className="inline-block bg-white text-[#9D4EDD] font-bold text-lg px-10 py-5 rounded-2xl hover:-translate-y-1 transition shadow-xl">
                 Optimizar mis ventas ahora →
               </Link>
@@ -202,6 +212,8 @@ export default function EcommerceLanding() {
             <div className="max-w-5xl mx-auto">
               <h3 className="font-bold text-[#1A1A2E] mb-5">Más casos de uso de LandForge</h3>
               <div className="flex flex-wrap gap-4">
+                <Link href="/para/restaurantes" className="text-[#9D4EDD] font-semibold text-sm border border-[#E0AAFF] rounded-lg px-4 py-2 hover:bg-[#F3E8FF] transition">→ LandForge para Restaurantes</Link>
+                <Link href="/para/coaches" className="text-[#9D4EDD] font-semibold text-sm border border-[#E0AAFF] rounded-lg px-4 py-2 hover:bg-[#F3E8FF] transition">→ LandForge para Coaches</Link>
                 <Link href="/para/agencias-de-marketing" className="text-[#9D4EDD] font-semibold text-sm border border-[#E0AAFF] rounded-lg px-4 py-2 hover:bg-[#F3E8FF] transition">→ LandForge para Agencias</Link>
                 <Link href="/integraciones/wordpress" className="text-[#9D4EDD] font-semibold text-sm border border-[#E0AAFF] rounded-lg px-4 py-2 hover:bg-[#F3E8FF] transition">→ Integración con WordPress</Link>
                 <Link href="/blog/como-aumentar-conversion-landing-page" className="text-[#9D4EDD] font-semibold text-sm border border-[#E0AAFF] rounded-lg px-4 py-2 hover:bg-[#F3E8FF] transition">→ Guía: Cómo aumentar la conversión</Link>

@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Landing Pages para WordPress sin Elementor ni Divi",
+  title: "Landing Pages IA para WordPress",
   description:
-    "Integra landing pages generadas por IA en tu WordPress en 1 minuto. Sin plugins pesados, sin romper Core Web Vitals. La alternativa a Elementor que no mata el SEO de tu web.",
+    "Integra landing pages con IA en tu WordPress en 1 minuto. Sin plugins pesados ni romper Core Web Vitals. Alternativa a Elementor y Divi.",
   keywords: [
     "alternativa elementor landing pages",
     "landing pages wordpress sin plugin",
@@ -16,9 +16,9 @@ export const metadata: Metadata = {
     canonical: "https://landforge.digital/integraciones/wordpress",
   },
   openGraph: {
-    title: "Landing Pages para WordPress sin Elementor ni Divi",
+    title: "Landing Pages IA para WordPress",
     description:
-      "Integra landing pages generadas por IA en tu WordPress en 1 minuto. Sin plugins pesados, sin romper Core Web Vitals. La alternativa a Elementor que no mata el SEO de tu web.",
+      "Integra landing pages con IA en tu WordPress en 1 minuto. Sin plugins pesados ni romper Core Web Vitals. Alternativa a Elementor y Divi.",
     url: "https://landforge.digital/integraciones/wordpress",
   },
 };
@@ -62,9 +62,9 @@ export default function IntegracionWordPress() {
             </p>
 
             <h1 className="text-4xl md:text-6xl font-extrabold max-w-4xl tracking-tight leading-[1.05] mb-7">
-              Haz que tu WordPress convierta más.{" "}
+              Landing Pages para WordPress que convierten.{" "}
               <span style={{ background: "linear-gradient(135deg, #9D4EDD, #7B2CBF)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-                Sin matar el SEO.
+                Sin matar tu SEO.
               </span>
             </h1>
 

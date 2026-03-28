@@ -65,7 +65,7 @@ const faqSchema = {
       name: "¿Cuánto cuesta LandForge para una startup en etapa early-stage?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Puedes empezar con el plan gratuito (0 euros) que incluye una landing con Forgi Chatbot. Para startups en crecimiento, el plan Growth (49 euros/mes) ofrece landings ilimitadas. Si necesitas white label y dominios personalizados, el plan Agency (97 euros/mes) es ideal para escalar.",
+        text: "Puedes empezar con el plan gratuito (0 euros) que incluye una landing con Forgi Chatbot. Para startups en crecimiento, el plan Starter (49 euros/mes) ofrece landings ilimitadas. Si necesitas white label y dominios personalizados, el plan Agency (97 euros/mes) es ideal para escalar.",
       },
     },
   ],
@@ -106,9 +106,9 @@ export default function StartupsSaasLanding() {
             </h1>
 
             <p className="text-lg md:text-xl text-[#6B7280] max-w-2xl leading-relaxed mb-10">
-              Tu developer deberia estar construyendo producto, no maquetando landings de marketing. Describe tu SaaS en 5 minutos: producto, ICP, propuesta de valor y pricing.{" "}
-              <strong className="text-[#1A1A2E]">La IA genera tu landing page completa en 30 segundos</strong>, lista para Product Hunt, campanas de paid o tu funnel de free trial.
-              Forgi, tu chatbot de cualificacion B2B, atiende leads y agenda demos mientras tu equipo duerme.
+              Tu developer debería estar construyendo producto, no maquetando landings de marketing. Describe tu SaaS en 5 minutos: producto, ICP, propuesta de valor y pricing.{" "}
+              <strong className="text-[#1A1A2E]">La IA genera tu landing page completa en 30 segundos</strong>, lista para Product Hunt, campañas de paid o tu funnel de free trial.
+              Forgi, tu chatbot de cualificación B2B, atiende leads y agenda demos mientras tu equipo duerme.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
@@ -119,10 +119,10 @@ export default function StartupsSaasLanding() {
                 Cómo funciona
               </Link>
             </div>
-            <p className="text-sm text-[#9D4EDD]">Sin tarjeta de credito · Plan Free para siempre · Setup en 30 segundos</p>
+            <p className="text-sm text-[#9D4EDD]">Sin tarjeta de crédito · Plan Free para siempre · Setup en 30 segundos</p>
 
             <div className="mt-12 flex flex-wrap gap-10 justify-center">
-              {[["30 seg", "Tiempo de generacion"], ["+200%", "Conversion rate media"], ["0€", "Para empezar"], ["24/7", "Forgi cualificando leads"]].map(([v, l]) => (
+              {[["30 seg", "Tiempo de generación"], ["+200%", "Conversion rate media"], ["0€", "Para empezar"], ["24/7", "Forgi cualificando leads"]].map(([v, l]) => (
                 <div key={l} className="text-center">
                   <div className="text-3xl font-extrabold text-[#9D4EDD]">{v}</div>
                   <div className="text-sm text-[#6B7280] mt-1">{l}</div>
@@ -131,18 +131,18 @@ export default function StartupsSaasLanding() {
             </div>
           </section>
 
-          {/* -- 2. DOLOR (Empatia con el Problema SaaS) -- */}
+          {/* -- 2. DOLOR (Empatía con el Problema SaaS) -- */}
           <section className="px-6 py-24 bg-[#1A1A2E] text-white">
             <div className="max-w-5xl mx-auto text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-extrabold mb-6">Problemas reales de growth en SaaS que te suenan</h2>
-              <p className="text-[#E0AAFF] text-lg max-w-2xl mx-auto">El 68% de las startups SaaS pierde oportunidades de conversion porque su landing page tarda semanas en actualizarse, no cualifica leads correctamente o simplemente no existe para cada caso de uso.</p>
+              <p className="text-[#E0AAFF] text-lg max-w-2xl mx-auto">El 68% de las startups SaaS pierde oportunidades de conversión porque su landing page tarda semanas en actualizarse, no cualifica leads correctamente o simplemente no existe para cada caso de uso.</p>
             </div>
             <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-6">
               {[
                 {
                   icon: "⚙️",
-                  title: "Tu developer esta construyendo producto, no landing pages",
-                  text: "Necesitas una landing page para el lanzamiento en Product Hunt la proxima semana. Tu unico developer esta cerrando el bug critico del onboarding. La landing no existe y el launch es en 5 dias.",
+                  title: "Tu developer está construyendo producto, no landing pages",
+                  text: "Necesitas una landing page para el lanzamiento en Product Hunt la próxima semana. Tu único developer está cerrando el bug crítico del onboarding. La landing no existe y el launch es en 5 días.",
                 },
                 {
                   icon: "🔄",
@@ -152,7 +152,7 @@ export default function StartupsSaasLanding() {
                 {
                   icon: "🌙",
                   title: "Leads enterprise abandonan tu web a las 11pm sin respuesta",
-                  text: "Un VP de Engineering de una empresa Fortune 500 visita tu pricing page a las 23:00. Tiene dudas sobre compliance y seguridad. No hay nadie para responder. Al dia siguiente ya esta evaluando a tu competencia.",
+                  text: "Un VP de Engineering de una empresa Fortune 500 visita tu pricing page a las 23:00. Tiene dudas sobre compliance y seguridad. No hay nadie para responder. Al día siguiente ya está evaluando a tu competencia.",
                 },
               ].map((item) => (
                 <div key={item.title} className="bg-white/5 border border-white/10 rounded-2xl p-8">
@@ -164,11 +164,11 @@ export default function StartupsSaasLanding() {
             </div>
           </section>
 
-          {/* -- 3. SOLUCION (Como lo resuelve LandForge para SaaS) -- */}
+          {/* -- 3. SOLUCIÓN (Cómo lo resuelve LandForge para SaaS) -- */}
           <section id="como-funciona" className="px-6 py-24 bg-white">
             <div className="max-w-5xl mx-auto">
               <div className="text-center mb-16">
-                <span className="inline-block text-xs font-bold uppercase tracking-widest text-[#9D4EDD] bg-[#F3E8FF] px-4 py-1.5 rounded-full border border-[#E0AAFF] mb-4">Como lo resuelve LandForge</span>
+                <span className="inline-block text-xs font-bold uppercase tracking-widest text-[#9D4EDD] bg-[#F3E8FF] px-4 py-1.5 rounded-full border border-[#E0AAFF] mb-4">Cómo lo resuelve LandForge</span>
                 <h2 className="text-3xl md:text-4xl font-extrabold">
                   De la idea a la landing publicada en menos tiempo que un standup
                 </h2>
@@ -181,7 +181,7 @@ export default function StartupsSaasLanding() {
                     title: "Describe tu SaaS y tu ICP (5 min)",
                     text: (
                       <>
-                        Cuentale a LandForge que hace tu producto, quien es tu cliente ideal (startup early-stage, mid-market B2B, enterprise) y cual es tu propuesta de valor unica. Indica si necesitas una landing para Product Hunt launch, free trial signup, enterprise demo request, feature announcement o{" "}
+                        Cuéntale a LandForge qué hace tu producto, quién es tu cliente ideal (startup early-stage, mid-market B2B, enterprise) y cuál es tu propuesta de valor única. Indica si necesitas una landing para Product Hunt launch, free trial signup, enterprise demo request, feature announcement o{" "}
                         <Link href="/precios" className="text-[#9D4EDD] underline underline-offset-2 hover:text-[#7B2CBF]">pricing comparison</Link>
                         . La IA adapta estructura y copy a cada caso de uso SaaS.
                       </>
@@ -193,7 +193,7 @@ export default function StartupsSaasLanding() {
                     title: "La IA genera tu landing SaaS en 30 segundos",
                     text: (
                       <>
-                        Dos agentes de IA trabajan en paralelo: uno disena la estructura visual (hero con social proof, feature grid, pricing table, trust badges) y otro redacta el copy orientado a conversion. El resultado es una landing con{" "}
+                        Dos agentes de IA trabajan en paralelo: uno diseña la estructura visual (hero con social proof, feature grid, pricing table, trust badges) y otro redacta el copy orientado a conversión. El resultado es una landing con{" "}
                         <Link href="/features/conversion-score" className="text-[#9D4EDD] underline underline-offset-2 hover:text-[#7B2CBF]">Conversion Score optimizado</Link>
                         , Core Web Vitals en verde y lista para iterar con A/B testing.
                       </>
@@ -207,14 +207,14 @@ export default function StartupsSaasLanding() {
                       <>
                         Desde que publicas la landing,{" "}
                         <Link href="/features/forgi-chatbot" className="text-[#9D4EDD] underline underline-offset-2 hover:text-[#7B2CBF]">Forgi Chatbot</Link>
-                        {" "}aprende todo sobre tu SaaS: features, pricing tiers, integraciones, compliance y roadmap. Cualifica leads preguntando por tamano de empresa, presupuesto y caso de uso antes de derivar a tu equipo de ventas. Conecta con tu CRM via{" "}
+                        {" "}aprende todo sobre tu SaaS: features, pricing tiers, integraciones, compliance y roadmap. Cualifica leads preguntando por tamaño de empresa, presupuesto y caso de uso antes de derivar a tu equipo de ventas. Conecta con tu CRM vía{" "}
                         <Link href="/integraciones/zapier" className="text-[#9D4EDD] underline underline-offset-2 hover:text-[#7B2CBF]">Zapier</Link>
                         {" "}o{" "}
                         <Link href="/integraciones/hubspot" className="text-[#9D4EDD] underline underline-offset-2 hover:text-[#7B2CBF]">HubSpot</Link>
                         {" "}para que tu SDR reciba leads con contexto completo.
                       </>
                     ),
-                    badge: "Lead scoring automatico incluido",
+                    badge: "Lead scoring automático incluido",
                   },
                 ].map((step) => (
                   <div key={step.num} className="flex gap-8 items-start">
@@ -237,13 +237,13 @@ export default function StartupsSaasLanding() {
                 <span className="inline-block text-xs font-bold uppercase tracking-widest text-[#9D4EDD] bg-white px-4 py-1.5 rounded-full border border-[#E0AAFF] mb-5">Forgi Chatbot para SaaS</span>
                 <h2 className="text-3xl font-extrabold mb-6">Tu SDR digital que cualifica leads mientras tu equipo construye producto</h2>
                 <p className="text-[#6B7280] leading-relaxed mb-8">
-                  Forgi no es un widget de chat generico. Se entrena con la informacion de <strong>tu</strong> SaaS: features, pricing tiers, integraciones disponibles, requisitos de seguridad y compliance. El resultado: un chatbot que habla el idioma de tus buyers, responde preguntas tecnicas con precision y mueve al lead hacia la demo o el signup. Si tu startup trabaja con{" "}
+                  Forgi no es un widget de chat genérico. Se entrena con la información de <strong>tu</strong> SaaS: features, pricing tiers, integraciones disponibles, requisitos de seguridad y compliance. El resultado: un chatbot que habla el idioma de tus buyers, responde preguntas técnicas con precisión y mueve al lead hacia la demo o el signup. Si tu startup trabaja con{" "}
                   <Link href="/para/agencias-de-marketing" className="text-[#9D4EDD] underline underline-offset-2 hover:text-[#7B2CBF]">agencias de marketing especializadas en SaaS</Link>
-                  , Forgi se convierte en una extension de su estrategia de generacion de leads.
+                  , Forgi se convierte en una extensión de su estrategia de generación de leads.
                 </p>
                 <ul className="space-y-3">
                   {[
-                    "Cualifica leads por tamano de empresa, presupuesto y caso de uso antes de derivar a ventas",
+                    "Cualifica leads por tamaño de empresa, presupuesto y caso de uso antes de derivar a ventas",
                     "Responde sobre integraciones, seguridad (SOC 2, GDPR), SLAs y uptime sin inventar datos",
                     "Agenda demos directamente en Calendly o HubSpot Meetings desde el chat",
                     "Reduce el tiempo de respuesta de horas a segundos, incluso a las 3am en otra timezone",
@@ -262,15 +262,15 @@ export default function StartupsSaasLanding() {
                   <div className="w-9 h-9 rounded-full flex items-center justify-center text-white font-bold text-sm" style={{ background: "linear-gradient(135deg, #9D4EDD, #7B2CBF)" }}>F</div>
                   <div>
                     <div className="font-bold text-sm">Forgi · Tu SaaS Landing</div>
-                    <div className="text-xs text-green-500 flex items-center gap-1"><span className="w-1.5 h-1.5 bg-green-500 rounded-full inline-block" />En linea</div>
+                    <div className="text-xs text-green-500 flex items-center gap-1"><span className="w-1.5 h-1.5 bg-green-500 rounded-full inline-block" />En línea</div>
                   </div>
                 </div>
                 <div className="p-5 flex flex-col gap-4">
                   {[
                     { role: "user", text: "Do you integrate with Salesforce?" },
-                    { role: "forgi", text: "Si, a traves de nuestra integracion con Zapier puedes conectar con Salesforce, HubSpot y +5,000 apps. Quieres que te cuente sobre nuestros planes para SaaS?" },
-                    { role: "user", text: "Cuanto cuesta para una startup de 10 personas?" },
-                    { role: "forgi", text: "Nuestro plan Agency (97€/mes) incluye dominios ilimitados, white label y Forgi en todas las landings. Quieres agendar una demo con el equipo?" },
+                    { role: "forgi", text: "Sí, a través de nuestra integración con Zapier puedes conectar con Salesforce, HubSpot y +5,000 apps. ¿Quieres que te cuente sobre nuestros planes para SaaS?" },
+                    { role: "user", text: "¿Cuánto cuesta para una startup de 10 personas?" },
+                    { role: "forgi", text: "Nuestro plan Agency (97€/mes) incluye dominios ilimitados, white label y Forgi en todas las landings. ¿Quieres agendar una demo con el equipo?" },
                   ].map((msg, i) => (
                     <div key={i} className={`flex gap-3 ${msg.role === "user" ? "flex-row-reverse" : ""}`}>
                       <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold ${msg.role === "forgi" ? "bg-[#F3E8FF] text-[#9D4EDD] border border-[#E0AAFF]" : "bg-[#1A1A2E] text-white"}`}>{msg.role === "forgi" ? "F" : "Tu"}</div>
@@ -289,19 +289,19 @@ export default function StartupsSaasLanding() {
               <div className="grid md:grid-cols-3 gap-8">
                 {[
                   {
-                    text: "Lanzamos en Product Hunt un martes y necesitabamos la landing lista para el lunes. Con LandForge la tuvimos en 20 minutos, incluyendo A/B de dos headlines distintos. Acabamos en el Top 5 del dia.",
+                    text: "Lanzamos en Product Hunt un martes y necesitábamos la landing lista para el lunes. Con LandForge la tuvimos en 20 minutos, incluyendo A/B de dos headlines distintos. Acabamos en el Top 5 del día.",
                     name: "Carlos R.",
                     role: "Co-founder & CEO, SaaS de productividad B2B",
                     result: "→ Top 5 en Product Hunt con landing creada en 20 min",
                   },
                   {
-                    text: "Forgi nos ahorra 15 horas semanales de SDR. Cualifica leads preguntando por tamano de equipo, presupuesto y stack actual. Cuando llega la demo, nuestro AE ya sabe exactamente que necesita el prospect.",
+                    text: "Forgi nos ahorra 15 horas semanales de SDR. Cualifica leads preguntando por tamaño de equipo, presupuesto y stack actual. Cuando llega la demo, nuestro AE ya sabe exactamente qué necesita el prospect.",
                     name: "Marina G.",
                     role: "Head of Growth, SaaS de analytics mid-market",
-                    result: "→ 15 horas/semana ahorradas en cualificacion de leads",
+                    result: "→ 15 horas/semana ahorradas en cualificación de leads",
                   },
                   {
-                    text: "Pivotamos de SMB a enterprise en 3 meses. Con LandForge regeneramos todas las landings con messaging enterprise en una tarde. Con nuestra agencia anterior habria costado 8.000 euros y 6 semanas.",
+                    text: "Pivotamos de SMB a enterprise en 3 meses. Con LandForge regeneramos todas las landings con messaging enterprise en una tarde. Con nuestra agencia anterior habría costado 8.000 euros y 6 semanas.",
                     name: "David L.",
                     role: "CMO, SaaS de ciberseguridad Series A",
                     result: "→ Pivot de messaging completo en una tarde",
@@ -328,14 +328,14 @@ export default function StartupsSaasLanding() {
             <div className="max-w-5xl mx-auto">
               <h2 className="text-3xl font-extrabold text-center mb-4">LandForge vs Alternativas para Startups SaaS</h2>
               <p className="text-center text-[#6B7280] mb-14 max-w-xl mx-auto">
-                Comparativa honesta de las opciones que tienes para crear landing pages de conversion para tu SaaS. Si quieres un analisis mas detallado, consulta nuestra{" "}
+                Comparativa honesta de las opciones que tienes para crear landing pages de conversión para tu SaaS. Si quieres un análisis más detallado, consulta nuestra{" "}
                 <Link href="/comparar/landforge-vs-webflow" className="text-[#9D4EDD] underline underline-offset-2 hover:text-[#7B2CBF]">comparativa completa LandForge vs Webflow</Link>.
               </p>
               <div className="overflow-x-auto rounded-2xl border border-[#E0AAFF] shadow-sm">
                 <table className="w-full text-left bg-white">
                   <thead>
                     <tr className="border-b border-[#E0AAFF] bg-[#FAF5FF]">
-                      <th className="p-5 font-bold text-[#6B7280] text-sm">Caracteristica</th>
+                      <th className="p-5 font-bold text-[#6B7280] text-sm">Característica</th>
                       <th className="p-5 font-bold text-[#9D4EDD]">LandForge IA</th>
                       <th className="p-5 font-bold text-[#6B7280]">Custom Dev (React/Next.js)</th>
                       <th className="p-5 font-bold text-[#6B7280]">Webflow</th>
@@ -344,14 +344,14 @@ export default function StartupsSaasLanding() {
                   </thead>
                   <tbody className="divide-y divide-gray-100 text-sm">
                     {[
-                      ["Tiempo de lanzamiento", "30 segundos", "1-4 semanas", "2-5 dias", "1-3 dias"],
+                      ["Tiempo de lanzamiento", "30 segundos", "1-4 semanas", "2-5 días", "1-3 días"],
                       ["Coste mensual", "Desde 0€/mes", "Salario developer + hosting", "29-49 USD/mes + dev time", "99-225 USD/mes"],
-                      ["Chatbot cualificacion B2B", "✅ Forgi (nativo)", "❌ Desarrollo custom", "❌ No incluido", "❌ Plugin externo"],
+                      ["Chatbot cualificación B2B", "✅ Forgi (nativo)", "❌ Desarrollo custom", "❌ No incluido", "❌ Plugin externo"],
                       ["Core Web Vitals", "✅ < 1 segundo", "✅ Si se optimiza", "⚠️ Variable", "⚠️ Suele penalizar"],
                       ["A/B testing de messaging", "✅ Variantes en 30 seg", "⚠️ Feature flags + sprint", "⚠️ Manual, lento", "✅ Nativo pero caro"],
-                      ["Iteracion product-led growth", "✅ Instantanea con IA", "❌ Requiere deploy", "⚠️ Requiere disenador", "⚠️ Drag & drop limitado"],
+                      ["Iteración product-led growth", "✅ Instantánea con IA", "❌ Requiere deploy", "⚠️ Requiere diseñador", "⚠️ Drag & drop limitado"],
                       ["Integraciones CRM/SaaS", "✅ Zapier + HubSpot nativo", "✅ Custom pero costoso", "⚠️ Limitado", "✅ Nativo"],
-                      ["Copy optimizado por IA", "✅ Incluido", "❌ Hay que redactar", "❌ Hay que redactar", "⚠️ Smart Builder basico"],
+                      ["Copy optimizado por IA", "✅ Incluido", "❌ Hay que redactar", "❌ Hay que redactar", "⚠️ Smart Builder básico"],
                     ].map(([feat, lf, custom, wf, ub]) => (
                       <tr key={feat}>
                         <td className="p-5 font-semibold text-[#1A1A2E]">{feat}</td>
@@ -375,23 +375,23 @@ export default function StartupsSaasLanding() {
                 {[
                   {
                     q: "¿Puedo crear una landing page para mi lanzamiento en Product Hunt con LandForge?",
-                    a: "Si. Describe tu producto SaaS, tu propuesta de valor y el publico objetivo. En 30 segundos tendras una landing optimizada para conversion con CTA de early access, contador de registros y Forgi Chatbot para responder dudas tecnicas de los hunters en tiempo real.",
+                    a: "Sí. Describe tu producto SaaS, tu propuesta de valor y el público objetivo. En 30 segundos tendrás una landing optimizada para conversión con CTA de early access, contador de registros y Forgi Chatbot para responder dudas técnicas de los hunters en tiempo real.",
                   },
                   {
                     q: "¿LandForge se integra con mi stack de herramientas SaaS?",
-                    a: "Si. A traves de nuestra integracion nativa con Zapier puedes conectar LandForge con HubSpot, Salesforce, Slack, Intercom, Segment y mas de 5.000 aplicaciones. Los leads que captura Forgi se envian automaticamente a tu CRM con los datos de cualificacion incluidos.",
+                    a: "Sí. A través de nuestra integración nativa con Zapier puedes conectar LandForge con HubSpot, Salesforce, Slack, Intercom, Segment y más de 5.000 aplicaciones. Los leads que captura Forgi se envían automáticamente a tu CRM con los datos de cualificación incluidos.",
                   },
                   {
                     q: "¿Puedo hacer A/B testing de mis landing pages SaaS?",
-                    a: "Si. Con LandForge generas variantes de tu landing en segundos: cambia el headline, la propuesta de valor o la estructura completa. Cada variante tiene su propia URL y metricas de conversion. Iteracion real en minutos, no en sprints de dos semanas.",
+                    a: "Sí. Con LandForge generas variantes de tu landing en segundos: cambia el headline, la propuesta de valor o la estructura completa. Cada variante tiene su propia URL y métricas de conversión. Iteración real en minutos, no en sprints de dos semanas.",
                   },
                   {
                     q: "¿LandForge funciona para SaaS B2B con ciclos de venta largos?",
-                    a: "Especialmente bien. Forgi cualifica al lead preguntando por tamano de empresa, presupuesto, caso de uso y urgencia antes de derivar a tu equipo de ventas. Tu SDR recibe un lead con contexto completo, no un email frio. Esto reduce el tiempo del ciclo de venta y aumenta la tasa de cierre.",
+                    a: "Especialmente bien. Forgi cualifica al lead preguntando por tamaño de empresa, presupuesto, caso de uso y urgencia antes de derivar a tu equipo de ventas. Tu SDR recibe un lead con contexto completo, no un email frío. Esto reduce el tiempo del ciclo de venta y aumenta la tasa de cierre.",
                   },
                   {
-                    q: "¿Cuanto cuesta LandForge para una startup en etapa early-stage?",
-                    a: "Puedes empezar con el plan gratuito (0 euros) que incluye una landing con Forgi Chatbot. Para startups en crecimiento, el plan Growth (49€/mes) ofrece landings ilimitadas. Si necesitas white label y dominios personalizados, el plan Agency (97€/mes) es ideal para escalar.",
+                    q: "¿Cuánto cuesta LandForge para una startup en etapa early-stage?",
+                    a: "Puedes empezar con el plan gratuito (0 euros) que incluye una landing con Forgi Chatbot. Para startups en crecimiento, el plan Starter (49€/mes) ofrece landings ilimitadas. Si necesitas white label y dominios personalizados, el plan Agency (97€/mes) es ideal para escalar.",
                   },
                 ].map((faq) => (
                   <details key={faq.q} className="group py-5">
@@ -409,10 +409,10 @@ export default function StartupsSaasLanding() {
           {/* -- 8. CTA FINAL (BOFU) -- */}
           <section className="px-6 py-24 text-center" style={{ background: "linear-gradient(135deg, #9D4EDD 0%, #4C0099 100%)" }}>
             <div className="max-w-3xl mx-auto">
-              <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-5">Tu MRR no crece solo. Tu landing page deberia trabajar tan rapido como tu equipo</h2>
+              <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-5">Tu MRR no crece solo. Tu landing page debería trabajar tan rápido como tu equipo</h2>
               <p className="text-[#E0AAFF] text-lg mb-10">
-                Crea tu primera landing para SaaS gratis. Sin tarjeta, sin sprints de desarrollo. Mientras tu competencia espera 3 semanas por una landing, tu ya estaras capturando leads cualificados. Consulta nuestras{" "}
-                <Link href="/blog/como-aumentar-conversion-landing-page" className="text-white underline underline-offset-2 hover:text-[#F3E8FF]">guias de conversion</Link>
+                Crea tu primera landing para SaaS gratis. Sin tarjeta, sin sprints de desarrollo. Mientras tu competencia espera 3 semanas por una landing, tú ya estarás capturando leads cualificados. Consulta nuestras{" "}
+                <Link href="/blog/como-aumentar-conversion-landing-page" className="text-white underline underline-offset-2 hover:text-[#F3E8FF]">guías de conversión</Link>
                 {" "}para maximizar tu funnel.
               </p>
               <Link href="/register" className="inline-block bg-white text-[#9D4EDD] font-bold text-lg px-10 py-5 rounded-2xl hover:-translate-y-1 transition duration-200 shadow-xl">
@@ -425,14 +425,14 @@ export default function StartupsSaasLanding() {
           {/* -- ENLAZADO INTERNO -- */}
           <section className="px-6 py-12 bg-[#FAFAFA] border-t border-gray-100">
             <div className="max-w-5xl mx-auto">
-              <h3 className="font-bold text-[#1A1A2E] mb-6 text-lg">Tambien te puede interesar</h3>
+              <h3 className="font-bold text-[#1A1A2E] mb-6 text-lg">También te puede interesar</h3>
               <div className="flex flex-wrap gap-4">
                 <Link href="/para/agencias-de-marketing" className="text-[#9D4EDD] font-semibold text-sm border border-[#E0AAFF] rounded-lg px-4 py-2 hover:bg-[#F3E8FF] transition">→ LandForge para Agencias de Marketing</Link>
                 <Link href="/comparar/landforge-vs-webflow" className="text-[#9D4EDD] font-semibold text-sm border border-[#E0AAFF] rounded-lg px-4 py-2 hover:bg-[#F3E8FF] transition">→ LandForge vs Webflow: Comparativa Completa</Link>
                 <Link href="/features/forgi-chatbot" className="text-[#9D4EDD] font-semibold text-sm border border-[#E0AAFF] rounded-lg px-4 py-2 hover:bg-[#F3E8FF] transition">→ Forgi Chatbot: Asistente de Ventas con IA</Link>
-                <Link href="/integraciones/zapier" className="text-[#9D4EDD] font-semibold text-sm border border-[#E0AAFF] rounded-lg px-4 py-2 hover:bg-[#F3E8FF] transition">→ Integracion con Zapier (+5,000 Apps)</Link>
-                <Link href="/integraciones/hubspot" className="text-[#9D4EDD] font-semibold text-sm border border-[#E0AAFF] rounded-lg px-4 py-2 hover:bg-[#F3E8FF] transition">→ Integracion con HubSpot CRM</Link>
-                <Link href="/blog/como-aumentar-conversion-landing-page" className="text-[#9D4EDD] font-semibold text-sm border border-[#E0AAFF] rounded-lg px-4 py-2 hover:bg-[#F3E8FF] transition">→ Como Aumentar la Conversion de tu Landing Page</Link>
+                <Link href="/integraciones/zapier" className="text-[#9D4EDD] font-semibold text-sm border border-[#E0AAFF] rounded-lg px-4 py-2 hover:bg-[#F3E8FF] transition">→ Integración con Zapier (+5,000 Apps)</Link>
+                <Link href="/integraciones/hubspot" className="text-[#9D4EDD] font-semibold text-sm border border-[#E0AAFF] rounded-lg px-4 py-2 hover:bg-[#F3E8FF] transition">→ Integración con HubSpot CRM</Link>
+                <Link href="/blog/como-aumentar-conversion-landing-page" className="text-[#9D4EDD] font-semibold text-sm border border-[#E0AAFF] rounded-lg px-4 py-2 hover:bg-[#F3E8FF] transition">→ Cómo Aumentar la Conversión de tu Landing Page</Link>
               </div>
             </div>
           </section>

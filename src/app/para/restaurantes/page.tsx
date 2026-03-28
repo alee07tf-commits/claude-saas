@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Landing Pages para Restaurantes y Hostelería con IA",
+  title: "Landing Pages para Restaurantes con IA",
   description:
-    "Genera la web de tu restaurante en 30 segundos. Forgi gestiona reservas y consultas sobre menú, alergenos y horarios mientras atiendes las mesas. Sin programar.",
+    "Genera la web de tu restaurante en 30s con IA. Forgi gestiona reservas y consultas sobre menú, alérgenos y horarios 24/7. Sin programar.",
   keywords: [
     "landing page restaurante ia",
     "web restaurante ia gratis",
@@ -16,11 +16,21 @@ export const metadata: Metadata = {
     canonical: "https://landforge.digital/para/restaurantes",
   },
   openGraph: {
-    title: "Landing Pages para Restaurantes y Hostelería con IA",
+    title: "Landing Pages para Restaurantes con IA",
     description:
-      "Genera la web de tu restaurante en 30 segundos. Forgi gestiona reservas y consultas sobre menú, alergenos y horarios mientras atiendes las mesas. Sin programar.",
+      "Genera la web de tu restaurante en 30s con IA. Forgi gestiona reservas y consultas sobre menú, alérgenos y horarios 24/7. Sin programar.",
     url: "https://landforge.digital/para/restaurantes",
   },
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Inicio", item: "https://landforge.digital" },
+    { "@type": "ListItem", position: 2, name: "Soluciones por Sector", item: "https://landforge.digital/para" },
+    { "@type": "ListItem", position: 3, name: "Restaurantes", item: "https://landforge.digital/para/restaurantes" },
+  ],
 };
 
 const faqSchema = {
@@ -193,7 +203,7 @@ export default function RestaurantesLanding() {
           <section className="px-6 py-24 text-center" style={{ background: "linear-gradient(135deg, #9D4EDD 0%, #4C0099 100%)" }}>
             <div className="max-w-3xl mx-auto">
               <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-5">Tu restaurante merece una web que trabaje tan duro como tú</h2>
-              <p className="text-[#E0AAFF] text-lg mb-10">Primera web lista en 30 segundos. Primera reserva esta misma noche.</p>
+              <p className="text-[#E0AAFF] text-lg mb-10">Primera web lista en 30 segundos. Primera reserva esta misma noche. Consulta nuestros <Link href="/precios" className="text-white font-semibold underline underline-offset-2 hover:text-[#F3E8FF] transition">planes y precios</Link> para hostelería.</p>
               <Link href="/register" className="inline-block bg-white text-[#9D4EDD] font-bold text-lg px-10 py-5 rounded-2xl hover:-translate-y-1 transition shadow-xl">
                 Crear la web de mi restaurante →
               </Link>
@@ -205,6 +215,7 @@ export default function RestaurantesLanding() {
             <div className="max-w-5xl mx-auto">
               <h3 className="font-bold mb-5">Más sectores con LandForge</h3>
               <div className="flex flex-wrap gap-4">
+                <Link href="/para/inmobiliarias" className="text-[#9D4EDD] font-semibold text-sm border border-[#E0AAFF] rounded-lg px-4 py-2 hover:bg-[#F3E8FF] transition">→ LandForge para Inmobiliarias</Link>
                 <Link href="/para/clinicas-dentales" className="text-[#9D4EDD] font-semibold text-sm border border-[#E0AAFF] rounded-lg px-4 py-2 hover:bg-[#F3E8FF] transition">→ Clínicas Dentales</Link>
                 <Link href="/para/coaches" className="text-[#9D4EDD] font-semibold text-sm border border-[#E0AAFF] rounded-lg px-4 py-2 hover:bg-[#F3E8FF] transition">→ Coaches y Formadores</Link>
                 <Link href="/features/forgi-chatbot" className="text-[#9D4EDD] font-semibold text-sm border border-[#E0AAFF] rounded-lg px-4 py-2 hover:bg-[#F3E8FF] transition">→ Forgi Chatbot 24/7</Link>

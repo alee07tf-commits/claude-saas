@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Cómo Aumentar la Conversión de tu Landing Page en 2026",
+  title: "Aumentar Conversión de tu Landing (2026)",
   description:
-    "Guía práctica con 7 tácticas CRO probadas para aumentar la tasa de conversión de tus landing pages. Titulares, CTAs, chatbots IA, social proof y Core Web Vitals.",
+    "7 tácticas CRO probadas para aumentar la conversión de tus landing pages. Titulares, CTAs, chatbots IA, social proof y Core Web Vitals.",
   keywords: [
     "como aumentar conversion landing page",
     "estrategias CRO landing pages",
@@ -16,9 +16,9 @@ export const metadata: Metadata = {
     canonical: "https://landforge.digital/blog/como-aumentar-conversion-landing-page",
   },
   openGraph: {
-    title: "Cómo Aumentar la Conversión de tu Landing Page en 2026",
+    title: "Aumentar Conversión de tu Landing (2026)",
     description:
-      "Guía práctica con 7 tácticas CRO probadas para aumentar la tasa de conversión de tus landing pages. Titulares, CTAs, chatbots IA, social proof y Core Web Vitals.",
+      "7 tácticas CRO probadas para aumentar la conversión de tus landing pages. Titulares, CTAs, chatbots IA, social proof y Core Web Vitals.",
     url: "https://landforge.digital/blog/como-aumentar-conversion-landing-page",
   },
 };

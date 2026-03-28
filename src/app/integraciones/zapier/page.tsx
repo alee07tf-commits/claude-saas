@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Conecta LandForge con Zapier: Automatiza Leads a +5,000 Apps",
-  description: "Integra LandForge con Zapier y envía cada lead automáticamente a tu CRM, email marketing, Slack y +5,000 apps. Sin código, en 2 minutos. Incluido en todos los planes.",
+  title: "Integración Zapier: Automatiza tus Leads",
+  description: "Conecta LandForge con Zapier y envía cada lead a tu CRM, email marketing, Slack y +5,000 apps. Sin código, en 2 minutos.",
   keywords: ["landforge zapier integracion", "automatizar leads landing page", "conectar landing page crm zapier", "zapier landing page builder"],
   alternates: { canonical: "https://landforge.digital/integraciones/zapier" },
-  openGraph: { title: "Conecta LandForge con Zapier: Automatiza Leads a +5,000 Apps", description: "Integra LandForge con Zapier y envía cada lead a tu CRM, email marketing, Slack y +5,000 apps. Sin código, en 2 minutos.", url: "https://landforge.digital/integraciones/zapier" },
+  openGraph: { title: "Integración Zapier: Automatiza tus Leads", description: "Conecta LandForge con Zapier y envía cada lead a tu CRM, email marketing, Slack y +5,000 apps. Sin código, en 2 minutos.", url: "https://landforge.digital/integraciones/zapier" },
 };
 
 const faqSchema = {

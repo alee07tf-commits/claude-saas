@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Las 4 Mejores Alternativas a Unbounce con IA en 2026",
+  title: "4 Alternativas a Unbounce con IA (2026)",
   description:
-    "Unbounce sube precios cada año. Descubre las 4 mejores alternativas a Unbounce para agencias en 2026: comparativa de precios, funcionalidades IA y tasas de conversión reales.",
+    "Unbounce sube precios cada año. Descubre las 4 mejores alternativas con IA para agencias en 2026: precios, funcionalidades y tasas de conversión.",
   keywords: [
     "alternativas unbounce",
     "mejor alternativa unbounce agencias",
@@ -16,9 +16,9 @@ export const metadata: Metadata = {
     canonical: "https://landforge.digital/comparar/alternativas-unbounce",
   },
   openGraph: {
-    title: "Las 4 Mejores Alternativas a Unbounce con IA en 2026",
+    title: "4 Alternativas a Unbounce con IA (2026)",
     description:
-      "Unbounce sube precios cada año. Descubre las 4 mejores alternativas a Unbounce para agencias en 2026: comparativa de precios, funcionalidades IA y tasas de conversión reales.",
+      "Unbounce sube precios cada año. Descubre las 4 mejores alternativas con IA para agencias en 2026: precios, funcionalidades y tasas de conversión.",
     url: "https://landforge.digital/comparar/alternativas-unbounce",
   },
 };
@@ -50,7 +50,7 @@ const faqSchema = {
       name: "¿Puede LandForge reemplazar a Unbounce para una agencia?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Sí, con ventajas clave. LandForge genera la landing completa con IA en 30 segundos (Unbounce requiere construcción manual desde plantillas), incluye chatbot de ventas Forgi de forma nativa, y el plan Unlimited para agencias cuesta 97€/mes vs los 199$/mes de Unbounce. El único punto donde Unbounce sigue siendo superior es en Smart Traffic (distribución automática de tráfico por segmento).",
+        text: "Sí, con ventajas clave. LandForge genera la landing completa con IA en 30 segundos (Unbounce requiere construcción manual desde plantillas), incluye chatbot de ventas Forgi de forma nativa, y el plan Agency para agencias cuesta 97€/mes vs los 199$/mes de Unbounce. El único punto donde Unbounce sigue siendo superior es en Smart Traffic (distribución automática de tráfico por segmento).",
       },
     },
     {
@@ -254,7 +254,7 @@ export default function AlternativasUnbounce() {
               <div className="divide-y divide-gray-100">
                 {[
                   { q: "¿Por qué Unbounce es tan caro para agencias?", a: "El plan Grow cuesta 149$/mes para solo 500 conversiones. Para agencias con múltiples clientes, el coste escala radicalmente. Además, no incluye chatbot de ventas nativo." },
-                  { q: "¿Puede LandForge reemplazar a Unbounce para una agencia?", a: "Sí, con ventajas clave. LandForge genera la landing completa con IA en 30 segundos (Unbounce requiere construcción manual), incluye Forgi de forma nativa, y el plan Unlimited cuesta 97€/mes vs 199$/mes de Unbounce." },
+                  { q: "¿Puede LandForge reemplazar a Unbounce para una agencia?", a: "Sí, con ventajas clave. LandForge genera la landing completa con IA en 30 segundos (Unbounce requiere construcción manual), incluye Forgi de forma nativa, y el plan Agency cuesta 97€/mes vs 199$/mes de Unbounce." },
                   { q: "¿Cuáles son las alternativas con mejor ratio precio/valor en 2026?", a: "Para agencias: 1) LandForge (97€/mes, IA + chatbot nativo). 2) Leadpages (99$/mes, buen editor visual). 3) Systeme.io (27€/mes, todo en uno). Para enterprise con Smart Traffic, Unbounce sigue siendo válido." },
                 ].map((faq) => (
                   <details key={faq.q} className="group py-5">

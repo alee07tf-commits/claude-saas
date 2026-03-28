@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Las Mejores Alternativas a Webflow para Landing Pages en 2026",
+  title: "Alternativas a Webflow para Landings (2026)",
   description: "¿Webflow es demasiado complejo o caro para tus landing pages? Comparativa de las 5 mejores alternativas con IA, chatbot y velocidad para agencias en 2026.",
   keywords: ["alternativas webflow", "alternativa webflow landing pages", "mejor que webflow agencias", "webflow alternativas baratas 2026"],
   alternates: { canonical: "https://landforge.digital/comparar/alternativas-webflow" },
   openGraph: {
-    title: "Las Mejores Alternativas a Webflow para Landing Pages en 2026",
+    title: "Alternativas a Webflow para Landings (2026)",
     description: "¿Webflow es demasiado complejo o caro para tus landing pages? Las 5 mejores alternativas con IA para agencias en 2026.",
     url: "https://landforge.digital/comparar/alternativas-webflow",
   },

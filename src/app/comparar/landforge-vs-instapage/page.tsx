@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "LandForge vs Instapage 2026: Comparativa Completa para Agencias",
+  title: "LandForge vs Instapage 2026: Comparativa",
   description:
-    "Comparativa honesta entre LandForge (generación IA en 30 segundos) e Instapage (A/B testing enterprise). Descubre cuál se adapta mejor a tu agencia según velocidad, precio y conversión.",
+    "Comparativa entre LandForge (IA en 30s) e Instapage (A/B testing enterprise). Descubre cuál se adapta mejor según velocidad, precio y conversión.",
   keywords: [
     "landforge vs instapage",
     "alternativa instapage",
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     canonical: "https://landforge.digital/comparar/landforge-vs-instapage",
   },
   openGraph: {
-    title: "LandForge vs Instapage 2026: Comparativa Completa para Agencias",
+    title: "LandForge vs Instapage 2026: Comparativa",
     description:
       "Comparativa honesta entre LandForge (generación IA en 30 segundos) e Instapage (A/B testing enterprise). Descubre cuál se adapta mejor a tu agencia.",
     url: "https://landforge.digital/comparar/landforge-vs-instapage",

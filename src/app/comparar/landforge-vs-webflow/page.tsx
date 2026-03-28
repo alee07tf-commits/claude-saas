@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "LandForge vs Webflow 2026: Comparativa Completa para Agencias",
+  title: "LandForge vs Webflow 2026: Comparativa",
   description:
-    "Comparativa honesta entre LandForge (generación IA en 30 segundos) y Webflow (diseño visual avanzado). Descubre cuál necesita tu agencia según velocidad, precio y conversión.",
+    "Comparativa entre LandForge (IA en 30s) y Webflow (diseño visual). Descubre cuál necesita tu agencia según velocidad, precio y conversión.",
   keywords: [
     "landforge vs webflow",
     "alternativa webflow landing pages",
@@ -15,9 +15,9 @@ export const metadata: Metadata = {
     canonical: "https://landforge.digital/comparar/landforge-vs-webflow",
   },
   openGraph: {
-    title: "LandForge vs Webflow 2026: Comparativa Completa para Agencias",
+    title: "LandForge vs Webflow 2026: Comparativa",
     description:
-      "Comparativa honesta entre LandForge (generación IA en 30 segundos) y Webflow (diseño visual avanzado). Descubre cuál necesita tu agencia según velocidad, precio y conversión.",
+      "Comparativa entre LandForge (IA en 30s) y Webflow (diseño visual). Descubre cuál necesita tu agencia según velocidad, precio y conversión.",
     url: "https://landforge.digital/comparar/landforge-vs-webflow",
   },
 };

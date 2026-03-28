@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "LandForge vs Carrd 2026: Comparativa para Landing Pages de Conversión",
+  title: "LandForge vs Carrd 2026: Comparativa",
   description:
-    "Carrd es barato y simple, pero ¿convierte? Comparativa completa entre LandForge (IA + chatbot + agencias) y Carrd (one-page builder). Descubre cuál necesitas según tu proyecto.",
+    "Carrd es barato y simple, pero ¿convierte? Comparativa entre LandForge (IA + chatbot) y Carrd (one-page builder). Descubre cuál necesitas.",
   keywords: [
     "landforge vs carrd",
     "alternativa carrd landing pages",
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     canonical: "https://landforge.digital/comparar/landforge-vs-carrd",
   },
   openGraph: {
-    title: "LandForge vs Carrd 2026: Comparativa para Landing Pages de Conversión",
+    title: "LandForge vs Carrd 2026: Comparativa",
     description:
       "Carrd es barato y simple, pero ¿convierte? Comparativa completa entre LandForge (IA + chatbot + agencias) y Carrd (one-page builder).",
     url: "https://landforge.digital/comparar/landforge-vs-carrd",

@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "LandForge + HubSpot: Envía Leads al CRM en Tiempo Real",
+  title: "Integración HubSpot: Leads al CRM en Vivo",
   description:
-    "Conecta tus landing pages de LandForge con HubSpot CRM. Envía leads, conversaciones del chatbot y datos de conversión automáticamente. Sin código, en 2 minutos.",
+    "Conecta LandForge con HubSpot CRM. Envía leads y datos de conversión automáticamente. Sin código, en 2 minutos.",
   keywords: [
     "landforge hubspot integracion",
     "automatizar leads hubspot landing page",
@@ -15,9 +15,9 @@ export const metadata: Metadata = {
     canonical: "https://landforge.digital/integraciones/hubspot",
   },
   openGraph: {
-    title: "LandForge + HubSpot: Envía Leads al CRM en Tiempo Real",
+    title: "Integración HubSpot: Leads al CRM en Vivo",
     description:
-      "Conecta tus landing pages de LandForge con HubSpot CRM. Envía leads, conversaciones del chatbot y datos de conversión automáticamente. Sin código, en 2 minutos.",
+      "Conecta LandForge con HubSpot CRM. Envía leads y datos de conversión automáticamente. Sin código, en 2 minutos.",
     url: "https://landforge.digital/integraciones/hubspot",
   },
 };

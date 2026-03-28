@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Diseño Web y Landing Pages para Abogados con IA",
+  title: "Landing Pages para Abogados con IA",
   description:
-    "Capta más prospectos para tu despacho legal sin programar. La IA genera tu web jurídica en 30s y Forgi atiende primeras consultas legales 24/7, cualificando casos antes de tu intervención.",
+    "Capta más clientes para tu despacho legal. La IA genera tu web en 30s y Forgi atiende consultas legales 24/7, cualificando casos sin programar.",
   keywords: [
     "crear landing page abogados",
     "captacion clientes despacho legal",
@@ -16,11 +16,21 @@ export const metadata: Metadata = {
     canonical: "https://landforge.digital/para/abogados",
   },
   openGraph: {
-    title: "Diseño Web y Landing Pages para Abogados con IA",
+    title: "Landing Pages para Abogados con IA",
     description:
-      "Capta más prospectos para tu despacho legal sin programar. La IA genera tu web jurídica en 30s y Forgi atiende primeras consultas legales 24/7, cualificando casos antes de tu intervención.",
+      "Capta más clientes para tu despacho legal. La IA genera tu web en 30s y Forgi atiende consultas legales 24/7, cualificando casos sin programar.",
     url: "https://landforge.digital/para/abogados",
   },
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Inicio", item: "https://landforge.digital" },
+    { "@type": "ListItem", position: 2, name: "Soluciones por Sector", item: "https://landforge.digital/para" },
+    { "@type": "ListItem", position: 3, name: "Abogados", item: "https://landforge.digital/para/abogados" },
+  ],
 };
 
 const faqSchema = {
@@ -29,7 +39,7 @@ const faqSchema = {
   mainEntity: [
     {
       "@type": "Question",
-      name: "¿Forgi puede cualificar casos legales y filtar prospectos no relevantes?",
+      name: "¿Forgi puede cualificar casos legales y filtrar prospectos no relevantes?",
       acceptedAnswer: { "@type": "Answer", text: "Sí. Entrenamos a Forgi con las especialidades de tu despacho (Laboral, Divorcios, Penal, etc.) para que cuando un usuario llegue a tu landing, el chatbot detecte si el caso entra dentro de tu área de práctica antes de comprometer tu tiempo en una primera consulta." },
     },
     {
@@ -49,6 +59,7 @@ export default function AbogadosLanding() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
       <div className="min-h-screen bg-[#FAFAFA] text-[#1A1A2E] font-sans">
         <main>
@@ -56,6 +67,12 @@ export default function AbogadosLanding() {
           {/* ── 1. HERO ── */}
           <section className="relative px-6 pt-32 pb-20 text-center flex flex-col items-center justify-center min-h-[90vh]">
             <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(circle at 50% 30%, rgba(157,78,221,0.06) 0%, transparent 65%)" }} />
+
+            <nav aria-label="Breadcrumb" className="text-xs text-[#6B7280] mb-6 flex gap-1">
+              <Link href="/" className="hover:text-[#9D4EDD]">Inicio</Link><span>/</span>
+              <Link href="/para" className="hover:text-[#9D4EDD]">Soluciones</Link><span>/</span>
+              <span className="text-[#9D4EDD]">Abogados</span>
+            </nav>
 
             <p className="text-xs font-bold uppercase tracking-[2px] text-[#9D4EDD] mb-5 bg-[#F3E8FF] border border-[#E0AAFF] px-4 py-1.5 rounded-full inline-block">
               Plataforma de Captación Legal para Despachos de Abogados
@@ -181,7 +198,7 @@ export default function AbogadosLanding() {
           <section className="px-6 py-24 text-center" style={{ background: "linear-gradient(135deg, #9D4EDD 0%, #4C0099 100%)" }}>
             <div className="max-w-3xl mx-auto">
               <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-5">Tu próximo cliente está buscando un abogado en Google ahora mismo</h2>
-              <p className="text-[#E0AAFF] text-lg mb-10">¿Le va a encontrar tu landing o la de la competencia? Crea la tuya en 30 segundos y empieza a recibir consultas cualificadas esta semana.</p>
+              <p className="text-[#E0AAFF] text-lg mb-10">¿Le va a encontrar tu landing o la de la competencia? Crea la tuya en 30 segundos y empieza a recibir consultas cualificadas esta semana. Consulta nuestros <Link href="/precios" className="text-white font-semibold underline underline-offset-2 hover:text-[#F3E8FF] transition">planes y precios</Link> para despachos.</p>
               <Link href="/register" className="inline-block bg-white text-[#9D4EDD] font-bold text-lg px-10 py-5 rounded-2xl hover:-translate-y-1 transition shadow-xl">
                 Crear mi web de captación legal →
               </Link>
@@ -193,6 +210,8 @@ export default function AbogadosLanding() {
             <div className="max-w-5xl mx-auto">
               <h3 className="font-bold mb-5">Más sectores con LandForge</h3>
               <div className="flex flex-wrap gap-4">
+                <Link href="/para/inmobiliarias" className="text-[#9D4EDD] font-semibold text-sm border border-[#E0AAFF] rounded-lg px-4 py-2 hover:bg-[#F3E8FF] transition">→ LandForge para Inmobiliarias</Link>
+                <Link href="/para/coaches" className="text-[#9D4EDD] font-semibold text-sm border border-[#E0AAFF] rounded-lg px-4 py-2 hover:bg-[#F3E8FF] transition">→ LandForge para Coaches</Link>
                 <Link href="/para/clinicas-dentales" className="text-[#9D4EDD] font-semibold text-sm border border-[#E0AAFF] rounded-lg px-4 py-2 hover:bg-[#F3E8FF] transition">→ Clínicas Dentales</Link>
                 <Link href="/para/agencias-de-marketing" className="text-[#9D4EDD] font-semibold text-sm border border-[#E0AAFF] rounded-lg px-4 py-2 hover:bg-[#F3E8FF] transition">→ Agencias de Marketing</Link>
                 <Link href="/comparar/landforge-vs-webflow" className="text-[#9D4EDD] font-semibold text-sm border border-[#E0AAFF] rounded-lg px-4 py-2 hover:bg-[#F3E8FF] transition">→ LandForge vs Webflow</Link>

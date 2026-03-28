@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Crear Landing Pages para Clínicas Dentales con IA",
+  title: "Landing Pages para Clínicas Dentales con IA",
   description:
-    "Capta más pacientes para tu clínica dental. Genera tu página de captación en 30 segundos con IA, lanza un chatbot que agenda citas 24/7 y convierte el tráfico de Google Ads en consultas reales.",
+    "Capta más pacientes para tu clínica dental. Genera tu landing en 30s con IA y lanza un chatbot que agenda citas 24/7. Convierte Google Ads en consultas.",
   keywords: [
     "crear landing page clinica dental",
     "software landing pages dentistas",
@@ -16,11 +16,21 @@ export const metadata: Metadata = {
     canonical: "https://landforge.digital/para/clinicas-dentales",
   },
   openGraph: {
-    title: "Crear Landing Pages para Clínicas Dentales con IA",
+    title: "Landing Pages para Clínicas Dentales con IA",
     description:
-      "Capta más pacientes para tu clínica dental. Genera tu página de captación en 30 segundos con IA, lanza un chatbot que agenda citas 24/7 y convierte el tráfico de Google Ads en consultas reales.",
+      "Capta más pacientes para tu clínica dental. Genera tu landing en 30s con IA y lanza un chatbot que agenda citas 24/7. Convierte Google Ads en consultas.",
     url: "https://landforge.digital/para/clinicas-dentales",
   },
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Inicio", item: "https://landforge.digital" },
+    { "@type": "ListItem", position: 2, name: "Soluciones por Sector", item: "https://landforge.digital/para" },
+    { "@type": "ListItem", position: 3, name: "Clínicas Dentales", item: "https://landforge.digital/para/clinicas-dentales" },
+  ],
 };
 
 const faqSchema = {
@@ -84,6 +94,7 @@ export default function ClinicasDentalesLanding() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(logoSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
       <div className="min-h-screen bg-[#FAFAFA] text-[#1A1A2E] font-sans">
         <main>
@@ -91,6 +102,12 @@ export default function ClinicasDentalesLanding() {
           {/* ── 1. HERO ── */}
           <section className="relative px-6 pt-32 pb-20 text-center flex flex-col items-center justify-center min-h-[90vh]">
             <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(circle at 50% 30%, rgba(157,78,221,0.06) 0%, transparent 65%)" }} />
+
+            <nav aria-label="Breadcrumb" className="text-xs text-[#6B7280] mb-6 flex gap-1">
+              <Link href="/" className="hover:text-[#9D4EDD]">Inicio</Link><span>/</span>
+              <Link href="/para" className="hover:text-[#9D4EDD]">Soluciones</Link><span>/</span>
+              <span className="text-[#9D4EDD]">Clínicas Dentales</span>
+            </nav>
 
             {/* SEO Kicker */}
             <p className="text-xs font-bold uppercase tracking-[2px] text-[#9D4EDD] mb-5 bg-[#F3E8FF] border border-[#E0AAFF] px-4 py-1.5 rounded-full inline-block">
@@ -301,7 +318,7 @@ export default function ClinicasDentalesLanding() {
                       ["Chatbot de ventas incluido", "✅ Forgi (nativo)", "❌ Extra €€", "❌ Plugin adicional"],
                       ["Velocidad de carga (Core Web Vitals)", "✅ superior", "⚠️ Variable", "❌ Suele penalizar"],
                       ["Edición con IA", "✅ Forgi Editor", "❌ Depende de la agencia", "❌ Solo manual"],
-                      ["Adaptación al sector dental", "✅ Copy especializado", "⚠️ Copy genérico", "❌ Temflate base"],
+                      ["Adaptación al sector dental", "✅ Copy especializado", "⚠️ Copy genérico", "❌ Template base"],
                     ].map(([feat, lf, ag, el]) => (
                       <tr key={feat}>
                         <td className="p-5 font-semibold text-[#1A1A2E]">{feat}</td>

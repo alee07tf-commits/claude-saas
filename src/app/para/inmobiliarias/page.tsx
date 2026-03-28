@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Landing Pages para Inmobiliarias con IA — Capta Compradores 24/7",
+  title: "Landing Pages para Inmobiliarias con IA",
   description:
-    "Genera landing pages de inmuebles para compraventa y alquiler en 30 segundos. Forgi atiende consultas sobre precio, zona y visitas las 24 horas para que no pierdas ningún lead.",
+    "Genera landing pages de inmuebles en 30s con IA. Forgi atiende consultas sobre precio, zona y visitas 24/7 para que no pierdas ningún lead.",
   keywords: [
     "landing page inmobiliaria ia",
     "crear landing page inmueble",
@@ -16,11 +16,21 @@ export const metadata: Metadata = {
     canonical: "https://landforge.digital/para/inmobiliarias",
   },
   openGraph: {
-    title: "Landing Pages para Inmobiliarias con IA — Capta Compradores 24/7",
+    title: "Landing Pages para Inmobiliarias con IA",
     description:
-      "Genera landing pages de inmuebles para compraventa y alquiler en 30 segundos. Forgi atiende consultas sobre precio, zona y visitas las 24 horas para que no pierdas ningún lead.",
+      "Genera landing pages de inmuebles en 30s con IA. Forgi atiende consultas sobre precio, zona y visitas 24/7 para que no pierdas ningún lead.",
     url: "https://landforge.digital/para/inmobiliarias",
   },
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Inicio", item: "https://landforge.digital" },
+    { "@type": "ListItem", position: 2, name: "Soluciones por Sector", item: "https://landforge.digital/para" },
+    { "@type": "ListItem", position: 3, name: "Inmobiliarias", item: "https://landforge.digital/para/inmobiliarias" },
+  ],
 };
 
 const faqSchema = {
@@ -193,7 +203,7 @@ export default function InmobiliariasLanding() {
           <section className="px-6 py-24 text-center" style={{ background: "linear-gradient(135deg, #9D4EDD 0%, #4C0099 100%)" }}>
             <div className="max-w-3xl mx-auto">
               <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-5">Tu próxima venta empieza con una landing específica</h2>
-              <p className="text-[#E0AAFF] text-lg mb-10">Crea la landing de tu propiedad estrella en 30 segundos y empieza a recibir solicitudes de visita cualificadas hoy mismo.</p>
+              <p className="text-[#E0AAFF] text-lg mb-10">Crea la landing de tu propiedad estrella en 30 segundos y empieza a recibir solicitudes de visita cualificadas hoy mismo. Consulta nuestros <Link href="/precios" className="text-white font-semibold underline underline-offset-2 hover:text-[#F3E8FF] transition">planes y precios</Link> para inmobiliarias.</p>
               <Link href="/register" className="inline-block bg-white text-[#9D4EDD] font-bold text-lg px-10 py-5 rounded-2xl hover:-translate-y-1 transition shadow-xl">
                 Crear mi primera landing inmobiliaria →
               </Link>
@@ -204,6 +214,7 @@ export default function InmobiliariasLanding() {
             <div className="max-w-5xl mx-auto">
               <h3 className="font-bold mb-5">Más sectores con LandForge</h3>
               <div className="flex flex-wrap gap-4">
+                <Link href="/para/restaurantes" className="text-[#9D4EDD] font-semibold text-sm border border-[#E0AAFF] rounded-lg px-4 py-2 hover:bg-[#F3E8FF] transition">→ LandForge para Restaurantes</Link>
                 <Link href="/para/clinicas-dentales" className="text-[#9D4EDD] font-semibold text-sm border border-[#E0AAFF] rounded-lg px-4 py-2 hover:bg-[#F3E8FF] transition">→ Clínicas Dentales</Link>
                 <Link href="/para/abogados" className="text-[#9D4EDD] font-semibold text-sm border border-[#E0AAFF] rounded-lg px-4 py-2 hover:bg-[#F3E8FF] transition">→ Despachos de Abogados</Link>
                 <Link href="/features/forgi-chatbot" className="text-[#9D4EDD] font-semibold text-sm border border-[#E0AAFF] rounded-lg px-4 py-2 hover:bg-[#F3E8FF] transition">→ Forgi Chatbot 24/7</Link>

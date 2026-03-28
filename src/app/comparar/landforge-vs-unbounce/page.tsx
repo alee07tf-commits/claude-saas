@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "LandForge vs Unbounce 2026: ¿Cuál es la Mejor Alternativa para Agencias?",
+  title: "LandForge vs Unbounce 2026: Comparativa",
   description:
-    "Comparativa honesta entre LandForge (IA generativa + chatbot de ventas en 30s) y Unbounce (editor visual clásico). Descubre cuál encaja mejor según precio, velocidad y conversión.",
+    "Comparativa entre LandForge (IA + chatbot en 30s) y Unbounce (editor visual). Descubre cuál encaja mejor según precio, velocidad y conversión.",
   keywords: [
     "landforge vs unbounce",
     "alternativa unbounce landing pages",
@@ -16,9 +16,9 @@ export const metadata: Metadata = {
     canonical: "https://landforge.digital/comparar/landforge-vs-unbounce",
   },
   openGraph: {
-    title: "LandForge vs Unbounce 2026: ¿Cuál es la Mejor Alternativa para Agencias?",
+    title: "LandForge vs Unbounce 2026: Comparativa",
     description:
-      "Comparativa honesta entre LandForge (IA generativa + chatbot de ventas en 30s) y Unbounce (editor visual clásico). Descubre cuál encaja mejor según precio, velocidad y conversión.",
+      "Comparativa entre LandForge (IA + chatbot en 30s) y Unbounce (editor visual). Descubre cuál encaja mejor según precio, velocidad y conversión.",
     url: "https://landforge.digital/comparar/landforge-vs-unbounce",
   },
 };

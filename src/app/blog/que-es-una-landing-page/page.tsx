@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Qué es una Landing Page y Para Qué Sirve en 2026 | Guía Completa",
+  title: "Qué es una Landing Page y Para Qué Sirve",
   description:
-    "Aprende qué es una landing page, para qué sirve, qué diferencia a una landing page de una web normal y cómo crear una que convierta visitas en clientes. Guía completa 2026.",
+    "Aprende qué es una landing page, para qué sirve y cómo se diferencia de una web normal. Crea una que convierta visitas en clientes.",
   keywords: [
     "que es una landing page",
     "para que sirve una landing page",
@@ -16,9 +16,9 @@ export const metadata: Metadata = {
     canonical: "https://landforge.digital/blog/que-es-una-landing-page",
   },
   openGraph: {
-    title: "Qué es una Landing Page y Para Qué Sirve en 2026 | Guía Completa",
+    title: "Qué es una Landing Page y Para Qué Sirve",
     description:
-      "Aprende qué es una landing page, para qué sirve, qué diferencia a una landing page de una web normal y cómo crear una que convierta visitas en clientes. Guía completa 2026.",
+      "Aprende qué es una landing page, para qué sirve y cómo se diferencia de una web normal. Crea una que convierta visitas en clientes.",
     url: "https://landforge.digital/blog/que-es-una-landing-page",
   },
 };

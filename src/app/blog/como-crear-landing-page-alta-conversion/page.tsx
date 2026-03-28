@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Cómo Crear una Landing Page de Alta Conversión en 2026 (Guía Completa)",
+  title: "Crear Landing Page de Alta Conversión 2026",
   description:
-    "Guía paso a paso para crear landing pages que convierten. Estructura, copywriting, CTA, velocidad de carga y chatbot de ventas. Con ejemplos reales y plantilla gratuita.",
+    "Guía paso a paso para crear landing pages que convierten. Estructura, copywriting, CTA, velocidad de carga y chatbot de ventas. Con ejemplos reales.",
   keywords: [
     "como crear landing page alta conversion",
     "crear landing page que convierte",
@@ -16,9 +16,9 @@ export const metadata: Metadata = {
     canonical: "https://landforge.digital/blog/como-crear-landing-page-alta-conversion",
   },
   openGraph: {
-    title: "Cómo Crear una Landing Page de Alta Conversión en 2026 (Guía Completa)",
+    title: "Crear Landing Page de Alta Conversión 2026",
     description:
-      "Guía paso a paso para crear landing pages que convierten. Estructura, copywriting, CTA, velocidad de carga y chatbot de ventas. Con ejemplos reales y plantilla gratuita.",
+      "Guía paso a paso para crear landing pages que convierten. Estructura, copywriting, CTA, velocidad de carga y chatbot de ventas. Con ejemplos reales.",
     url: "https://landforge.digital/blog/como-crear-landing-page-alta-conversion",
   },
 };

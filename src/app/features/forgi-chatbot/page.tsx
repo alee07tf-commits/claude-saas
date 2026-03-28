@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Forgi Chatbot: Asistente de Ventas IA 24/7 para tu Landing Page",
+  title: "Forgi Chatbot: Ventas IA 24/7 en tu Web",
   description:
-    "Forgi es el chatbot de ventas con IA que atiende, cualifica y convierte a los visitantes de tu landing page las 24 horas. Se configura solo en 30 segundos. Sin código.",
+    "Forgi es el chatbot de ventas con IA que atiende, cualifica y convierte visitantes de tu landing 24/7. Se configura en 30 segundos. Sin código.",
   keywords: [
     "chatbot ventas ia web",
     "chatbot ia landing page",
@@ -16,9 +16,9 @@ export const metadata: Metadata = {
     canonical: "https://landforge.digital/features/forgi-chatbot",
   },
   openGraph: {
-    title: "Forgi Chatbot: Asistente de Ventas IA 24/7 para tu Landing Page",
+    title: "Forgi Chatbot: Ventas IA 24/7 en tu Web",
     description:
-      "Forgi es el chatbot de ventas con IA que atiende, cualifica y convierte a los visitantes de tu landing page las 24 horas. Se configura solo en 30 segundos. Sin código.",
+      "Forgi es el chatbot de ventas con IA que atiende, cualifica y convierte visitantes de tu landing 24/7. Se configura en 30 segundos. Sin código.",
     url: "https://landforge.digital/features/forgi-chatbot",
   },
 };
@@ -96,7 +96,7 @@ export default function ForgiChatbotPage() {
             </p>
 
             <h1 className="text-4xl md:text-6xl font-extrabold max-w-4xl tracking-tight leading-[1.05] mb-7">
-              Tu asistente de ventas IA que nunca duerme.{" "}
+              Chatbot de Ventas IA que nunca duerme.{" "}
               <span style={{ background: "linear-gradient(135deg, #9D4EDD, #7B2CBF)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
                 70% menos de leads perdidos.
               </span>

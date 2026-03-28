@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Alternativas a Leadpages para Agencias con IA en 2026",
+  title: "Alternativas a Leadpages con IA (2026)",
   description:
-    "¿Buscas una alternativa a Leadpages con IA nativa? Comparativa honesta de las mejores opciones en 2026 para agencias que quieren velocidad, chatbot y precio justo.",
+    "¿Buscas alternativa a Leadpages con IA? Comparativa de las mejores opciones 2026 para agencias: velocidad, chatbot y precio justo.",
   keywords: [
     "alternativas leadpages",
     "alternativa leadpages agencias",
@@ -16,9 +16,9 @@ export const metadata: Metadata = {
     canonical: "https://landforge.digital/comparar/alternativas-leadpages",
   },
   openGraph: {
-    title: "Alternativas a Leadpages para Agencias con IA en 2026",
+    title: "Alternativas a Leadpages con IA (2026)",
     description:
-      "¿Buscas una alternativa a Leadpages con IA nativa? Comparativa honesta de las mejores opciones en 2026 para agencias que quieren velocidad, chatbot y precio justo.",
+      "¿Buscas alternativa a Leadpages con IA? Comparativa de las mejores opciones 2026 para agencias: velocidad, chatbot y precio justo.",
     url: "https://landforge.digital/comparar/alternativas-leadpages",
   },
 };
