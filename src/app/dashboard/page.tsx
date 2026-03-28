@@ -2,6 +2,7 @@ import { createClient } from '@/lib/supabase/server'
 import { checkUserLimit } from '@/lib/limits'
 import DeleteButton from '@/components/DeleteButton'
 import BillingButton from '@/components/BillingButton'
+import DomainPanel from '@/components/DomainPanel'
 
 const T = {
   bg: '#FAFAFA', card: '#FFFFFF', border: '#E0AAFF',
@@ -288,16 +289,20 @@ export default async function DashboardPage() {
                     >
                       Ver
                     </a>
-                    <a
-                      href={row.subdomain ? `/preview/${row.id}?domain=1` : `/preview/${row.id}`}
-                      style={{
-                        padding: '8px 18px', borderRadius: '8px', textDecoration: 'none',
-                        background: 'transparent', border: `1px solid ${T.border}`,
-                        color: T.accent, fontSize: '13px', fontWeight: 700,
-                      }}
-                    >
-                      🔗 {row.subdomain ? 'Dominio' : 'Publicar'}
-                    </a>
+                    {row.subdomain ? (
+                      <DomainPanel landingId={row.id} subdomain={row.subdomain} />
+                    ) : (
+                      <a
+                        href={`/preview/${row.id}`}
+                        style={{
+                          padding: '8px 18px', borderRadius: '8px', textDecoration: 'none',
+                          background: 'transparent', border: `1px solid ${T.border}`,
+                          color: T.accent, fontSize: '13px', fontWeight: 700,
+                        }}
+                      >
+                        🔗 Publicar
+                      </a>
+                    )}
                     <a
                       href={`/editor/${row.id}`}
                       style={{
