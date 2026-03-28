@@ -21,7 +21,7 @@ const BRAND = {
 
 export default async function LoginPage({ searchParams }: { searchParams: Promise<{ error?: string; next?: string }> }) {
     const params = await searchParams
-    const next = params?.next || '/survey'
+    const next = params?.next || '/dashboard'
     return (
         <div style={{
             minHeight: "100vh", background: BRAND.bg, color: BRAND.text,
