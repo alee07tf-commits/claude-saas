@@ -6,11 +6,7 @@ import { checkUserLimit, incrementUserUsage } from '@/lib/limits'
 // Extend Vercel function timeout — generation can take 60-120s
 export const maxDuration = 300
 
-const client = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY!,
-  timeout: 100_000,        // 100s timeout for API calls
-  maxRetries: 2,           // SDK-level retry on transient errors (429, 500, 529)
-})
+const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! })
 
 // ─────────────────────────────────────────────────────────────────
 // LABELS / MAPS
@@ -792,11 +788,14 @@ ${sectionsList}
 10. CTA principal en botones: "${effectiveCta}"
 11. Keywords LSI: ${(seoStrategy.lsiKeywords as string[] || []).join(', ')} — incluir naturalmente en subtítulos y párrafos
 
-━━━ CRÍTICO — GENERACIÓN COMPLETA ━━━
+━━━ CRÍTICO — GENERACIÓN COMPLETA Y COMPACTA ━━━
+• LÍMITE DURO: la respuesta completa NO puede superar 14000 tokens. Sé conciso.
 • Genera ABSOLUTAMENTE TODAS las secciones pedidas. Nunca omitas ninguna.
-• CSS: objetivo 200-250 líneas. Shorthand, selectores agrupados con coma, sin comentarios, cero duplicados. Usa .container universal — no repitas max-width por sección.
-• HTML conciso: 1-2 frases por párrafo. Descripciones de servicios/beneficios: máx 2 líneas. Sin palabrería, sin texto de relleno.
-• SIEMPRE termina el documento con </footer></body></html>. Si hay presión de longitud, recorta texto de párrafos pero NUNCA dejes el HTML incompleto ni omitas secciones.
+• CSS ULTRA-COMPACTO: máx 180 líneas. Shorthand agresivo, selectores agrupados con coma, sin comentarios, cero duplicados. Usa .container universal.
+• HTML conciso: 1 frase por párrafo en cards. Descripciones de servicios/beneficios: máx 1 línea. Testimonios: 1-2 frases. FAQ: respuestas de 1-2 frases.
+• 3 servicios máximo en cards, 3 testimonios, 4-5 FAQ, 3-4 stats.
+• NO añadas atributos aria innecesarios, NO repitas CSS, NO uses comentarios HTML.
+• SIEMPRE termina el documento con </footer></body></html>. Si hay presión de longitud, recorta texto pero NUNCA dejes el HTML incompleto ni omitas secciones.
 
 Genera el HTML ahora.`
 }
@@ -857,7 +856,7 @@ export async function POST(request: NextRequest) {
 
         const anthropicStream = client.messages.stream({
           model: 'claude-sonnet-4-6',
-          max_tokens: 48000,
+          max_tokens: 16000,
           system: [{ type: 'text' as const, text: HTML_DESIGNER_SYSTEM, cache_control: { type: 'ephemeral' as const } }],
           messages: [{ role: 'user', content: buildHtmlPrompt(surveyData, serpAnalysis, domainContent, designConcept, seoStrategy) }],
         })

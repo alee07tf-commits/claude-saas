@@ -395,7 +395,7 @@ export default function SurveyPage() {
             const res = await fetch("/api/analyze-domain", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ domain: url.trim() }),
+              body: JSON.stringify({ domain: url.trim(), isCompetitor: true }),
             });
             const data = await res.json();
             return data.success && data.data ? (data.data as BusinessInfo) : null;
@@ -448,42 +448,28 @@ export default function SurveyPage() {
       try {
         if (attempt > 0) {
           setGeneratePhase(`Reintentando (${attempt}/${MAX_RETRIES})...`);
-          await new Promise(r => setTimeout(r, 1500 * attempt)); // backoff: 1.5s, 3s
+          await new Promise(r => setTimeout(r, 2000 * attempt));
         }
 
-        const controller = new AbortController();
-        const timeout = setTimeout(() => controller.abort(), 150_000); // 2.5 min timeout
-
-        let res: Response;
-        try {
-          res = await fetch("/api/generate", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ surveyData, platform: "html" }),
-            signal: controller.signal,
-          });
-        } catch (fetchErr) {
-          clearTimeout(timeout);
-          const isAbort = fetchErr instanceof DOMException && fetchErr.name === "AbortError";
-          const msg = isAbort ? "La generación tardó demasiado" : "Error de conexión";
-          if (attempt < MAX_RETRIES) continue; // retry silently
-          throw new Error(msg);
-        }
+        const res = await fetch("/api/generate", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ surveyData, platform: "html" }),
+        });
 
         // Non-SSE error (auth/limits return JSON) — don't retry auth/limit errors
         if (!res.ok) {
-          clearTimeout(timeout);
           const d = await res.json().catch(() => ({})) as { error?: string; overloaded?: boolean };
           if (res.status === 403) { setLimitReached(true); throw new Error(d.error || `Error ${res.status}`); }
           if (res.status === 401) throw new Error(d.error || "No autorizado");
           if (d.overloaded || res.status === 529) {
-            if (attempt < MAX_RETRIES) continue; // retry overloaded
+            if (attempt < MAX_RETRIES) continue;
             setRetryable(true);
           }
-          if (attempt < MAX_RETRIES && res.status >= 500) continue; // retry server errors
+          if (attempt < MAX_RETRIES && res.status >= 500) continue;
           throw new Error(d.error || `Error ${res.status}`);
         }
-        if (!res.body) { clearTimeout(timeout); throw new Error("No se recibió respuesta del servidor"); }
+        if (!res.body) throw new Error("No se recibió respuesta del servidor");
 
         // Consume SSE stream
         const reader = res.body.getReader();
@@ -501,7 +487,7 @@ export default function SurveyPage() {
             const parts = buf.split("\n\n");
             buf = parts.pop() ?? "";
             for (const part of parts) {
-              if (!part.startsWith("data: ")) continue; // skip keepalive comments
+              if (!part.startsWith("data: ")) continue;
               try {
                 const ev = JSON.parse(part.slice(6)) as { type: string; msg?: string; html?: string; id?: string; overloaded?: boolean };
                 if (ev.type === "progress" && ev.msg) setGeneratePhase(ev.msg);
@@ -518,10 +504,8 @@ export default function SurveyPage() {
           }
         } finally {
           reader.releaseLock();
-          clearTimeout(timeout);
         }
 
-        // If the stream sent an error event, check if retryable
         if (streamError) {
           const isRetryable = streamError.includes("saturado") || streamError.includes("overloaded");
           if (isRetryable && attempt < MAX_RETRIES) continue;
@@ -530,7 +514,7 @@ export default function SurveyPage() {
 
         const fullHtml = htmlChunks.join("");
         if (!fullHtml || !fullHtml.toLowerCase().includes("<html")) {
-          if (attempt < MAX_RETRIES) continue; // retry empty/invalid responses
+          if (attempt < MAX_RETRIES) continue;
           throw new Error("No se recibió HTML válido del servidor");
         }
 
@@ -538,15 +522,19 @@ export default function SurveyPage() {
         sessionStorage.setItem("previewHtml", fullHtml);
         sessionStorage.setItem("surveyData", JSON.stringify(surveyData));
         router.push(`/preview/${landingId || "preview"}`);
-        return; // success — exit retry loop
+        return;
       } catch (err) {
+        // Network errors (fetch failed, stream interrupted) → retry silently
+        const msg = err instanceof Error ? err.message : String(err);
+        const isNetworkErr = msg.includes("fetch") || msg.includes("network") || msg.includes("aborted") || msg.includes("Failed") || msg.includes("BodyStreamBuffer");
+        if (isNetworkErr && attempt < MAX_RETRIES) continue;
+
         if (attempt >= MAX_RETRIES) {
           stopElapsed();
-          setError(err instanceof Error ? err.message : "Error desconocido");
+          setError(msg || "Error desconocido");
           setLoading(false);
           return;
         }
-        // else: continue to next attempt
       }
     }
   }

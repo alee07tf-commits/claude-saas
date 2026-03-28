@@ -36,12 +36,17 @@ export async function POST(request: NextRequest) {
     const { data: { user } } = await supabase.auth.getUser()
     if (!user) return NextResponse.json({ success: false, error: 'No autorizado', data: null }, { status: 401 })
 
-    const access = await checkFeatureAccess(user.id, 'competitor_analysis', user.email ?? undefined)
-    if (!access.allowed) {
-      return NextResponse.json({ success: false, error: 'El análisis de competidores está disponible desde el plan Agency. Mejora tu plan para acceder.', data: null }, { status: 403 })
+    const body = await request.json()
+    const { domain, isCompetitor } = body as { domain?: string; isCompetitor?: boolean }
+
+    // Only gate competitor analysis (Agency+) — own domain analysis is available to all plans
+    if (isCompetitor) {
+      const access = await checkFeatureAccess(user.id, 'competitor_analysis', user.email ?? undefined)
+      if (!access.allowed) {
+        return NextResponse.json({ success: false, error: 'El análisis de competidores está disponible desde el plan Agency. Mejora tu plan para acceder.', data: null }, { status: 403 })
+      }
     }
 
-    const { domain } = await request.json()
     if (!domain) return NextResponse.json({ error: 'Domain required' }, { status: 400 })
 
     let url = domain.trim()
