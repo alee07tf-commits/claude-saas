@@ -24,6 +24,16 @@ export const metadata: Metadata = {
   },
 };
 
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Inicio", item: "https://landforge.digital" },
+    { "@type": "ListItem", position: 2, name: "Soluciones por Sector", item: "https://landforge.digital/para" },
+    { "@type": "ListItem", position: 3, name: "Gimnasios", item: "https://landforge.digital/para/gimnasios" },
+  ],
+};
+
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",

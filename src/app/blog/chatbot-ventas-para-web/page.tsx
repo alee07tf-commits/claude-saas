@@ -144,6 +144,13 @@ export default function ChatbotVentasArticle() {
             {/* SECCIÓN 2 */}
             <section id="que-es" className="mt-12">
               <h2 className="text-2xl font-extrabold mb-4">2. Qué es un chatbot de ventas con IA (y por qué no es lo mismo que un chatbot de soporte)</h2>
+              <p className="text-[#6B7280] leading-relaxed mb-4">
+                Si aún no tienes claro qué es exactamente un chatbot de ventas con IA y en qué se diferencia de otras soluciones,{" "}
+                <Link href="/blog/que-es-un-chatbot-de-ventas-ia" className="text-[#9D4EDD] underline hover:text-[#7B2CBF]">
+                  nuestra guía completa sobre chatbots de ventas IA
+                </Link>{" "}
+                te lo explica desde cero con datos, tipos y comparativas.
+              </p>
               <div className="overflow-x-auto rounded-2xl border border-[#E0AAFF] mb-6">
                 <table className="w-full text-sm">
                   <thead className="bg-[#FAF5FF] border-b border-[#E0AAFF]">
@@ -253,6 +260,7 @@ export default function ChatbotVentasArticle() {
             <div className="mt-12 pt-8 border-t border-gray-100">
               <p className="font-bold text-sm text-[#6B7280] mb-4">Artículos y páginas relacionadas</p>
               <div className="flex flex-wrap gap-3">
+                <Link href="/blog/que-es-un-chatbot-de-ventas-ia" className="text-[#9D4EDD] font-semibold text-sm border border-[#E0AAFF] rounded-lg px-4 py-2 hover:bg-[#F3E8FF] transition">→ Qué es un Chatbot de Ventas con IA</Link>
                 <Link href="/features/forgi-chatbot" className="text-[#9D4EDD] font-semibold text-sm border border-[#E0AAFF] rounded-lg px-4 py-2 hover:bg-[#F3E8FF] transition">→ Forgi Chatbot: Cómo Funciona</Link>
                 <Link href="/blog/que-es-una-landing-page" className="text-[#9D4EDD] font-semibold text-sm border border-[#E0AAFF] rounded-lg px-4 py-2 hover:bg-[#F3E8FF] transition">→ Qué es una Landing Page</Link>
                 <Link href="/blog/como-aumentar-conversion-landing-page" className="text-[#9D4EDD] font-semibold text-sm border border-[#E0AAFF] rounded-lg px-4 py-2 hover:bg-[#F3E8FF] transition">→ Cómo Aumentar la Conversión</Link>

@@ -86,6 +86,15 @@ export default function StartupsSaasLanding() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://landforge.digital" },
+          { "@type": "ListItem", "position": 2, "name": "Soluciones", "item": "https://landforge.digital/para" },
+          { "@type": "ListItem", "position": 3, "name": "Startups SaaS", "item": "https://landforge.digital/para/startups-saas" }
+        ]
+      })}} />
 
       <div className="min-h-screen bg-[#FAFAFA] text-[#1A1A2E] font-sans">
         <main>

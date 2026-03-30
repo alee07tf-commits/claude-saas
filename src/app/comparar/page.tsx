@@ -23,6 +23,15 @@ export const metadata: Metadata = {
   },
 };
 
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Inicio", item: "https://landforge.digital" },
+    { "@type": "ListItem", position: 2, name: "Comparativas", item: "https://landforge.digital/comparar" },
+  ],
+};
+
 const comparativas = [
   {
     title: "LandForge vs Webflow",
@@ -84,6 +93,8 @@ const comparativas = [
 
 export default function ComparativasHub() {
   return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
     <div className="min-h-screen bg-[#FAFAFA] text-[#1A1A2E] font-sans">
       <main>
 
@@ -200,5 +211,6 @@ export default function ComparativasHub() {
 
       </main>
     </div>
+    </>
   );
 }

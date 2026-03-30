@@ -115,27 +115,7 @@ const softwareSchema = {
       url: `${SITE_URL}/precios`,
     },
   ],
-  aggregateRating: {
-    "@type": "AggregateRating",
-    ratingValue: "4.9",
-    reviewCount: "47",
-    bestRating: "5",
-    worstRating: "1",
-  },
-  review: [
-    {
-      "@type": "Review",
-      author: { "@type": "Person", name: "Carlos R." },
-      reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" },
-      reviewBody: "Generamos 12 landings en una tarde para nuestros clientes. Antes tardábamos 3 días por landing.",
-    },
-    {
-      "@type": "Review",
-      author: { "@type": "Person", name: "María G." },
-      reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" },
-      reviewBody: "Forgi convierte el 23% de los visitantes que interactúan con él. Mejor que cualquier formulario.",
-    },
-  ],
+  // aggregateRating and reviews removed — will be added when real reviews exist on G2/Capterra
 };
 
 // FAQPage schema removed from global component to prevent duplicate

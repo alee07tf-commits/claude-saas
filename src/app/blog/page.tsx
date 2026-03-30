@@ -23,6 +23,15 @@ export const metadata: Metadata = {
   },
 };
 
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Inicio", item: "https://landforge.digital" },
+    { "@type": "ListItem", position: 2, name: "Blog", item: "https://landforge.digital/blog" },
+  ],
+};
+
 const collectionSchema = {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
@@ -148,6 +157,11 @@ export default function BlogIndex() {
 
   return (
     <div className="min-h-screen bg-[#FAFAFA] text-[#1A1A2E] font-sans">
+      <Script
+        id="breadcrumb-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <Script
         id="collection-schema"
         type="application/ld+json"

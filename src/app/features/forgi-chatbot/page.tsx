@@ -281,6 +281,27 @@ export default function ForgiChatbotPage() {
             </div>
           </section>
 
+          {/* Aprende más sobre chatbots de ventas */}
+          <section className="px-6 py-16 bg-white">
+            <div className="max-w-3xl mx-auto text-center">
+              <span className="inline-block text-xs font-bold uppercase tracking-widest text-[#9D4EDD] bg-[#F3E8FF] px-4 py-1.5 rounded-full border border-[#E0AAFF] mb-4">Aprende más</span>
+              <h2 className="text-2xl md:text-3xl font-extrabold mb-4">Todo lo que necesitas saber sobre chatbots de ventas con IA</h2>
+              <p className="text-[#6B7280] mb-8">Antes de activar Forgi, entiende cómo funcionan los chatbots de ventas y cómo sacarles el máximo partido.</p>
+              <div className="grid sm:grid-cols-2 gap-4 text-left">
+                <Link href="/blog/que-es-un-chatbot-de-ventas-ia" className="block border border-[#E0AAFF] rounded-2xl p-5 hover:bg-[#F3E8FF] transition-colors">
+                  <span className="text-xs font-bold uppercase tracking-[2px] text-[#9D4EDD]">Guía completa</span>
+                  <p className="font-bold text-[#1A1A2E] mt-1">Qué es un chatbot de ventas con IA y cómo funciona</p>
+                  <p className="text-[#6B7280] text-sm mt-2">Definición, tipos, beneficios con datos y comparativa de las mejores herramientas del mercado.</p>
+                </Link>
+                <Link href="/blog/chatbot-ventas-para-web" className="block border border-[#E0AAFF] rounded-2xl p-5 hover:bg-[#F3E8FF] transition-colors">
+                  <span className="text-xs font-bold uppercase tracking-[2px] text-[#9D4EDD]">Guía práctica</span>
+                  <p className="font-bold text-[#1A1A2E] mt-1">Cómo poner un chatbot de ventas IA en tu web</p>
+                  <p className="text-[#6B7280] text-sm mt-2">Paso a paso para instalar un chatbot, cuándo activarlo y los errores más comunes a evitar.</p>
+                </Link>
+              </div>
+            </div>
+          </section>
+
           {/* Enlazado interno */}
           <section className="px-6 py-12 bg-[#FAFAFA] border-t border-gray-100">
             <div className="max-w-5xl mx-auto">
