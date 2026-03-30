@@ -199,28 +199,25 @@ export default function LandForgeLanding() {
   const [billingInterval, setBillingInterval] = useState<'month' | 'year'>('month');
   const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
 
-  const handleSubscribe = async (planId: string) => {
-    if (!isLoggedIn) {
-      window.location.href = `/register?next=/pricing-redirect&plan=${planId}&interval=${billingInterval}`;
-      return;
-    }
-    setLoadingPlan(planId);
-    try {
-      const res = await fetch('/api/stripe/checkout', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ planId, interval: billingInterval }),
-      });
-      const data = await res.json();
-      if (data.url) {
-        window.location.href = data.url;
-      } else {
-        alert(data.error || 'Error al iniciar checkout');
-      }
-    } catch {
-      alert('Error de conexión');
-    } finally {
-      setLoadingPlan(null);
+  const STRIPE_LINKS: Record<string, Record<string, string>> = {
+    starter: {
+      month: 'https://buy.stripe.com/4gMfZaaGHa36fdM51o2Ji04',
+      year:  'https://buy.stripe.com/00w6oA4ijdfie9IeBY2Ji05',
+    },
+    agency: {
+      month: 'https://buy.stripe.com/00wfZabKL4IM8Po51o2Ji06',
+      year:  'https://buy.stripe.com/fZu4gs5mn0sw5DcdxU2Ji07',
+    },
+    agency_pro: {
+      month: 'https://buy.stripe.com/5kQ9AM5mn2AE6Hg9hE2Ji08',
+      year:  'https://buy.stripe.com/8x200c3efa368Po3Xk2Ji09',
+    },
+  };
+
+  const handleSubscribe = (planId: string) => {
+    const link = STRIPE_LINKS[planId]?.[billingInterval === 'month' ? 'month' : 'year'];
+    if (link) {
+      window.location.href = link;
     }
   };
 
