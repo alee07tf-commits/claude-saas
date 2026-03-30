@@ -144,7 +144,8 @@ export async function checkUserLimit(userId: string, action: ActionType, callerE
     return await checkUsageMetrics(supabaseAdmin, userId, action, plan, limit);
   } catch (err) {
     console.error('Error checking user limits:', err);
-    return { allowed: true, plan: 'none', limit: 999, usage: 0 };
+    // On error, DENY access (safe default — don't let users bypass limits)
+    return { allowed: false, plan: 'none', limit: 1, usage: 1 };
   }
 }
 
@@ -166,7 +167,8 @@ async function checkUsageMetrics(
 
   if (usageError) {
     console.error('Error fetching usage metrics:', usageError);
-    return { allowed: true, plan, limit, usage: 0 };
+    // On error, DENY access (safe default — don't let users bypass limits)
+    return { allowed: false, plan, limit, usage: limit };
   }
 
   const currentUsage = usage ? (usage as unknown as Record<string, number>)[`${action}_count`] ?? 0 : 0;

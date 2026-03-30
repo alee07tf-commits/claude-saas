@@ -911,6 +911,10 @@ export async function POST(request: NextRequest) {
           if (!fullHtml.includes('</html>')) fullHtml += '\n</html>'
         }
 
+        // Increment usage FIRST (before DB save — usage counts even if save fails)
+        await incrementUserUsage(user.id, 'generations')
+        await incrementUserUsage(user.id, 'landings')
+
         // Save to Supabase
         const bi = businessInfo
         const projectName = (bi?.businessName as string) || keyword || PAGE_TYPE_LABELS[surveyData.pageType as string] || 'Landing'
@@ -936,9 +940,6 @@ export async function POST(request: NextRequest) {
           send({ type: 'error', msg: 'Error al guardar la landing. Inténtalo de nuevo.' })
           return
         }
-
-        await incrementUserUsage(user.id, 'generations')
-        await incrementUserUsage(user.id, 'landings')
 
         send({
           type: 'done',
