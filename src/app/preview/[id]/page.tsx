@@ -199,10 +199,39 @@ export default function PreviewPage() {
             userPrompt:   text,
           }),
         })
-        const data = await res.json() as { newSectionHtml?: string; error?: string }
-        if (!res.ok || data.error) throw new Error(data.error || `Error ${res.status}`)
 
-        persistHtml(replaceSectionHtml(liveHtmlRef.current!, sectionHtml, data.newSectionHtml!))
+        // forgi-edit returns SSE stream — consume it
+        if (!res.ok) {
+          const d = await res.json().catch(() => ({})) as { error?: string }
+          throw new Error(d.error || `Error ${res.status}`)
+        }
+        if (!res.body) throw new Error('Sin respuesta del servidor')
+        const reader = res.body.getReader()
+        const decoder = new TextDecoder()
+        let buf = ''
+        let newSectionHtml = ''
+        let streamErr = ''
+        try {
+          while (true) {
+            const { done, value } = await reader.read()
+            if (done) break
+            buf += decoder.decode(value, { stream: true })
+            const parts = buf.split('\n\n')
+            buf = parts.pop() ?? ''
+            for (const part of parts) {
+              if (!part.startsWith('data: ')) continue
+              try {
+                const ev = JSON.parse(part.slice(6)) as { type: string; newSectionHtml?: string; msg?: string }
+                if (ev.type === 'done' && ev.newSectionHtml) newSectionHtml = ev.newSectionHtml
+                else if (ev.type === 'error') streamErr = ev.msg || 'Error al editar'
+              } catch { /* partial JSON, skip */ }
+            }
+          }
+        } finally { reader.releaseLock() }
+        if (streamErr) throw new Error(streamErr)
+        if (!newSectionHtml) throw new Error('No se recibió HTML editado')
+
+        persistHtml(replaceSectionHtml(liveHtmlRef.current!, sectionHtml, newSectionHtml))
         setMessages(prev => [
           ...prev.slice(0, -1),
           { role: 'forgi', text: `✅ Sección "${selectedSection.label}" actualizada`, undoable: true },
