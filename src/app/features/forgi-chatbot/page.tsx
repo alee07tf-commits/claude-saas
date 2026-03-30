@@ -96,7 +96,7 @@ export default function ForgiChatbotPage() {
             </p>
 
             <h1 className="text-4xl md:text-6xl font-extrabold max-w-4xl tracking-tight leading-[1.05] mb-7">
-              Chatbot de Ventas IA que nunca duerme.{" "}
+              Forgi: El Chatbot de Ventas con IA para tu Landing Page.{" "}
               <span style={{ background: "linear-gradient(135deg, #9D4EDD, #7B2CBF)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
                 70% menos de leads perdidos.
               </span>
@@ -131,7 +131,7 @@ export default function ForgiChatbotPage() {
             <div className="max-w-5xl mx-auto">
               <div className="text-center mb-16">
                 <span className="inline-block text-xs font-bold uppercase tracking-widest text-[#9D4EDD] bg-[#F3E8FF] px-4 py-1.5 rounded-full border border-[#E0AAFF] mb-4">Forgi en acción</span>
-                <h2 className="text-3xl md:text-4xl font-extrabold">Así convierte Forgi un visitante en cliente</h2>
+                <h2 className="text-3xl md:text-4xl font-extrabold">Chatbot para captar leads 24/7: así convierte Forgi un visitante en cliente</h2>
               </div>
 
               <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -310,6 +310,7 @@ export default function ForgiChatbotPage() {
                 <Link href="/features/forgi-editor" className="text-[#9D4EDD] font-semibold text-sm border border-[#E0AAFF] rounded-lg px-4 py-2 hover:bg-[#F3E8FF] transition">→ Forgi Editor: Edita con IA</Link>
                 <Link href="/para/agencias-de-marketing" className="text-[#9D4EDD] font-semibold text-sm border border-[#E0AAFF] rounded-lg px-4 py-2 hover:bg-[#F3E8FF] transition">→ LandForge para Agencias</Link>
                 <Link href="/comparar/landforge-vs-webflow" className="text-[#9D4EDD] font-semibold text-sm border border-[#E0AAFF] rounded-lg px-4 py-2 hover:bg-[#F3E8FF] transition">→ LandForge vs Webflow</Link>
+                <Link href="/precios" className="text-[#9D4EDD] font-semibold text-sm border border-[#E0AAFF] rounded-lg px-4 py-2 hover:bg-[#F3E8FF] transition">→ Ver precios de LandForge</Link>
               </div>
             </div>
           </section>

@@ -84,14 +84,14 @@ export default function AgenciasLanding() {
             </p>
 
             <h1 className="text-4xl md:text-6xl font-extrabold max-w-4xl tracking-tight leading-[1.05] mb-7">
-              Genera landing pages para tus clientes{" "}
+              Landing Pages para Agencias de Marketing{" "}
               <span style={{ background: "linear-gradient(135deg, #9D4EDD, #7B2CBF)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-                en 30 segundos, no en 3 días.
+                que Convierten en 30 Segundos
               </span>
             </h1>
 
             <p className="text-lg md:text-xl text-[#6B7280] max-w-2xl leading-relaxed mb-10">
-              Cada vez que un cliente nuevo firma contigo, necesita una landing page. <strong className="text-[#1A1A2E]">Con LandForge es cuestión de 30 segundos y de rellenar un briefing.</strong> La IA se encarga del copy, del diseño y del chatbot de ventas. Tú te llevas el margen.
+              Las landing pages para agencias de marketing son el cuello de botella que frena tu escalabilidad. <strong className="text-[#1A1A2E]">Con LandForge, cada nueva landing para un cliente tarda 30 segundos, no 3 días.</strong> La IA se encarga del copy, del diseño y del chatbot de ventas. Tú te llevas el margen.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
@@ -117,7 +117,7 @@ export default function AgenciasLanding() {
           {/* ── 2. DOLOR ── */}
           <section className="px-6 py-24 bg-[#1A1A2E] text-white">
             <div className="max-w-5xl mx-auto text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-extrabold mb-6">El robo de horas que ninguna agencia habla</h2>
+              <h2 className="text-3xl md:text-4xl font-extrabold mb-6">Captar clientes para tu agencia empieza por entregar landing pages más rápido</h2>
               <p className="text-[#E0AAFF] text-lg max-w-2xl mx-auto">El 68% del tiempo que paga tu cliente en las facturas de tu agencia va a maquetación repetitiva, no a estrategia. LandForge cierra ese sangrado.</p>
             </div>
             <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-6">
@@ -254,6 +254,7 @@ export default function AgenciasLanding() {
                 <Link href="/para/ecommerce" className="text-[#9D4EDD] font-semibold text-sm border border-[#E0AAFF] rounded-lg px-4 py-2 hover:bg-[#F3E8FF] transition">→ LandForge para eCommerce</Link>
                 <Link href="/para/abogados" className="text-[#9D4EDD] font-semibold text-sm border border-[#E0AAFF] rounded-lg px-4 py-2 hover:bg-[#F3E8FF] transition">→ LandForge para Abogados</Link>
                 <Link href="/comparar/landforge-vs-webflow" className="text-[#9D4EDD] font-semibold text-sm border border-[#E0AAFF] rounded-lg px-4 py-2 hover:bg-[#F3E8FF] transition">→ LandForge vs Webflow</Link>
+                <Link href="/features/forgi-chatbot" className="text-[#9D4EDD] font-semibold text-sm border border-[#E0AAFF] rounded-lg px-4 py-2 hover:bg-[#F3E8FF] transition">→ Forgi: Chatbot de Ventas IA</Link>
               </div>
             </div>
           </section>

@@ -79,7 +79,7 @@ export default function EcommerceLanding() {
             </h1>
 
             <p className="text-lg md:text-xl text-[#6B7280] max-w-2xl leading-relaxed mb-10">
-              Enviar tráfico de campañas de pago a tu página de inicio es el error más caro del eCommerce. <strong className="text-[#1A1A2E]">Genera una landing hiper-enfocada en tu producto estrella en 30 segundos.</strong> Forgi intercepta al visitante dudoso y responde sus objeciones antes de que cierre la ventana.
+              Una landing page para ecommerce convierte hasta 3x más que la página de inicio de tu tienda online. <strong className="text-[#1A1A2E]">Genera una landing page para tienda online hiper-enfocada en tu producto estrella en 30 segundos.</strong> Forgi intercepta al visitante dudoso y responde sus objeciones antes de que cierre la ventana.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
@@ -105,7 +105,7 @@ export default function EcommerceLanding() {
           {/* ── 2. DOLOR ── */}
           <section className="px-6 py-24 bg-[#1A1A2E] text-white">
             <div className="max-w-5xl mx-auto text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-extrabold mb-6">Los 3 fallos que destruyen tu ROAS en eCommerce</h2>
+              <h2 className="text-3xl md:text-4xl font-extrabold mb-6">Por qué tu landing page para tienda online necesita estar separada de la web</h2>
               <p className="text-[#E0AAFF] text-lg max-w-2xl mx-auto">Un buen producto y un buen anuncio no bastan. Si tu landing no está optimizada para cerrar la compra, estás subvencionando a la competencia.</p>
             </div>
             <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-6">

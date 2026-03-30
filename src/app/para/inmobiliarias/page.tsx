@@ -79,13 +79,13 @@ export default function InmobiliariasLanding() {
               Landing Pages IA para Agencias Inmobiliarias
             </p>
             <h1 className="text-4xl md:text-6xl font-extrabold max-w-4xl tracking-tight leading-[1.05] mb-7">
-              Cada inmueble, su propia landing.{" "}
+              Landing Page para Inmobiliarias:{" "}
               <span style={{ background: "linear-gradient(135deg, #9D4EDD, #7B2CBF)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-                Cada lead, cualificado.
+                Capta Compradores y Vendedores 24/7
               </span>
             </h1>
             <p className="text-lg md:text-xl text-[#6B7280] max-w-2xl leading-relaxed mb-10">
-              El 80% del tráfico de portales y Google Ads llega a páginas genéricas de agencia. <strong className="text-[#1A1A2E]">Crea una landing específica por inmueble en 30 segundos</strong> y deja que Forgi atienda las consultas de precio, zona y visitas a cualquier hora.
+              Una landing page para inmobiliarias convierte hasta un 55% más que la web general de tu agencia. <strong className="text-[#1A1A2E]">Crea una landing específica por inmueble en 30 segundos</strong> y deja que Forgi atienda las consultas de precio, zona y visitas a cualquier hora.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
               <Link href="/register" className="px-8 py-4 rounded-xl font-bold text-lg text-white transition hover:-translate-y-1" style={{ background: "linear-gradient(135deg, #9D4EDD, #7B2CBF)", boxShadow: "0 8px 24px rgba(157,78,221,0.3)" }}>
@@ -109,7 +109,7 @@ export default function InmobiliariasLanding() {
           {/* ── 2. DOLOR ── */}
           <section className="px-6 py-24 bg-[#1A1A2E] text-white">
             <div className="max-w-5xl mx-auto text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-extrabold mb-6">El comprador de piso no espera. Y se va a la competencia.</h2>
+              <h2 className="text-3xl md:text-4xl font-extrabold mb-6">Sin landing page inmobiliaria, el comprador se va a la competencia</h2>
               <p className="text-[#E0AAFF] text-lg max-w-2xl mx-auto">El ciclo de decisión inmobiliaria puede durar meses, pero la decisión de contactar a una agencia se toma en segundos.</p>
             </div>
             <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-6">

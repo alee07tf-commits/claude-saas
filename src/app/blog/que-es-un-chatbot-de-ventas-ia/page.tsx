@@ -86,13 +86,13 @@ const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Inicio", item: "https://landforge.site" },
-    { "@type": "ListItem", position: 2, name: "Blog", item: "https://landforge.site/blog" },
+    { "@type": "ListItem", position: 1, name: "Inicio", item: "https://landforge.digital" },
+    { "@type": "ListItem", position: 2, name: "Blog", item: "https://landforge.digital/blog" },
     {
       "@type": "ListItem",
       position: 3,
       name: "Que es un Chatbot de Ventas con IA",
-      item: "https://landforge.site/blog/que-es-un-chatbot-de-ventas-ia",
+      item: "https://landforge.digital/blog/que-es-un-chatbot-de-ventas-ia",
     },
   ],
 };

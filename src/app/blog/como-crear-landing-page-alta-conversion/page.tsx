@@ -148,7 +148,7 @@ export default function ComoCrearLandingPage() {
                 Cómo crear una landing page de alta conversión en 2026: la guía definitiva con IA
               </h1>
               <p className="text-lg text-[#6B7280] leading-relaxed mb-6">
-                El 73% de las landing pages convierte por debajo del 2%. Las que superan el 10% no tienen un secreto misterioso: siguen una estructura concreta, aplican un copywriting basado en datos reales del cliente y reducen la fricción técnica al mínimo. Esta guía te da exactamente eso.
+                Crear una landing page de alta conversión no es suerte: el 73% de las landing pages convierte por debajo del 2%, mientras las mejores superan el 10% aplicando una estructura concreta, copywriting basado en datos reales del cliente y mínima fricción técnica. Esta guía te da exactamente eso.
               </p>
               <div className="flex flex-wrap gap-4 text-sm text-[#6B7280]">
                 <span>📅 Febrero 2026 (actualizado Marzo 2026)</span>
@@ -251,6 +251,7 @@ export default function ComoCrearLandingPage() {
                 <Link href="/blog/chatbot-ventas-para-web" className="text-[#9D4EDD] font-semibold text-sm border border-[#E0AAFF] rounded-lg px-4 py-2 hover:bg-[#F3E8FF] transition">→ Chatbot de Ventas para tu Web</Link>
                 <Link href="/features/forgi-chatbot" className="text-[#9D4EDD] font-semibold text-sm border border-[#E0AAFF] rounded-lg px-4 py-2 hover:bg-[#F3E8FF] transition">→ Forgi Chatbot IA</Link>
                 <Link href="/blog/como-aumentar-conversion-landing-page" className="text-[#9D4EDD] font-semibold text-sm border border-[#E0AAFF] rounded-lg px-4 py-2 hover:bg-[#F3E8FF] transition">→ Aumentar Conversión Landing</Link>
+                <Link href="/precios" className="text-[#9D4EDD] font-semibold text-sm border border-[#E0AAFF] rounded-lg px-4 py-2 hover:bg-[#F3E8FF] transition">→ Ver precios de LandForge</Link>
               </div>
             </div>
 

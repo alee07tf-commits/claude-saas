@@ -80,13 +80,13 @@ export default function ShopifyIntegracion() {
               Integración — LandForge + Shopify
             </p>
             <h1 className="text-4xl md:text-6xl font-extrabold max-w-4xl tracking-tight leading-[1.05] mb-7">
-              Landing pages de{" "}
+              Landing Page Shopify:{" "}
               <span style={{ background: "linear-gradient(135deg, #9D4EDD, #7B2CBF)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-                alta conversión para tu Shopify.
+                Más Ventas por Visita con IA
               </span>
             </h1>
             <p className="text-lg md:text-xl text-[#6B7280] max-w-2xl leading-relaxed mb-10">
-              Las páginas de producto de Shopify tienen una tasa de conversión media del 1-2%. Las landing pages específicas de LandForge pueden llegar al 8-15%. <strong className="text-[#1A1A2E]">Crea landings de producto, colección o campaña en 30 segundos</strong> con chatbot IA que resuelve dudas de talla, envío y devoluciones antes de que el comprador abandone.
+              Una landing page Shopify específica convierte entre un 8-15%, frente al 1-2% de las páginas de producto estándar. <strong className="text-[#1A1A2E]">Crea tu landing page para Shopify de producto, colección o campaña en 30 segundos</strong> con chatbot IA que resuelve dudas de talla, envío y devoluciones antes de que el comprador abandone.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
               <Link href="/register" className="px-8 py-4 rounded-xl font-bold text-lg text-white transition hover:-translate-y-1" style={{ background: "linear-gradient(135deg, #9D4EDD, #7B2CBF)", boxShadow: "0 8px 24px rgba(157,78,221,0.3)" }}>
@@ -194,6 +194,8 @@ export default function ShopifyIntegracion() {
                 <Link href="/para/ecommerce" className="text-[#9D4EDD] font-semibold text-sm border border-[#E0AAFF] rounded-lg px-4 py-2 hover:bg-[#F3E8FF] transition">→ LandForge para eCommerce</Link>
                 <Link href="/features/forgi-chatbot" className="text-[#9D4EDD] font-semibold text-sm border border-[#E0AAFF] rounded-lg px-4 py-2 hover:bg-[#F3E8FF] transition">→ Forgi Chatbot: Menos Abandonos</Link>
                 <Link href="/blog/chatbot-ventas-para-web" className="text-[#9D4EDD] font-semibold text-sm border border-[#E0AAFF] rounded-lg px-4 py-2 hover:bg-[#F3E8FF] transition">→ Guía Chatbot de Ventas</Link>
+                <Link href="/precios" className="text-[#9D4EDD] font-semibold text-sm border border-[#E0AAFF] rounded-lg px-4 py-2 hover:bg-[#F3E8FF] transition">→ Ver precios de LandForge</Link>
+                <Link href="/integraciones" className="text-[#9D4EDD] font-semibold text-sm border border-[#E0AAFF] rounded-lg px-4 py-2 hover:bg-[#F3E8FF] transition">→ Todas las integraciones</Link>
               </div>
             </div>
           </section>
