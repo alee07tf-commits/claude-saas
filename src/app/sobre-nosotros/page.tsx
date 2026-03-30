@@ -129,7 +129,7 @@ export default function SobreNosotrosPage() {
               una herramienta que combinase lo mejor de la inteligencia artificial con las
               mejores prácticas de conversión. Así nació LandForge: una plataforma donde
               describes tu negocio y en 30 segundos tienes una landing page lista para
-              captar clientes.
+              captar clientes, con <Link href="/features/forgi-chatbot" className="text-[#9D4EDD] font-semibold hover:underline">Forgi, nuestro chatbot de IA</Link>, atendiendo a tus leads 24/7.
             </p>
           </section>
 
@@ -289,12 +289,26 @@ export default function SobreNosotrosPage() {
                 LinkedIn de Alejandro
               </a>
             </div>
-            <div className="mt-6">
+            <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center flex-wrap">
               <Link
                 href="/precios"
                 className="text-[#9D4EDD] font-semibold text-sm hover:underline"
               >
                 Ver planes y precios →
+              </Link>
+              <span className="text-[#6B7280] hidden sm:inline">·</span>
+              <Link
+                href="/features/forgi-chatbot"
+                className="text-[#9D4EDD] font-semibold text-sm hover:underline"
+              >
+                Forgi, nuestro chatbot de IA →
+              </Link>
+              <span className="text-[#6B7280] hidden sm:inline">·</span>
+              <Link
+                href="/blog/como-aumentar-conversion-landing-page"
+                className="text-[#9D4EDD] font-semibold text-sm hover:underline"
+              >
+                Guía: Aumentar la conversión de tu landing →
               </Link>
             </div>
           </section>

@@ -79,13 +79,13 @@ export default function RestaurantesLanding() {
               Web y Reservas con IA para Restaurantes y Hostelería
             </p>
             <h1 className="text-4xl md:text-6xl font-extrabold max-w-4xl tracking-tight leading-[1.05] mb-7">
-              Tu restaurante lleno.{" "}
+              Landing Page para Restaurantes:{" "}
               <span style={{ background: "linear-gradient(135deg, #9D4EDD, #7B2CBF)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-                Forgi gestiona las reservas.
+                Más Reservas, Menos Dependencia de Redes
               </span>
             </h1>
             <p className="text-lg md:text-xl text-[#6B7280] max-w-2xl leading-relaxed mb-10">
-              Mientras estás en cocina o atendiendo a tus clientes, <strong className="text-[#1A1A2E]">LandForge genera tu web de restaurante en 30 segundos</strong> y Forgi atiende las consultas sobre reservas, menú, horarios y alérgenos a cualquier hora.
+              Una landing page para restaurantes aumenta las reservas directas sin depender de plataformas externas ni comisiones. Mientras estás en cocina o atendiendo a tus clientes, <strong className="text-[#1A1A2E]">LandForge genera tu landing de restaurante en 30 segundos</strong> y Forgi atiende las consultas sobre reservas, menú, horarios y alérgenos a cualquier hora.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
               <Link href="/register" className="px-8 py-4 rounded-xl font-bold text-lg text-white transition hover:-translate-y-1" style={{ background: "linear-gradient(135deg, #9D4EDD, #7B2CBF)", boxShadow: "0 8px 24px rgba(157,78,221,0.3)" }}>
@@ -109,7 +109,7 @@ export default function RestaurantesLanding() {
           {/* ── 2. DOLOR ── */}
           <section className="px-6 py-24 bg-[#1A1A2E] text-white">
             <div className="max-w-5xl mx-auto text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-extrabold mb-6">Los problemas de hostelería que LandForge resuelve</h2>
+              <h2 className="text-3xl md:text-4xl font-extrabold mb-6">Qué incluye una landing page para restaurante y por qué convierte más</h2>
               <p className="text-[#E0AAFF] text-lg max-w-2xl mx-auto">El 62% de los comensales busca el restaurante online antes de decidir. Si no te encuentran o no pueden reservar fácilmente, esa mesa la llena la competencia.</p>
             </div>
             <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-6">

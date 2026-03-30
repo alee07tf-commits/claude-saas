@@ -115,14 +115,14 @@ export default function ClinicasDentalesLanding() {
             </p>
 
             <h1 className="text-4xl md:text-6xl font-extrabold max-w-4xl tracking-tight leading-[1.05] mb-7">
-              Tu Clínica Dental necesita más pacientes,{" "}
+              Landing Page para Clínicas Dentales:{" "}
               <span style={{ background: "linear-gradient(135deg, #9D4EDD, #7B2CBF)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-                no semanas de programación.
+                Más Pacientes sin Más Publicidad
               </span>
             </h1>
 
             <p className="text-lg md:text-xl text-[#6B7280] max-w-2xl leading-relaxed mb-10">
-              Describe en 5 minutos tu clínica: tratamientos (Invisalign, Implantes, Blanqueamientos), zona y público objetivo. <strong className="text-[#1A1A2E]">La IA genera tu página de captación completa en 30 segundos</strong>, lista para recibir tráfico de Google Ads. Forgi, tu asistente inteligente, atiende consultas de pacientes y agenda citas mientras duermes.
+              Una landing page para clínicas dentales convierte hasta 3x más que una web genérica. Describe en 5 minutos tu clínica: tratamientos (Invisalign, Implantes, Blanqueamientos), zona y público objetivo. <strong className="text-[#1A1A2E]">La IA genera tu landing completa en 30 segundos</strong>, lista para recibir tráfico de Google Ads. Forgi, tu asistente inteligente, atiende consultas de pacientes y agenda citas mientras duermes.
             </p>
 
             {/* CTAs */}
@@ -150,8 +150,8 @@ export default function ClinicasDentalesLanding() {
           {/* ── 2. DOLOR → AGITAR (Empatía con el Problema) ── */}
           <section className="px-6 py-24 bg-[#1A1A2E] text-white">
             <div className="max-w-5xl mx-auto text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-extrabold mb-6">¿Te suena alguna de estas situaciones?</h2>
-              <p className="text-[#E0AAFF] text-lg max-w-2xl mx-auto">El 73% de las clínicas dentales en España pierde entre el 40% y el 60% de su presupuesto en Google Ads por enviar el tráfico a su web corporativa en lugar de a una landing específica.</p>
+              <h2 className="text-3xl md:text-4xl font-extrabold mb-6">Por qué tu clínica dental necesita una landing page dedicada</h2>
+              <p className="text-[#E0AAFF] text-lg max-w-2xl mx-auto">El 73% de las clínicas dentales en España pierde entre el 40% y el 60% de su presupuesto en Google Ads por enviar el tráfico a su web corporativa en lugar de a una landing page para clínica dental específica.</p>
             </div>
             <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-6">
               {[
@@ -361,7 +361,7 @@ export default function ClinicasDentalesLanding() {
           <section className="px-6 py-24 text-center" style={{ background: "linear-gradient(135deg, #9D4EDD 0%, #4C0099 100%)" }}>
             <div className="max-w-3xl mx-auto">
               <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-5">Tu agenda de pacientes puede empezar a llenarse hoy</h2>
-              <p className="text-[#E0AAFF] text-lg mb-10">Crea tu primera landing para clínica dental gratis. Sin tarjeta, sin configuraciones técnicas. Tu competencia en el barrio ya está captando pacientes online.</p>
+              <p className="text-[#E0AAFF] text-lg mb-10">Crea tu primera landing para clínica dental gratis. Sin tarjeta, sin configuraciones técnicas. Tu competencia en el barrio ya está captando pacientes online. Consulta nuestros <Link href="/precios" className="text-white font-semibold underline underline-offset-2 hover:text-[#F3E8FF] transition">planes y precios</Link> para clínicas dentales.</p>
               <Link href="/register" className="inline-block bg-white text-[#9D4EDD] font-bold text-lg px-10 py-5 rounded-2xl hover:-translate-y-1 transition duration-200 shadow-xl">
                 Generar mi landing dental ahora (Gratis) →
               </Link>

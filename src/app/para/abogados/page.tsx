@@ -79,14 +79,14 @@ export default function AbogadosLanding() {
             </p>
 
             <h1 className="text-4xl md:text-6xl font-extrabold max-w-4xl tracking-tight leading-[1.05] mb-7">
-              Tu despacho de abogados captando nuevos casos.{" "}
+              Landing Page para Abogados:{" "}
               <span style={{ background: "linear-gradient(135deg, #9D4EDD, #7B2CBF)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-                Mientras duermes.
+                Capta Consultas sin Intermediarios
               </span>
             </h1>
 
             <p className="text-lg md:text-xl text-[#6B7280] max-w-2xl leading-relaxed mb-10">
-              Dile a LandForge tu área de práctica jurídica: Laboral, Divorcios, Penal, Mercantil. <strong className="text-[#1A1A2E]">En 30 segundos la IA crea una landing sobria, profesional y diseñada para generar confianza</strong>, con Forgi cualificando casos nuevos las 24 horas.
+              Una landing page para abogados convierte visitantes en consultas reales, sin depender de directorios ni intermediarios. Dile a LandForge tu área de práctica jurídica: Laboral, Divorcios, Penal, Mercantil. <strong className="text-[#1A1A2E]">En 30 segundos la IA crea una landing sobria, profesional y diseñada para generar confianza</strong>, con Forgi cualificando casos nuevos las 24 horas.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
@@ -103,7 +103,7 @@ export default function AbogadosLanding() {
           {/* ── 2. DOLOR ── */}
           <section className="px-6 py-24 bg-[#1A1A2E] text-white">
             <div className="max-w-5xl mx-auto text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-extrabold mb-6">El prospecto legal no espera. Y tú tampoco puedes atenderlo siempre.</h2>
+              <h2 className="text-3xl md:text-4xl font-extrabold mb-6">Por qué los despachos de abogados necesitan landing pages dedicadas</h2>
               <p className="text-[#E0AAFF] text-lg max-w-2xl mx-auto">El 60% de los usuarios que buscan "abogado de divorcios Madrid" o "abogado laboral Barcelona" contact al primer despacho que les responde. No al mejor. Al más rápido.</p>
             </div>
             <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-6">

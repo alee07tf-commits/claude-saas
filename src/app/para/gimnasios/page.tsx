@@ -108,14 +108,14 @@ export default function GimnasiosLanding() {
             </p>
 
             <h1 className="text-4xl md:text-6xl font-extrabold max-w-4xl tracking-tight leading-[1.05] mb-7">
-              Tu Gimnasio necesita más socios,{" "}
+              Landing Page para Gimnasios:{" "}
               <span style={{ background: "linear-gradient(135deg, #9D4EDD, #7B2CBF)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-                no meses esperando a una agencia.
+                Más Socios con Menos Inversión
               </span>
             </h1>
 
             <p className="text-lg md:text-xl text-[#6B7280] max-w-2xl leading-relaxed mb-10">
-              Describe en 5 minutos tu centro de fitness: instalaciones (piscina, sala de spinning, box de crossfit), tarifas y público objetivo. <strong className="text-[#1A1A2E]">La IA genera tu landing page para gimnasio en 30 segundos</strong>, lista para recibir tráfico de Google Ads para gimnasios. Forgi, tu asistente inteligente, responde sobre horarios, cuotas y reserva clases de prueba mientras duermes.
+              Una landing page para gimnasios capta socios cualificados 24/7, sin depender de meses de espera ni agencias caras. Describe en 5 minutos tu centro de fitness: instalaciones (piscina, sala de spinning, box de crossfit), tarifas y público objetivo. <strong className="text-[#1A1A2E]">La IA genera tu landing page para gimnasio en 30 segundos</strong>, lista para recibir tráfico de Google Ads. Forgi, tu asistente inteligente, responde sobre horarios, cuotas y reserva clases de prueba mientras duermes.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
@@ -141,7 +141,7 @@ export default function GimnasiosLanding() {
           {/* -- 2. DOLOR / PROBLEMA -- */}
           <section className="px-6 py-24 bg-[#1A1A2E] text-white">
             <div className="max-w-5xl mx-auto text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-extrabold mb-6">¿Te suena alguna de estas situaciones?</h2>
+              <h2 className="text-3xl md:text-4xl font-extrabold mb-6">Por qué tu gimnasio necesita una landing page propia</h2>
               <p className="text-[#E0AAFF] text-lg max-w-2xl mx-auto">El 68% de los gimnasios en España pierde entre el 40% y el 60% de su presupuesto en Google Ads por enviar el tráfico a una web genérica en lugar de a una landing page para gimnasio optimizada para captar socios.</p>
             </div>
             <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-6">
