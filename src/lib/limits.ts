@@ -26,9 +26,9 @@ export const PLAN_LIMITS: Record<PlanType, Record<ActionType, number>> = {
   },
   none: {
     landings: 1,
-    generations: 5,
-    editions: 10,
-    chatbot_messages: 100
+    generations: 1,
+    editions: 3,
+    chatbot_messages: 20
   }
 };
 

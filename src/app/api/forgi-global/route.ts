@@ -1,5 +1,7 @@
 import Anthropic from '@anthropic-ai/sdk'
 import { NextRequest } from 'next/server'
+import { createClient } from '@/lib/supabase/server'
+import { checkUserLimit, incrementUserUsage } from '@/lib/limits'
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! })
 
@@ -14,6 +16,15 @@ Reglas:
 - Sin comentarios ni markdown, solo HTML puro`
 
 export async function POST(req: NextRequest) {
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) return Response.json({ error: 'No autorizado. Inicia sesión.' }, { status: 401 })
+
+  const limit = await checkUserLimit(user.id, 'editions', user.email ?? undefined)
+  if (!limit.allowed) {
+    return Response.json({ error: 'Has alcanzado el límite de ediciones Forgi de tu plan. Mejora tu plan para seguir editando.' }, { status: 403 })
+  }
+
   const body = await req.json() as { fullHtml?: string; userPrompt?: string; imageUrl?: string; embedCode?: string }
   const { fullHtml, userPrompt, imageUrl, embedCode } = body
 
@@ -65,6 +76,7 @@ export async function POST(req: NextRequest) {
           throw new Error('La IA no devolvió HTML válido')
         }
 
+        await incrementUserUsage(user.id, 'editions')
         send({ type: 'done', tokens: finalMsg.usage.input_tokens + finalMsg.usage.output_tokens })
       } catch (err) {
         const msg = err instanceof Error ? err.message : String(err)
