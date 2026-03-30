@@ -430,10 +430,10 @@ TESTIMONIALS LAYOUTS:
 
 STATS LAYOUTS:
 • fullwidth_numbers_centered → flex row justify-center gap:48px flex-wrap. Stat: número clamp(3rem,7vw,6rem) fw:800 color:var(--primary), label muted
-• floating_cards_row → flex row gap:20px flex-wrap justify-center. Card: padding:28px shadow, emoji arriba + number + label
+• floating_cards_row → flex row gap:20px flex-wrap justify-center. Card: padding:28px shadow, SVG icon arriba + number + label
 • split_accent_bg → section: left 50% bg:var(--primary) (white stats) right 50% var(--bg) (2 stats + copy). clip-path o pseudo-el
 • minimal_counters → grid repeat(4,1fr) gap:0 border-top:2px. Each: padding:32px 0. Number huge + label. Zero decoration
-• icon_stats → grid repeat(4,1fr) gap:24px. Each: emoji 48px centered + number clamp(2.8rem,6vw,5rem) + label. Card: rounded tint bg
+• icon_stats → grid repeat(4,1fr) gap:24px. Each: SVG icon 48px centered + number clamp(2.8rem,6vw,5rem) + label. Card: rounded tint bg
 • progress_bars → flex col gap:24px max-width:600px mx-auto. Each: label row justify-between + progress bar (height:8px rounded) filled to % with var(--primary)
 • ticker_banner → background:var(--primary). Flex row overflow-x:auto gap:0. Dividers: border-right. Each stat: padding:28px 48px white text. Scrollable on mobile
 • diagonal_split → section position:relative. ::before clip-path:polygon(0 0,60% 0,40% 100%,0 100%) bg:var(--primary). Stats in two groups: left white on primary, right normal
@@ -454,7 +454,7 @@ FAQ LAYOUTS:
 • numbered_cards → grid repeat(2,1fr) gap:20px. Card: num 3rem var(--primary) top-left + Q + A
 • chat_bubbles → flex col gap:16px max-width:680px mx-auto. Q: bubble right-aligned bg:var(--primary) color:#fff border-radius:20px 20px 4px 20px. A: bubble left bg:var(--surface) border-radius:20px 20px 20px 4px
 • borderless_expand → max-width:700px mx-auto. Item: padding:20px 0. .faq-btn: font-size:1.1rem fw:600 no border. Separator: thin line between. Clean minimal look
-• icon_faq → grid repeat(2,1fr) gap:20px. Card: emoji icon 36px top + Q bold + collapsible A. Icon as visual cue per topic
+• icon_faq → grid repeat(2,1fr) gap:20px. Card: SVG icon 36px top + Q bold + collapsible A. Icon as visual cue per topic
 • grid_plain_faq → grid repeat(2,1fr) gap:24px. All answers visible, no accordion. Card: Q as H3 + A as p. Colored top-border per card
 • stepped_reveal → numbered vertical with connecting line. Each step: circle number + Q bold + A paragraph. Line connects circles. Accordion optional
 
@@ -472,7 +472,7 @@ HOW IT WORKS LAYOUTS:
 • steps_horizontal → flex row justify-center gap:32px flex-wrap. Step: text-center. Num: circle 52px var(--primary) white. "→" separator
 • steps_timeline → max-width:640px mx-auto. Item: position:relative padding-left:36px mb:32px border-left:2px dashed var(--primary). Dot: ::before 14px circle
 • steps_numbered_col → flex col gap:24px max-width:680px mx-auto. Item: flex gap:20px. Num: 52px circle var(--primary) fw:800 flex-shrink:0
-• steps_icon_cards → grid repeat(3,1fr) gap:24px. Card relative: num huge opacity:.07 abs top-right + emoji 36px + H3 + desc
+• steps_icon_cards → grid repeat(3,1fr) gap:24px. Card relative: num huge opacity:.07 abs top-right + SVG icon 36px + H3 + desc
 • alternating_cards_hiw → flex col gap:0. Item even: flex row; odd: flex row-reverse. Card: 48% width. Center: connecting arrow ↓ between items. Alt bg tint per step
 • process_circle → flex wrap justify-center gap:20px. Steps arranged in 2 rows (1-2-3 top, 4-5 bottom). Connecting arrows between with CSS. Each: circle number prominent
 • flowchart_arrows → flex col align-center gap:0. Box: border:2px solid var(--primary) rounded padding:20px 32px text-center max-width:400px. Arrow: ↓ element between boxes with connector
@@ -482,15 +482,15 @@ BENEFITS LAYOUTS:
 • icon_grid_4col → grid repeat(4,1fr) gap:20px. Item: icon 48px tint bg rounded + title bold + desc small. Mobile: 2col
 • checklist_two_col → grid repeat(2,1fr) gap-y:10px. Item: flex gap:12px. Check: 24px circle tint "✓" var(--primary) fw:700
 • feature_zigzag → flex col gap:48px. Even: row; odd: row-reverse. Icon block: 80px tint bg rounded font-size:2.5rem
-• badge_highlights → flex wrap gap:14px justify-center. Badge: border:2px solid tint border-radius:100px padding:10px 24px emoji+label fw:600
+• badge_highlights → flex wrap gap:14px justify-center. Badge: border:2px solid tint border-radius:100px padding:10px 24px icon+label fw:600
 • comparison_without → grid repeat(2,1fr) gap:32px. Left col: "Sin nosotros" list with ✗ red. Right col: "Con nosotros" list with ✓ green. Header row titles
 • stat_benefits → grid repeat(3,1fr) gap:24px. Card: big stat number var(--primary) + benefit text below. Each stat supports the benefit claim
-• visual_list_benefits → flex col gap:32px max-width:700px mx-auto. Item: flex gap:24px. Left: emoji in 64px square tint rounded. Right: H3 title + desc paragraph
+• visual_list_benefits → flex col gap:32px max-width:700px mx-auto. Item: flex gap:24px. Left: SVG icon in 64px square tint rounded. Right: H3 title + desc paragraph
 • grid_with_numbers → grid repeat(3,1fr) gap:24px. Card: large num clamp(3rem,6vw,5rem) fw:900 var(--primary) opacity:.2 top-right abs + title + desc. Card position:relative
 
 ABOUT LAYOUTS:
 • split_story → grid 55% 45% gap:48px align-center. Left: H2+text+mini stats row. Right: decorative CSS div (gradient shapes)
-• values_grid → H2+subtitle centered + grid repeat(3,1fr) gap:24px mt:40px. Card: emoji 32px + name fw:700 + desc small
+• values_grid → H2+subtitle centered + grid repeat(3,1fr) gap:24px mt:40px. Card: SVG icon 32px + name fw:700 + desc small
 • timeline_milestones → max-width:640px mx-auto. Item: flex gap:24px mb:28px. Year: pill fw:800 var(--primary). Line: border-left tint ml:40px
 • hero_about → full-width section bg:var(--primary) text white. Grid 50/50: left H2+text+cta. Right: stats 2x2 in white cards
 • mission_vision → grid repeat(2,1fr) gap:0. Left: bg:var(--primary) padding:64px white text. Right: bg:var(--surface) same padding. Title + paragraph each
@@ -534,7 +534,15 @@ CARD STYLES (aplicar al selector .card):
 Hover universal en cards: .card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(0,0,0,.13);transition:.25s}
 
 ━━━ IMÁGENES ━━━
-Sin <img> externas. Usa: gradientes CSS, SVG inline simples, divs decorativos, emojis como iconos, letras en círculos de color para avatares.
+Sin <img> externas. Usa: gradientes CSS, SVG inline simples, divs decorativos, letras en círculos de color para avatares.
+
+━━━ ICONOS — REGLA CRÍTICA ━━━
+• NO uses emojis como iconos. En su lugar usa SVG inline simples o caracteres Unicode simbólicos (✓ ✕ → ★ ● ■).
+• Para iconos de servicios/beneficios: usa un div con una letra o símbolo estilizado dentro de un círculo/cuadrado de color.
+• Para stats: solo el número grande, sin emoji delante.
+• Para testimonios: iniciales del nombre en un avatar circular CSS, sin emoji.
+• El ÚNICO emoji permitido es en la respuesta de FAQ si es natural para el contexto (ej: ☎️ en un número de teléfono).
+• Si necesitas representar un concepto visual, usa CSS shapes o SVG — NUNCA emojis decorativos.
 
 ━━━ CLASES SEMÁNTICAS + DATA ATTRIBUTES ━━━
 • <section id="X" class="section section-X" data-section="X" data-section-label="Label">
