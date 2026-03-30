@@ -2,16 +2,16 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Soluciones por Sector",
+  title: "Landing Pages IA por Sector e Industria",
   description:
-    "Landing pages con IA para cada industria: agencias, clínicas dentales, eCommerce, abogados, coaches, inmobiliarias, restaurantes, gimnasios, startups SaaS y cursos online.",
+    "Landing pages con IA para tu sector: agencias, clínicas, eCommerce, inmobiliarias y más. Crea la tuya en 30 segundos.",
   alternates: {
     canonical: "https://landforge.digital/para",
   },
   openGraph: {
-    title: "Soluciones por Sector | LandForge",
+    title: "Landing Pages IA por Sector e Industria | LandForge",
     description:
-      "Landing pages con IA para cada industria: agencias, clínicas dentales, eCommerce, abogados, coaches, inmobiliarias, restaurantes, gimnasios, startups SaaS y cursos online.",
+      "Landing pages con IA para tu sector: agencias, clínicas, eCommerce, inmobiliarias y más. Crea la tuya en 30 segundos.",
     url: "https://landforge.digital/para",
   },
 };

@@ -2,16 +2,16 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Integraciones",
+  title: "Integraciones para tus Landing Pages IA",
   description:
-    "Conecta LandForge con WordPress, Shopify, HubSpot, Zapier, Google Ads y Facebook Ads. Envía leads a tu CRM, optimiza campañas y publica en tu plataforma favorita.",
+    "Conecta LandForge con WordPress, Shopify, HubSpot, Zapier y Google Ads. Envía leads a tu CRM y publica en tu plataforma.",
   alternates: {
     canonical: "https://landforge.digital/integraciones",
   },
   openGraph: {
-    title: "Integraciones | LandForge",
+    title: "Integraciones para tus Landing Pages IA | LandForge",
     description:
-      "Conecta LandForge con WordPress, Shopify, HubSpot, Zapier, Google Ads y Facebook Ads. Envía leads a tu CRM, optimiza campañas y publica en tu plataforma favorita.",
+      "Conecta LandForge con WordPress, Shopify, HubSpot, Zapier y Google Ads. Envía leads a tu CRM y publica en tu plataforma.",
     url: "https://landforge.digital/integraciones",
   },
 };

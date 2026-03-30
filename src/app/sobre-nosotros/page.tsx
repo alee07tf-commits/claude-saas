@@ -2,16 +2,16 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Sobre Nosotros",
+  title: "Sobre LandForge: IA y Landing Pages",
   description:
-    "Conoce al equipo detrás de LandForge. Alejandro Bethencourt, experto en marketing digital, SEO y automatización con IA.",
+    "Conoce al equipo de LandForge. Alejandro Bethencourt, especialista en IA y landing pages, creó la herramienta que genera tu web en 30 segundos.",
   alternates: {
     canonical: "https://landforge.digital/sobre-nosotros",
   },
   openGraph: {
-    title: "Sobre Nosotros | LandForge",
+    title: "Sobre LandForge: IA y Landing Pages | LandForge",
     description:
-      "Conoce al equipo detrás de LandForge. Alejandro Bethencourt, experto en marketing digital, SEO y automatización con IA.",
+      "Conoce al equipo de LandForge. Alejandro Bethencourt, especialista en IA y landing pages, creó la herramienta que genera tu web en 30 segundos.",
     url: "https://landforge.digital/sobre-nosotros",
   },
 };

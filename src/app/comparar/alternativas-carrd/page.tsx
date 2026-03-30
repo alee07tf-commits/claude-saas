@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "5 Alternativas a Carrd para Landings Pro (2026)",
+  title: "5 Alternativas a Carrd con IA (2026)",
   description:
     "Carrd es simple pero limitado. Compara 5 alternativas con más poder: LandForge, Webflow, Unbounce, Leadpages y WordPress. Con IA incluida.",
   keywords: [
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     canonical: "https://landforge.digital/comparar/alternativas-carrd",
   },
   openGraph: {
-    title: "5 Alternativas a Carrd para Landings Pro (2026) | LandForge",
+    title: "5 Alternativas a Carrd con IA (2026) | LandForge",
     description:
       "Carrd es simple pero limitado. Compara 5 alternativas con más poder: LandForge, Webflow, Unbounce, Leadpages y WordPress. Con IA incluida.",
     url: "https://landforge.digital/comparar/alternativas-carrd",

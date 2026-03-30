@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Forgi Editor: Edita Landings con IA",
+  title: "Editor de Landing Pages con IA",
   description:
     "El editor de landing pages más rápido. Describe en lenguaje natural lo que quieres cambiar y Forgi lo aplica al instante. Sin código.",
   keywords: [
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     canonical: "https://landforge.digital/features/forgi-editor",
   },
   openGraph: {
-    title: "Forgi Editor: Edita Landings con IA",
+    title: "Editor de Landing Pages con IA | LandForge",
     description:
       "El editor de landing pages más rápido. Describe en lenguaje natural lo que quieres cambiar y Forgi lo aplica al instante. Sin código.",
     url: "https://landforge.digital/features/forgi-editor",

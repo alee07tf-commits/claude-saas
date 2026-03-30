@@ -2,14 +2,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Funcionalidades",
+  title: "Funcionalidades IA para Landing Pages",
   description:
     "Descubre las funcionalidades de LandForge: generador IA, Forgi Chatbot de ventas 24/7, Forgi Editor y Conversion Score para landing pages.",
   alternates: {
     canonical: "https://landforge.digital/features",
   },
   openGraph: {
-    title: "Funcionalidades | LandForge",
+    title: "Funcionalidades IA para Landing Pages | LandForge",
     description:
       "Descubre las funcionalidades de LandForge: generador IA, Forgi Chatbot de ventas 24/7, Forgi Editor y Conversion Score para landing pages.",
     url: "https://landforge.digital/features",

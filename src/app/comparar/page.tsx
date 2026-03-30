@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Comparativas: LandForge vs Competencia",
+  title: "Comparar Landing Page Builders IA (2026)",
   description:
     "Comparativas honestas de LandForge vs Webflow, Unbounce, Instapage, Carrd y Leadpages. Encuentra la mejor herramienta de landing pages para ti.",
   keywords: [
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     canonical: "https://landforge.digital/comparar",
   },
   openGraph: {
-    title: "Comparativas: LandForge vs Competencia",
+    title: "Comparar Landing Page Builders IA (2026) | LandForge",
     description:
       "Comparativas honestas de LandForge vs Webflow, Unbounce, Instapage, Carrd y Leadpages. Encuentra la mejor herramienta de landing pages para ti.",
     url: "https://landforge.digital/comparar",
