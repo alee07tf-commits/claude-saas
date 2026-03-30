@@ -65,6 +65,7 @@ export default function PreviewPage() {
   const [deploying, setDeploying]     = useState(false)
   const [deployedUrl, setDeployedUrl] = useState<string | null>(null)
   const [deployError, setDeployError] = useState('')
+  const [isPublished, setIsPublished] = useState(false)
 
   // Domain connection panel
   const [showDomainPanel, setShowDomainPanel]   = useState(false)
@@ -432,11 +433,12 @@ export default function PreviewPage() {
     } else if (id && id !== 'preview') {
       fetch(`/api/landing/${id}`)
         .then((r) => r.json())
-        .then((data: { html?: string; surveyData?: Record<string, unknown>; subdomain?: string }) => {
+        .then((data: { html?: string; surveyData?: Record<string, unknown>; subdomain?: string; status?: string }) => {
           if (data.html) {
             setHtml(data.html)
             if (data.surveyData) setSurveyData(data.surveyData)
-            if (data.subdomain) setDeployedUrl(data.subdomain)
+            if (data.subdomain) { setDeployedUrl(data.subdomain); setIsPublished(true) }
+            if (data.status === 'published') setIsPublished(true)
           } else {
             setNoData(true)
           }
@@ -494,6 +496,7 @@ export default function PreviewPage() {
       }
       const data = await res.json() as { url: string }
       setDeployedUrl(data.url)
+      setIsPublished(true)
       setPublishOverlay({ url: data.url, countdown: 5 })
     } catch (err) {
       setDeployError(err instanceof Error ? err.message : 'Error al publicar')
@@ -852,8 +855,34 @@ export default function PreviewPage() {
             >✕</button>
           </div>
 
-          {/* Messages */}
-          <div style={{
+          {/* Publish gate — must publish before using Forgi */}
+          {!isPublished && (
+            <div style={{ padding: '32px 24px', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px' }}>
+              <div style={{ fontSize: '36px' }}>🚀</div>
+              <div style={{ fontSize: '15px', fontWeight: 700, color: UI.text }}>Publica para editar con Forgi</div>
+              <div style={{ fontSize: '13px', color: UI.gray, lineHeight: 1.5 }}>
+                Publica tu landing primero para poder hacer ediciones con el asistente de IA.
+              </div>
+              <button
+                onClick={handleDeploy}
+                disabled={deploying || !id}
+                style={{
+                  padding: '12px 32px', borderRadius: '10px', border: 'none',
+                  background: `linear-gradient(135deg, ${UI.accent}, ${UI.accentAlt})`,
+                  color: UI.white, fontSize: '14px', fontWeight: 800,
+                  cursor: deploying ? 'wait' : 'pointer',
+                  opacity: deploying ? 0.7 : 1,
+                  display: 'flex', alignItems: 'center', gap: '8px',
+                }}
+              >
+                {deploying ? <><span style={{ display: 'inline-block', animation: 'spin 0.7s linear infinite' }}>⟳</span> Publicando...</> : '🚀 Publicar landing'}
+              </button>
+              {deployError && <div style={{ fontSize: '12px', color: '#EF4444' }}>⚠ {deployError}</div>}
+            </div>
+          )}
+
+          {/* Messages + input (only when published) */}
+          {isPublished && <><div style={{
             flex: 1, overflowY: 'auto', padding: '16px',
             display: 'flex', flexDirection: 'column', gap: '10px',
             maxHeight: '340px',
@@ -948,6 +977,7 @@ export default function PreviewPage() {
               }}
             >➤</button>
           </div>
+          </>}
         </div>
       )}
 
