@@ -22,11 +22,11 @@ const SEO_DOMAIN = "https://landforge.digital";
 export const metadata: Metadata = {
   metadataBase: new URL(SEO_DOMAIN),
   title: {
-    default: "LandForge: Generador de Landing Pages con IA para Agencias",
+    default: "Generador de Landing Pages con IA para Agencias — LandForge",
     template: "%s | LandForge",
   },
   description:
-    "Crea páginas de aterrizaje de alta conversión en 30s. Nuestro Chatbot IA (Forgi) diseña, atiende a tus clientes 24/7 y cierra ventas sin tocar código.",
+    "Crea landing pages de alta conversión en 30 segundos con IA. Forgi diseña, atiende clientes 24/7 y cierra ventas. Prueba gratis.",
   keywords: [
     "generador de landing pages con IA",
     "crear landing page con Inteligencia Artificial",
