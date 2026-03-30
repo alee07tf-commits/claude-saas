@@ -89,6 +89,22 @@ const comparativas = [
     icon: "🔀",
     winner: "LandForge para agencias que priorizan velocidad sobre control visual",
   },
+  {
+    title: "Alternativas a Instapage",
+    desc: "Instapage cuesta desde 199$/mes y no incluye IA generativa. Descubre las mejores alternativas a Instapage para agencias en 2026 con mejor relación calidad-precio.",
+    badge: "Ranking 2026",
+    link: "/comparar/alternativas-instapage",
+    icon: "🧩",
+    winner: "LandForge como alternativa con IA nativa a una fracción del precio",
+  },
+  {
+    title: "Alternativas a Carrd",
+    desc: "Carrd es barato pero limitado para conversión profesional. Las mejores alternativas a Carrd en 2026 para quienes necesitan más que una one-page.",
+    badge: "Ranking 2026",
+    link: "/comparar/alternativas-carrd",
+    icon: "📄",
+    winner: "LandForge para conversión profesional con chatbot y IA incluidos",
+  },
 ];
 
 export default function ComparativasHub() {

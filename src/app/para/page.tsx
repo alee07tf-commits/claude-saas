@@ -4,14 +4,14 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Soluciones por Sector",
   description:
-    "Landing pages con IA para cada industria: agencias, clínicas dentales, eCommerce, abogados, coaches, inmobiliarias, restaurantes, gimnasios y startups SaaS.",
+    "Landing pages con IA para cada industria: agencias, clínicas dentales, eCommerce, abogados, coaches, inmobiliarias, restaurantes, gimnasios, startups SaaS y cursos online.",
   alternates: {
     canonical: "https://landforge.digital/para",
   },
   openGraph: {
     title: "Soluciones por Sector | LandForge",
     description:
-      "Landing pages con IA para cada industria: agencias, clínicas dentales, eCommerce, abogados, coaches, inmobiliarias, restaurantes, gimnasios y startups SaaS.",
+      "Landing pages con IA para cada industria: agencias, clínicas dentales, eCommerce, abogados, coaches, inmobiliarias, restaurantes, gimnasios, startups SaaS y cursos online.",
     url: "https://landforge.digital/para",
   },
 };
@@ -79,6 +79,12 @@ const SECTORS = [
     title: "Startups SaaS",
     desc: "Product Hunt launches, free trials, demo requests y pricing pages. Forgi cualifica leads B2B.",
     emoji: "🚀",
+  },
+  {
+    href: "/para/cursos-online",
+    title: "Cursos Online",
+    desc: "Landing pages para vender cursos y formaciones online. Forgi resuelve dudas de alumnos y cierra matrículas 24/7.",
+    emoji: "🎓",
   },
 ];
 

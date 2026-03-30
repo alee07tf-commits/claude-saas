@@ -266,6 +266,70 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.8,
     },
+    // ── Mes 3 — Blog (TOFU) ──
+    {
+      url: `${SITE_URL}/blog/ejemplos-landing-pages-que-convierten`,
+      lastModified: "2026-03-30",
+      changeFrequency: "monthly",
+      priority: 0.85,
+    },
+    {
+      url: `${SITE_URL}/blog/como-crear-landing-page-gratis`,
+      lastModified: "2026-03-30",
+      changeFrequency: "monthly",
+      priority: 0.85,
+    },
+    {
+      url: `${SITE_URL}/blog/elementos-landing-page-perfecta`,
+      lastModified: "2026-03-30",
+      changeFrequency: "monthly",
+      priority: 0.85,
+    },
+    {
+      url: `${SITE_URL}/blog/cuanto-cuesta-landing-page`,
+      lastModified: "2026-03-30",
+      changeFrequency: "monthly",
+      priority: 0.85,
+    },
+    {
+      url: `${SITE_URL}/blog/mejores-chatbots-ventas-web`,
+      lastModified: "2026-03-30",
+      changeFrequency: "monthly",
+      priority: 0.85,
+    },
+    // ── Mes 3 — Comparativas (MOFU) ──
+    {
+      url: `${SITE_URL}/comparar/alternativas-instapage`,
+      lastModified: "2026-03-30",
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${SITE_URL}/comparar/alternativas-carrd`,
+      lastModified: "2026-03-30",
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    // ── Mes 3 — Sector (BOFU) ──
+    {
+      url: `${SITE_URL}/para/cursos-online`,
+      lastModified: "2026-03-30",
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    // ── Mes 3 — Integraciones (BOFU) ──
+    {
+      url: `${SITE_URL}/integraciones/google-ads`,
+      lastModified: "2026-03-30",
+      changeFrequency: "monthly",
+      priority: 0.85,
+    },
+    {
+      url: `${SITE_URL}/integraciones/facebook-ads`,
+      lastModified: "2026-03-30",
+      changeFrequency: "monthly",
+      priority: 0.85,
+    },
     // ── Páginas legales ──
     {
       url: `${SITE_URL}/aviso-legal`,

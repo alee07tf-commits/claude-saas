@@ -4,14 +4,14 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Integraciones",
   description:
-    "Conecta LandForge con WordPress, Shopify, HubSpot y Zapier. Envía leads a tu CRM, automatiza flujos y publica en tu plataforma favorita.",
+    "Conecta LandForge con WordPress, Shopify, HubSpot, Zapier, Google Ads y Facebook Ads. Envía leads a tu CRM, optimiza campañas y publica en tu plataforma favorita.",
   alternates: {
     canonical: "https://landforge.digital/integraciones",
   },
   openGraph: {
     title: "Integraciones | LandForge",
     description:
-      "Conecta LandForge con WordPress, Shopify, HubSpot y Zapier. Envía leads a tu CRM, automatiza flujos y publica en tu plataforma favorita.",
+      "Conecta LandForge con WordPress, Shopify, HubSpot, Zapier, Google Ads y Facebook Ads. Envía leads a tu CRM, optimiza campañas y publica en tu plataforma favorita.",
     url: "https://landforge.digital/integraciones",
   },
 };
@@ -49,6 +49,18 @@ const INTEGRATIONS = [
     title: "Zapier",
     desc: "Conecta LandForge con +5.000 apps: email marketing, Slack, Google Sheets, CRMs y más. Automatiza sin código.",
     tag: "Automatización",
+  },
+  {
+    href: "/integraciones/google-ads",
+    title: "Google Ads",
+    desc: "Landing pages optimizadas para Quality Score de Google Ads. Mejora tu CPC, aumenta conversiones y trackea cada lead con UTMs automáticos.",
+    tag: "Publicidad",
+  },
+  {
+    href: "/integraciones/facebook-ads",
+    title: "Facebook Ads",
+    desc: "Landing pages diseñadas para campañas de Meta Ads. Pixel integrado, carga ultra-rápida y Forgi convierte el tráfico social en leads.",
+    tag: "Publicidad",
   },
 ];
 

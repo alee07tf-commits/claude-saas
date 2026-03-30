@@ -41,7 +41,7 @@ const collectionSchema = {
   url: "https://landforge.digital/blog",
   mainEntity: {
     "@type": "ItemList",
-    numberOfItems: 8,
+    numberOfItems: 13,
     itemListElement: [
       {
         "@type": "ListItem",
@@ -90,6 +90,36 @@ const collectionSchema = {
         position: 8,
         url: "https://landforge.digital/blog/ab-testing-landing-pages-guia",
         name: "A/B Testing en Landing Pages: Guía Completa para Maximizar Conversiones",
+      },
+      {
+        "@type": "ListItem",
+        position: 9,
+        url: "https://landforge.digital/blog/ejemplos-landing-pages-que-convierten",
+        name: "Ejemplos de Landing Pages que Convierten: Casos Reales 2026",
+      },
+      {
+        "@type": "ListItem",
+        position: 10,
+        url: "https://landforge.digital/blog/como-crear-landing-page-gratis",
+        name: "Cómo Crear una Landing Page Gratis: Guía Paso a Paso 2026",
+      },
+      {
+        "@type": "ListItem",
+        position: 11,
+        url: "https://landforge.digital/blog/elementos-landing-page-perfecta",
+        name: "Los 10 Elementos de una Landing Page Perfecta",
+      },
+      {
+        "@type": "ListItem",
+        position: 12,
+        url: "https://landforge.digital/blog/cuanto-cuesta-landing-page",
+        name: "Cuánto Cuesta una Landing Page en 2026: Precios y Opciones",
+      },
+      {
+        "@type": "ListItem",
+        position: 13,
+        url: "https://landforge.digital/blog/mejores-chatbots-ventas-web",
+        name: "Los Mejores Chatbots de Ventas para tu Web en 2026",
       },
     ],
   },
@@ -152,6 +182,41 @@ export default function BlogIndex() {
       category: "CRO & Testing",
       date: "Marzo 2026",
       excerpt: "Aprende cómo hacer A/B testing en landing pages paso a paso. Herramientas, framework de priorización ICE, ejemplos reales y errores comunes.",
+    },
+    {
+      title: "Ejemplos de Landing Pages que Convierten: Casos Reales 2026",
+      slug: "ejemplos-landing-pages-que-convierten",
+      category: "CRO & Ejemplos",
+      date: "Marzo 2026",
+      excerpt: "Analizamos landing pages reales con tasas de conversión superiores al 20%. Qué hacen bien, qué copiar y cómo aplicarlo a tu negocio.",
+    },
+    {
+      title: "Cómo Crear una Landing Page Gratis: Guía Paso a Paso 2026",
+      slug: "como-crear-landing-page-gratis",
+      category: "Guías & Tutoriales",
+      date: "Marzo 2026",
+      excerpt: "Crea tu primera landing page sin gastar un euro. Herramientas gratuitas, plantillas y trucos para que convierta desde el día 1.",
+    },
+    {
+      title: "Los 10 Elementos de una Landing Page Perfecta",
+      slug: "elementos-landing-page-perfecta",
+      category: "CRO & Estructura",
+      date: "Marzo 2026",
+      excerpt: "Los 10 elementos imprescindibles que toda landing page necesita para maximizar conversiones: hero, CTA, social proof, urgencia y más.",
+    },
+    {
+      title: "Cuánto Cuesta una Landing Page en 2026: Precios y Opciones",
+      slug: "cuanto-cuesta-landing-page",
+      category: "Precios & Herramientas",
+      date: "Marzo 2026",
+      excerpt: "Desglose completo de precios: freelance, agencia, builders o IA. Cuánto invertir según tu negocio y cómo ahorrar sin perder calidad.",
+    },
+    {
+      title: "Los Mejores Chatbots de Ventas para tu Web en 2026",
+      slug: "mejores-chatbots-ventas-web",
+      category: "IA & Chatbots",
+      date: "Marzo 2026",
+      excerpt: "Ranking de los mejores chatbots de ventas con IA para webs y landing pages. Comparativa de funcionalidades, precios y tasas de conversión.",
     },
   ];
 
