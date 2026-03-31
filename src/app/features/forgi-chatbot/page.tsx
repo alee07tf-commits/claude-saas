@@ -62,6 +62,15 @@ const faqSchema = {
   ],
 };
 
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Inicio", item: "https://landforge.digital" },
+    { "@type": "ListItem", position: 2, name: "Forgi Chatbot", item: "https://landforge.digital/features/forgi-chatbot" },
+  ],
+};
+
 const softwareFeatureSchema = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
@@ -83,6 +92,7 @@ export default function ForgiChatbotPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareFeatureSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
       <div className="min-h-screen bg-[#FAFAFA] text-[#1A1A2E] font-sans">
         <main>
@@ -204,18 +214,18 @@ export default function ForgiChatbotPage() {
               </div>
               <div className="grid md:grid-cols-3 gap-6">
                 {[
-                  { sector: "🦷 Clínicas Dentales", use: "Responde sobre precios de Invisalign, horarios de urgencias y seguros médicos. Agenda valoraciones gratuitas automáticamente.", link: "/para/clinicas-dentales" },
-                  { sector: "⚖️ Despachos de Abogados", use: "Cualifica casos legales según especialidad jurídica antes de que el abogado invierta tiempo en una primera consulta.", link: "/para/abogados" },
-                  { sector: "🛒 eCommerce", use: "Responde sobre plazos de envío, política de devoluciones y disponibilidad de tallas, reduciendo el abandono de carrito.", link: "/para/ecommerce" },
-                  { sector: "🏠 Agencias Inmobiliarias", use: "Filtra compradores de inversores, responde sobre zonas y precios, y agenda visitas a los inmuebles disponibles.", link: "/para/inmobiliarias" },
-                  { sector: "📣 Agencias de Marketing", use: "Cualifica el presupuesto y tipo de servicio del prospecto antes de que el account manager dedique tiempo a una propuesta.", link: "/para/agencias-de-marketing" },
-                  { sector: "🎓 Coaches y Formadores", use: "Explica el programa, filtra si el prospecto es el perfil correcto y gestiona las inscripciones a llamadas de descubrimiento.", link: "/para/coaches" },
+                  { sector: "🦷 Clínicas Dentales", use: "Responde sobre precios de Invisalign, horarios de urgencias y seguros médicos. Agenda valoraciones gratuitas automáticamente.", link: "/para/clinicas-dentales", cta: "Landing pages para clínicas dentales →" },
+                  { sector: "⚖️ Despachos de Abogados", use: "Cualifica casos legales según especialidad jurídica antes de que el abogado invierta tiempo en una primera consulta.", link: "/para/abogados", cta: "Landing pages para abogados →" },
+                  { sector: "🛒 eCommerce", use: "Responde sobre plazos de envío, política de devoluciones y disponibilidad de tallas, reduciendo el abandono de carrito.", link: "/para/ecommerce", cta: "Landing pages para ecommerce →" },
+                  { sector: "🏠 Agencias Inmobiliarias", use: "Filtra compradores de inversores, responde sobre zonas y precios, y agenda visitas a los inmuebles disponibles.", link: "/para/inmobiliarias", cta: "Landing pages para inmobiliarias →" },
+                  { sector: "📣 Agencias de Marketing", use: "Cualifica el presupuesto y tipo de servicio del prospecto antes de que el account manager dedique tiempo a una propuesta.", link: "/para/agencias-de-marketing", cta: "Landing pages para agencias →" },
+                  { sector: "🎓 Coaches y Formadores", use: "Explica el programa, filtra si el prospecto es el perfil correcto y gestiona las inscripciones a llamadas de descubrimiento.", link: "/para/coaches", cta: "Landing pages para coaches →" },
                 ].map((c) => (
                   <Link key={c.sector} href={c.link} className="bg-white/5 border border-white/10 rounded-2xl p-6 hover:border-[#9D4EDD]/50 hover:bg-white/10 transition group">
                     <div className="text-2xl mb-3">{c.sector.split(" ")[0]}</div>
                     <h3 className="font-bold mb-2 text-sm">{c.sector.substring(c.sector.indexOf(" ") + 1)}</h3>
                     <p className="text-white/60 text-xs leading-relaxed">{c.use}</p>
-                    <span className="inline-block mt-3 text-[#E0AAFF] text-xs group-hover:text-white transition">Ver caso de uso →</span>
+                    <span className="inline-block mt-3 text-[#E0AAFF] text-xs group-hover:text-white transition">{c.cta}</span>
                   </Link>
                 ))}
               </div>

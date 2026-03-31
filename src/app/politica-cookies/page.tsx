@@ -6,9 +6,6 @@ export const metadata: Metadata = {
   description:
     "Política de cookies de LandForge. Qué cookies usamos, para qué sirven y cómo puedes gestionarlas.",
   robots: { index: false, follow: true },
-  alternates: {
-    canonical: "https://landforge.digital/politica-cookies",
-  },
   openGraph: {
     title: "Política de Cookies",
     description:

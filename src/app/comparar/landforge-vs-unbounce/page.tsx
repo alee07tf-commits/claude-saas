@@ -69,8 +69,7 @@ const breadcrumbSchema = {
   "@type": "BreadcrumbList",
   itemListElement: [
     { "@type": "ListItem", position: 1, name: "Inicio", item: "https://landforge.digital" },
-    { "@type": "ListItem", position: 2, name: "Comparativas", item: "https://landforge.digital/comparar" },
-    { "@type": "ListItem", position: 3, name: "LandForge vs Unbounce", item: "https://landforge.digital/comparar/landforge-vs-unbounce" },
+    { "@type": "ListItem", position: 2, name: "LandForge vs Unbounce", item: "https://landforge.digital/comparar/landforge-vs-unbounce" },
   ],
 };
 

@@ -21,6 +21,12 @@ export const metadata: Metadata = {
       "Guías y tutoriales sobre landing pages, CRO, chatbots IA y conversión. Aprende a crear páginas que convierten visitas en clientes.",
     url: "https://landforge.digital/blog",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Blog de Landing Pages, CRO y Chatbots IA | LandForge",
+    description:
+      "Guías y tutoriales sobre landing pages, CRO, chatbots IA y conversión. Aprende a crear páginas que convierten visitas en clientes.",
+  },
 };
 
 const breadcrumbSchema = {

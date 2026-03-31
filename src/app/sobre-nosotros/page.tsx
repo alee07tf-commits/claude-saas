@@ -4,15 +4,21 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Sobre LandForge: IA y Landing Pages",
   description:
-    "Conoce al equipo de LandForge. Alejandro Bethencourt, especialista en IA y landing pages, creó la herramienta que genera tu web en 30 segundos.",
+    "Conoce al equipo de LandForge. Alejandro Bethencourt, especialista en IA y landing pages de alta conversión, creó la plataforma que genera tu web en 30s.",
   alternates: {
     canonical: "https://landforge.digital/sobre-nosotros",
   },
   openGraph: {
     title: "Sobre LandForge: IA y Landing Pages | LandForge",
     description:
-      "Conoce al equipo de LandForge. Alejandro Bethencourt, especialista en IA y landing pages, creó la herramienta que genera tu web en 30 segundos.",
+      "Conoce al equipo de LandForge. Alejandro Bethencourt, especialista en IA y landing pages de alta conversión, creó la plataforma que genera tu web en 30s.",
     url: "https://landforge.digital/sobre-nosotros",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Sobre LandForge: IA y Landing Pages | LandForge",
+    description:
+      "Conoce al equipo de LandForge. Alejandro Bethencourt, especialista en IA y landing pages de alta conversión, creó la plataforma que genera tu web en 30s.",
   },
 };
 
@@ -33,7 +39,7 @@ const personSchema = {
   alumniOf: [
     {
       "@type": "EducationalOrganization",
-      name: "Graduado en Marketing Digital y Publicidad",
+      name: "Universidad de La Laguna",
     },
   ],
   knowsAbout: [

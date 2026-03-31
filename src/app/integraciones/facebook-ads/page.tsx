@@ -36,13 +36,7 @@ const breadcrumbSchema = {
     {
       "@type": "ListItem",
       position: 2,
-      name: "Integraciones",
-      item: "https://landforge.digital/integraciones",
-    },
-    {
-      "@type": "ListItem",
-      position: 3,
-      name: "Facebook Ads",
+      name: "Integración con Facebook Ads",
       item: "https://landforge.digital/integraciones/facebook-ads",
     },
   ],

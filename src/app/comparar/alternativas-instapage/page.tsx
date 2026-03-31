@@ -91,12 +91,6 @@ const breadcrumbSchema = {
     {
       "@type": "ListItem",
       position: 2,
-      name: "Comparativas",
-      item: "https://landforge.digital/comparar",
-    },
-    {
-      "@type": "ListItem",
-      position: 3,
       name: "Alternativas a Instapage",
       item: "https://landforge.digital/comparar/alternativas-instapage",
     },

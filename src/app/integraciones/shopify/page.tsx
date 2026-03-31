@@ -28,8 +28,7 @@ const breadcrumbSchema = {
   "@type": "BreadcrumbList",
   itemListElement: [
     { "@type": "ListItem", position: 1, name: "Inicio", item: "https://landforge.digital" },
-    { "@type": "ListItem", position: 2, name: "Integraciones", item: "https://landforge.digital/integraciones" },
-    { "@type": "ListItem", position: 3, name: "Shopify", item: "https://landforge.digital/integraciones/shopify" },
+    { "@type": "ListItem", position: 2, name: "Integración con Shopify", item: "https://landforge.digital/integraciones/shopify" },
   ],
 };
 

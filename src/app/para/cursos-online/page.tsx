@@ -36,13 +36,7 @@ const breadcrumbSchema = {
     {
       "@type": "ListItem",
       position: 2,
-      name: "Soluciones por Sector",
-      item: "https://landforge.digital/para",
-    },
-    {
-      "@type": "ListItem",
-      position: 3,
-      name: "Cursos Online",
+      name: "Landing Pages para Cursos Online",
       item: "https://landforge.digital/para/cursos-online",
     },
   ],

@@ -91,8 +91,7 @@ export default function StartupsSaasLanding() {
         "@type": "BreadcrumbList",
         "itemListElement": [
           { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://landforge.digital" },
-          { "@type": "ListItem", "position": 2, "name": "Soluciones", "item": "https://landforge.digital/para" },
-          { "@type": "ListItem", "position": 3, "name": "Startups SaaS", "item": "https://landforge.digital/para/startups-saas" }
+          { "@type": "ListItem", "position": 2, "name": "Landing Pages para Startups SaaS", "item": "https://landforge.digital/para/startups-saas" }
         ]
       })}} />
 

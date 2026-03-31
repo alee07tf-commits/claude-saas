@@ -6,9 +6,6 @@ export const metadata: Metadata = {
   description:
     "Conecta LandForge con WordPress, Shopify, HubSpot, Zapier y Google Ads. Envía leads a tu CRM y publica en tu plataforma.",
   robots: { index: false, follow: true },
-  alternates: {
-    canonical: "https://landforge.digital/integraciones",
-  },
   openGraph: {
     title: "Integraciones para tus Landing Pages IA | LandForge",
     description:

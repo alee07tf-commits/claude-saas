@@ -13,9 +13,6 @@ export const metadata: Metadata = {
     "alternativas unbounce webflow leadpages",
   ],
   robots: { index: false, follow: true },
-  alternates: {
-    canonical: "https://landforge.digital/comparar",
-  },
   openGraph: {
     title: "Comparar Landing Page Builders IA (2026) | LandForge",
     description:

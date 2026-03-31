@@ -21,6 +21,12 @@ export const metadata: Metadata = {
       "Planes claros y sin sorpresas para agencias de marketing. Desde 49€/mes con 14 días gratis.",
     url: "https://landforge.digital/precios",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Precios y Planes — Desde 49€/mes",
+    description:
+      "Planes claros y sin sorpresas para agencias de marketing. Desde 49€/mes con 14 días gratis.",
+  },
 };
 
 const breadcrumbSchema = {
@@ -38,6 +44,8 @@ const pricingSchema = {
   name: "LandForge",
   description:
     "Generador de landing pages con IA para agencias de marketing. Incluye chatbot de ventas Forgi, Conversion Score y white label.",
+  url: "https://landforge.digital/precios",
+  image: "https://landforge.digital/opengraph-image",
   brand: { "@type": "Brand", name: "LandForge" },
   offers: [
     {

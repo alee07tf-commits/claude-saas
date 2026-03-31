@@ -28,8 +28,7 @@ const breadcrumbSchema = {
   "@type": "BreadcrumbList",
   itemListElement: [
     { "@type": "ListItem", position: 1, name: "Inicio", item: "https://landforge.digital" },
-    { "@type": "ListItem", position: 2, name: "Soluciones por Sector", item: "https://landforge.digital/para" },
-    { "@type": "ListItem", position: 3, name: "Coaches", item: "https://landforge.digital/para/coaches" },
+    { "@type": "ListItem", position: 2, name: "Landing Pages para Coaches", item: "https://landforge.digital/para/coaches" },
   ],
 };
 

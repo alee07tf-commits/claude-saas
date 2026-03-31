@@ -14,8 +14,7 @@ const breadcrumbSchema = {
   "@type": "BreadcrumbList",
   itemListElement: [
     { "@type": "ListItem", position: 1, name: "Inicio", item: "https://landforge.digital" },
-    { "@type": "ListItem", position: 2, name: "Integraciones", item: "https://landforge.digital/integraciones" },
-    { "@type": "ListItem", position: 3, name: "Zapier", item: "https://landforge.digital/integraciones/zapier" },
+    { "@type": "ListItem", position: 2, name: "Integración con Zapier", item: "https://landforge.digital/integraciones/zapier" },
   ],
 };
 

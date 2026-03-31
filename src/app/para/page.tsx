@@ -6,9 +6,6 @@ export const metadata: Metadata = {
   description:
     "Landing pages con IA para tu sector: agencias, clínicas, eCommerce, inmobiliarias y más. Crea la tuya en 30 segundos.",
   robots: { index: false, follow: true },
-  alternates: {
-    canonical: "https://landforge.digital/para",
-  },
   openGraph: {
     title: "Landing Pages IA por Sector e Industria | LandForge",
     description:

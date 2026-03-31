@@ -28,8 +28,7 @@ const breadcrumbSchema = {
   "@type": "BreadcrumbList",
   itemListElement: [
     { "@type": "ListItem", position: 1, name: "Inicio", item: "https://landforge.digital" },
-    { "@type": "ListItem", position: 2, name: "Soluciones por Sector", item: "https://landforge.digital/para" },
-    { "@type": "ListItem", position: 3, name: "Restaurantes", item: "https://landforge.digital/para/restaurantes" },
+    { "@type": "ListItem", position: 2, name: "Landing Pages para Restaurantes", item: "https://landforge.digital/para/restaurantes" },
   ],
 };
 

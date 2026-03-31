@@ -28,8 +28,7 @@ const breadcrumbSchema = {
   "@type": "BreadcrumbList",
   itemListElement: [
     { "@type": "ListItem", position: 1, name: "Inicio", item: "https://landforge.digital" },
-    { "@type": "ListItem", position: 2, name: "Funcionalidades", item: "https://landforge.digital/features" },
-    { "@type": "ListItem", position: 3, name: "Forgi Editor", item: "https://landforge.digital/features/forgi-editor" },
+    { "@type": "ListItem", position: 2, name: "Forgi Editor", item: "https://landforge.digital/features/forgi-editor" },
   ],
 };
 

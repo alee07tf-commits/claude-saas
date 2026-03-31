@@ -18,8 +18,7 @@ const breadcrumbSchema = {
   "@type": "BreadcrumbList",
   itemListElement: [
     { "@type": "ListItem", position: 1, name: "Inicio", item: "https://landforge.digital" },
-    { "@type": "ListItem", position: 2, name: "Comparativas", item: "https://landforge.digital/comparar" },
-    { "@type": "ListItem", position: 3, name: "Alternativas a Webflow", item: "https://landforge.digital/comparar/alternativas-webflow" },
+    { "@type": "ListItem", position: 2, name: "Alternativas a Webflow", item: "https://landforge.digital/comparar/alternativas-webflow" },
   ],
 };
 

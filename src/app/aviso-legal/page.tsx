@@ -6,9 +6,6 @@ export const metadata: Metadata = {
   description:
     "Aviso legal de LandForge. Información del titular, propiedad intelectual y condiciones de uso del sitio web.",
   robots: { index: false, follow: true },
-  alternates: {
-    canonical: "https://landforge.digital/aviso-legal",
-  },
   openGraph: {
     title: "Aviso Legal",
     description:
