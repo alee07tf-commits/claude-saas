@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Política de Privacidad",
   description:
     "Política de privacidad de LandForge. Cómo recogemos, usamos y protegemos tus datos personales según el RGPD.",
+  robots: { index: false, follow: true },
   alternates: {
     canonical: "https://landforge.digital/politica-privacidad",
   },

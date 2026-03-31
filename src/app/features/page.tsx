@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Funcionalidades IA para Landing Pages",
   description:
     "Descubre las funcionalidades de LandForge: generador IA, Forgi Chatbot de ventas 24/7, Forgi Editor y Conversion Score para landing pages.",
+  robots: { index: false, follow: true },
   alternates: {
     canonical: "https://landforge.digital/features",
   },

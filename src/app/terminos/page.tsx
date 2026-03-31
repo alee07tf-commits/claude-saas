@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Términos y Condiciones",
   description:
     "Términos y condiciones de uso de LandForge. Obligaciones, pagos, propiedad intelectual y limitaciones del servicio.",
+  robots: { index: false, follow: true },
   alternates: {
     canonical: "https://landforge.digital/terminos",
   },

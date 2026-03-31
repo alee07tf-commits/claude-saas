@@ -120,12 +120,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.8,
     },
-    {
-      url: `${SITE_URL}/comparar`,
-      lastModified: DATES.comparativas,
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
+    // /comparar hub — noindex, fuera del sitemap
     // ── Nuevos Silos BOFU y Técnicos ──
     {
       url: `${SITE_URL}/para/restaurantes`,
@@ -240,25 +235,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.9,
     },
-    // ── Hub pages ──
-    {
-      url: `${SITE_URL}/para`,
-      lastModified: DATES.hubs,
-      changeFrequency: "monthly",
-      priority: 0.85,
-    },
-    {
-      url: `${SITE_URL}/features`,
-      lastModified: DATES.hubs,
-      changeFrequency: "monthly",
-      priority: 0.85,
-    },
-    {
-      url: `${SITE_URL}/integraciones`,
-      lastModified: DATES.hubs,
-      changeFrequency: "monthly",
-      priority: 0.85,
-    },
+    // ── Hub pages (noindex — enlazadas desde menú dropdown) ──
     // ── Sobre nosotros (E-E-A-T) ──
     {
       url: `${SITE_URL}/sobre-nosotros`,
@@ -330,30 +307,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.85,
     },
-    // ── Páginas legales ──
-    {
-      url: `${SITE_URL}/aviso-legal`,
-      lastModified: DATES.legales,
-      changeFrequency: "yearly",
-      priority: 0.3,
-    },
-    {
-      url: `${SITE_URL}/politica-privacidad`,
-      lastModified: DATES.legales,
-      changeFrequency: "yearly",
-      priority: 0.3,
-    },
-    {
-      url: `${SITE_URL}/politica-cookies`,
-      lastModified: DATES.legales,
-      changeFrequency: "yearly",
-      priority: 0.3,
-    },
-    {
-      url: `${SITE_URL}/terminos`,
-      lastModified: DATES.legales,
-      changeFrequency: "yearly",
-      priority: 0.3,
-    },
+    // ── Páginas legales (noindex — fuera del sitemap) ──
   ];
 }

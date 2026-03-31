@@ -12,6 +12,7 @@ export const metadata: Metadata = {
     "alternativas landing page builder",
     "alternativas unbounce webflow leadpages",
   ],
+  robots: { index: false, follow: true },
   alternates: {
     canonical: "https://landforge.digital/comparar",
   },
